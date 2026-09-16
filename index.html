@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>DBMS Topic Allocation</title>
 
 <style>
-
-/* =========================================================
-   RESET
-   ========================================================= */
 
 * {
     box-sizing: border-box;
@@ -24,34 +14,12 @@
     padding: 0;
 }
 
-
-/* =========================================================
-   BODY
-   ========================================================= */
-
 body {
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            #eef4ff 0%,
-            #f5f3ff 45%,
-            #ecfeff 100%
-        );
-
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef4ff, #f5f3ff);
     color: #172033;
-
     min-height: 100vh;
 }
-
-
-/* =========================================================
-   CONTAINER
-   ========================================================= */
 
 .container {
     width: 94%;
@@ -59,1594 +27,961 @@ body {
     margin: auto;
 }
 
-
-/* =========================================================
-   HEADER
-   ========================================================= */
+/* HEADER */
 
 header {
     padding: 28px 0 18px;
 }
 
 .header-box {
-
-    background:
-        linear-gradient(
-            135deg,
-            #172554,
-            #3730a3,
-            #1e40af
-        );
-
+    background: linear-gradient(135deg, #172554, #3730a3);
     color: white;
-
     padding: 32px;
-
     border-radius: 24px;
-
-    box-shadow:
-        0 18px 45px
-        rgba(30, 41, 59, 0.18);
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-.header-box::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 220px;
-    height: 220px;
-
-    right: -70px;
-    top: -90px;
-
-    background:
-        rgba(255,255,255,0.08);
-
-    border-radius: 50%;
+    box-shadow: 0 18px 45px rgba(30, 41, 59, .18);
 }
 
 .header-box h1 {
-
     font-size: 40px;
-
     margin-bottom: 8px;
-
-    position: relative;
-
-    z-index: 1;
 }
 
 .header-box p {
-
     color: #dbeafe;
-
-    position: relative;
-
-    z-index: 1;
 }
 
-
-/* =========================================================
-   SUMMARY CARDS
-   ========================================================= */
+/* SUMMARY */
 
 .summary {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-
     margin: 18px 0;
 }
 
 .summary-card {
-
     background: white;
-
-    border:
-        1px solid #dbe3f0;
-
+    border: 1px solid #dbe3f0;
     border-radius: 18px;
-
     padding: 20px;
-
-    box-shadow:
-        0 12px 35px
-        rgba(30, 64, 175, 0.10);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.summary-card:hover {
-
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 16px 40px
-        rgba(30, 64, 175, 0.15);
+    box-shadow: 0 12px 35px rgba(30, 64, 175, .10);
 }
 
 .number {
-
     font-size: 30px;
-
     font-weight: 800;
-
     color: #2563eb;
 }
 
 .label {
-
     color: #64748b;
-
     margin-top: 5px;
-
-    font-size: 14px;
 }
 
-
-/* =========================================================
-   TABS
-   ========================================================= */
+/* TABS */
 
 .tabs {
-
     display: flex;
-
     gap: 10px;
-
     margin: 24px 0;
-
     flex-wrap: wrap;
 }
 
 .tab {
-
-    border:
-        1px solid #dbe3f0;
-
+    border: 1px solid #dbe3f0;
     background: white;
-
     color: #64748b;
-
-    padding:
-        13px 22px;
-
+    padding: 13px 22px;
     border-radius: 12px;
-
     cursor: pointer;
-
     font-weight: 700;
-
-    transition:
-        all 0.2s ease;
-}
-
-.tab:hover {
-
-    border-color:
-        #93c5fd;
-
-    color:
-        #2563eb;
-
-    transform:
-        translateY(-1px);
 }
 
 .tab.active {
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #4f46e5
-        );
-
+    background: #2563eb;
     color: white;
-
-    border-color:
-        #2563eb;
-
-    box-shadow:
-        0 8px 20px
-        rgba(37, 99, 235, 0.20);
+    border-color: #2563eb;
 }
 
-
-/* =========================================================
-   SECTIONS
-   ========================================================= */
+/* SECTIONS */
 
 .section {
-
     display: none;
 }
 
 .section.active {
-
     display: block;
 }
 
 .section-header {
-
     display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
+    justify-content: space-between;
+    align-items: center;
     gap: 15px;
-
     flex-wrap: wrap;
-
     margin-bottom: 18px;
 }
 
 .section-header h2 {
-
     font-size: 26px;
 }
 
 .section-header p {
-
     color: #64748b;
-
     margin-top: 4px;
 }
 
-
-/* =========================================================
-   FORM CARD
-   ========================================================= */
+/* FORM */
 
 .form-card {
-
     background: white;
-
-    border:
-        1px solid #dbe3f0;
-
+    border: 1px solid #dbe3f0;
     border-radius: 20px;
-
     padding: 24px;
-
-    box-shadow:
-        0 12px 35px
-        rgba(30, 64, 175, 0.10);
-
+    box-shadow: 0 12px 35px rgba(30, 64, 175, .10);
     margin-bottom: 22px;
 }
 
 .form-grid {
-
     display: grid;
-
-    grid-template-columns:
-        1fr 1.5fr auto;
-
+    grid-template-columns: 1fr 1.5fr auto;
     gap: 14px;
-
     align-items: end;
 }
 
 .project-grid {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
 }
 
 .full {
-    grid-column:
-        1 / -1;
+    grid-column: 1 / -1;
 }
 
-
-/* =========================================================
-   LABELS
-   ========================================================= */
-
 label {
-
     display: block;
-
     font-weight: 700;
-
     font-size: 14px;
-
     margin-bottom: 7px;
 }
 
-
-/* =========================================================
-   INPUT / SELECT
-   ========================================================= */
-
 input,
 select {
-
     width: 100%;
-
-    padding:
-        12px 14px;
-
-    border:
-        1px solid #cbd5e1;
-
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
     border-radius: 11px;
-
     background: white;
-
     font-size: 14px;
-
     outline: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
 input:focus,
 select:focus {
-
-    border-color:
-        #2563eb;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(37, 99, 235, 0.10);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
 }
-
-input::placeholder {
-
-    color:
-        #94a3b8;
-}
-
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
 
 button {
-
-    font-family:
-        inherit;
+    font-family: inherit;
 }
 
 .primary {
-
     border: none;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #4f46e5
-        );
-
+    background: #2563eb;
     color: white;
-
-    padding:
-        12px 20px;
-
+    padding: 12px 20px;
     border-radius: 11px;
-
     font-weight: 700;
-
     cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
 .primary:hover {
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 8px 20px
-        rgba(37, 99, 235, 0.22);
+    background: #1d4ed8;
 }
 
-.primary:active {
-
-    transform:
-        translateY(0);
-}
-
-
-/* =========================================================
-   TABLE CARD
-   ========================================================= */
+/* TABLE */
 
 .table-card {
-
     background: white;
-
-    border:
-        1px solid #dbe3f0;
-
+    border: 1px solid #dbe3f0;
     border-radius: 20px;
-
     overflow: hidden;
-
-    box-shadow:
-        0 12px 35px
-        rgba(30, 64, 175, 0.10);
+    box-shadow: 0 12px 35px rgba(30, 64, 175, .10);
 }
 
 .table-top {
-
-    padding:
-        18px 20px;
-
+    padding: 18px 20px;
     display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
+    justify-content: space-between;
+    align-items: center;
     gap: 12px;
-
     flex-wrap: wrap;
 }
 
-.table-top h3 {
-
-    font-size: 18px;
-}
-
 .search {
-
     width: 320px;
 }
 
 .table-wrapper {
-
     overflow-x: auto;
 }
 
 table {
-
     width: 100%;
-
-    border-collapse:
-        collapse;
-
-    min-width:
-        900px;
+    border-collapse: collapse;
+    min-width: 900px;
 }
 
 th {
-
-    background:
-        #f1f5ff;
-
-    color:
-        #334155;
-
-    padding:
-        13px 15px;
-
-    text-align:
-        left;
-
-    font-size:
-        13px;
-
-    white-space:
-        nowrap;
+    background: #f1f5ff;
+    color: #334155;
+    padding: 13px 15px;
+    text-align: left;
+    font-size: 13px;
 }
 
 td {
-
-    padding:
-        14px 15px;
-
-    border-bottom:
-        1px solid #edf1f7;
-
-    font-size:
-        14px;
-
-    vertical-align:
-        middle;
+    padding: 14px 15px;
+    border-bottom: 1px solid #edf1f7;
+    font-size: 14px;
 }
 
-tbody tr {
-
-    transition:
-        background 0.15s ease;
+tr:hover {
+    background: #f8faff;
 }
-
-tbody tr:hover {
-
-    background:
-        #f8faff;
-}
-
-
-/* =========================================================
-   COLLISION ROWS
-   ========================================================= */
 
 .collision-row {
-
-    background:
-        #fff1f2 !important;
+    background: #fff1f2 !important;
 }
 
 .project-collision-row {
-
-    background:
-        #fff7ed !important;
+    background: #fff7ed !important;
 }
 
 .roll {
-
-    font-family:
-        Consolas,
-        "Courier New",
-        monospace;
-
-    font-weight:
-        700;
+    font-family: Consolas, monospace;
+    font-weight: 700;
 }
 
 .topic-name {
-
-    font-weight:
-        700;
+    font-weight: 700;
 }
 
 .muted {
-
-    color:
-        #64748b;
+    color: #64748b;
 }
 
-.conflict {
-
-    color:
-        #dc2626;
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    margin-top:
-        5px;
-
-    line-height:
-        1.5;
-}
-
-
-/* =========================================================
-   STATUS BADGES
-   ========================================================= */
+/* STATUS */
 
 .status {
-
-    display:
-        inline-block;
-
-    padding:
-        6px 10px;
-
-    border-radius:
-        999px;
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-    white-space:
-        nowrap;
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
 }
 
 .available {
-
-    background:
-        #dcfce7;
-
-    color:
-        #15803d;
+    background: #dcfce7;
+    color: #15803d;
 }
 
 .allocated {
-
-    background:
-        #dbeafe;
-
-    color:
-        #1e40af;
+    background: #dbeafe;
+    color: #1e40af;
 }
 
 .collision {
-
-    background:
-        #fee2e2;
-
-    color:
-        #dc2626;
+    background: #fee2e2;
+    color: #dc2626;
 }
 
-
-/* =========================================================
-   CHANGE BUTTON
-   ========================================================= */
+.conflict {
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 5px;
+}
 
 .change-btn {
-
-    border:
-        none;
-
-    background:
-        #dc2626;
-
-    color:
-        white;
-
-    padding:
-        9px 13px;
-
-    border-radius:
-        9px;
-
-    cursor:
-        pointer;
-
-    font-weight:
-        700;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+    border: none;
+    background: #dc2626;
+    color: white;
+    padding: 9px 13px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 700;
 }
 
-.change-btn:hover {
-
-    background:
-        #b91c1c;
-
-    transform:
-        translateY(-1px);
-}
-
-
-/* =========================================================
-   MODAL
-   ========================================================= */
+/* MODAL */
 
 .modal {
-
-    display:
-        none;
-
-    position:
-        fixed;
-
-    inset:
-        0;
-
-    background:
-        rgba(15, 23, 42, 0.65);
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    z-index:
-        5000;
-
-    padding:
-        20px;
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, .65);
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    padding: 20px;
 }
 
 .modal.show {
-
-    display:
-        flex;
+    display: flex;
 }
 
 .modal-box {
-
-    width:
-        min(550px, 100%);
-
-    background:
-        white;
-
-    border-radius:
-        20px;
-
-    padding:
-        25px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(15, 23, 42, 0.30);
+    width: min(550px, 100%);
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
 }
 
 .modal-head {
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    gap:
-        20px;
-
-    margin-bottom:
-        20px;
-}
-
-.modal-head h3 {
-
-    font-size:
-        21px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .close {
-
-    border:
-        none;
-
-    background:
-        #f1f5f9;
-
-    width:
-        35px;
-
-    height:
-        35px;
-
-    border-radius:
-        50%;
-
-    cursor:
-        pointer;
-
-    font-size:
-        20px;
-
-    flex-shrink:
-        0;
-}
-
-.close:hover {
-
-    background:
-        #e2e8f0;
+    border: none;
+    background: #f1f5f9;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .modal-actions {
-
-    display:
-        flex;
-
-    justify-content:
-        flex-end;
-
-    gap:
-        10px;
-
-    margin-top:
-        20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .cancel {
-
-    border:
-        1px solid #cbd5e1;
-
-    background:
-        white;
-
-    padding:
-        10px 16px;
-
-    border-radius:
-        10px;
-
-    cursor:
-        pointer;
+    border: 1px solid #cbd5e1;
+    background: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-.cancel:hover {
-
-    background:
-        #f8fafc;
-}
-
-
-/* =========================================================
-   TOAST
-   ========================================================= */
+/* TOAST */
 
 #toast {
-
-    position:
-        fixed;
-
-    right:
-        20px;
-
-    bottom:
-        20px;
-
-    z-index:
-        9999;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
 }
 
 .toast-item {
-
-    color:
-        white;
-
-    padding:
-        14px 18px;
-
-    border-radius:
-        12px;
-
-    margin-top:
-        10px;
-
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,0.18);
-
-    max-width:
-        380px;
-
-    font-size:
-        14px;
-
-    font-weight:
-        600;
+    color: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
 }
 
 .toast-success {
-
-    background:
-        #15803d;
+    background: #15803d;
 }
 
 .toast-error {
-
-    background:
-        #dc2626;
+    background: #dc2626;
 }
 
 .toast-info {
-
-    background:
-        #2563eb;
+    background: #2563eb;
 }
 
+/* RESPONSIVE */
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 1000px) {
+@media(max-width:1000px) {
 
     .summary {
-
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .form-grid {
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .project-grid {
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 }
 
-
-@media (max-width: 600px) {
-
-    .container {
-
-        width:
-            95%;
-    }
+@media(max-width:600px) {
 
     .summary {
-
-        grid-template-columns:
-            1fr;
-    }
-
-    .header-box {
-
-        padding:
-            25px;
+        grid-template-columns: 1fr;
     }
 
     .header-box h1 {
-
-        font-size:
-            28px;
+        font-size: 28px;
     }
 
     .tab {
-
-        width:
-            100%;
+        width: 100%;
     }
 
     .search {
-
-        width:
-            100%;
-    }
-
-    .form-card {
-
-        padding:
-            18px;
-    }
-
-    #toast {
-
-        right:
-            10px;
-
-        left:
-            10px;
-    }
-
-    .toast-item {
-
-        max-width:
-            100%;
+        width: 100%;
     }
 }
 
 </style>
-
 </head>
 
-
 <body>
-
 
 <div class="container">
 
 <header>
 
-    <div class="header-box">
+<div class="header-box">
 
-        <h1>
-            DBMS Topic Allocation
-        </h1>
+<h1>DBMS Topic Allocation</h1>
 
-        <p>
-            Theory • Lab • Project
-        </p>
+<p>Theory • Lab • Project</p>
 
-    </div>
+</div>
 
 </header>
 
 
+<!-- SUMMARY -->
+
 <div class="summary">
 
-    <div class="summary-card">
+<div class="summary-card">
 
-        <div
-            class="number"
-            id="theoryCount"
-        >
-            0
-        </div>
+<div class="number" id="theoryCount">0</div>
 
-        <div class="label">
-            Theory Allocations
-        </div>
-
-    </div>
-
-
-    <div class="summary-card">
-
-        <div
-            class="number"
-            id="labCount"
-        >
-            0
-        </div>
-
-        <div class="label">
-            Lab Allocations
-        </div>
-
-    </div>
-
-
-    <div class="summary-card">
-
-        <div
-            class="number"
-            id="projectCount"
-        >
-            0
-        </div>
-
-        <div class="label">
-            Project Teams
-        </div>
-
-    </div>
-
-
-    <div class="summary-card">
-
-        <div
-            class="number"
-            id="collisionCount"
-        >
-            0
-        </div>
-
-        <div class="label">
-            Collisions
-        </div>
-
-    </div>
+<div class="label">
+Theory Allocations
+</div>
 
 </div>
 
+
+<div class="summary-card">
+
+<div class="number" id="labCount">0</div>
+
+<div class="label">
+Lab Allocations
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<div class="number" id="projectCount">0</div>
+
+<div class="label">
+Project Teams
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<div class="number" id="collisionCount">0</div>
+
+<div class="label">
+Collisions
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TABS -->
 
 <div class="tabs">
 
-    <button
-        class="tab active"
-        onclick="showSection('theory', this)"
-    >
-        DBMS Theory
-    </button>
+<button
+    class="tab active"
+    onclick="showSection('theory', this)"
+>
+DBMS Theory
+</button>
 
-    <button
-        class="tab"
-        onclick="showSection('lab', this)"
-    >
-        DBMS Lab
-    </button>
+<button
+    class="tab"
+    onclick="showSection('lab', this)"
+>
+DBMS Lab
+</button>
 
-    <button
-        class="tab"
-        onclick="showSection('project', this)"
-    >
-        DBMS Project
-    </button>
+<button
+    class="tab"
+    onclick="showSection('project', this)"
+>
+DBMS Project
+</button>
 
 </div>
 
 
-<section
-    id="theory"
-    class="section active"
+<!-- =====================================================
+     THEORY
+     ===================================================== -->
+
+<section id="theory" class="section active">
+
+<div class="section-header">
+
+<div>
+
+<h2>DBMS Theory</h2>
+
+<p>
+Choose a theory topic using your Roll Number.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="form-card">
+
+<div class="form-grid">
+
+<div>
+
+<label>Roll Number</label>
+
+<input
+    id="theoryRoll"
+    placeholder="257R1A66C9"
 >
 
-    <div class="section-header">
-
-        <div>
-
-            <h2>
-                DBMS Theory
-            </h2>
-
-            <p>
-                Choose a theory topic using your Roll Number.
-            </p>
-
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="form-card">
+<div>
 
-        <div class="form-grid">
+<label>Theory Topic</label>
 
-            <div>
+<select id="theoryTopic">
 
-                <label>
-                    Roll Number
-                </label>
+<option value="">
+Select Theory Topic
+</option>
 
-                <input
-                    id="theoryRoll"
-                    placeholder="257R1A66C9"
-                    autocomplete="off"
-                >
+</select>
 
-            </div>
+</div>
 
 
-            <div>
+<button
+    class="primary"
+    onclick="allocateSingle('theory')"
+>
+Allocate Topic
+</button>
 
-                <label>
-                    Theory Topic
-                </label>
+</div>
 
-                <select id="theoryTopic">
-
-                    <option value="">
-                        Select Theory Topic
-                    </option>
-
-                </select>
-
-            </div>
+</div>
 
 
-            <button
-                class="primary"
-                onclick="allocateSingle('theory')"
-            >
-                Allocate Topic
-            </button>
+<div class="table-card">
 
-        </div>
+<div class="table-top">
 
-    </div>
+<h3>Theory Allocation Status</h3>
 
+<input
+    id="theorySearch"
+    class="search"
+    placeholder="Search Roll Number or Topic..."
+    oninput="renderTheory()"
+>
 
-    <div class="table-card">
-
-        <div class="table-top">
-
-            <h3>
-                Theory Allocation Status
-            </h3>
-
-            <input
-                id="theorySearch"
-                class="search"
-                placeholder="Search Roll Number or Topic..."
-                oninput="renderTheory()"
-            >
-
-        </div>
+</div>
 
 
-        <div class="table-wrapper">
+<div class="table-wrapper">
 
-            <table>
+<table>
 
-                <thead>
+<thead>
 
-                    <tr>
+<tr>
 
-                        <th>S.No</th>
-                        <th>Roll Number</th>
-                        <th>Topic</th>
-                        <th>Presentation Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
+<th>S.No</th>
+<th>Roll Number</th>
+<th>Topic</th>
+<th>Presentation Date</th>
+<th>Status</th>
+<th>Action</th>
 
-                    </tr>
+</tr>
 
-                </thead>
+</thead>
 
-                <tbody id="theoryTable"></tbody>
+<tbody id="theoryTable"></tbody>
 
-            </table>
+</table>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 </section>
 
 
-<section
-    id="lab"
-    class="section"
+<!-- =====================================================
+     LAB
+     ===================================================== -->
+
+<section id="lab" class="section">
+
+<div class="section-header">
+
+<div>
+
+<h2>DBMS Lab</h2>
+
+<p>
+Choose a lab topic using your Roll Number.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="form-card">
+
+<div class="form-grid">
+
+<div>
+
+<label>Roll Number</label>
+
+<input
+    id="labRoll"
+    placeholder="257R1A66C9"
 >
 
-    <div class="section-header">
-
-        <div>
-
-            <h2>
-                DBMS Lab
-            </h2>
-
-            <p>
-                Choose a lab topic using your Roll Number.
-            </p>
-
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="form-card">
+<div>
 
-        <div class="form-grid">
+<label>Lab Topic</label>
 
-            <div>
+<select id="labTopic">
 
-                <label>
-                    Roll Number
-                </label>
+<option value="">
+Select Lab Topic
+</option>
 
-                <input
-                    id="labRoll"
-                    placeholder="257R1A66C9"
-                    autocomplete="off"
-                >
+</select>
 
-            </div>
+</div>
 
 
-            <div>
+<button
+    class="primary"
+    onclick="allocateSingle('lab')"
+>
+Allocate Topic
+</button>
 
-                <label>
-                    Lab Topic
-                </label>
+</div>
 
-                <select id="labTopic">
-
-                    <option value="">
-                        Select Lab Topic
-                    </option>
-
-                </select>
-
-            </div>
+</div>
 
 
-            <button
-                class="primary"
-                onclick="allocateSingle('lab')"
-            >
-                Allocate Topic
-            </button>
+<div class="table-card">
 
-        </div>
+<div class="table-top">
 
-    </div>
+<h3>Lab Allocation Status</h3>
 
+<input
+    id="labSearch"
+    class="search"
+    placeholder="Search Roll Number or Topic..."
+    oninput="renderLab()"
+>
 
-    <div class="table-card">
-
-        <div class="table-top">
-
-            <h3>
-                Lab Allocation Status
-            </h3>
-
-            <input
-                id="labSearch"
-                class="search"
-                placeholder="Search Roll Number or Topic..."
-                oninput="renderLab()"
-            >
-
-        </div>
+</div>
 
 
-        <div class="table-wrapper">
+<div class="table-wrapper">
 
-            <table>
+<table>
 
-                <thead>
+<thead>
 
-                    <tr>
+<tr>
 
-                        <th>S.No</th>
-                        <th>Roll Number</th>
-                        <th>Topic</th>
-                        <th>Presentation Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
+<th>S.No</th>
+<th>Roll Number</th>
+<th>Topic</th>
+<th>Presentation Date</th>
+<th>Status</th>
+<th>Action</th>
 
-                    </tr>
+</tr>
 
-                </thead>
+</thead>
 
-                <tbody id="labTable"></tbody>
+<tbody id="labTable"></tbody>
 
-            </table>
+</table>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 </section>
 
 
-<section
-    id="project"
-    class="section"
+<!-- =====================================================
+     PROJECT
+     ===================================================== -->
+
+<section id="project" class="section">
+
+<div class="section-header">
+
+<div>
+
+<h2>DBMS Project</h2>
+
+<p>
+Each project is allocated to one team of exactly 3 students.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="form-card">
+
+<div class="project-grid">
+
+
+<div>
+
+<label>Team Member 1</label>
+
+<input
+    id="projectRoll1"
+    placeholder="Roll Number"
 >
 
-    <div class="section-header">
-
-        <div>
-
-            <h2>
-                DBMS Project
-            </h2>
-
-            <p>
-                Each project is allocated to one team of exactly 3 students.
-            </p>
-
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="form-card">
+<div>
 
-        <div class="project-grid">
+<label>Team Member 2</label>
 
-            <div>
+<input
+    id="projectRoll2"
+    placeholder="Roll Number"
+>
 
-                <label>
-                    Team Member 1
-                </label>
-
-                <input
-                    id="projectRoll1"
-                    placeholder="Roll Number"
-                    autocomplete="off"
-                >
-
-            </div>
+</div>
 
 
-            <div>
+<div>
 
-                <label>
-                    Team Member 2
-                </label>
+<label>Team Member 3</label>
 
-                <input
-                    id="projectRoll2"
-                    placeholder="Roll Number"
-                    autocomplete="off"
-                >
+<input
+    id="projectRoll3"
+    placeholder="Roll Number"
+>
 
-            </div>
+</div>
 
 
-            <div>
+<div class="full">
 
-                <label>
-                    Team Member 3
-                </label>
+<label>Project Title</label>
 
-                <input
-                    id="projectRoll3"
-                    placeholder="Roll Number"
-                    autocomplete="off"
-                >
+<select id="projectTopic">
 
-            </div>
+<option value="">
+Select Project
+</option>
 
+</select>
 
-            <div class="full">
-
-                <label>
-                    Project Title
-                </label>
-
-                <select id="projectTopic">
-
-                    <option value="">
-                        Select Project
-                    </option>
-
-                </select>
-
-            </div>
+</div>
 
 
-            <div class="full">
+<div class="full">
 
-                <button
-                    class="primary"
-                    onclick="allocateProject()"
-                >
-                    Allocate Project
-                </button>
+<button
+    class="primary"
+    onclick="allocateProject()"
+>
+Allocate Project
+</button>
 
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="table-card">
+</div>
 
-        <div class="table-top">
-
-            <h3>
-                Project Allocation Status
-            </h3>
-
-            <input
-                id="projectSearch"
-                class="search"
-                placeholder="Search project or Roll Number..."
-                oninput="renderProjects()"
-            >
-
-        </div>
+</div>
 
 
-        <div class="table-wrapper">
+<div class="table-card">
 
-            <table>
+<div class="table-top">
 
-                <thead>
+<h3>Project Allocation Status</h3>
 
-                    <tr>
+<input
+    id="projectSearch"
+    class="search"
+    placeholder="Search project or Roll Number..."
+    oninput="renderProjects()"
+>
 
-                        <th>S.No</th>
-                        <th>Team Roll Numbers</th>
-                        <th>Batch</th>
-                        <th>Project</th>
-                        <th>Presentation Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
+</div>
 
-                    </tr>
 
-                </thead>
+<div class="table-wrapper">
 
-                <tbody id="projectTable"></tbody>
+<table>
 
-            </table>
+<thead>
 
-        </div>
+<tr>
 
-    </div>
+<th>S.No</th>
+<th>Team Roll Numbers</th>
+<th>Batch</th>
+<th>Project</th>
+<th>Presentation Date</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="projectTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
+
+</div>
+
+
+<!-- =====================================================
+     CHANGE MODAL
+     ===================================================== -->
+
+<div class="modal" id="changeModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<div>
+
+<h3 id="modalTitle">
+Change Topic
+</h3>
+
+<p
+    id="modalDescription"
+    style="color:#64748b;margin-top:5px;"
+>
+</p>
+
+</div>
+
+<button
+    class="close"
+    onclick="closeModal()"
+>
+×
+</button>
+
+</div>
+
+
+<div id="singleChange">
+
+<label>New Topic</label>
+
+<select id="newTopicSelect">
+
+<option value="">
+Select New Topic
+</option>
+
+</select>
 
 </div>
 
 
 <div
-    class="modal"
-    id="changeModal"
+    id="projectChange"
+    style="display:none;"
 >
 
-    <div class="modal-box">
+<label>New Project</label>
 
-        <div class="modal-head">
+<select id="newProjectSelect">
 
-            <div>
+<option value="">
+Select New Project
+</option>
 
-                <h3 id="modalTitle">
-                    Change Topic
-                </h3>
+</select>
 
-                <p
-                    id="modalDescription"
-                    style="
-                        color:#64748b;
-                        margin-top:5px;
-                    "
-                ></p>
-
-            </div>
-
-            <button
-                class="close"
-                onclick="closeModal()"
-            >
-                ×
-            </button>
-
-        </div>
+</div>
 
 
-        <div id="singleChange">
+<div class="modal-actions">
 
-            <label>
-                New Topic
-            </label>
+<button
+    class="cancel"
+    onclick="closeModal()"
+>
+Cancel
+</button>
 
-            <select id="newTopicSelect">
+<button
+    class="primary"
+    onclick="submitChange()"
+>
+Confirm Change
+</button>
 
-                <option value="">
-                    Select New Topic
-                </option>
+</div>
 
-            </select>
-
-        </div>
-
-
-        <div
-            id="projectChange"
-            style="display:none;"
-        >
-
-            <label>
-                New Project
-            </label>
-
-            <select id="newProjectSelect">
-
-                <option value="">
-                    Select New Project
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="modal-actions">
-
-            <button
-                class="cancel"
-                onclick="closeModal()"
-            >
-                Cancel
-            </button>
-
-            <button
-                class="primary"
-                onclick="submitChange()"
-            >
-                Confirm Change
-            </button>
-
-        </div>
-
-    </div>
+</div>
 
 </div>
 
@@ -1656,613 +991,376 @@ tbody tr:hover {
 
 <script>
 
-
-/* =========================================================
-   GOOGLE APPS SCRIPT WEB APP URL
-   ========================================================= */
+/* =====================================================
+   YOUR CURRENT APPS SCRIPT URL
+   ===================================================== */
 
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbx9UP3JGD6tmaCyYzmLBpyJR2Jd9ZFbVr4q1BBOVlO86xoTJkLCeO9rLpnYyahujUy-pw/exec";
+"https://script.google.com/macros/s/AKfycbzvtKNRlxnsdRNwqzjxysGiEkyyFJMUFWNmBWrTaGnpWOv6XM9EsTzOylEjYkU09tgjxw/exec";
 
 
-/* =========================================================
+/* =====================================================
    THEORY TOPICS
-   ========================================================= */
+   ===================================================== */
 
 const THEORY_TOPICS = [
-
-    "Functional Dependencies",
-    "ER Diagram for a Hospital Management System",
-    "Basic Form of SQL Queries",
-    "B+ Trees: A Dynamic Index Structure",
-    "Advantages and Applications of DBMS",
-    "Selection and Projection Operations",
-    "Transaction Concept and Transaction States",
-    "Weak Entity Sets and Strong Entity Sets",
-    "UNION, INTERSECT, and EXCEPT Operations in SQL",
-    "Problems Caused by Data Redundancy",
-    "Data Independence in Database Systems",
-    "Natural Join and Its Applications",
-    "Lock-Based Concurrency Control Protocols",
-    "Entity-Relationship (ER) Model",
-    "Fourth Normal Form (4NF)",
-    "Database System Architecture",
-    "NULL Values in SQL",
-    "Relational Algebra: Fundamental Operators",
-    "ER Diagram for an Online Shopping System",
-    "Atomicity and Durability in Transactions",
-    "Types of Attributes in ER Model",
-    "Database Decomposition",
-    "Tuple Relational Calculus",
-    "File Organization and Indexing Techniques",
-    "Second Normal Form (2NF)",
-    "Relationships and Relationship Sets",
-    "Triggers and Active Databases",
-    "Introduction to the Relational Model",
-    "Lossless Join Decomposition",
-    "SQL SELECT, FROM, and WHERE Clauses",
-    "Multiple Granularity Protocol",
-    "Additional Features of the ER Model",
-    "Division Operator in Relational Algebra",
-    "File Systems versus Database Management Systems",
-    "Fifth Normal Form (5NF)",
-    "Aggregation Operators in SQL",
-    "Logical Database Design",
-    "Concurrent Executions and Their Problems",
-    "Types of Relationships in ER Model",
-    "Domain Relational Calculus",
-    "Structure and Components of a DBMS",
-    "Third Normal Form (3NF)",
-    "Join Operations in Relational Algebra",
-    "Complex Integrity Constraints in SQL",
-    "Evolution and Historical Perspective of Database Systems",
-    "Serializability and Recoverability",
-    "Creating, Altering, and Destroying Tables and Views",
-    "Multivalued Dependencies",
-    "ER Diagram for a College Management System",
-    "Timestamp-Based and Validation-Based Protocols",
-    "Integrity Constraints over Relations",
-    "Boyce-Codd Normal Form (BCNF)",
-    "Relational Algebra versus Relational Calculus",
-    "Views in Relational Databases",
-    "Log-Based Recovery and Atomicity",
-    "Entities, Attributes, and Entity Sets",
-    "Cartesian Product, Union, and Set Difference",
-    "Querying Relational Data",
-    "Types and Applications of SQL Triggers",
-    "Database Design Process",
-    "Rename Operator in Relational Algebra",
-    "Enforcement of Integrity Constraints",
-    "Nested Queries in SQL",
-    "Conceptual Database Design Using ER Diagrams",
-    "Problems Related to Decomposition",
-    "Different Types of Data Models",
-    "Domain Relational Calculus",
-    "Reasoning about Functional Dependencies",
-    "Relational Model Integrity Constraints",
-    "Hash-Based and Tree-Based Indexing"
-
+"Functional Dependencies",
+"ER Diagram for a Hospital Management System",
+"Basic Form of SQL Queries",
+"B+ Trees: A Dynamic Index Structure",
+"Advantages and Applications of DBMS",
+"Selection and Projection Operations",
+"Transaction Concept and Transaction States",
+"Weak Entity Sets and Strong Entity Sets",
+"UNION, INTERSECT, and EXCEPT Operations in SQL",
+"Problems Caused by Data Redundancy",
+"Data Independence in Database Systems",
+"Natural Join and Its Applications",
+"Lock-Based Concurrency Control Protocols",
+"Entity-Relationship (ER) Model",
+"Fourth Normal Form (4NF)",
+"Database System Architecture",
+"NULL Values in SQL",
+"Relational Algebra: Fundamental Operators",
+"ER Diagram for an Online Shopping System",
+"Atomicity and Durability in Transactions",
+"Types of Attributes in ER Model",
+"Database Decomposition",
+"Tuple Relational Calculus",
+"File Organization and Indexing Techniques",
+"Second Normal Form (2NF)",
+"Relationships and Relationship Sets",
+"Triggers and Active Databases",
+"Introduction to the Relational Model",
+"Lossless Join Decomposition",
+"SQL SELECT, FROM, and WHERE Clauses",
+"Multiple Granularity Protocol",
+"Additional Features of the ER Model",
+"Division Operator in Relational Algebra",
+"File Systems versus Database Management Systems",
+"Fifth Normal Form (5NF)",
+"Aggregation Operators in SQL",
+"Logical Database Design",
+"Concurrent Executions and Their Problems",
+"Types of Relationships in ER Model",
+"Domain Relational Calculus",
+"Structure and Components of a DBMS",
+"Third Normal Form (3NF)",
+"Join Operations in Relational Algebra",
+"Complex Integrity Constraints in SQL",
+"Evolution and Historical Perspective of Database Systems",
+"Serializability and Recoverability",
+"Creating, Altering, and Destroying Tables and Views",
+"Multivalued Dependencies",
+"ER Diagram for a College Management System",
+"Timestamp-Based and Validation-Based Protocols",
+"Integrity Constraints over Relations",
+"Boyce-Codd Normal Form (BCNF)",
+"Relational Algebra versus Relational Calculus",
+"Views in Relational Databases",
+"Log-Based Recovery and Atomicity",
+"Entities, Attributes, and Entity Sets",
+"Cartesian Product, Union, and Set Difference",
+"Querying Relational Data",
+"Types and Applications of SQL Triggers",
+"Database Design Process",
+"Rename Operator in Relational Algebra",
+"Enforcement of Integrity Constraints",
+"Nested Queries in SQL",
+"Conceptual Database Design Using ER Diagrams",
+"Problems Related to Decomposition",
+"Different Types of Data Models",
+"Domain Relational Calculus",
+"Reasoning about Functional Dependencies",
+"Relational Model Integrity Constraints",
+"Hash-Based and Tree-Based Indexing"
 ];
 
 
-/* =========================================================
+/* =====================================================
    LAB TOPICS
-   ========================================================= */
+   ===================================================== */
 
 const LAB_TOPICS = [
-
-    "Introduction to MySQL and Database Environment",
-    "Designing an ER Diagram for a College Management System",
-    "SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
-    "Database Normalization and Its Practical Importance",
-    "SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
-    "Database Views and Their Practical Applications",
-    "DML Commands: INSERT, UPDATE and DELETE",
-    "Functional Dependencies in Database Design",
-    "Nested Queries and Subqueries in SQL",
-    "SQL Aggregate Functions with GROUP BY and HAVING",
-    "Database Design for an Online Shopping System",
-    "Primary Key and Foreign Key Constraints",
-    "Correlated Subqueries in SQL",
-    "SQL Set Operations: UNION, INTERSECT and EXCEPT",
-    "Database Triggers and Their Applications",
-    "Stored Procedures in MySQL",
-    "Cursor Handling in Database Programming",
-    "One-to-One, One-to-Many and Many-to-Many Relationships",
-    "Converting ER Diagrams into Relational Schemas",
-    "SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
-    "First Normal Form, Second Normal Form and Third Normal Form",
-    "Boyce-Codd Normal Form (BCNF)",
-    "Designing a Hospital Management Database",
-    "SQL Queries for Employee Management System",
-    "SQL Queries for Student Management System",
-    "SQL Queries for Banking Database",
-    "SQL Queries for Library Management System",
-    "SQL Queries for Railway Reservation System",
-    "SQL Queries for Hotel Management System",
-    "SQL Queries for E-Commerce Database",
-    "Self Join and Its Applications",
-    "Cross Join and Cartesian Product",
-    "Natural Join and Equi Join",
-    "Subqueries Using IN, ANY and ALL",
-    "EXISTS and NOT EXISTS in SQL",
-    "SQL Date and Time Functions",
-    "SQL String Functions and Their Applications",
-    "SQL Numeric and Mathematical Functions",
-    "NULL Values and Three-Valued Logic in SQL",
-    "Creating and Managing SQL Views",
-    "BEFORE and AFTER Triggers in MySQL",
-    "INSERT, UPDATE and DELETE Triggers",
-    "Audit Trail Using Database Triggers",
-    "Stored Functions versus Stored Procedures",
-    "Input and Output Parameters in Stored Procedures",
-    "Cursors and Their Applications in MySQL",
-    "Error Handling in Stored Procedures",
-    "Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
-    "ACID Properties of Database Transactions",
-    "Database Concurrency and Transaction Problems",
-    "Indexing in MySQL for Faster Query Processing",
-    "Clustered and Non-Clustered Indexing",
-    "Primary Index, Secondary Index and Composite Index",
-    "Query Optimization Techniques in MySQL",
-    "Understanding EXPLAIN in MySQL",
-    "SQL Injection and Database Security",
-    "DCL Commands: GRANT and REVOKE",
-    "User Management and Privileges in MySQL",
-    "Database Backup and Restoration",
-    "Database Import and Export Using MySQL",
-    "Connecting Java Applications with MySQL",
-    "Connecting Python Applications with MySQL",
-    "CRUD Operations Using a Database Application",
-    "Database Connectivity Using JDBC",
-    "Database Connectivity Using Python and MySQL Connector",
-    "Introduction to NoSQL Databases",
-    "Relational Databases versus NoSQL Databases",
-    "MySQL JSON Data Types and JSON Queries",
-    "Database Replication and High Availability",
-    "Database Performance Monitoring and Optimization"
-
+"Introduction to MySQL and Database Environment",
+"Designing an ER Diagram for a College Management System",
+"SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
+"Database Normalization and Its Practical Importance",
+"SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
+"Database Views and Their Practical Applications",
+"DML Commands: INSERT, UPDATE and DELETE",
+"Functional Dependencies in Database Design",
+"Nested Queries and Subqueries in SQL",
+"SQL Aggregate Functions with GROUP BY and HAVING",
+"Database Design for an Online Shopping System",
+"Primary Key and Foreign Key Constraints",
+"Correlated Subqueries in SQL",
+"SQL Set Operations: UNION, INTERSECT and EXCEPT",
+"Database Triggers and Their Applications",
+"Stored Procedures in MySQL",
+"Cursor Handling in Database Programming",
+"One-to-One, One-to-Many and Many-to-Many Relationships",
+"Converting ER Diagrams into Relational Schemas",
+"SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
+"First Normal Form, Second Normal Form and Third Normal Form",
+"Boyce-Codd Normal Form (BCNF)",
+"Designing a Hospital Management Database",
+"SQL Queries for Employee Management System",
+"SQL Queries for Student Management System",
+"SQL Queries for Banking Database",
+"SQL Queries for Library Management System",
+"SQL Queries for Railway Reservation System",
+"SQL Queries for Hotel Management System",
+"SQL Queries for E-Commerce Database",
+"Self Join and Its Applications",
+"Cross Join and Cartesian Product",
+"Natural Join and Equi Join",
+"Subqueries Using IN, ANY and ALL",
+"EXISTS and NOT EXISTS in SQL",
+"SQL Date and Time Functions",
+"SQL String Functions and Their Applications",
+"SQL Numeric and Mathematical Functions",
+"NULL Values and Three-Valued Logic in SQL",
+"Creating and Managing SQL Views",
+"BEFORE and AFTER Triggers in MySQL",
+"INSERT, UPDATE and DELETE Triggers",
+"Audit Trail Using Database Triggers",
+"Stored Functions versus Stored Procedures",
+"Input and Output Parameters in Stored Procedures",
+"Cursors and Their Applications in MySQL",
+"Error Handling in Stored Procedures",
+"Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
+"ACID Properties of Database Transactions",
+"Database Concurrency and Transaction Problems",
+"Indexing in MySQL for Faster Query Processing",
+"Clustered and Non-Clustered Indexing",
+"Primary Index, Secondary Index and Composite Index",
+"Query Optimization Techniques in MySQL",
+"Understanding EXPLAIN in MySQL",
+"SQL Injection and Database Security",
+"DCL Commands: GRANT and REVOKE",
+"User Management and Privileges in MySQL",
+"Database Backup and Restoration",
+"Database Import and Export Using MySQL",
+"Connecting Java Applications with MySQL",
+"Connecting Python Applications with MySQL",
+"CRUD Operations Using a Database Application",
+"Database Connectivity Using JDBC",
+"Database Connectivity Using Python and MySQL Connector",
+"Introduction to NoSQL Databases",
+"Relational Databases versus NoSQL Databases",
+"MySQL JSON Data Types and JSON Queries",
+"Database Replication and High Availability",
+"Database Performance Monitoring and Optimization"
 ];
 
 
-/* =========================================================
+/* =====================================================
    PROJECT TOPICS
-   ========================================================= */
+   ===================================================== */
 
 const PROJECT_TOPICS = [
-
-    "Supermarket Billing Management System",
-    "Blood Donation Camp Management System",
-    "Doctor Appointment Booking System",
-    "Online Examination Management System",
-    "College Hostel Allocation System",
-    "Vehicle Service Center Management System",
-    "Online Event Management System",
-    "College Placement Management System",
-    "Sports Tournament Management System",
-    "Parking Management System",
-    "Electricity Billing Management System",
-    "Water Supply Billing Management System",
-    "Real Estate Property Management System",
-    "Mobile Shop Management System",
-    "Computer Sales and Service Management System",
-    "Online Complaint Management System",
-    "Travel Agency Management System",
-    "Flight Booking Management System",
-    "Pet Clinic Management System",
-    "Donation Management System",
-    "Digital Document Management System",
-    "Freelancer Project Management System",
-    "Online Auction Management System"
-
+"Supermarket Billing Management System",
+"Blood Donation Camp Management System",
+"Doctor Appointment Booking System",
+"Online Examination Management System",
+"College Hostel Allocation System",
+"Vehicle Service Center Management System",
+"Online Event Management System",
+"College Placement Management System",
+"Sports Tournament Management System",
+"Parking Management System",
+"Electricity Billing Management System",
+"Water Supply Billing Management System",
+"Real Estate Property Management System",
+"Mobile Shop Management System",
+"Computer Sales and Service Management System",
+"Online Complaint Management System",
+"Travel Agency Management System",
+"Flight Booking Management System",
+"Pet Clinic Management System",
+"Donation Management System",
+"Digital Document Management System",
+"Freelancer Project Management System",
+"Online Auction Management System"
 ];
 
 
-/* =========================================================
+/* =====================================================
    APPLICATION DATA
-   ========================================================= */
+   ===================================================== */
 
 let appData = {
-
     theory: [],
-
     lab: [],
-
     projects: []
-
 };
 
 
 let currentChange = {
-
     type: null,
-
     roll: null,
-
     rolls: null
-
 };
 
 
-/* =========================================================
-   PART 1 ENDS — DO NOT CLOSE SCRIPT HERE
-   ========================================================= */
-    /* =========================================================
-   HELPERS
-   ========================================================= */
+/* =====================================================
+   NORMALIZATION
+   ===================================================== */
 
-function cleanValue(value) {
+function normalizeText(value) {
 
-    return String(
-        value == null ? "" : value
-    ).trim();
-
+    return String(value || "")
+        .replace(/\u00A0/g, " ")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
 }
 
 
 function normalizeRoll(value) {
 
-    return cleanValue(value)
-        .toUpperCase()
-        .replace(/\s+/g, "");
-
+    return String(value || "")
+        .trim()
+        .replace(/\s+/g, "")
+        .toUpperCase();
 }
 
 
-function normalizeText(value) {
+function normalizeProject(value) {
 
-    return cleanValue(value)
-        .toLowerCase()
-        .replace(/\s+/g, " ");
+    return String(value || "")
+        .replace(/\u00A0/g, " ")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+}
 
+
+function cleanValue(value) {
+
+    return String(value || "")
+        .replace(/\u00A0/g, " ")
+        .trim();
 }
 
 
 function escapeHtml(value) {
 
-    return cleanValue(value)
+    return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
 }
 
 
 function escapeAttr(value) {
 
     return escapeHtml(value);
-
 }
 
 
-function setText(id, value) {
-
-    const element =
-        document.getElementById(id);
-
-    if (element) {
-
-        element.textContent =
-            value;
-
-    }
-
-}
-
-
-/* =========================================================
-   PROJECT ROLL PARSER
-   ========================================================= */
-
-function parseProjectRolls(value) {
-
-    if (Array.isArray(value)) {
-
-        return value
-            .map(normalizeRoll)
-            .filter(Boolean);
-
-    }
-
-    return cleanValue(value)
-        .split(",")
-        .map(normalizeRoll)
-        .filter(Boolean);
-
-}
-
-
-/* =========================================================
-   JSONP REQUEST
-   ========================================================= */
-
-function jsonpRequest(params) {
-
-    return new Promise(
-        function(resolve, reject) {
-
-            const callbackName =
-                "dbmsCallback_" +
-                Date.now() +
-                "_" +
-                Math.random()
-                    .toString(36)
-                    .substring(2);
-
-            const script =
-                document.createElement("script");
-
-            const query =
-                new URLSearchParams();
-
-            Object.keys(params).forEach(
-                function(key) {
-
-                    query.set(
-                        key,
-                        params[key]
-                    );
-
-                }
-            );
-
-            query.set(
-                "callback",
-                callbackName
-            );
-
-            let finished = false;
-
-            const timer =
-                setTimeout(
-                    function() {
-
-                        if (finished) {
-                            return;
-                        }
-
-                        finished = true;
-
-                        cleanup();
-
-                        reject(
-                            new Error(
-                                "Google Sheets connection timed out."
-                            )
-                        );
-
-                    },
-                    15000
-                );
-
-
-            function cleanup() {
-
-                clearTimeout(timer);
-
-                if (script.parentNode) {
-
-                    script.parentNode
-                        .removeChild(script);
-
-                }
-
-                try {
-
-                    delete window[
-                        callbackName
-                    ];
-
-                } catch(error) {
-
-                    window[
-                        callbackName
-                    ] = undefined;
-
-                }
-
-            }
-
-
-            window[
-                callbackName
-            ] =
-                function(data) {
-
-                    if (finished) {
-                        return;
-                    }
-
-                    finished = true;
-
-                    cleanup();
-
-                    resolve(data);
-
-                };
-
-
-            script.onerror =
-                function() {
-
-                    if (finished) {
-                        return;
-                    }
-
-                    finished = true;
-
-                    cleanup();
-
-                    reject(
-                        new Error(
-                            "Unable to connect to Google Sheets."
-                        )
-                    );
-
-                };
-
-
-            script.src =
-                SCRIPT_URL +
-                "?" +
-                query.toString();
-
-
-            document.body.appendChild(
-                script
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SEND DATA
-   ========================================================= */
-
-async function postData(data) {
-
-    return await jsonpRequest(
-        data
-    );
-
-}
-
-
-/* =========================================================
+/* =====================================================
    LOAD DATA
-   ========================================================= */
+   ===================================================== */
 
 async function loadData() {
 
     try {
 
-        const result =
-            await postData({
-                action: "loadData"
-            });
-
-
-        if (
-            !result ||
-            result.success === false
-        ) {
-
-            throw new Error(
-                result &&
-                result.message
-                    ? result.message
-                    : "Failed to load data."
+        const response =
+            await fetch(
+                SCRIPT_URL +
+                "?t=" +
+                Date.now()
             );
 
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            throw new Error(
+                data.message
+            );
         }
 
 
-        appData.theory =
-            Array.isArray(
-                result.theory
-            )
-                ? result.theory
-                : [];
-
-
-        appData.lab =
-            Array.isArray(
-                result.lab
-            )
-                ? result.lab
-                : [];
-
-
-        appData.projects =
-            Array.isArray(
-                result.projects
-            )
-                ? result.projects
-                : [];
-
+        appData = data;
 
         renderAll();
 
-        populateSelects();
-
-
     } catch(error) {
 
-        console.error(
-            "loadData error:",
-            error
-        );
-
+        console.error(error);
 
         showToast(
-            error.message ||
             "Unable to connect to Google Sheets.",
             "error"
         );
-
     }
-
 }
 
 
-/* =========================================================
-   ALLOCATE SINGLE TOPIC
-   ========================================================= */
+/* =====================================================
+   POST DATA
+   ===================================================== */
 
-async function allocateSingle(
-    category
-) {
+async function postData(payload) {
 
-    const isTheory =
-        category === "theory";
+    const response =
+        await fetch(
+            SCRIPT_URL,
+            {
+                method: "POST",
 
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
 
-    const rollInput =
-        document.getElementById(
-            isTheory
-                ? "theoryRoll"
-                : "labRoll"
+                body:
+                    JSON.stringify(payload)
+            }
         );
 
 
-    const topicSelect =
-        document.getElementById(
-            isTheory
-                ? "theoryTopic"
-                : "labTopic"
-        );
+    return await response.json();
+}
 
+
+/* =====================================================
+   SINGLE ALLOCATION
+   ===================================================== */
+
+async function allocateSingle(type) {
 
     const roll =
         normalizeRoll(
-            rollInput
-                ? rollInput.value
-                : ""
+            document.getElementById(
+                type + "Roll"
+            ).value
         );
 
 
     const topic =
-        cleanValue(
-            topicSelect
-                ? topicSelect.value
-                : ""
-        );
+        document.getElementById(
+            type + "Topic"
+        ).value;
 
 
     if (!roll) {
 
         showToast(
-            "Enter a Roll Number.",
+            "Enter your Roll Number.",
             "error"
         );
 
         return;
-
     }
 
 
@@ -2274,17 +1372,10 @@ async function allocateSingle(
         );
 
         return;
-
     }
 
 
     try {
-
-        showToast(
-            "Allocating topic...",
-            "info"
-        );
-
 
         const result =
             await postData({
@@ -2293,141 +1384,114 @@ async function allocateSingle(
                     "allocateSingle",
 
                 category:
-                    category,
+                    type,
 
                 roll:
                     roll,
 
                 topic:
                     topic
-
             });
 
 
         showToast(
-
-            result.message ||
-            (
-                result.success
-                    ? "Topic allocated successfully."
-                    : "Allocation failed."
-            ),
-
+            result.message,
             result.success
                 ? "success"
                 : "error"
-
         );
 
 
         if (result.success) {
 
-            if (rollInput) {
+            document.getElementById(
+                type + "Roll"
+            ).value = "";
 
-                rollInput.value = "";
-
-            }
-
-            if (topicSelect) {
-
-                topicSelect.value = "";
-
-            }
-
-            await loadData();
-
+            document.getElementById(
+                type + "Topic"
+            ).value = "";
         }
 
 
+        await loadData();
+
     } catch(error) {
 
-        console.error(
-            "allocateSingle error:",
-            error
-        );
-
+        console.error(error);
 
         showToast(
-            "Unable to allocate topic.",
+            "Request failed.",
             "error"
         );
-
     }
-
 }
 
 
-/* =========================================================
-   ALLOCATE PROJECT
-   ========================================================= */
+/* =====================================================
+   PROJECT ALLOCATION
+   ===================================================== */
 
 async function allocateProject() {
 
-    const roll1 =
+    const rolls = [
+
         normalizeRoll(
             document.getElementById(
                 "projectRoll1"
             ).value
-        );
+        ),
 
-
-    const roll2 =
         normalizeRoll(
             document.getElementById(
                 "projectRoll2"
             ).value
-        );
+        ),
 
-
-    const roll3 =
         normalizeRoll(
             document.getElementById(
                 "projectRoll3"
             ).value
-        );
+        )
+
+    ];
 
 
-    const topic =
-        cleanValue(
-            document.getElementById(
-                "projectTopic"
-            ).value
-        );
+    const project =
+        document.getElementById(
+            "projectTopic"
+        ).value;
 
 
     if (
-        !roll1 ||
-        !roll2 ||
-        !roll3
+        !rolls[0] ||
+        !rolls[1] ||
+        !rolls[2]
     ) {
 
         showToast(
-            "Enter all 3 team Roll Numbers.",
+            "Enter all 3 Roll Numbers.",
             "error"
         );
 
         return;
-
     }
 
 
     if (
-        roll1 === roll2 ||
-        roll1 === roll3 ||
-        roll2 === roll3
+        new Set(rolls).size !== 3
     ) {
 
         showToast(
-            "All 3 team members must be different.",
+            "All 3 Roll Numbers must be different.",
             "error"
         );
 
         return;
-
     }
 
 
-    if (!topic) {
+    if (!project) {
 
         showToast(
             "Select a project.",
@@ -2435,17 +1499,10 @@ async function allocateProject() {
         );
 
         return;
-
     }
 
 
     try {
-
-        showToast(
-            "Allocating project...",
-            "info"
-        );
-
 
         const result =
             await postData({
@@ -2453,34 +1510,20 @@ async function allocateProject() {
                 action:
                     "allocateProject",
 
-                roll1:
-                    roll1,
-
-                roll2:
-                    roll2,
-
-                roll3:
-                    roll3,
+                rolls:
+                    rolls,
 
                 topic:
-                    topic
+                    project
 
             });
 
 
         showToast(
-
-            result.message ||
-            (
-                result.success
-                    ? "Project allocated successfully."
-                    : "Project allocation failed."
-            ),
-
+            result.message,
             result.success
                 ? "success"
                 : "error"
-
         );
 
 
@@ -2501,133 +1544,109 @@ async function allocateProject() {
             document.getElementById(
                 "projectTopic"
             ).value = "";
-
-
-            await loadData();
-
         }
 
+
+        await loadData();
 
     } catch(error) {
 
-        console.error(
-            "allocateProject error:",
-            error
-        );
-
+        console.error(error);
 
         showToast(
-            "Unable to allocate project.",
+            "Project request failed.",
             "error"
         );
-
     }
-
 }
 
 
-/* =========================================================
+/* =====================================================
    TOPIC COLLISION DETECTION
-   ========================================================= */
+   ===================================================== */
 
-function getTopicCollisions(
-    rows
-) {
+function getTopicCollisions(rows) {
 
-    const topicMap = {};
+    const map = {};
 
 
-    rows.forEach(
-        function(row, index) {
+    rows.forEach(function(row) {
 
-            const topic =
-                normalizeText(
-                    row.topic
-                );
+        const topic =
+            normalizeText(row.topic);
 
 
-            if (!topic) {
-                return;
-            }
+        if (!topic) return;
 
 
-            if (!topicMap[topic]) {
+        if (!map[topic]) {
 
-                topicMap[topic] = [];
-
-            }
-
-
-            topicMap[topic].push(
-                index
-            );
+            map[topic] = [];
 
         }
-    );
+
+
+        map[topic].push(row);
+
+    });
 
 
     const collisions = {};
 
 
-    Object.keys(topicMap).forEach(
-        function(topic) {
+    Object.keys(map).forEach(function(topic) {
 
-            if (
-                topicMap[topic].length > 1
-            ) {
+        if (
+            map[topic].length > 1
+        ) {
 
-                topicMap[topic].forEach(
-                    function(index) {
+            map[topic].forEach(function(row) {
 
-                        collisions[index] =
-                            topicMap[topic]
-                                .filter(
-                                    function(otherIndex) {
+                const roll =
+                    normalizeRoll(row.roll);
 
-                                        return (
-                                            otherIndex !==
-                                            index
-                                        );
 
-                                    }
-                                );
+                collisions[roll] =
+                    map[topic].filter(
+                        function(other) {
 
-                    }
-                );
+                            return (
+                                normalizeRoll(
+                                    other.roll
+                                ) !== roll
+                            );
 
-            }
+                        }
+                    );
+
+            });
 
         }
-    );
+
+    });
 
 
     return collisions;
-
 }
 
 
-/* =========================================================
+/* =====================================================
    THEORY RENDER
-   ========================================================= */
+   ===================================================== */
 
 function renderTheory() {
 
-    const table =
+    const tbody =
         document.getElementById(
             "theoryTable"
         );
-
-
-    if (!table) {
-        return;
-    }
 
 
     const search =
         normalizeText(
             document.getElementById(
                 "theorySearch"
-            )?.value || ""
+            ).value
         );
 
 
@@ -2637,254 +1656,205 @@ function renderTheory() {
         );
 
 
-    const filtered =
-        appData.theory.filter(
-            function(row) {
+    const rows =
+        appData.theory.filter(function(row) {
 
-                const roll =
-                    cleanValue(
-                        row.roll
+            return (
+                normalizeText(row.roll)
+                    .includes(search)
+
+                ||
+
+                normalizeText(row.topic)
+                    .includes(search)
+            );
+
+        });
+
+
+    tbody.innerHTML =
+        rows.map(function(row) {
+
+            const roll =
+                normalizeRoll(row.roll);
+
+            const topic =
+                cleanValue(row.topic);
+
+            const conflict =
+                collisions[roll];
+
+
+            return `
+
+<tr class="${conflict ? "collision-row" : ""}">
+
+<td>
+${escapeHtml(row.sno)}
+</td>
+
+<td class="roll">
+${escapeHtml(roll)}
+</td>
+
+<td>
+
+${
+    topic
+
+    ?
+
+    `
+    <div class="topic-name">
+        ${escapeHtml(topic)}
+    </div>
+
+    ${
+        conflict
+        ?
+        `
+        <div class="conflict">
+            Same topic with:
+            ${conflict.map(
+                function(other) {
+                    return escapeHtml(
+                        normalizeRoll(
+                            other.roll
+                        )
                     );
-
-                const topic =
-                    cleanValue(
-                        row.topic
-                    );
-
-
-                return (
-                    !search ||
-                    normalizeText(
-                        roll
-                    ).includes(search) ||
-                    normalizeText(
-                        topic
-                    ).includes(search)
-                );
-
-            }
-        );
-
-
-    if (!filtered.length) {
-
-        table.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="6"
-                    style="
-                        text-align:center;
-                        padding:30px;
-                    "
-                >
-                    No theory records found.
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
+                }
+            ).join(", ")}
+        </div>
+        `
+        :
+        ""
     }
 
+    `
 
-    table.innerHTML =
-        filtered.map(
-            function(row) {
+    :
 
-                const originalIndex =
-                    appData.theory.indexOf(
-                        row
-                    );
+    `
+    <span class="muted">
+        Not allocated
+    </span>
+    `
+}
+
+</td>
+
+<td>
+${escapeHtml(row.date || "-")}
+</td>
+
+<td>
+
+${
+    conflict
+
+    ?
+
+    `<span class="status collision">
+        Collision
+    </span>`
+
+    :
+
+    topic
+
+    ?
+
+    `<span class="status allocated">
+        Allocated
+    </span>`
+
+    :
+
+    `<span class="status available">
+        Available
+    </span>`
+}
+
+</td>
+
+<td>
+
+${
+    conflict
+
+    ?
+
+    `
+    <button
+        class="change-btn"
+        onclick="openSingleChange(
+            'theory',
+            '${escapeAttr(roll)}'
+        )"
+    >
+        Change Topic
+    </button>
+    `
+
+    :
+
+    "—"
+}
+
+</td>
+
+</tr>
+
+`;
+
+        }).join("");
 
 
-                const topic =
-                    cleanValue(
-                        row.topic
-                    );
+    if (!rows.length) {
 
+        tbody.innerHTML = `
 
-                const collision =
-                    Object.prototype
-                        .hasOwnProperty.call(
-                            collisions,
-                            originalIndex
-                        );
+<tr>
 
+<td colspan="6">
 
-                let conflictText = "";
+<div
+    style="
+    padding:40px;
+    text-align:center;
+    color:#64748b;
+    "
+>
+No matching records found.
+</div>
 
+</td>
 
-                if (collision) {
+</tr>
 
-                    const otherIndexes =
-                        collisions[
-                            originalIndex
-                        ];
+`;
 
-
-                    const otherRolls =
-                        otherIndexes
-                            .map(
-                                function(index) {
-
-                                    return cleanValue(
-                                        appData
-                                            .theory[index]
-                                            .roll
-                                    );
-
-                                }
-                            )
-                            .filter(Boolean);
-
-
-                    conflictText =
-                        "Conflicting Roll Number(s): " +
-                        otherRolls.join(", ");
-
-                }
-
-
-                return `
-
-                    <tr
-                        class="${
-                            collision
-                                ? "collision-row"
-                                : ""
-                        }"
-                    >
-
-                        <td>
-                            ${escapeHtml(
-                                row.sno
-                            )}
-                        </td>
-
-                        <td class="roll">
-                            ${escapeHtml(
-                                row.roll
-                            )}
-                        </td>
-
-                        <td>
-
-                            ${
-                                topic
-                                    ? `
-                                        <div class="topic-name">
-                                            ${escapeHtml(topic)}
-                                        </div>
-                                      `
-                                    : `
-                                        <span class="muted">
-                                            Not Allocated
-                                        </span>
-                                      `
-                            }
-
-                            ${
-                                conflictText
-                                    ? `
-                                        <div class="conflict">
-                                            ${escapeHtml(
-                                                conflictText
-                                            )}
-                                        </div>
-                                      `
-                                    : ""
-                            }
-
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                row.date || "-"
-                            )}
-                        </td>
-
-                        <td>
-
-                            ${
-                                collision
-                                    ? `
-                                        <span class="status collision">
-                                            Collision
-                                        </span>
-                                      `
-                                    : topic
-                                        ? `
-                                            <span class="status allocated">
-                                                Allocated
-                                            </span>
-                                          `
-                                        : `
-                                            <span class="status available">
-                                                Available
-                                            </span>
-                                          `
-                            }
-
-                        </td>
-
-                        <td>
-
-                            ${
-                                collision
-                                    ? `
-                                        <button
-                                            class="change-btn"
-                                            onclick="openSingleChange(
-                                                'theory',
-                                                '${escapeAttr(
-                                                    row.roll
-                                                )}'
-                                            )"
-                                        >
-                                            Change Topic
-                                        </button>
-                                      `
-                                    : "-"
-                            }
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-        ).join("");
-
+    }
 }
 
 
-/* =========================================================
+/* =====================================================
    LAB RENDER
-   ========================================================= */
+   ===================================================== */
 
 function renderLab() {
 
-    const table =
+    const tbody =
         document.getElementById(
             "labTable"
         );
-
-
-    if (!table) {
-        return;
-    }
 
 
     const search =
         normalizeText(
             document.getElementById(
                 "labSearch"
-            )?.value || ""
+            ).value
         );
 
 
@@ -2894,771 +1864,615 @@ function renderLab() {
         );
 
 
-    const filtered =
-        appData.lab.filter(
-            function(row) {
+    const rows =
+        appData.lab.filter(function(row) {
 
-                const roll =
-                    cleanValue(
-                        row.roll
+            return (
+                normalizeText(row.roll)
+                    .includes(search)
+
+                ||
+
+                normalizeText(row.topic)
+                    .includes(search)
+            );
+
+        });
+
+
+    tbody.innerHTML =
+        rows.map(function(row) {
+
+            const roll =
+                normalizeRoll(row.roll);
+
+            const topic =
+                cleanValue(row.topic);
+
+            const conflict =
+                collisions[roll];
+
+
+            return `
+
+<tr class="${conflict ? "collision-row" : ""}">
+
+<td>
+${escapeHtml(row.sno)}
+</td>
+
+<td class="roll">
+${escapeHtml(roll)}
+</td>
+
+<td>
+
+${
+    topic
+
+    ?
+
+    `
+    <div class="topic-name">
+        ${escapeHtml(topic)}
+    </div>
+
+    ${
+        conflict
+        ?
+        `
+        <div class="conflict">
+            Same topic with:
+            ${conflict.map(
+                function(other) {
+                    return escapeHtml(
+                        normalizeRoll(
+                            other.roll
+                        )
                     );
-
-                const topic =
-                    cleanValue(
-                        row.topic
-                    );
-
-
-                return (
-                    !search ||
-                    normalizeText(
-                        roll
-                    ).includes(search) ||
-                    normalizeText(
-                        topic
-                    ).includes(search)
-                );
-
-            }
-        );
-
-
-    if (!filtered.length) {
-
-        table.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="6"
-                    style="
-                        text-align:center;
-                        padding:30px;
-                    "
-                >
-                    No lab records found.
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
+                }
+            ).join(", ")}
+        </div>
+        `
+        :
+        ""
     }
 
+    `
 
-    table.innerHTML =
-        filtered.map(
-            function(row) {
+    :
 
-                const originalIndex =
-                    appData.lab.indexOf(
-                        row
-                    );
+    `
+    <span class="muted">
+        Not allocated
+    </span>
+    `
+}
+
+</td>
+
+<td>
+${escapeHtml(row.date || "-")}
+</td>
+
+<td>
+
+${
+    conflict
+
+    ?
+
+    `<span class="status collision">
+        Collision
+    </span>`
+
+    :
+
+    topic
+
+    ?
+
+    `<span class="status allocated">
+        Allocated
+    </span>`
+
+    :
+
+    `<span class="status available">
+        Available
+    </span>`
+}
+
+</td>
+
+<td>
+
+${
+    conflict
+
+    ?
+
+    `
+    <button
+        class="change-btn"
+        onclick="openSingleChange(
+            'lab',
+            '${escapeAttr(roll)}'
+        )"
+    >
+        Change Topic
+    </button>
+    `
+
+    :
+
+    "—"
+}
+
+</td>
+
+</tr>
+
+`;
+
+        }).join("");
 
 
-                const topic =
-                    cleanValue(
-                        row.topic
-                    );
+    if (!rows.length) {
 
+        tbody.innerHTML = `
 
-                const collision =
-                    Object.prototype
-                        .hasOwnProperty.call(
-                            collisions,
-                            originalIndex
-                        );
+<tr>
 
+<td colspan="6">
 
-                let conflictText = "";
+<div
+    style="
+    padding:40px;
+    text-align:center;
+    color:#64748b;
+    "
+>
+No matching records found.
+</div>
 
+</td>
 
-                if (collision) {
+</tr>
 
-                    const otherIndexes =
-                        collisions[
-                            originalIndex
-                        ];
+`;
 
-
-                    const otherRolls =
-                        otherIndexes
-                            .map(
-                                function(index) {
-
-                                    return cleanValue(
-                                        appData
-                                            .lab[index]
-                                            .roll
-                                    );
-
-                                }
-                            )
-                            .filter(Boolean);
-
-
-                    conflictText =
-                        "Conflicting Roll Number(s): " +
-                        otherRolls.join(", ");
-
-                }
-
-
-                return `
-
-                    <tr
-                        class="${
-                            collision
-                                ? "collision-row"
-                                : ""
-                        }"
-                    >
-
-                        <td>
-                            ${escapeHtml(
-                                row.sno
-                            )}
-                        </td>
-
-                        <td class="roll">
-                            ${escapeHtml(
-                                row.roll
-                            )}
-                        </td>
-
-                        <td>
-
-                            ${
-                                topic
-                                    ? `
-                                        <div class="topic-name">
-                                            ${escapeHtml(topic)}
-                                        </div>
-                                      `
-                                    : `
-                                        <span class="muted">
-                                            Not Allocated
-                                        </span>
-                                      `
-                            }
-
-                            ${
-                                conflictText
-                                    ? `
-                                        <div class="conflict">
-                                            ${escapeHtml(
-                                                conflictText
-                                            )}
-                                        </div>
-                                      `
-                                    : ""
-                            }
-
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                row.date || "-"
-                            )}
-                        </td>
-
-                        <td>
-
-                            ${
-                                collision
-                                    ? `
-                                        <span class="status collision">
-                                            Collision
-                                        </span>
-                                      `
-                                    : topic
-                                        ? `
-                                            <span class="status allocated">
-                                                Allocated
-                                            </span>
-                                          `
-                                        : `
-                                            <span class="status available">
-                                                Available
-                                            </span>
-                                          `
-                            }
-
-                        </td>
-
-                        <td>
-
-                            ${
-                                collision
-                                    ? `
-                                        <button
-                                            class="change-btn"
-                                            onclick="openSingleChange(
-                                                'lab',
-                                                '${escapeAttr(
-                                                    row.roll
-                                                )}'
-                                            )"
-                                        >
-                                            Change Topic
-                                        </button>
-                                      `
-                                    : "-"
-                            }
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-        ).join("");
-
+    }
 }
 
 
-/* =========================================================
+/* =====================================================
    PROJECT COLLISION DETECTION
-   ========================================================= */
+   ===================================================== */
 
-function getProjectCollisions(
-    projects
-) {
+function getProjectCollisions() {
 
     const memberMap = {};
 
 
-    projects.forEach(
-        function(project, index) {
+    appData.projects.forEach(function(project) {
 
-            const rolls =
-                parseProjectRolls(
-                    project.rolls ||
-                    project.team ||
-                    project.members ||
-                    project.rollNo
-                );
+        parseProjectRolls(
+            project.teamRolls
+        ).forEach(function(roll) {
 
+            if (!memberMap[roll]) {
 
-            rolls.forEach(
-                function(roll) {
+                memberMap[roll] = [];
 
-                    if (!memberMap[roll]) {
+            }
 
-                        memberMap[roll] = [];
+            memberMap[roll].push(project);
 
-                    }
+        });
 
-
-                    memberMap[roll].push(
-                        index
-                    );
-
-                }
-            );
-
-        }
-    );
+    });
 
 
     const collisions = {};
 
 
-    Object.keys(memberMap).forEach(
-        function(roll) {
+    Object.keys(memberMap).forEach(function(roll) {
 
-            const indexes =
-                memberMap[roll];
+        if (
+            memberMap[roll].length > 1
+        ) {
 
+            memberMap[roll].forEach(function(project) {
 
-            if (
-                indexes.length > 1
-            ) {
-
-                indexes.forEach(
-                    function(index) {
-
-                        if (!collisions[index]) {
-
-                            collisions[index] =
-                                [];
-
-                        }
+                const key =
+                    String(project.row);
 
 
-                        if (
-                            !collisions[index]
-                                .includes(roll)
-                        ) {
+                if (!collisions[key]) {
 
-                            collisions[index]
-                                .push(roll);
+                    collisions[key] = [];
 
-                        }
+                }
 
-                    }
-                );
 
-            }
+                if (
+                    collisions[key].indexOf(
+                        roll
+                    ) === -1
+                ) {
+
+                    collisions[key].push(roll);
+
+                }
+
+            });
 
         }
-    );
+
+    });
 
 
     return collisions;
-
 }
 
 
-/* =========================================================
-   PART 2 ENDS — CONTINUE DIRECTLY WITH PART 3
-   ========================================================= */
-    /* =========================================================
+/* =====================================================
    PROJECT RENDER
-   ========================================================= */
+   ===================================================== */
 
 function renderProjects() {
 
-    const table =
+    const tbody =
         document.getElementById(
             "projectTable"
         );
-
-    if (!table) {
-        return;
-    }
 
 
     const search =
         normalizeText(
             document.getElementById(
                 "projectSearch"
-            )?.value || ""
+            ).value
         );
 
 
     const collisions =
-        getProjectCollisions(
-            appData.projects
-        );
+        getProjectCollisions();
 
 
-    const filtered =
-        appData.projects.filter(
-            function(row) {
+    const rows =
+        appData.projects.filter(function(row) {
 
-                const rolls =
-                    parseProjectRolls(
-                        row.rolls ||
-                        row.team ||
-                        row.members ||
-                        row.rollNo
-                    );
+            return (
+                normalizeText(row.project)
+                    .includes(search)
 
-                const project =
-                    cleanValue(
-                        row.topic ||
-                        row.project ||
-                        row.title
-                    );
+                ||
 
+                normalizeText(row.teamRolls)
+                    .includes(search)
 
-                const rollText =
-                    rolls.join(" ");
+                ||
+
+                normalizeText(row.batch)
+                    .includes(search)
+            );
+
+        });
 
 
-                return (
-                    !search ||
-                    normalizeText(
-                        project
-                    ).includes(search) ||
-                    normalizeText(
-                        rollText
-                    ).includes(search)
+    tbody.innerHTML =
+        rows.map(function(row) {
+
+            const key =
+                String(row.row);
+
+            const conflict =
+                collisions[key] || [];
+
+            const team =
+                parseProjectRolls(
+                    row.teamRolls
                 );
 
-            }
-        );
+            const hasTeam =
+                team.length > 0;
 
 
-    if (!filtered.length) {
+            return `
 
-        table.innerHTML = `
+<tr class="${
+    conflict.length
+    ? "project-collision-row"
+    : ""
+}">
 
-            <tr>
+<td>
+${escapeHtml(row.sno)}
+</td>
 
-                <td
-                    colspan="7"
-                    style="
-                        text-align:center;
-                        padding:30px;
-                    "
-                >
-                    No project records found.
-                </td>
 
-            </tr>
+<td>
 
+${
+    team.length
+
+    ?
+
+    team.map(function(roll) {
+
+        return `
+        <div
+            class="roll"
+            style="margin-bottom:4px;"
+        >
+            ${escapeHtml(roll)}
+        </div>
         `;
 
-        return;
+    }).join("")
 
-    }
+    :
 
-
-    table.innerHTML =
-        filtered.map(
-            function(row) {
-
-                const originalIndex =
-                    appData.projects.indexOf(
-                        row
-                    );
-
-
-                const rolls =
-                    parseProjectRolls(
-                        row.rolls ||
-                        row.team ||
-                        row.members ||
-                        row.rollNo
-                    );
-
-
-                const project =
-                    cleanValue(
-                        row.topic ||
-                        row.project ||
-                        row.title
-                    );
-
-
-                const collision =
-                    Object.prototype
-                        .hasOwnProperty.call(
-                            collisions,
-                            originalIndex
-                        );
-
-
-                let conflictText = "";
-
-
-                if (collision) {
-
-                    conflictText =
-                        "Conflicting Roll Number(s): " +
-                        collisions[
-                            originalIndex
-                        ].join(", ");
-
-                }
-
-
-                return `
-
-                    <tr
-                        class="${
-                            collision
-                                ? "project-collision-row"
-                                : ""
-                        }"
-                    >
-
-                        <td>
-                            ${escapeHtml(
-                                row.sno
-                            )}
-                        </td>
-
-
-                        <td>
-
-                            ${
-                                rolls.length
-                                    ? `
-                                        <div>
-                                            ${rolls.map(
-                                                function(roll) {
-
-                                                    return `
-                                                        <span
-                                                            class="roll"
-                                                            style="
-                                                                display:inline-block;
-                                                                margin-right:7px;
-                                                                margin-bottom:4px;
-                                                            "
-                                                        >
-                                                            ${escapeHtml(roll)}
-                                                        </span>
-                                                    `;
-
-                                                }
-                                            ).join("")}
-                                        </div>
-                                      `
-                                    : `
-                                        <span class="muted">
-                                            No Team Allocated
-                                        </span>
-                                      `
-                            }
-
-
-                            ${
-                                conflictText
-                                    ? `
-                                        <div class="conflict">
-                                            ${escapeHtml(
-                                                conflictText
-                                            )}
-                                        </div>
-                                      `
-                                    : ""
-                            }
-
-                        </td>
-
-
-                        <td>
-                            ${escapeHtml(
-                                row.batch || "-"
-                            )}
-                        </td>
-
-
-                        <td>
-
-                            ${
-                                project
-                                    ? `
-                                        <div class="topic-name">
-                                            ${escapeHtml(
-                                                project
-                                            )}
-                                        </div>
-                                      `
-                                    : `
-                                        <span class="muted">
-                                            No Project
-                                        </span>
-                                      `
-                            }
-
-                        </td>
-
-
-                        <td>
-                            ${escapeHtml(
-                                row.date || "-"
-                            )}
-                        </td>
-
-
-                        <td>
-
-                            ${
-                                collision
-                                    ? `
-                                        <span class="status collision">
-                                            Collision
-                                        </span>
-                                      `
-                                    : rolls.length
-                                        ? `
-                                            <span class="status allocated">
-                                                Allocated
-                                            </span>
-                                          `
-                                        : `
-                                            <span class="status available">
-                                                Available
-                                            </span>
-                                          `
-                            }
-
-                        </td>
-
-
-                        <td>
-
-                            ${
-                                collision && rolls.length
-                                    ? `
-                                        <button
-                                            class="change-btn"
-                                            onclick="openProjectChange(
-                                                ${JSON.stringify(
-                                                    rolls
-                                                ).replace(
-                                                    /"/g,
-                                                    "&quot;"
-                                                )},
-                                                '${escapeAttr(
-                                                    project
-                                                )}'
-                                            )"
-                                        >
-                                            Change Project
-                                        </button>
-                                      `
-                                    : "-"
-                            }
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-        ).join("");
-
+    `
+    <span class="muted">
+        No team allocated
+    </span>
+    `
 }
 
 
-/* =========================================================
+${
+    conflict.length
+
+    ?
+
+    `
+    <div class="conflict">
+        Conflicting Roll Number(s):
+        ${conflict.map(
+            function(roll) {
+                return escapeHtml(roll);
+            }
+        ).join(", ")}
+    </div>
+    `
+
+    :
+
+    ""
+}
+
+</td>
+
+
+<td>
+${escapeHtml(row.batch || "-")}
+</td>
+
+
+<td>
+<strong>
+${escapeHtml(row.project || "-")}
+</strong>
+</td>
+
+
+<td>
+${escapeHtml(row.date || "-")}
+</td>
+
+
+<td>
+
+${
+    conflict.length
+
+    ?
+
+    `<span class="status collision">
+        Team Collision
+    </span>`
+
+    :
+
+    hasTeam
+
+    ?
+
+    `<span class="status allocated">
+        Allocated
+    </span>`
+
+    :
+
+    `<span class="status available">
+        Available
+    </span>`
+}
+
+</td>
+
+
+<td>
+
+${
+    conflict.length
+
+    ?
+
+    `
+    <button
+        class="change-btn"
+        onclick='openProjectChange(
+            ${JSON.stringify(team)}
+        )'
+    >
+        Change Project
+    </button>
+    `
+
+    :
+
+    "—"
+}
+
+</td>
+
+</tr>
+
+`;
+
+        }).join("");
+
+
+    if (!rows.length) {
+
+        tbody.innerHTML = `
+
+<tr>
+
+<td colspan="7">
+
+<div
+    style="
+    padding:40px;
+    text-align:center;
+    color:#64748b;
+    "
+>
+No matching project records found.
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+    }
+}
+
+
+/* =====================================================
    POPULATE DROPDOWNS
-   ========================================================= */
+   ===================================================== */
 
 function populateSelects() {
 
-    const theorySelect =
+    const theory =
         document.getElementById(
             "theoryTopic"
         );
 
 
-    const labSelect =
+    const lab =
         document.getElementById(
             "labTopic"
         );
 
 
-    const projectSelect =
+    const project =
         document.getElementById(
             "projectTopic"
         );
 
 
-    if (theorySelect) {
-
-        theorySelect.innerHTML =
-
-            `<option value="">
-                Select Theory Topic
-            </option>` +
-
-            THEORY_TOPICS.map(
-                function(topic) {
-
-                    return `
-                        <option
-                            value="${escapeAttr(topic)}"
-                        >
-                            ${escapeHtml(topic)}
-                        </option>
-                    `;
-
-                }
-            ).join("");
-
-    }
+    theory.innerHTML =
+        `<option value="">
+            Select Theory Topic
+        </option>`;
 
 
-    if (labSelect) {
+    THEORY_TOPICS.forEach(function(topic) {
 
-        labSelect.innerHTML =
+        theory.innerHTML += `
+            <option value="${escapeAttr(topic)}">
+                ${escapeHtml(topic)}
+            </option>
+        `;
 
-            `<option value="">
-                Select Lab Topic
-            </option>` +
-
-            LAB_TOPICS.map(
-                function(topic) {
-
-                    return `
-                        <option
-                            value="${escapeAttr(topic)}"
-                        >
-                            ${escapeHtml(topic)}
-                        </option>
-                    `;
-
-                }
-            ).join("");
-
-    }
+    });
 
 
-    if (projectSelect) {
+    lab.innerHTML =
+        `<option value="">
+            Select Lab Topic
+        </option>`;
 
-        projectSelect.innerHTML =
 
-            `<option value="">
-                Select Project
-            </option>` +
+    LAB_TOPICS.forEach(function(topic) {
 
-            PROJECT_TOPICS.map(
-                function(topic) {
+        lab.innerHTML += `
+            <option value="${escapeAttr(topic)}">
+                ${escapeHtml(topic)}
+            </option>
+        `;
 
-                    return `
-                        <option
-                            value="${escapeAttr(topic)}"
-                        >
-                            ${escapeHtml(topic)}
-                        </option>
-                    `;
+    });
 
-                }
-            ).join("");
 
-    }
+    project.innerHTML =
+        `<option value="">
+            Select Project
+        </option>`;
 
+
+    PROJECT_TOPICS.forEach(function(topic) {
+
+        project.innerHTML += `
+            <option value="${escapeAttr(topic)}">
+                ${escapeHtml(topic)}
+            </option>
+        `;
+
+    });
 }
 
 
-/* =========================================================
-   OPEN SINGLE CHANGE MODAL
-   ========================================================= */
+/* =====================================================
+   OPEN SINGLE CHANGE
+   ===================================================== */
 
-function openSingleChange(
-    category,
-    roll
-) {
+function openSingleChange(type, roll) {
 
-    const modal =
-        document.getElementById(
-            "changeModal"
-        );
+    currentChange = {
+        type: type,
+        roll: roll,
+        rolls: null
+    };
 
 
-    const title =
-        document.getElementById(
-            "modalTitle"
-        );
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Change " +
+        (
+            type === "theory"
+            ? "Theory"
+            : "Lab"
+        ) +
+        " Topic";
 
 
-    const description =
-        document.getElementById(
-            "modalDescription"
-        );
+    document.getElementById(
+        "modalDescription"
+    ).textContent =
+        "Roll Number: " +
+        roll;
 
 
-    const singleChange =
-        document.getElementById(
-            "singleChange"
-        );
+    document.getElementById(
+        "singleChange"
+    ).style.display =
+        "block";
 
 
-    const projectChange =
-        document.getElementById(
-            "projectChange"
-        );
+    document.getElementById(
+        "projectChange"
+    ).style.display =
+        "none";
 
 
     const select =
@@ -3667,234 +2481,107 @@ function openSingleChange(
         );
 
 
-    if (!modal || !select) {
-        return;
-    }
+    const topics =
+        type === "theory"
+        ? THEORY_TOPICS
+        : LAB_TOPICS;
 
 
     const rows =
-        category === "theory"
-            ? appData.theory
-            : appData.lab;
+        type === "theory"
+        ? appData.theory
+        : appData.lab;
 
 
-    const currentRow =
-        rows.find(
-            function(row) {
-
-                return (
-                    normalizeRoll(
-                        row.roll
-                    ) ===
-                    normalizeRoll(
-                        roll
-                    )
-                );
-
-            }
-        );
-
-
-    if (!currentRow) {
-
-        showToast(
-            "Student record not found.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const currentTopic =
-        cleanValue(
-            currentRow.topic
-        );
-
-
-    const collisions =
-        getTopicCollisions(
-            rows
-        );
-
-
-    const rowIndex =
-        rows.indexOf(
-            currentRow
-        );
-
-
-    if (
-        !Object.prototype
-            .hasOwnProperty.call(
-                collisions,
-                rowIndex
-            )
-    ) {
-
-        showToast(
-            "This student is not involved in a topic collision.",
-            "info"
-        );
-
-        return;
-
-    }
-
-
-    const topicList =
-        category === "theory"
-            ? THEORY_TOPICS
-            : LAB_TOPICS;
-
-
-    const usedTopics =
+    const used =
         new Set();
 
 
-    rows.forEach(
-        function(row) {
+    rows.forEach(function(row) {
 
-            const topic =
+        if (
+            normalizeRoll(row.roll) !== roll &&
+            row.topic
+        ) {
+
+            used.add(
                 normalizeText(
                     row.topic
-                );
-
-            if (topic) {
-
-                usedTopics.add(
-                    topic
-                );
-
-            }
+                )
+            );
 
         }
-    );
 
-
-    const availableTopics =
-        topicList.filter(
-            function(topic) {
-
-                return (
-                    normalizeText(
-                        topic
-                    ) ===
-                    normalizeText(
-                        currentTopic
-                    ) ||
-                    !usedTopics.has(
-                        normalizeText(
-                            topic
-                        )
-                    )
-                );
-
-            }
-        );
-
-
-    title.textContent =
-        "Change Topic";
-
-
-    description.textContent =
-        category === "theory"
-            ? "Select a new DBMS Theory topic for this Roll Number."
-            : "Select a new DBMS Lab topic for this Roll Number.";
-
-
-    singleChange.style.display =
-        "block";
-
-
-    projectChange.style.display =
-        "none";
+    });
 
 
     select.innerHTML =
-
         `<option value="">
             Select New Topic
-        </option>` +
-
-        availableTopics.map(
-            function(topic) {
-
-                return `
-                    <option
-                        value="${escapeAttr(topic)}"
-                    >
-                        ${escapeHtml(topic)}
-                    </option>
-                `;
-
-            }
-        ).join("");
+        </option>`;
 
 
-    currentChange = {
+    topics.forEach(function(topic) {
 
-        type:
-            "single",
+        if (
+            !used.has(
+                normalizeText(topic)
+            )
+        ) {
 
-        category:
-            category,
+            select.innerHTML += `
+                <option value="${escapeAttr(topic)}">
+                    ${escapeHtml(topic)}
+                </option>
+            `;
 
-        roll:
-            normalizeRoll(roll),
+        }
 
-        rolls:
-            null
-
-    };
+    });
 
 
-    modal.classList.add(
-        "show"
-    );
-
+    document.getElementById(
+        "changeModal"
+    ).classList.add("show");
 }
 
 
-/* =========================================================
-   OPEN PROJECT CHANGE MODAL
-   ========================================================= */
+/* =====================================================
+   OPEN PROJECT CHANGE
+   ===================================================== */
 
-function openProjectChange(
-    teamRolls,
-    currentTitle
-) {
+function openProjectChange(rolls) {
 
-    const modal =
-        document.getElementById(
-            "changeModal"
-        );
+    currentChange = {
+        type: "project",
+        roll: null,
+        rolls: rolls
+    };
 
 
-    const title =
-        document.getElementById(
-            "modalTitle"
-        );
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Change Project";
 
 
-    const description =
-        document.getElementById(
-            "modalDescription"
-        );
+    document.getElementById(
+        "modalDescription"
+    ).textContent =
+        "Team: " +
+        rolls.join(", ");
 
 
-    const singleChange =
-        document.getElementById(
-            "singleChange"
-        );
+    document.getElementById(
+        "singleChange"
+    ).style.display =
+        "none";
 
 
-    const projectChange =
-        document.getElementById(
-            "projectChange"
-        );
+    document.getElementById(
+        "projectChange"
+    ).style.display =
+        "block";
 
 
     const select =
@@ -3903,407 +2590,285 @@ function openProjectChange(
         );
 
 
-    if (!modal || !select) {
-        return;
-    }
-
-
-    const normalizedRolls =
-        teamRolls
-            .map(normalizeRoll)
-            .filter(Boolean);
-
-
-    if (
-        normalizedRolls.length !== 3
-    ) {
-
-        showToast(
-            "A project team must contain exactly 3 Roll Numbers.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const allocatedProjects =
+    const allocated =
         new Set();
 
 
-    appData.projects.forEach(
-        function(project) {
+    appData.projects.forEach(function(row) {
 
-            const rolls =
-                parseProjectRolls(
-                    project.rolls ||
-                    project.team ||
-                    project.members ||
-                    project.rollNo
-                );
+        if (row.teamRolls) {
 
-
-            if (rolls.length > 0) {
-
-                allocatedProjects.add(
-                    normalizeText(
-                        project.topic ||
-                        project.project ||
-                        project.title
-                    )
-                );
-
-            }
+            allocated.add(
+                normalizeProject(
+                    row.project
+                )
+            );
 
         }
-    );
 
-
-    const availableProjects =
-        PROJECT_TOPICS.filter(
-            function(project) {
-
-                const normalized =
-                    normalizeText(
-                        project
-                    );
-
-
-                return (
-                    normalized ===
-                    normalizeText(
-                        currentTitle
-                    )
-                    ||
-                    !allocatedProjects.has(
-                        normalized
-                    )
-                );
-
-            }
-        );
-
-
-    title.textContent =
-        "Change Project";
-
-
-    description.textContent =
-        "Select a new project for this team.";
-
-
-    singleChange.style.display =
-        "none";
-
-
-    projectChange.style.display =
-        "block";
+    });
 
 
     select.innerHTML =
-
         `<option value="">
             Select New Project
-        </option>` +
-
-        availableProjects.map(
-            function(project) {
-
-                return `
-                    <option
-                        value="${escapeAttr(project)}"
-                    >
-                        ${escapeHtml(project)}
-                    </option>
-                `;
-
-            }
-        ).join("");
+        </option>`;
 
 
-    currentChange = {
+    PROJECT_TOPICS.forEach(function(project) {
 
-        type:
-            "project",
-
-        category:
-            null,
-
-        roll:
-            null,
-
-        rolls:
-            normalizedRolls
-
-    };
-
-
-    modal.classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   CLOSE MODAL
-   ========================================================= */
-
-function closeModal() {
-
-    const modal =
-        document.getElementById(
-            "changeModal"
-        );
-
-
-    if (modal) {
-
-        modal.classList.remove(
-            "show"
-        );
-
-    }
-
-
-    currentChange = {
-
-        type:
-            null,
-
-        roll:
-            null,
-
-        rolls:
-            null
-
-    };
-
-}
-
-
-/* =========================================================
-   SUBMIT CHANGE
-   ========================================================= */
-
-async function submitChange() {
-
-    if (!currentChange) {
-        return;
-    }
-
-
-    if (!currentChange.type) {
-        return;
-    }
-
-
-    let newValue = "";
-
-
-    if (
-        currentChange.type ===
-        "single"
-    ) {
-
-        const select =
-            document.getElementById(
-                "newTopicSelect"
-            );
-
-
-        newValue =
-            cleanValue(
-                select
-                    ? select.value
-                    : ""
-            );
-
-    } else {
-
-        const select =
-            document.getElementById(
-                "newProjectSelect"
-            );
-
-
-        newValue =
-            cleanValue(
-                select
-                    ? select.value
-                    : ""
-            );
-
-    }
-
-
-    if (!newValue) {
-
-        showToast(
-            "Select a new topic/project.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    try {
-
-        showToast(
-            "Applying change...",
-            "info"
-        );
-
-
-        let result;
+        const key =
+            normalizeProject(project);
 
 
         if (
-            currentChange.type ===
-            "single"
+            allocated.has(key)
         ) {
 
-            result =
+            return;
+        }
+
+
+        select.innerHTML += `
+            <option value="${escapeAttr(project)}">
+                ${escapeHtml(project)}
+            </option>
+        `;
+
+    });
+
+
+    document.getElementById(
+        "changeModal"
+    ).classList.add("show");
+}
+
+
+/* =====================================================
+   SUBMIT CHANGE
+   ===================================================== */
+
+async function submitChange() {
+
+    try {
+
+        if (
+            currentChange.type === "theory" ||
+            currentChange.type === "lab"
+        ) {
+
+            const newTopic =
+                document.getElementById(
+                    "newTopicSelect"
+                ).value;
+
+
+            if (!newTopic) {
+
+                showToast(
+                    "Select a new topic.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            const result =
                 await postData({
 
                     action:
                         "changeSingle",
 
                     category:
-                        currentChange.category,
+                        currentChange.type,
 
                     roll:
                         currentChange.roll,
 
                     newTopic:
-                        newValue
+                        newTopic
 
                 });
 
 
-        } else {
+            showToast(
+                result.message,
+                result.success
+                    ? "success"
+                    : "error"
+            );
 
-            result =
+
+            if (result.success) {
+
+                closeModal();
+
+            }
+
+
+            await loadData();
+
+            return;
+        }
+
+
+        if (
+            currentChange.type === "project"
+        ) {
+
+            const newProject =
+                document.getElementById(
+                    "newProjectSelect"
+                ).value;
+
+
+            if (!newProject) {
+
+                showToast(
+                    "Select a new project.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            const result =
                 await postData({
 
                     action:
                         "changeProject",
 
-                    roll1:
-                        currentChange.rolls[0],
-
-                    roll2:
-                        currentChange.rolls[1],
-
-                    roll3:
-                        currentChange.rolls[2],
+                    rolls:
+                        currentChange.rolls,
 
                     newTopic:
-                        newValue
+                        newProject
 
                 });
 
-        }
 
-
-        showToast(
-
-            result.message ||
-            (
+            showToast(
+                result.message,
                 result.success
-                    ? "Change completed."
-                    : "Change failed."
-            ),
-
-            result.success
-                ? "success"
-                : "error"
-
-        );
+                    ? "success"
+                    : "error"
+            );
 
 
-        if (result.success) {
+            if (result.success) {
 
-            closeModal();
+                closeModal();
+
+            }
+
 
             await loadData();
 
         }
 
-
     } catch(error) {
 
-        console.error(
-            "submitChange error:",
-            error
-        );
-
+        console.error(error);
 
         showToast(
-            "Unable to apply the change.",
+            "Unable to process change.",
             "error"
         );
-
     }
-
 }
 
 
-/* =========================================================
+/* =====================================================
+   CLOSE MODAL
+   ===================================================== */
+
+function closeModal() {
+
+    document.getElementById(
+        "changeModal"
+    ).classList.remove("show");
+
+
+    currentChange = {
+        type: null,
+        roll: null,
+        rolls: null
+    };
+}
+
+
+/* =====================================================
+   SECTION SWITCH
+   ===================================================== */
+
+function showSection(section, button) {
+
+    document
+        .querySelectorAll(".section")
+        .forEach(function(item) {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(function(item) {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(section)
+        .classList.add("active");
+
+
+    button.classList.add("active");
+}
+
+
+/* =====================================================
    SUMMARY
-   ========================================================= */
+   ===================================================== */
 
 function updateSummary() {
 
-    const theoryAllocated =
-        appData.theory.filter(
-            function(row) {
+    const theory =
+        appData.theory.filter(function(row) {
 
-                return (
-                    cleanValue(
-                        row.topic
-                    ) !== ""
-                );
+            return cleanValue(
+                row.topic
+            ) !== "";
 
-            }
-        ).length;
+        }).length;
 
 
-    const labAllocated =
-        appData.lab.filter(
-            function(row) {
+    const lab =
+        appData.lab.filter(function(row) {
 
-                return (
-                    cleanValue(
-                        row.topic
-                    ) !== ""
-                );
+            return cleanValue(
+                row.topic
+            ) !== "";
 
-            }
-        ).length;
+        }).length;
 
 
-    const projectsAllocated =
-        appData.projects.filter(
-            function(row) {
+    const projects =
+        appData.projects.filter(function(row) {
 
-                return (
-                    parseProjectRolls(
-                        row.rolls ||
-                        row.team ||
-                        row.members ||
-                        row.rollNo
-                    ).length > 0
-                );
+            return parseProjectRolls(
+                row.teamRolls
+            ).length > 0;
 
-            }
-        ).length;
+        }).length;
 
 
-    const theoryCollisions =
+    const theoryCollision =
         Object.keys(
             getTopicCollisions(
                 appData.theory
@@ -4311,7 +2876,7 @@ function updateSummary() {
         ).length;
 
 
-    const labCollisions =
+    const labCollision =
         Object.keys(
             getTopicCollisions(
                 appData.lab
@@ -4319,45 +2884,42 @@ function updateSummary() {
         ).length;
 
 
-    const projectCollisions =
+    const projectCollision =
         Object.keys(
-            getProjectCollisions(
-                appData.projects
-            )
+            getProjectCollisions()
         ).length;
 
 
-    setText(
-        "theoryCount",
-        theoryAllocated
-    );
+    document.getElementById(
+        "theoryCount"
+    ).textContent =
+        theory;
 
 
-    setText(
-        "labCount",
-        labAllocated
-    );
+    document.getElementById(
+        "labCount"
+    ).textContent =
+        lab;
 
 
-    setText(
-        "projectCount",
-        projectsAllocated
-    );
+    document.getElementById(
+        "projectCount"
+    ).textContent =
+        projects;
 
 
-    setText(
-        "collisionCount",
-        theoryCollisions +
-        labCollisions +
-        projectCollisions
-    );
-
+    document.getElementById(
+        "collisionCount"
+    ).textContent =
+        theoryCollision +
+        labCollision +
+        projectCollision;
 }
 
 
-/* =========================================================
+/* =====================================================
    RENDER EVERYTHING
-   ========================================================= */
+   ===================================================== */
 
 function renderAll() {
 
@@ -4368,99 +2930,19 @@ function renderAll() {
     renderProjects();
 
     updateSummary();
-
 }
 
 
-/* =========================================================
-   SECTION SWITCHING
-   ========================================================= */
-
-function showSection(
-    sectionName,
-    button
-) {
-
-    document
-        .querySelectorAll(
-            ".section"
-        )
-        .forEach(
-            function(section) {
-
-                section.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    document
-        .querySelectorAll(
-            ".tab"
-        )
-        .forEach(
-            function(tab) {
-
-                tab.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    const section =
-        document.getElementById(
-            sectionName
-        );
-
-
-    if (section) {
-
-        section.classList.add(
-            "active"
-        );
-
-    }
-
-
-    if (button) {
-
-        button.classList.add(
-            "active"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
+/* =====================================================
    TOAST
-   ========================================================= */
+   ===================================================== */
 
-let toastTimer = null;
+function showToast(message, type) {
 
-
-function showToast(
-    message,
-    type
-) {
-
-    const toast =
+    const container =
         document.getElementById(
             "toast"
         );
-
-
-    if (!toast) {
-        return;
-    }
-
-
-    toast.innerHTML = "";
 
 
     const item =
@@ -4473,250 +2955,71 @@ function showToast(
         "toast-item " +
         (
             type === "success"
-                ? "toast-success"
-                : type === "error"
-                    ? "toast-error"
-                    : "toast-info"
+            ? "toast-success"
+            :
+            type === "error"
+            ? "toast-error"
+            :
+            "toast-info"
         );
 
 
     item.textContent =
-        message || "";
+        message;
 
 
-    toast.appendChild(
-        item
-    );
+    container.appendChild(item);
 
 
-    if (toastTimer) {
+    setTimeout(function() {
 
-        clearTimeout(
-            toastTimer
-        );
+        item.remove();
 
-    }
-
-
-    toastTimer =
-        setTimeout(
-            function() {
-
-                toast.innerHTML = "";
-
-            },
-            3500
-        );
-
+    }, 4000);
 }
 
 
-/* =========================================================
-   SEARCH SETUP
-   ========================================================= */
+/* =====================================================
+   CLOSE MODAL ON OUTSIDE CLICK
+   ===================================================== */
 
-function setupSearch(
-    inputId,
-    renderFunction
-) {
+document
+    .getElementById(
+        "changeModal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
 
-    const input =
-        document.getElementById(
-            inputId
-        );
+            if (
+                event.target === this
+            ) {
 
+                closeModal();
 
-    if (!input) {
-        return;
-    }
+            }
 
-
-    input.addEventListener(
-        "input",
-        renderFunction
+        }
     );
 
-}
+
+/* =====================================================
+   INITIALIZE
+   ===================================================== */
+
+populateSelects();
+
+loadData();
 
 
-/* =========================================================
-   INITIALIZATION
-   ========================================================= */
+/* REFRESH EVERY 30 SECONDS */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        populateSelects();
-
-
-        setupSearch(
-            "theorySearch",
-            renderTheory
-        );
-
-
-        setupSearch(
-            "labSearch",
-            renderLab
-        );
-
-
-        setupSearch(
-            "projectSearch",
-            renderProjects
-        );
-
-
-        const closeButton =
-            document.querySelector(
-                "#changeModal .close"
-            );
-
-
-        if (closeButton) {
-
-            closeButton.addEventListener(
-                "click",
-                closeModal
-            );
-
-        }
-
-
-        const cancelButton =
-            document.querySelector(
-                "#changeModal .cancel"
-            );
-
-
-        if (cancelButton) {
-
-            cancelButton.addEventListener(
-                "click",
-                closeModal
-            );
-
-        }
-
-
-        const modal =
-            document.getElementById(
-                "changeModal"
-            );
-
-
-        if (modal) {
-
-            modal.addEventListener(
-                "click",
-                function(event) {
-
-                    if (
-                        event.target ===
-                        modal
-                    ) {
-
-                        closeModal();
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        const theoryRoll =
-            document.getElementById(
-                "theoryRoll"
-            );
-
-
-        if (theoryRoll) {
-
-            theoryRoll.addEventListener(
-                "keydown",
-                function(event) {
-
-                    if (
-                        event.key ===
-                        "Enter"
-                    ) {
-
-                        event.preventDefault();
-
-                        allocateSingle(
-                            "theory"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        const labRoll =
-            document.getElementById(
-                "labRoll"
-            );
-
-
-        if (labRoll) {
-
-            labRoll.addEventListener(
-                "keydown",
-                function(event) {
-
-                    if (
-                        event.key ===
-                        "Enter"
-                    ) {
-
-                        event.preventDefault();
-
-                        allocateSingle(
-                            "lab"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        loadData();
-
-
-        /*
-         * Refresh data every 30 seconds.
-         * This keeps the page synchronized
-         * with Google Sheets.
-         */
-
-        setInterval(
-            function() {
-
-                loadData();
-
-            },
-            30000
-        );
-
-    }
+setInterval(
+    loadData,
+    30000
 );
-
-
-/* =========================================================
-   END OF APPLICATION SCRIPT
-   ========================================================= */
 
 </script>
 
 </body>
-
 </html>
