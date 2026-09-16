@@ -2,278 +2,807 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DBMS Topic Allocation</title>
+<meta charset="UTF-8">
 
-    <style>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-        * {
-            box-sizing: border-box;
-        }
+<title>DBMS Topic Allocation Dashboard</title>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
-        }
 
-        header {
-            background: #1f2937;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+<style>
 
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-        }
+/* ============================================================
+   BASIC RESET
+   ============================================================ */
 
-        header p {
-            margin: 7px 0 0;
-            color: #d1d5db;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-        .container {
-            width: 92%;
-            max-width: 1200px;
-            margin: 25px auto;
-        }
 
-        .card {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+body {
 
-        .card h2 {
-            margin-top: 0;
-            color: #1f2937;
-        }
+    min-height: 100vh;
 
-        .form-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+    background: #f4f6f8;
 
-        input,
-        select,
-        button {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #bbb;
-            font-size: 14px;
-        }
+    color: #1f2937;
 
-        input {
-            flex: 1;
-            min-width: 200px;
-        }
+}
 
-        select {
-            flex: 2;
-            min-width: 250px;
-        }
 
-        button {
-            cursor: pointer;
-            background: #2563eb;
-            color: white;
-            border: none;
-        }
+/* ============================================================
+   HEADER
+   ============================================================ */
 
-        button:hover {
-            background: #1d4ed8;
-        }
+header {
 
-        .message {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-        }
+    background: #1f2937;
 
-        .success {
-            display: block;
-            background: #dcfce7;
-            color: #166534;
-        }
+    color: white;
 
-        .error {
-            display: block;
-            background: #fee2e2;
-            color: #991b1b;
-        }
+    text-align: center;
 
-        .warning {
-            display: block;
-            background: #fef3c7;
-            color: #92400e;
-        }
+    padding: 25px 15px;
 
-        .collision-box {
-            background: #fff7ed;
-            border: 1px solid #fb923c;
-            border-radius: 7px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
+}
 
-        .collision-box h2 {
-            color: #c2410c;
-            margin-top: 0;
-        }
 
-        .collision-item {
-            border-bottom: 1px solid #fed7aa;
-            padding: 10px 0;
-        }
+header h1 {
 
-        .collision-item:last-child {
-            border-bottom: none;
-        }
+    font-size: 30px;
 
-        .collision-row {
-            background: #fff1f2 !important;
-        }
+}
 
-        .collision-label {
-            display: inline-block;
-            background: #dc2626;
-            color: white;
-            padding: 3px 7px;
-            border-radius: 4px;
-            font-size: 11px;
-            margin-left: 5px;
-        }
 
-        .change-btn {
-            background: #dc2626;
-            padding: 7px 10px;
-        }
+header p {
 
-        .change-btn:hover {
-            background: #b91c1c;
-        }
+    margin-top: 7px;
 
-        .available {
-            color: #15803d;
-            font-weight: bold;
-        }
+    color: #d1d5db;
 
-        .allocated {
-            color: #2563eb;
-            font-weight: bold;
-        }
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 9px;
-            text-align: left;
-        }
+/* ============================================================
+   CONTAINER
+   ============================================================ */
 
-        th {
-            background: #e5e7eb;
-        }
+.container {
 
-        .empty {
-            color: #777;
-            font-style: italic;
-        }
+    width: 94%;
 
-        .summary {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+    max-width: 1400px;
 
-        .summary-box {
-            flex: 1;
-            min-width: 180px;
-            background: white;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 7px;
-        }
+    margin: auto;
 
-        .summary-box strong {
-            font-size: 25px;
-            display: block;
-        }
+    padding: 25px 0;
 
-        /* MODAL */
+}
 
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
 
-        .modal-box {
-            background: white;
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-            border-radius: 8px;
-        }
+/* ============================================================
+   SUMMARY
+   ============================================================ */
 
-        .modal-box h2 {
-            margin-top: 0;
-        }
+.summary {
 
-        .modal-buttons {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-        }
+    display: flex;
 
-        .cancel {
-            background: #6b7280;
-        }
+    gap: 12px;
 
-        @media(max-width:700px) {
+    flex-wrap: wrap;
 
-            .container {
-                width: 96%;
-            }
+    margin-bottom: 20px;
 
-            table {
-                font-size: 12px;
-            }
+}
 
-            th,
-            td {
-                padding: 6px;
-            }
 
-        }
+.badge {
 
-    </style>
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 7px;
+
+    padding: 10px 15px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+}
+
+
+/* ============================================================
+   REFRESH
+   ============================================================ */
+
+.refresh {
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 17px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+
+}
+
+
+.refresh:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+/* ============================================================
+   LIVE COLLISIONS
+   ============================================================ */
+
+.collision-section {
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.collision-section h2 {
+
+    color: #b91c1c;
+
+    margin-bottom: 15px;
+
+}
+
+
+.collision-group {
+
+    border: 1px solid #fecaca;
+
+    background: #fff7f7;
+
+    border-radius: 7px;
+
+    margin-bottom: 15px;
+
+    padding: 15px;
+
+}
+
+
+.collision-group:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+.collision-heading {
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: #b91c1c;
+
+    margin-bottom: 8px;
+
+}
+
+
+.collision-topic {
+
+    margin-bottom: 12px;
+
+}
+
+
+.collision-person {
+
+    background: #fff1f2;
+
+    border-left: 4px solid #dc2626;
+
+    padding: 10px;
+
+    margin-top: 7px;
+
+    border-radius: 4px;
+
+}
+
+
+.collision-person strong {
+
+    color: #7f1d1d;
+
+}
+
+
+.no-collision {
+
+    color: #15803d;
+
+    font-weight: bold;
+
+    padding: 5px 0;
+
+}
+
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+
+.section {
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    margin-bottom: 25px;
+
+    padding: 20px;
+
+}
+
+
+.section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.section-header h2 {
+
+    font-size: 22px;
+
+}
+
+
+.count {
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+    padding: 7px 12px;
+
+    border-radius: 15px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+
+.table-wrap {
+
+    overflow-x: auto;
+
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 750px;
+
+}
+
+
+th {
+
+    background: #e5e7eb;
+
+    color: #374151;
+
+    text-align: left;
+
+    padding: 11px;
+
+    font-size: 13px;
+
+}
+
+
+td {
+
+    padding: 11px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    font-size: 13px;
+
+    vertical-align: middle;
+
+}
+
+
+.collision {
+
+    background: #fff1f2 !important;
+
+}
+
+
+.collision td {
+
+    color: #9f1239;
+
+}
+
+
+.collision-label {
+
+    display: inline-block;
+
+    background: #dc2626;
+
+    color: white;
+
+    padding: 3px 7px;
+
+    border-radius: 4px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    margin-left: 5px;
+
+}
+
+
+.status {
+
+    display: inline-block;
+
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+}
+
+
+.status-ok {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.status-empty {
+
+    background: #f3f4f6;
+
+    color: #6b7280;
+
+}
+
+
+.status-warning {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+/* ============================================================
+   CHANGE BUTTON
+   ============================================================ */
+
+.change-btn {
+
+    background: #dc2626;
+
+    color: white;
+
+    border: none;
+
+    padding: 7px 10px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+}
+
+
+.change-btn:hover {
+
+    background: #b91c1c;
+
+}
+
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+.forms {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.form-card {
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    padding: 20px;
+
+}
+
+
+.form-card h3 {
+
+    margin-bottom: 17px;
+
+}
+
+
+.group {
+
+    margin-bottom: 13px;
+
+}
+
+
+label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+
+}
+
+
+input,
+select {
+
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #bbb;
+
+    border-radius: 5px;
+
+    outline: none;
+
+    background: white;
+
+}
+
+
+input:focus,
+select:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+button.submit {
+
+    width: 100%;
+
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+
+}
+
+
+button.submit.theory {
+
+    background: #2563eb;
+
+}
+
+
+button.submit.lab {
+
+    background: #059669;
+
+}
+
+
+button.submit.project {
+
+    background: #7c3aed;
+
+}
+
+
+button.submit:hover {
+
+    opacity: .9;
+
+}
+
+
+button:disabled {
+
+    opacity: .6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* ============================================================
+   MESSAGE
+   ============================================================ */
+
+.message {
+
+    margin-top: 10px;
+
+    padding: 9px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    display: none;
+
+}
+
+
+.message.success {
+
+    display: block;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.message.error {
+
+    display: block;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+.message.loading {
+
+    display: block;
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+}
+
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.5);
+
+    z-index: 1000;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+
+.modal-box {
+
+    background: white;
+
+    width: 100%;
+
+    max-width: 500px;
+
+    padding: 22px;
+
+    border-radius: 8px;
+
+}
+
+
+.modal-box h3 {
+
+    margin-bottom: 15px;
+
+}
+
+
+.modal-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+}
+
+
+.modal-actions button {
+
+    flex: 1;
+
+    padding: 10px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+}
+
+
+.cancel {
+
+    background: #e5e7eb;
+
+}
+
+
+.confirm {
+
+    background: #dc2626;
+
+    color: white;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media(max-width:1000px) {
+
+    .forms {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media(max-width:700px) {
+
+    header h1 {
+
+        font-size: 24px;
+
+    }
+
+    .container {
+
+        width: 96%;
+
+    }
+
+}
+
+</style>
+
 </head>
 
 
 <body>
 
+
 <header>
 
-    <h1>DBMS Topic Allocation System</h1>
+    <h1>
+        DBMS Topic Allocation Dashboard
+    </h1>
 
     <p>
         Theory • Lab • Project
@@ -285,282 +814,460 @@
 <div class="container">
 
 
-    <!-- =====================================================
-         LIVE SUMMARY
-         ===================================================== -->
+<!-- =========================================================
+     SUMMARY
+     ========================================================= -->
 
-    <div class="summary">
+<div class="summary">
 
-        <div class="summary-box">
-            Theory Allocated
-            <strong id="theoryCount">0</strong>
+    <div class="badge">
+
+        Theory:
+        <span id="theoryCount">
+            0
+        </span>
+
+    </div>
+
+
+    <div class="badge">
+
+        Lab:
+        <span id="labCount">
+            0
+        </span>
+
+    </div>
+
+
+    <div class="badge">
+
+        Projects:
+        <span id="projectCount">
+            0
+        </span>
+
+    </div>
+
+
+    <div class="badge">
+
+        ⚠ Collisions:
+        <span id="collisionCount">
+            0
+        </span>
+
+    </div>
+
+</div>
+
+
+<button
+    class="refresh"
+    onclick="loadData()"
+>
+    ↻ Refresh Data
+</button>
+
+
+<!-- =========================================================
+     LIVE COLLISIONS
+     ========================================================= -->
+
+<section class="collision-section">
+
+    <h2>
+        ⚠ Live Collisions
+    </h2>
+
+    <div id="collisionList">
+
+        <div class="no-collision">
+            Checking live collisions...
         </div>
 
-        <div class="summary-box">
-            Lab Allocated
-            <strong id="labCount">0</strong>
-        </div>
+    </div>
 
-        <div class="summary-box">
-            Projects Allocated
-            <strong id="projectCount">0</strong>
-        </div>
+</section>
 
-        <div class="summary-box">
-            Live Collisions
-            <strong id="collisionCount">0</strong>
+
+<!-- =========================================================
+     THEORY TABLE
+     ========================================================= -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <h2>
+            📘 DBMS Theory Allocations
+        </h2>
+
+        <div class="count">
+            Live Data
         </div>
 
     </div>
 
 
-    <!-- =====================================================
-         LIVE COLLISIONS
-         ===================================================== -->
-
-    <div class="collision-box">
-
-        <h2>Live Collisions</h2>
-
-        <div id="collisionList">
-
-            <span class="empty">
-                Checking for collisions...
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         THEORY
-         ===================================================== -->
-
-    <div class="card">
-
-        <h2>Theory Topic Allocation</h2>
-
-        <div class="form-row">
-
-            <input
-                id="theoryRoll"
-                type="text"
-                placeholder="Enter full Roll Number"
-            >
-
-            <select id="theoryTopic">
-
-                <option value="">
-                    Select available Theory topic
-                </option>
-
-            </select>
-
-            <button onclick="allocateTheory()">
-                Allocate Theory
-            </button>
-
-        </div>
-
-        <div
-            id="theoryMessage"
-            class="message">
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         LAB
-         ===================================================== -->
-
-    <div class="card">
-
-        <h2>Lab Topic Allocation</h2>
-
-        <div class="form-row">
-
-            <input
-                id="labRoll"
-                type="text"
-                placeholder="Enter full Roll Number"
-            >
-
-            <select id="labTopic">
-
-                <option value="">
-                    Select available Lab topic
-                </option>
-
-            </select>
-
-            <button onclick="allocateLab()">
-                Allocate Lab
-            </button>
-
-        </div>
-
-        <div
-            id="labMessage"
-            class="message">
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         PROJECT
-         ===================================================== -->
-
-    <div class="card">
-
-        <h2>Project Allocation</h2>
-
-        <p>
-            Enter exactly three team Roll Numbers.
-            These Roll Numbers do not need to already exist
-            in the Project sheet because the Project sheet
-            starts without team Roll Numbers.
-        </p>
-
-        <div class="form-row">
-
-            <input
-                id="projectRoll1"
-                type="text"
-                placeholder="Team Member 1 - Full Roll Number"
-            >
-
-            <input
-                id="projectRoll2"
-                type="text"
-                placeholder="Team Member 2 - Full Roll Number"
-            >
-
-            <input
-                id="projectRoll3"
-                type="text"
-                placeholder="Team Member 3 - Full Roll Number"
-            >
-
-        </div>
-
-        <br>
-
-        <div class="form-row">
-
-            <select id="projectTopic">
-
-                <option value="">
-                    Select available Project
-                </option>
-
-            </select>
-
-            <button onclick="allocateProject()">
-                Allocate Project
-            </button>
-
-        </div>
-
-        <div
-            id="projectMessage"
-            class="message">
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         THEORY LIST
-         ===================================================== -->
-
-    <div class="card">
-
-        <h2>Theory Allocations</h2>
+    <div class="table-wrap">
 
         <table>
 
             <thead>
 
                 <tr>
+
                     <th>S.No</th>
+
                     <th>Roll Number</th>
+
                     <th>Topic</th>
+
                     <th>Status</th>
+
                     <th>Action</th>
+
                 </tr>
 
             </thead>
+
 
             <tbody id="theoryTable">
+
             </tbody>
 
         </table>
 
     </div>
 
+</section>
 
-    <!-- =====================================================
-         LAB LIST
-         ===================================================== -->
 
-    <div class="card">
+<!-- =========================================================
+     LAB TABLE
+     ========================================================= -->
 
-        <h2>Lab Allocations</h2>
+<section class="section">
+
+    <div class="section-header">
+
+        <h2>
+            💻 DBMS Lab Allocations
+        </h2>
+
+        <div class="count">
+            Live Data
+        </div>
+
+    </div>
+
+
+    <div class="table-wrap">
 
         <table>
 
             <thead>
 
                 <tr>
+
                     <th>S.No</th>
+
                     <th>Roll Number</th>
+
                     <th>Topic</th>
+
                     <th>Status</th>
+
                     <th>Action</th>
+
                 </tr>
 
             </thead>
+
 
             <tbody id="labTable">
+
             </tbody>
 
         </table>
 
     </div>
 
+</section>
 
-    <!-- =====================================================
-         PROJECT LIST
-         ===================================================== -->
 
-    <div class="card">
+<!-- =========================================================
+     PROJECT TABLE
+     ========================================================= -->
 
-        <h2>Project Allocations</h2>
+<section class="section">
+
+    <div class="section-header">
+
+        <h2>
+            🚀 DBMS Project Allocations
+        </h2>
+
+        <div class="count">
+            Live Data
+        </div>
+
+    </div>
+
+
+    <div class="table-wrap">
 
         <table>
 
             <thead>
 
                 <tr>
+
                     <th>S.No</th>
+
                     <th>Team Roll Numbers</th>
+
                     <th>Project</th>
+
                     <th>Batch</th>
+
                     <th>Status</th>
+
                     <th>Action</th>
+
                 </tr>
 
             </thead>
 
+
             <tbody id="projectTable">
+
             </tbody>
 
         </table>
 
     </div>
+
+</section>
+
+
+<!-- =========================================================
+     ALLOCATION FORMS
+     ========================================================= -->
+
+<div class="forms">
+
+
+<!-- =========================================================
+     THEORY FORM
+     ========================================================= -->
+
+<div class="form-card">
+
+    <h3>
+        Allocate Theory
+    </h3>
+
+
+    <div class="group">
+
+        <label>
+            Full Roll Number
+        </label>
+
+        <input
+            id="theoryRoll"
+            placeholder="257R1A66C9"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="group">
+
+        <label>
+            Available Theory Topic
+        </label>
+
+        <select id="theoryTopic">
+
+            <option value="">
+                -- Select Topic --
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <button
+        class="submit theory"
+        onclick="allocateTheory()"
+    >
+        Allocate Theory
+    </button>
+
+
+    <div
+        id="theoryMessage"
+        class="message"
+    ></div>
+
+</div>
+
+
+<!-- =========================================================
+     LAB FORM
+     ========================================================= -->
+
+<div class="form-card">
+
+    <h3>
+        Allocate Lab
+    </h3>
+
+
+    <div class="group">
+
+        <label>
+            Full Roll Number
+        </label>
+
+        <input
+            id="labRoll"
+            placeholder="257R1A66C9"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="group">
+
+        <label>
+            Available Lab Topic
+        </label>
+
+        <select id="labTopic">
+
+            <option value="">
+                -- Select Topic --
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <button
+        class="submit lab"
+        onclick="allocateLab()"
+    >
+        Allocate Lab
+    </button>
+
+
+    <div
+        id="labMessage"
+        class="message"
+    ></div>
+
+</div>
+
+
+<!-- =========================================================
+     PROJECT FORM
+     ========================================================= -->
+
+<div class="form-card">
+
+    <h3>
+        Allocate Project
+    </h3>
+
+
+    <div class="group">
+
+        <label>
+            Team Member 1
+        </label>
+
+        <input
+            id="projectRoll1"
+            placeholder="Full Roll Number"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="group">
+
+        <label>
+            Team Member 2
+        </label>
+
+        <input
+            id="projectRoll2"
+            placeholder="Full Roll Number"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="group">
+
+        <label>
+            Team Member 3
+        </label>
+
+        <input
+            id="projectRoll3"
+            placeholder="Full Roll Number"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="group">
+
+        <label>
+            Available Project
+        </label>
+
+        <select id="projectTopic">
+
+            <option value="">
+                -- Select Project --
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <button
+        class="submit project"
+        onclick="allocateProject()"
+    >
+        Allocate Project
+    </button>
+
+
+    <div
+        id="projectMessage"
+        class="message"
+    ></div>
+
+</div>
+
+
+</div>
+
 
 </div>
 
@@ -570,29 +1277,25 @@
      ========================================================= -->
 
 <div
-    id="changeModal"
     class="modal"
+    id="changeModal"
 >
 
     <div class="modal-box">
 
-        <h2 id="modalTitle">
-            Change
-        </h2>
+        <h3 id="modalTitle">
+            Change Topic
+        </h3>
+
 
         <div id="modalContent">
+
         </div>
+
 
         <div
-            id="modalMessage"
-            class="message">
-        </div>
-
-        <div class="modal-buttons">
-
-            <button onclick="confirmChange()">
-                Confirm Change
-            </button>
+            class="modal-actions"
+        >
 
             <button
                 class="cancel"
@@ -601,76 +1304,37 @@
                 Cancel
             </button>
 
+
+            <button
+                class="confirm"
+                onclick="confirmChange()"
+            >
+                Change
+            </button>
+
         </div>
+
+
+        <div
+            id="modalMessage"
+            class="message"
+        ></div>
 
     </div>
 
 </div>
 
 
+
 <script>
 
+
 /* ============================================================
-   GOOGLE APPS SCRIPT
+   APPS SCRIPT URL
    ============================================================ */
 
 const SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbx-4VgDi6t96h4wuVsj3Csa2TEEIHPIjxUVGlCHb5IupuKgKIsaoe1ZcZLeqheE5mXjTw/exec";
-
-
-/* ============================================================
-   EXACT 23 APPROVED PROJECTS
-   ============================================================ */
-
-const PROJECT_TOPICS = [
-
-    "Supermarket Billing Management System",
-
-    "Blood Donation Camp Management System",
-
-    "Doctor Appointment Booking System",
-
-    "Online Examination Management System",
-
-    "College Hostel Allocation System",
-
-    "Vehicle Service Center Management System",
-
-    "Online Event Management System",
-
-    "College Placement Management System",
-
-    "Sports Tournament Management System",
-
-    "Parking Management System",
-
-    "Electricity Billing Management System",
-
-    "Water Supply Billing Management System",
-
-    "Real Estate Property Management System",
-
-    "Mobile Shop Management System",
-
-    "Computer Sales and Service Management System",
-
-    "Online Complaint Management System",
-
-    "Travel Agency Management System",
-
-    "Flight Booking Management System",
-
-    "Pet Clinic Management System",
-
-    "Donation Management System",
-
-    "Digital Document Management System",
-
-    "Freelancer Project Management System",
-
-    "Online Auction Management System"
-
-];
 
 
 /* ============================================================
@@ -679,76 +1343,76 @@ const PROJECT_TOPICS = [
 
 const THEORY_TOPICS = [
 
-    "Functional Dependencies",
-    "ER Diagram for a Hospital Management System",
-    "Basic Form of SQL Queries",
-    "B+ Trees: A Dynamic Index Structure",
-    "Advantages and Applications of DBMS",
-    "Selection and Projection Operations",
-    "Transaction Concept and Transaction States",
-    "Weak Entity Sets and Strong Entity Sets",
-    "UNION, INTERSECT, and EXCEPT Operations in SQL",
-    "Problems Caused by Data Redundancy",
-    "Data Independence in Database Systems",
-    "Natural Join and Its Applications",
-    "Lock-Based Concurrency Control Protocols",
-    "Entity-Relationship (ER) Model",
-    "Fourth Normal Form (4NF)",
-    "Database System Architecture",
-    "NULL Values in SQL",
-    "Relational Algebra: Fundamental Operators",
-    "ER Diagram for an Online Shopping System",
-    "Atomicity and Durability in Transactions",
-    "Types of Attributes in ER Model",
-    "Database Decomposition",
-    "Tuple Relational Calculus",
-    "File Organization and Indexing Techniques",
-    "Second Normal Form (2NF)",
-    "Relationships and Relationship Sets",
-    "Triggers and Active Databases",
-    "Introduction to the Relational Model",
-    "Lossless Join Decomposition",
-    "SQL SELECT, FROM, and WHERE Clauses",
-    "Multiple Granularity Protocol",
-    "Additional Features of the ER Model",
-    "Division Operator in Relational Algebra",
-    "File Systems versus Database Management Systems",
-    "Fifth Normal Form (5NF)",
-    "Aggregation Operators in SQL",
-    "Logical Database Design",
-    "Concurrent Executions and Their Problems",
-    "Types of Relationships in ER Model",
-    "Domain Relational Calculus",
-    "Structure and Components of a DBMS",
-    "Third Normal Form (3NF)",
-    "Join Operations in Relational Algebra",
-    "Complex Integrity Constraints in SQL",
-    "Evolution and Historical Perspective of Database Systems",
-    "Serializability and Recoverability",
-    "Creating, Altering, and Destroying Tables and Views",
-    "Multivalued Dependencies",
-    "ER Diagram for a College Management System",
-    "Timestamp-Based and Validation-Based Protocols",
-    "Integrity Constraints over Relations",
-    "Boyce-Codd Normal Form (BCNF)",
-    "Relational Algebra versus Relational Calculus",
-    "Views in Relational Databases",
-    "Log-Based Recovery and Atomicity",
-    "Entities, Attributes, and Entity Sets",
-    "Cartesian Product, Union, and Set Difference",
-    "Querying Relational Data",
-    "Types and Applications of SQL Triggers",
-    "Database Design Process",
-    "Rename Operator in Relational Algebra",
-    "Enforcement of Integrity Constraints",
-    "Nested Queries in SQL",
-    "Conceptual Database Design Using ER Diagrams",
-    "Problems Related to Decomposition",
-    "Different Types of Data Models",
-    "Domain Relational Calculus",
-    "Reasoning about Functional Dependencies",
-    "Relational Model Integrity Constraints",
-    "Hash-Based and Tree-Based Indexing"
+"Functional Dependencies",
+"ER Diagram for a Hospital Management System",
+"Basic Form of SQL Queries",
+"B+ Trees: A Dynamic Index Structure",
+"Advantages and Applications of DBMS",
+"Selection and Projection Operations",
+"Transaction Concept and Transaction States",
+"Weak Entity Sets and Strong Entity Sets",
+"UNION, INTERSECT, and EXCEPT Operations in SQL",
+"Problems Caused by Data Redundancy",
+"Data Independence in Database Systems",
+"Natural Join and Its Applications",
+"Lock-Based Concurrency Control Protocols",
+"Entity-Relationship (ER) Model",
+"Fourth Normal Form (4NF)",
+"Database System Architecture",
+"NULL Values in SQL",
+"Relational Algebra: Fundamental Operators",
+"ER Diagram for an Online Shopping System",
+"Atomicity and Durability in Transactions",
+"Types of Attributes in ER Model",
+"Database Decomposition",
+"Tuple Relational Calculus",
+"File Organization and Indexing Techniques",
+"Second Normal Form (2NF)",
+"Relationships and Relationship Sets",
+"Triggers and Active Databases",
+"Introduction to the Relational Model",
+"Lossless Join Decomposition",
+"SQL SELECT, FROM, and WHERE Clauses",
+"Multiple Granularity Protocol",
+"Additional Features of the ER Model",
+"Division Operator in Relational Algebra",
+"File Systems versus Database Management Systems",
+"Fifth Normal Form (5NF)",
+"Aggregation Operators in SQL",
+"Logical Database Design",
+"Concurrent Executions and Their Problems",
+"Types of Relationships in ER Model",
+"Domain Relational Calculus",
+"Structure and Components of a DBMS",
+"Third Normal Form (3NF)",
+"Join Operations in Relational Algebra",
+"Complex Integrity Constraints in SQL",
+"Evolution and Historical Perspective of Database Systems",
+"Serializability and Recoverability",
+"Creating, Altering, and Destroying Tables and Views",
+"Multivalued Dependencies",
+"ER Diagram for a College Management System",
+"Timestamp-Based and Validation-Based Protocols",
+"Integrity Constraints over Relations",
+"Boyce-Codd Normal Form (BCNF)",
+"Relational Algebra versus Relational Calculus",
+"Views in Relational Databases",
+"Log-Based Recovery and Atomicity",
+"Entities, Attributes, and Entity Sets",
+"Cartesian Product, Union, and Set Difference",
+"Querying Relational Data",
+"Types and Applications of SQL Triggers",
+"Database Design Process",
+"Rename Operator in Relational Algebra",
+"Enforcement of Integrity Constraints",
+"Nested Queries in SQL",
+"Conceptual Database Design Using ER Diagrams",
+"Problems Related to Decomposition",
+"Different Types of Data Models",
+"Domain Relational Calculus",
+"Reasoning about Functional Dependencies",
+"Relational Model Integrity Constraints",
+"Hash-Based and Tree-Based Indexing"
 
 ];
 
@@ -759,97 +1423,155 @@ const THEORY_TOPICS = [
 
 const LAB_TOPICS = [
 
-    "Introduction to MySQL and Database Environment",
-    "Designing an ER Diagram for a College Management System",
-    "SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
-    "Database Normalization and Its Practical Importance",
-    "SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
-    "Database Views and Their Practical Applications",
-    "DML Commands: INSERT, UPDATE and DELETE",
-    "Functional Dependencies in Database Design",
-    "Nested Queries and Subqueries in SQL",
-    "SQL Aggregate Functions with GROUP BY and HAVING",
-    "Database Design for an Online Shopping System",
-    "Primary Key and Foreign Key Constraints",
-    "Correlated Subqueries in SQL",
-    "SQL Set Operations: UNION, INTERSECT and EXCEPT",
-    "Database Triggers and Their Applications",
-    "Stored Procedures in MySQL",
-    "Cursor Handling in Database Programming",
-    "One-to-One, One-to-Many and Many-to-Many Relationships",
-    "Converting ER Diagrams into Relational Schemas",
-    "SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
-    "First Normal Form, Second Normal Form and Third Normal Form",
-    "Boyce-Codd Normal Form (BCNF)",
-    "Designing a Hospital Management Database",
-    "SQL Queries for Employee Management System",
-    "SQL Queries for Student Management System",
-    "SQL Queries for Banking Database",
-    "SQL Queries for Library Management System",
-    "SQL Queries for Railway Reservation System",
-    "SQL Queries for Hotel Management System",
-    "SQL Queries for E-Commerce Database",
-    "Self Join and Its Applications",
-    "Cross Join and Cartesian Product",
-    "Natural Join and Equi Join",
-    "Subqueries Using IN, ANY and ALL",
-    "EXISTS and NOT EXISTS in SQL",
-    "SQL Date and Time Functions",
-    "SQL String Functions and Their Applications",
-    "SQL Numeric and Mathematical Functions",
-    "NULL Values and Three-Valued Logic in SQL",
-    "Creating and Managing SQL Views",
-    "BEFORE and AFTER Triggers in MySQL",
-    "INSERT, UPDATE and DELETE Triggers",
-    "Audit Trail Using Database Triggers",
-    "Stored Functions versus Stored Procedures",
-    "Input and Output Parameters in Stored Procedures",
-    "Cursors and Their Applications in MySQL",
-    "Error Handling in Stored Procedures",
-    "Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
-    "ACID Properties of Database Transactions",
-    "Database Concurrency and Transaction Problems",
-    "Indexing in MySQL for Faster Query Processing",
-    "Clustered and Non-Clustered Indexing",
-    "Primary Index, Secondary Index and Composite Index",
-    "Query Optimization Techniques in MySQL",
-    "Understanding EXPLAIN in MySQL",
-    "SQL Injection and Database Security",
-    "DCL Commands: GRANT and REVOKE",
-    "User Management and Privileges in MySQL",
-    "Database Backup and Restoration",
-    "Database Import and Export Using MySQL",
-    "Connecting Java Applications with MySQL",
-    "Connecting Python Applications with MySQL",
-    "CRUD Operations Using a Database Application",
-    "Database Connectivity Using JDBC",
-    "Database Connectivity Using Python and MySQL Connector",
-    "Introduction to NoSQL Databases",
-    "Relational Databases versus NoSQL Databases",
-    "MySQL JSON Data Types and JSON Queries",
-    "Database Replication and High Availability",
-    "Database Performance Monitoring and Optimization"
+"Introduction to MySQL and Database Environment",
+"Designing an ER Diagram for a College Management System",
+"SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
+"Database Normalization and Its Practical Importance",
+"SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
+"Database Views and Their Practical Applications",
+"DML Commands: INSERT, UPDATE and DELETE",
+"Functional Dependencies in Database Design",
+"Nested Queries and Subqueries in SQL",
+"SQL Aggregate Functions with GROUP BY and HAVING",
+"Database Design for an Online Shopping System",
+"Primary Key and Foreign Key Constraints",
+"Correlated Subqueries in SQL",
+"SQL Set Operations: UNION, INTERSECT and EXCEPT",
+"Database Triggers and Their Applications",
+"Stored Procedures in MySQL",
+"Cursor Handling in Database Programming",
+"One-to-One, One-to-Many and Many-to-Many Relationships",
+"Converting ER Diagrams into Relational Schemas",
+"SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
+"First Normal Form, Second Normal Form and Third Normal Form",
+"Boyce-Codd Normal Form (BCNF)",
+"Designing a Hospital Management Database",
+"SQL Queries for Employee Management System",
+"SQL Queries for Student Management System",
+"SQL Queries for Banking Database",
+"SQL Queries for Library Management System",
+"SQL Queries for Railway Reservation System",
+"SQL Queries for Hotel Management System",
+"SQL Queries for E-Commerce Database",
+"Self Join and Its Applications",
+"Cross Join and Cartesian Product",
+"Natural Join and Equi Join",
+"Subqueries Using IN, ANY and ALL",
+"EXISTS and NOT EXISTS in SQL",
+"SQL Date and Time Functions",
+"SQL String Functions and Their Applications",
+"SQL Numeric and Mathematical Functions",
+"NULL Values and Three-Valued Logic in SQL",
+"Creating and Managing SQL Views",
+"BEFORE and AFTER Triggers in MySQL",
+"INSERT, UPDATE and DELETE Triggers",
+"Audit Trail Using Database Triggers",
+"Stored Functions versus Stored Procedures",
+"Input and Output Parameters in Stored Procedures",
+"Cursors and Their Applications in MySQL",
+"Error Handling in Stored Procedures",
+"Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
+"ACID Properties of Database Transactions",
+"Database Concurrency and Transaction Problems",
+"Indexing in MySQL for Faster Query Processing",
+"Clustered and Non-Clustered Indexing",
+"Primary Index, Secondary Index and Composite Index",
+"Query Optimization Techniques in MySQL",
+"Understanding EXPLAIN in MySQL",
+"SQL Injection and Database Security",
+"DCL Commands: GRANT and REVOKE",
+"User Management and Privileges in MySQL",
+"Database Backup and Restoration",
+"Database Import and Export Using MySQL",
+"Connecting Java Applications with MySQL",
+"Connecting Python Applications with MySQL",
+"CRUD Operations Using a Database Application",
+"Database Connectivity Using JDBC",
+"Database Connectivity Using Python and MySQL Connector",
+"Introduction to NoSQL Databases",
+"Relational Databases versus NoSQL Databases",
+"MySQL JSON Data Types and JSON Queries",
+"Database Replication and High Availability",
+"Database Performance Monitoring and Optimization"
 
 ];
 
 
 /* ============================================================
-   DATA
+   EXACT 23 PROJECT TOPICS
+   ============================================================ */
+
+const PROJECT_TOPICS = [
+
+"Supermarket Billing Management System",
+
+"Blood Donation Camp Management System",
+
+"Doctor Appointment Booking System",
+
+"Online Examination Management System",
+
+"College Hostel Allocation System",
+
+"Vehicle Service Center Management System",
+
+"Online Event Management System",
+
+"College Placement Management System",
+
+"Sports Tournament Management System",
+
+"Parking Management System",
+
+"Electricity Billing Management System",
+
+"Water Supply Billing Management System",
+
+"Real Estate Property Management System",
+
+"Mobile Shop Management System",
+
+"Computer Sales and Service Management System",
+
+"Online Complaint Management System",
+
+"Travel Agency Management System",
+
+"Flight Booking Management System",
+
+"Pet Clinic Management System",
+
+"Donation Management System",
+
+"Digital Document Management System",
+
+"Freelancer Project Management System",
+
+"Online Auction Management System"
+
+];
+
+
+/* ============================================================
+   DATABASE
    ============================================================ */
 
 let database = {
 
     theory: [],
+
     lab: [],
+
     project: []
 
 };
+
 
 let changeState = null;
 
 
 /* ============================================================
-   NORMALIZATION
+   NORMALIZE TEXT
    ============================================================ */
 
 function normalizeText(value) {
@@ -862,6 +1584,10 @@ function normalizeText(value) {
 }
 
 
+/* ============================================================
+   NORMALIZE ROLL NUMBER
+   ============================================================ */
+
 function normalizeRoll(value) {
 
     return String(value || "")
@@ -871,6 +1597,10 @@ function normalizeRoll(value) {
 
 }
 
+
+/* ============================================================
+   ESCAPE HTML
+   ============================================================ */
 
 function escapeHtml(value) {
 
@@ -884,182 +1614,13 @@ function escapeHtml(value) {
 }
 
 
+/* ============================================================
+   ESCAPE ATTRIBUTE
+   ============================================================ */
+
 function escapeAttr(value) {
 
     return escapeHtml(value);
-
-}
-
-
-/* ============================================================
-   GET ALLOCATED TOPICS
-   ============================================================ */
-
-function getTakenTopics(data) {
-
-    const taken = [];
-
-    for (
-        let i = 0;
-        i < data.length;
-        i++
-    ) {
-
-        const topic =
-            normalizeText(
-                data[i].topic
-            );
-
-        if (topic) {
-
-            taken.push(topic);
-
-        }
-
-    }
-
-    return taken;
-
-}
-
-
-/* ============================================================
-   LOAD ONLY AVAILABLE TOPICS
-   ============================================================ */
-
-function loadAvailableDropdown(
-    elementId,
-    allTopics,
-    currentData
-) {
-
-    const select =
-        document.getElementById(
-            elementId
-        );
-
-    select.innerHTML =
-        '<option value="">Select available topic</option>';
-
-    const taken =
-        getTakenTopics(
-            currentData
-        );
-
-    for (
-        let i = 0;
-        i < allTopics.length;
-        i++
-    ) {
-
-        if (
-            taken.indexOf(
-                normalizeText(
-                    allTopics[i]
-                )
-            ) !== -1
-        ) {
-
-            continue;
-
-        }
-
-        const option =
-            document.createElement(
-                "option"
-            );
-
-        option.value =
-            allTopics[i];
-
-        option.textContent =
-            (i + 1) +
-            ". " +
-            allTopics[i];
-
-        select.appendChild(
-            option
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   PROJECT AVAILABLE DROPDOWN
-   ============================================================ */
-
-function loadAvailableProjects() {
-
-    const select =
-        document.getElementById(
-            "projectTopic"
-        );
-
-    select.innerHTML =
-        '<option value="">Select available Project</option>';
-
-    const allocatedProjects = [];
-
-    for (
-        let i = 0;
-        i < database.project.length;
-        i++
-    ) {
-
-        const project =
-            normalizeText(
-                database.project[i].project
-            );
-
-        if (project) {
-
-            allocatedProjects.push(
-                project
-            );
-
-        }
-
-    }
-
-    for (
-        let i = 0;
-        i < PROJECT_TOPICS.length;
-        i++
-    ) {
-
-        const project =
-            PROJECT_TOPICS[i];
-
-        if (
-            allocatedProjects.indexOf(
-                normalizeText(project)
-            ) !== -1
-        ) {
-
-            continue;
-
-        }
-
-        const option =
-            document.createElement(
-                "option"
-            );
-
-        option.value =
-            project;
-
-        option.textContent =
-            (i + 1) +
-            ". " +
-            project;
-
-        select.appendChild(
-            option
-        );
-
-    }
 
 }
 
@@ -1079,17 +1640,20 @@ async function loadData() {
                 Date.now()
             );
 
+
         const data =
             await response.json();
+
 
         if (!data.success) {
 
             throw new Error(
                 data.message ||
-                "Unable to load data."
+                "Data loading failed"
             );
 
         }
+
 
         database = {
 
@@ -1104,18 +1668,25 @@ async function loadData() {
 
         };
 
+
         renderAll();
+
 
     } catch (error) {
 
         console.error(error);
 
+
         showMessage(
+
             document.getElementById(
                 "theoryMessage"
             ),
-            "Unable to connect to Google Sheets.",
+
+            "Unable to load Google Sheet data.",
+
             "error"
+
         );
 
     }
@@ -1139,17 +1710,9 @@ function renderAll() {
 
     updateCollisions();
 
-    loadAvailableDropdown(
-        "theoryTopic",
-        THEORY_TOPICS,
-        database.theory
-    );
+    loadAvailableTheoryTopics();
 
-    loadAvailableDropdown(
-        "labTopic",
-        LAB_TOPICS,
-        database.lab
-    );
+    loadAvailableLabTopics();
 
     loadAvailableProjects();
 
@@ -1157,15 +1720,12 @@ function renderAll() {
 
 
 /* ============================================================
-   THEORY COLLISIONS
+   GET TAKEN TOPICS
    ============================================================ */
 
-function getTopicCollisions(data) {
+function getTakenTopics(data) {
 
-    const map = {};
-
-    const collisions =
-        new Set();
+    const taken = [];
 
     for (
         let i = 0;
@@ -1178,9 +1738,277 @@ function getTopicCollisions(data) {
                 data[i].topic
             );
 
-        if (!topic) {
-            continue;
+
+        if (topic) {
+
+            taken.push(topic);
+
         }
+
+    }
+
+    return taken;
+
+}
+
+
+/* ============================================================
+   AVAILABLE THEORY TOPICS
+   ============================================================ */
+
+function loadAvailableTheoryTopics() {
+
+    const select =
+        document.getElementById(
+            "theoryTopic"
+        );
+
+
+    select.innerHTML =
+        `<option value="">
+            -- Select Available Topic --
+        </option>`;
+
+
+    const taken =
+        getTakenTopics(
+            database.theory
+        );
+
+
+    for (
+        let i = 0;
+        i < THEORY_TOPICS.length;
+        i++
+    ) {
+
+        if (
+            taken.indexOf(
+                normalizeText(
+                    THEORY_TOPICS[i]
+                )
+            ) !== -1
+        ) {
+
+            continue;
+
+        }
+
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            THEORY_TOPICS[i];
+
+
+        option.textContent =
+            (i + 1) +
+            ". " +
+            THEORY_TOPICS[i];
+
+
+        select.appendChild(
+            option
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   AVAILABLE LAB TOPICS
+   ============================================================ */
+
+function loadAvailableLabTopics() {
+
+    const select =
+        document.getElementById(
+            "labTopic"
+        );
+
+
+    select.innerHTML =
+        `<option value="">
+            -- Select Available Topic --
+        </option>`;
+
+
+    const taken =
+        getTakenTopics(
+            database.lab
+        );
+
+
+    for (
+        let i = 0;
+        i < LAB_TOPICS.length;
+        i++
+    ) {
+
+        if (
+            taken.indexOf(
+                normalizeText(
+                    LAB_TOPICS[i]
+                )
+            ) !== -1
+        ) {
+
+            continue;
+
+        }
+
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            LAB_TOPICS[i];
+
+
+        option.textContent =
+            (i + 1) +
+            ". " +
+            LAB_TOPICS[i];
+
+
+        select.appendChild(
+            option
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   AVAILABLE PROJECTS
+   ============================================================ */
+
+function loadAvailableProjects() {
+
+    const select =
+        document.getElementById(
+            "projectTopic"
+        );
+
+
+    select.innerHTML =
+        `<option value="">
+            -- Select Available Project --
+        </option>`;
+
+
+    const allocated =
+        [];
+
+
+    for (
+        let i = 0;
+        i < database.project.length;
+        i++
+    ) {
+
+        const project =
+            normalizeText(
+                database.project[i].project
+            );
+
+
+        if (project) {
+
+            allocated.push(
+                project
+            );
+
+        }
+
+    }
+
+
+    for (
+        let i = 0;
+        i < PROJECT_TOPICS.length;
+        i++
+    ) {
+
+        const project =
+            PROJECT_TOPICS[i];
+
+
+        if (
+            allocated.indexOf(
+                normalizeText(project)
+            ) !== -1
+        ) {
+
+            continue;
+
+        }
+
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            project;
+
+
+        option.textContent =
+            (i + 1) +
+            ". " +
+            project;
+
+
+        select.appendChild(
+            option
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   GET TOPIC COLLISIONS
+   ============================================================ */
+
+function getTopicCollisions(data) {
+
+    const map = {};
+
+    const collisions =
+        new Set();
+
+
+    for (
+        let i = 0;
+        i < data.length;
+        i++
+    ) {
+
+        const topic =
+            normalizeText(
+                data[i].topic
+            );
+
+
+        if (!topic) {
+
+            continue;
+
+        }
+
 
         if (!map[topic]) {
 
@@ -1188,12 +2016,15 @@ function getTopicCollisions(data) {
 
         }
 
+
         map[topic].push(i);
 
     }
 
 
-    for (const topic in map) {
+    for (
+        const topic in map
+    ) {
 
         if (
             map[topic].length > 1
@@ -1215,49 +2046,52 @@ function getTopicCollisions(data) {
 
     }
 
+
     return collisions;
 
 }
 
 
 /* ============================================================
-   PROJECT MEMBER COLLISIONS
+   GET PROJECT MEMBER COLLISIONS
    ============================================================ */
 
-function getProjectCollisions(data) {
+function getProjectMemberMap() {
 
     const map = {};
 
-    const collisions =
-        new Set();
 
     for (
         let i = 0;
-        i < data.length;
+        i < database.project.length;
         i++
     ) {
 
-        const rolls =
+        const raw =
             String(
-                data[i].rollNo || ""
-            )
-            .split(",")
-            .map(
-                function(value) {
-
-                    return normalizeRoll(
-                        value
-                    );
-
-                }
-            )
-            .filter(
-                function(value) {
-
-                    return value !== "";
-
-                }
+                database.project[i].rollNo || ""
             );
+
+
+        const rolls =
+            raw
+                .split(",")
+                .map(
+                    function(value) {
+
+                        return normalizeRoll(
+                            value
+                        );
+
+                    }
+                )
+                .filter(
+                    function(value) {
+
+                        return value !== "";
+
+                    }
+                );
 
 
         for (
@@ -1269,20 +2103,50 @@ function getProjectCollisions(data) {
             const roll =
                 rolls[j];
 
+
             if (!map[roll]) {
 
                 map[roll] = [];
 
             }
 
-            map[roll].push(i);
+
+            map[roll].push({
+
+                projectIndex: i,
+
+                project:
+                    database.project[i].project
+
+            });
 
         }
 
     }
 
 
-    for (const roll in map) {
+    return map;
+
+}
+
+
+/* ============================================================
+   PROJECT COLLISION INDICES
+   ============================================================ */
+
+function getProjectCollisionIndices() {
+
+    const map =
+        getProjectMemberMap();
+
+
+    const collisions =
+        new Set();
+
+
+    for (
+        const roll in map
+    ) {
 
         if (
             map[roll].length > 1
@@ -1295,7 +2159,7 @@ function getProjectCollisions(data) {
             ) {
 
                 collisions.add(
-                    map[roll][i]
+                    map[roll][i].projectIndex
                 );
 
             }
@@ -1303,6 +2167,7 @@ function getProjectCollisions(data) {
         }
 
     }
+
 
     return collisions;
 
@@ -1320,7 +2185,9 @@ function renderTheory() {
             "theoryTable"
         );
 
+
     body.innerHTML = "";
+
 
     const collisions =
         getTopicCollisions(
@@ -1337,18 +2204,21 @@ function renderTheory() {
         const row =
             database.theory[i];
 
+
         const collision =
             collisions.has(i);
+
 
         const tr =
             document.createElement(
                 "tr"
             );
 
+
         if (collision) {
 
             tr.classList.add(
-                "collision-row"
+                "collision"
             );
 
         }
@@ -1360,17 +2230,20 @@ function renderTheory() {
                 ${escapeHtml(row.sno)}
             </td>
 
+
             <td>
                 ${escapeHtml(row.rollNo)}
             </td>
 
+
             <td>
+
                 ${
                     row.topic
                     ?
                     escapeHtml(row.topic)
                     :
-                    '<span class="empty">Not selected</span>'
+                    "<em>Not selected</em>"
                 }
 
                 ${
@@ -1383,21 +2256,23 @@ function renderTheory() {
 
             </td>
 
+
             <td>
 
                 ${
                     collision
                     ?
-                    '<span style="color:#dc2626;font-weight:bold">Collision</span>'
+                    '<span class="status status-warning">Collision</span>'
                     :
                     row.topic
                     ?
-                    '<span class="allocated">Allocated</span>'
+                    '<span class="status status-ok">Allocated</span>'
                     :
-                    '<span class="available">Available</span>'
+                    '<span class="status status-empty">Available</span>'
                 }
 
             </td>
+
 
             <td>
 
@@ -1423,6 +2298,7 @@ function renderTheory() {
 
         `;
 
+
         body.appendChild(
             tr
         );
@@ -1443,7 +2319,9 @@ function renderLab() {
             "labTable"
         );
 
+
     body.innerHTML = "";
+
 
     const collisions =
         getTopicCollisions(
@@ -1460,18 +2338,21 @@ function renderLab() {
         const row =
             database.lab[i];
 
+
         const collision =
             collisions.has(i);
+
 
         const tr =
             document.createElement(
                 "tr"
             );
 
+
         if (collision) {
 
             tr.classList.add(
-                "collision-row"
+                "collision"
             );
 
         }
@@ -1483,9 +2364,11 @@ function renderLab() {
                 ${escapeHtml(row.sno)}
             </td>
 
+
             <td>
                 ${escapeHtml(row.rollNo)}
             </td>
+
 
             <td>
 
@@ -1494,7 +2377,7 @@ function renderLab() {
                     ?
                     escapeHtml(row.topic)
                     :
-                    '<span class="empty">Not selected</span>'
+                    "<em>Not selected</em>"
                 }
 
                 ${
@@ -1507,21 +2390,23 @@ function renderLab() {
 
             </td>
 
+
             <td>
 
                 ${
                     collision
                     ?
-                    '<span style="color:#dc2626;font-weight:bold">Collision</span>'
+                    '<span class="status status-warning">Collision</span>'
                     :
                     row.topic
                     ?
-                    '<span class="allocated">Allocated</span>'
+                    '<span class="status status-ok">Allocated</span>'
                     :
-                    '<span class="available">Available</span>'
+                    '<span class="status status-empty">Available</span>'
                 }
 
             </td>
+
 
             <td>
 
@@ -1547,6 +2432,7 @@ function renderLab() {
 
         `;
 
+
         body.appendChild(
             tr
         );
@@ -1567,12 +2453,12 @@ function renderProjects() {
             "projectTable"
         );
 
+
     body.innerHTML = "";
 
+
     const collisions =
-        getProjectCollisions(
-            database.project
-        );
+        getProjectCollisionIndices();
 
 
     for (
@@ -1584,26 +2470,31 @@ function renderProjects() {
         const row =
             database.project[i];
 
-        const rolls =
+
+        const rollCell =
             String(
                 row.rollNo || ""
             ).trim();
 
+
         const allocated =
-            rolls !== "";
+            rollCell !== "";
+
 
         const collision =
             collisions.has(i);
+
 
         const tr =
             document.createElement(
                 "tr"
             );
 
+
         if (collision) {
 
             tr.classList.add(
-                "collision-row"
+                "collision"
             );
 
         }
@@ -1615,14 +2506,15 @@ function renderProjects() {
                 ${escapeHtml(row.sno)}
             </td>
 
+
             <td>
 
                 ${
                     allocated
                     ?
-                    escapeHtml(rolls)
+                    escapeHtml(rollCell)
                     :
-                    '<span class="empty">Not allocated</span>'
+                    "<em>Not allocated</em>"
                 }
 
                 ${
@@ -1635,29 +2527,41 @@ function renderProjects() {
 
             </td>
 
-            <td>
-                ${escapeHtml(row.project)}
-            </td>
 
             <td>
-                ${escapeHtml(row.batch)}
+
+                ${escapeHtml(
+                    row.project
+                )}
+
             </td>
+
+
+            <td>
+
+                ${escapeHtml(
+                    row.batch
+                )}
+
+            </td>
+
 
             <td>
 
                 ${
                     collision
                     ?
-                    '<span style="color:#dc2626;font-weight:bold">Collision</span>'
+                    '<span class="status status-warning">Collision</span>'
                     :
                     allocated
                     ?
-                    '<span class="allocated">Allocated</span>'
+                    '<span class="status status-ok">Allocated</span>'
                     :
-                    '<span class="available">Available</span>'
+                    '<span class="status status-empty">Available</span>'
                 }
 
             </td>
+
 
             <td>
 
@@ -1667,7 +2571,7 @@ function renderProjects() {
                     `<button
                         class="change-btn"
                         onclick="openProjectChange(
-                            '${escapeAttr(rolls)}',
+                            '${escapeAttr(rollCell)}',
                             '${escapeAttr(row.project)}'
                         )"
                     >
@@ -1680,6 +2584,7 @@ function renderProjects() {
             </td>
 
         `;
+
 
         body.appendChild(
             tr
@@ -1701,14 +2606,19 @@ function updateCollisions() {
             "collisionList"
         );
 
+
     box.innerHTML = "";
 
-    let total = 0;
+
+    let collisionGroups = 0;
 
 
-    /* THEORY */
+    /* ========================================================
+       THEORY
+       ======================================================== */
 
     const theoryMap = {};
+
 
     for (
         let i = 0;
@@ -1721,15 +2631,20 @@ function updateCollisions() {
                 database.theory[i].topic
             );
 
+
         if (!topic) {
+
             continue;
+
         }
+
 
         if (!theoryMap[topic]) {
 
             theoryMap[topic] = [];
 
         }
+
 
         theoryMap[topic].push(
             database.theory[i].rollNo
@@ -1742,46 +2657,143 @@ function updateCollisions() {
         const topic in theoryMap
     ) {
 
+        const rolls =
+            theoryMap[topic];
+
+
         if (
-            theoryMap[topic].length > 1
+            rolls.length <= 1
         ) {
 
-            total++;
+            continue;
 
-            const div =
-                document.createElement(
-                    "div"
+        }
+
+
+        collisionGroups++;
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "collision-group";
+
+
+        let html = `
+
+            <div class="collision-heading">
+
+                📘 THEORY COLLISION
+
+            </div>
+
+
+            <div class="collision-topic">
+
+                <strong>
+                    Topic:
+                </strong>
+
+                ${escapeHtml(
+                    database.theory.find(
+                        function(row) {
+
+                            return normalizeText(
+                                row.topic
+                            ) === topic;
+
+                        }
+                    ).topic
+                )}
+
+            </div>
+
+        `;
+
+
+        /*
+           Every Roll Number is displayed.
+
+           Each Roll Number also gets the
+           exact OTHER Roll Numbers that
+           are using the same topic.
+        */
+
+        for (
+            let i = 0;
+            i < rolls.length;
+            i++
+        ) {
+
+            const currentRoll =
+                rolls[i];
+
+
+            const otherRolls =
+                rolls.filter(
+                    function(otherRoll) {
+
+                        return normalizeRoll(
+                            otherRoll
+                        ) !==
+                        normalizeRoll(
+                            currentRoll
+                        );
+
+                    }
                 );
 
-            div.className =
-                "collision-item";
 
-            div.innerHTML = `
+            html += `
 
-                <strong>Theory Collision</strong><br>
+                <div class="collision-person">
 
-                Topic:
-                ${escapeHtml(topic)}<br>
+                    <strong>
+                        Roll Number:
+                    </strong>
 
-                Roll Numbers:
-                ${escapeHtml(
-                    theoryMap[topic].join(", ")
-                )}
+                    ${escapeHtml(
+                        currentRoll
+                    )}
+
+                    <br>
+
+                    <strong>
+                        Collision with:
+                    </strong>
+
+                    ${escapeHtml(
+                        otherRolls.join(", ")
+                    )}
+
+                </div>
 
             `;
 
-            box.appendChild(
-                div
-            );
-
         }
+
+
+        div.innerHTML =
+            html;
+
+
+        box.appendChild(
+            div
+        );
 
     }
 
 
-    /* LAB */
+    /* ========================================================
+       LAB
+       ======================================================== */
 
     const labMap = {};
+
 
     for (
         let i = 0;
@@ -1794,15 +2806,20 @@ function updateCollisions() {
                 database.lab[i].topic
             );
 
+
         if (!topic) {
+
             continue;
+
         }
+
 
         if (!labMap[topic]) {
 
             labMap[topic] = [];
 
         }
+
 
         labMap[topic].push(
             database.lab[i].rollNo
@@ -1815,139 +2832,318 @@ function updateCollisions() {
         const topic in labMap
     ) {
 
+        const rolls =
+            labMap[topic];
+
+
         if (
-            labMap[topic].length > 1
+            rolls.length <= 1
         ) {
 
-            total++;
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-            div.className =
-                "collision-item";
-
-            div.innerHTML = `
-
-                <strong>Lab Collision</strong><br>
-
-                Topic:
-                ${escapeHtml(topic)}<br>
-
-                Roll Numbers:
-                ${escapeHtml(
-                    labMap[topic].join(", ")
-                )}
-
-            `;
-
-            box.appendChild(
-                div
-            );
+            continue;
 
         }
 
-    }
+
+        collisionGroups++;
 
 
-    /* PROJECT */
+        const div =
+            document.createElement(
+                "div"
+            );
 
-    const projectMap = {};
 
-    for (
-        let i = 0;
-        i < database.project.length;
-        i++
-    ) {
+        div.className =
+            "collision-group";
 
-        const rolls =
-            String(
-                database.project[i].rollNo || ""
-            )
-            .split(",")
-            .map(
-                function(value) {
-                    return normalizeRoll(value);
-                }
-            )
-            .filter(
-                function(value) {
-                    return value !== "";
+
+        const topicRow =
+            database.lab.find(
+                function(row) {
+
+                    return normalizeText(
+                        row.topic
+                    ) === topic;
+
                 }
             );
+
+
+        let html = `
+
+            <div class="collision-heading">
+
+                💻 LAB COLLISION
+
+            </div>
+
+
+            <div class="collision-topic">
+
+                <strong>
+                    Topic:
+                </strong>
+
+                ${escapeHtml(
+                    topicRow.topic
+                )}
+
+            </div>
+
+        `;
 
 
         for (
-            let j = 0;
-            j < rolls.length;
-            j++
+            let i = 0;
+            i < rolls.length;
+            i++
         ) {
 
-            const roll =
-                rolls[j];
+            const currentRoll =
+                rolls[i];
 
-            if (!projectMap[roll]) {
 
-                projectMap[roll] = [];
+            const otherRolls =
+                rolls.filter(
+                    function(otherRoll) {
 
-            }
+                        return normalizeRoll(
+                            otherRoll
+                        ) !==
+                        normalizeRoll(
+                            currentRoll
+                        );
 
-            projectMap[roll].push(
-                database.project[i].project
-            );
+                    }
+                );
+
+
+            html += `
+
+                <div class="collision-person">
+
+                    <strong>
+                        Roll Number:
+                    </strong>
+
+                    ${escapeHtml(
+                        currentRoll
+                    )}
+
+                    <br>
+
+                    <strong>
+                        Collision with:
+                    </strong>
+
+                    ${escapeHtml(
+                        otherRolls.join(", ")
+                    )}
+
+                </div>
+
+            `;
 
         }
 
+
+        div.innerHTML =
+            html;
+
+
+        box.appendChild(
+            div
+        );
+
     }
+
+
+    /* ========================================================
+       PROJECT MEMBER COLLISIONS
+       ======================================================== */
+
+    const projectMap =
+        getProjectMemberMap();
 
 
     for (
         const roll in projectMap
     ) {
 
+        const entries =
+            projectMap[roll];
+
+
         if (
-            projectMap[roll].length > 1
+            entries.length <= 1
         ) {
 
-            total++;
+            continue;
 
-            const div =
-                document.createElement(
-                    "div"
+        }
+
+
+        collisionGroups++;
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "collision-group";
+
+
+        let html = `
+
+            <div class="collision-heading">
+
+                🚀 PROJECT TEAM COLLISION
+
+            </div>
+
+
+            <div class="collision-topic">
+
+                <strong>
+                    Roll Number:
+                </strong>
+
+                ${escapeHtml(
+                    roll
+                )}
+
+                <br><br>
+
+                <strong>
+                    This Roll Number appears in:
+                </strong>
+
+            </div>
+
+        `;
+
+
+        for (
+            let i = 0;
+            i < entries.length;
+            i++
+        ) {
+
+            const projectIndex =
+                entries[i].projectIndex;
+
+
+            const project =
+                database.project[
+                    projectIndex
+                ];
+
+
+            const teamMembers =
+                String(
+                    project.rollNo || ""
+                )
+                .split(",")
+                .map(
+                    function(value) {
+
+                        return normalizeRoll(
+                            value
+                        );
+
+                    }
+                )
+                .filter(
+                    function(value) {
+
+                        return value !== "";
+
+                    }
                 );
 
-            div.className =
-                "collision-item";
 
-            div.innerHTML = `
+            const otherMembers =
+                teamMembers.filter(
+                    function(member) {
 
-                <strong>Project Team Collision</strong><br>
+                        return member !==
+                            normalizeRoll(roll);
 
-                Roll Number:
-                ${escapeHtml(roll)}<br>
+                    }
+                );
 
-                Projects:
-                ${escapeHtml(
-                    projectMap[roll].join(" | ")
-                )}
+
+            html += `
+
+                <div class="collision-person">
+
+                    <strong>
+                        Project:
+                    </strong>
+
+                    ${escapeHtml(
+                        project.project
+                    )}
+
+                    <br>
+
+                    <strong>
+                        Conflicting Roll Number:
+                    </strong>
+
+                    ${escapeHtml(
+                        roll
+                    )}
+
+                    <br>
+
+                    <strong>
+                        Other Team Members:
+                    </strong>
+
+                    ${escapeHtml(
+                        otherMembers.join(", ")
+                    )}
+
+                </div>
 
             `;
 
-            box.appendChild(
-                div
-            );
-
         }
+
+
+        div.innerHTML =
+            html;
+
+
+        box.appendChild(
+            div
+        );
 
     }
 
 
-    if (total === 0) {
+    /* ========================================================
+       NO COLLISIONS
+       ======================================================== */
 
-        box.innerHTML =
-            '<span class="available">No collisions detected.</span>';
+    if (
+        collisionGroups === 0
+    ) {
+
+        box.innerHTML = `
+
+            <div class="no-collision">
+
+                ✓ No live collisions detected.
+
+            </div>
+
+        `;
 
     }
 
@@ -1955,7 +3151,7 @@ function updateCollisions() {
     document.getElementById(
         "collisionCount"
     ).textContent =
-        total;
+        collisionGroups;
 
 }
 
@@ -1966,9 +3162,11 @@ function updateCollisions() {
 
 function updateSummary() {
 
-    let theory = 0;
-    let lab = 0;
-    let project = 0;
+    let theoryCount = 0;
+
+    let labCount = 0;
+
+    let projectCount = 0;
 
 
     for (
@@ -1981,7 +3179,7 @@ function updateSummary() {
             database.theory[i].topic
         ) {
 
-            theory++;
+            theoryCount++;
 
         }
 
@@ -1998,7 +3196,7 @@ function updateSummary() {
             database.lab[i].topic
         ) {
 
-            lab++;
+            labCount++;
 
         }
 
@@ -2017,7 +3215,7 @@ function updateSummary() {
             ).trim()
         ) {
 
-            project++;
+            projectCount++;
 
         }
 
@@ -2026,15 +3224,20 @@ function updateSummary() {
 
     document.getElementById(
         "theoryCount"
-    ).textContent = theory;
+    ).textContent =
+        theoryCount;
+
 
     document.getElementById(
         "labCount"
-    ).textContent = lab;
+    ).textContent =
+        labCount;
+
 
     document.getElementById(
         "projectCount"
-    ).textContent = project;
+    ).textContent =
+        projectCount;
 
 }
 
@@ -2045,12 +3248,13 @@ function updateSummary() {
 
 async function allocateTheory() {
 
-    const roll =
+    const rollNo =
         normalizeRoll(
             document.getElementById(
                 "theoryRoll"
             ).value
         );
+
 
     const topic =
         document.getElementById(
@@ -2058,13 +3262,13 @@ async function allocateTheory() {
         ).value;
 
 
-    if (!roll) {
+    if (!rollNo) {
 
         showMessage(
             document.getElementById(
                 "theoryMessage"
             ),
-            "Enter your full Roll Number.",
+            "Enter the full Roll Number.",
             "error"
         );
 
@@ -2079,7 +3283,7 @@ async function allocateTheory() {
             document.getElementById(
                 "theoryMessage"
             ),
-            "Select an available topic.",
+            "Select an available Theory topic.",
             "error"
         );
 
@@ -2091,13 +3295,19 @@ async function allocateTheory() {
     await sendRequest(
 
         {
-            action: "allocateSingle",
 
-            sheet: "DBMS_THEORY",
+            action:
+                "allocateSingle",
 
-            rollNo: roll,
+            sheet:
+                "DBMS_THEORY",
 
-            topic: topic
+            rollNo:
+                rollNo,
+
+            topic:
+                topic
+
         },
 
         "theoryMessage"
@@ -2113,12 +3323,13 @@ async function allocateTheory() {
 
 async function allocateLab() {
 
-    const roll =
+    const rollNo =
         normalizeRoll(
             document.getElementById(
                 "labRoll"
             ).value
         );
+
 
     const topic =
         document.getElementById(
@@ -2126,13 +3337,13 @@ async function allocateLab() {
         ).value;
 
 
-    if (!roll) {
+    if (!rollNo) {
 
         showMessage(
             document.getElementById(
                 "labMessage"
             ),
-            "Enter your full Roll Number.",
+            "Enter the full Roll Number.",
             "error"
         );
 
@@ -2147,7 +3358,7 @@ async function allocateLab() {
             document.getElementById(
                 "labMessage"
             ),
-            "Select an available topic.",
+            "Select an available Lab topic.",
             "error"
         );
 
@@ -2159,13 +3370,19 @@ async function allocateLab() {
     await sendRequest(
 
         {
-            action: "allocateSingle",
 
-            sheet: "DBMS_LAB",
+            action:
+                "allocateSingle",
 
-            rollNo: roll,
+            sheet:
+                "DBMS_LAB",
 
-            topic: topic
+            rollNo:
+                rollNo,
+
+            topic:
+                topic
+
         },
 
         "labMessage"
@@ -2188,6 +3405,7 @@ async function allocateProject() {
             ).value
         );
 
+
     const roll2 =
         normalizeRoll(
             document.getElementById(
@@ -2195,12 +3413,14 @@ async function allocateProject() {
             ).value
         );
 
+
     const roll3 =
         normalizeRoll(
             document.getElementById(
                 "projectRoll3"
             ).value
         );
+
 
     const project =
         document.getElementById(
@@ -2218,7 +3438,7 @@ async function allocateProject() {
             document.getElementById(
                 "projectMessage"
             ),
-            "All 3 full Roll Numbers are required.",
+            "Enter all 3 full Roll Numbers.",
             "error"
         );
 
@@ -2252,7 +3472,7 @@ async function allocateProject() {
             document.getElementById(
                 "projectMessage"
             ),
-            "Select an available project.",
+            "Select an available Project.",
             "error"
         );
 
@@ -2262,8 +3482,7 @@ async function allocateProject() {
 
 
     /*
-       EXTRA FRONTEND CHECK:
-       Project MUST be one of the exact 23.
+       Project must be one of the exact 23.
     */
 
     const validProject =
@@ -2283,7 +3502,7 @@ async function allocateProject() {
             document.getElementById(
                 "projectMessage"
             ),
-            "This project is not in the approved 23-project list.",
+            "Invalid Project. Select one of the approved 23 projects.",
             "error"
         );
 
@@ -2295,15 +3514,22 @@ async function allocateProject() {
     await sendRequest(
 
         {
-            action: "allocateProject",
 
-            rollNo1: roll1,
+            action:
+                "allocateProject",
 
-            rollNo2: roll2,
+            rollNo1:
+                roll1,
 
-            rollNo3: roll3,
+            rollNo2:
+                roll2,
 
-            topic: project
+            rollNo3:
+                roll3,
+
+            topic:
+                project
+
         },
 
         "projectMessage"
@@ -2331,7 +3557,7 @@ async function sendRequest(
     showMessage(
         message,
         "Processing...",
-        "warning"
+        "loading"
     );
 
 
@@ -2344,7 +3570,8 @@ async function sendRequest(
 
                 {
 
-                    method: "POST",
+                    method:
+                        "POST",
 
                     headers: {
 
@@ -2377,10 +3604,16 @@ async function sendRequest(
                 "success"
             );
 
+
             setTimeout(
-                loadData,
+                function() {
+
+                    loadData();
+
+                },
                 500
             );
+
 
         } else {
 
@@ -2392,9 +3625,11 @@ async function sendRequest(
 
         }
 
+
     } catch (error) {
 
         console.error(error);
+
 
         showMessage(
             message,
@@ -2420,13 +3655,17 @@ function openSingleChange(
 
     changeState = {
 
-        type: "single",
+        type:
+            "single",
 
-        sheet: sheet,
+        sheet:
+            sheet,
 
-        rollNo: rollNo,
+        rollNo:
+            rollNo,
 
-        currentTopic: currentTopic
+        currentTopic:
+            currentTopic
 
     };
 
@@ -2448,7 +3687,9 @@ function openSingleChange(
 
 
     const taken =
-        getTakenTopics(data);
+        getTakenTopics(
+            data
+        );
 
 
     let options = "";
@@ -2466,6 +3707,10 @@ function openSingleChange(
             );
 
 
+        /*
+           Current topic is excluded.
+        */
+
         if (
             normalized ===
             normalizeText(currentTopic)
@@ -2477,7 +3722,7 @@ function openSingleChange(
 
 
         /*
-           ONLY AVAILABLE TOPICS
+           Only AVAILABLE topics.
         */
 
         if (
@@ -2491,10 +3736,18 @@ function openSingleChange(
         }
 
 
-        options +=
-            `<option value="${escapeAttr(topics[i])}">
-                ${i + 1}. ${escapeHtml(topics[i])}
-            </option>`;
+        options += `
+
+            <option
+                value="${escapeAttr(topics[i])}"
+            >
+
+                ${i + 1}.
+                ${escapeHtml(topics[i])}
+
+            </option>
+
+        `;
 
     }
 
@@ -2511,33 +3764,39 @@ function openSingleChange(
         "modalContent"
     ).innerHTML = `
 
-        <p>
-            Roll Number:
+        <p style="margin-bottom:10px;">
+
             <strong>
-                ${escapeHtml(rollNo)}
+                Roll Number:
             </strong>
+
+            ${escapeHtml(rollNo)}
+
         </p>
 
-        <p>
-            Current Topic:
+
+        <p style="margin-bottom:15px;">
+
             <strong>
-                ${escapeHtml(currentTopic)}
+                Current Topic:
             </strong>
+
+            ${escapeHtml(currentTopic)}
+
         </p>
+
 
         <label>
             Select Available Topic
         </label>
 
-        <br><br>
 
         <select
-            id="newTopicSelect"
-            style="width:100%"
+            id="newSingleTopic"
         >
 
             <option value="">
-                Select available topic
+                -- Select Available Topic --
             </option>
 
             ${options}
@@ -2549,12 +3808,14 @@ function openSingleChange(
 
     document.getElementById(
         "modalMessage"
-    ).textContent = "";
+    ).className =
+        "message";
 
 
     document.getElementById(
         "changeModal"
-    ).style.display = "flex";
+    ).style.display =
+        "flex";
 
 }
 
@@ -2568,30 +3829,34 @@ function openProjectChange(
     currentProject
 ) {
 
-    const rolls =
-        String(rollCell)
-        .split(",")
-        .map(
-            function(value) {
+    const members =
+        rollCell
+            .split(",")
+            .map(
+                function(value) {
 
-                return normalizeRoll(
-                    value
-                );
+                    return normalizeRoll(
+                        value
+                    );
 
-            }
-        )
-        .filter(
-            function(value) {
+                }
+            )
+            .filter(
+                function(value) {
 
-                return value !== "";
+                    return value !== "";
 
-            }
-        );
+                }
+            );
 
 
     if (
-        rolls.length !== 3
+        members.length !== 3
     ) {
+
+        alert(
+            "This project does not contain exactly 3 Roll Numbers."
+        );
 
         return;
 
@@ -2600,19 +3865,21 @@ function openProjectChange(
 
     changeState = {
 
-        type: "project",
+        type:
+            "project",
 
-        rollNo1: rolls[0],
-
-        rollNo2: rolls[1],
-
-        rollNo3: rolls[2],
+        members:
+            members,
 
         currentProject:
             currentProject
 
     };
 
+
+    /*
+       Find currently allocated projects.
+    */
 
     const allocatedProjects = [];
 
@@ -2627,6 +3894,7 @@ function openProjectChange(
             normalizeText(
                 database.project[i].project
             );
+
 
         if (project) {
 
@@ -2662,6 +3930,10 @@ function openProjectChange(
         }
 
 
+        /*
+           Only available projects.
+        */
+
         if (
             allocatedProjects.indexOf(
                 normalizeText(project)
@@ -2673,10 +3945,18 @@ function openProjectChange(
         }
 
 
-        options +=
-            `<option value="${escapeAttr(project)}">
-                ${i + 1}. ${escapeHtml(project)}
-            </option>`;
+        options += `
+
+            <option
+                value="${escapeAttr(project)}"
+            >
+
+                ${i + 1}.
+                ${escapeHtml(project)}
+
+            </option>
+
+        `;
 
     }
 
@@ -2691,35 +3971,48 @@ function openProjectChange(
         "modalContent"
     ).innerHTML = `
 
-        <p>
-            Team:
+        <p style="margin-bottom:10px;">
+
             <strong>
-                ${escapeHtml(
-                    rolls.join(", ")
-                )}
+                Team Members:
             </strong>
+
         </p>
 
-        <p>
-            Current Project:
-            <strong>
-                ${escapeHtml(currentProject)}
-            </strong>
+
+        <p style="margin-bottom:15px;">
+
+            ${escapeHtml(
+                members.join(" • ")
+            )}
+
         </p>
+
+
+        <p style="margin-bottom:15px;">
+
+            <strong>
+                Current Project:
+            </strong>
+
+            ${escapeHtml(
+                currentProject
+            )}
+
+        </p>
+
 
         <label>
             Select Available Project
         </label>
 
-        <br><br>
 
         <select
-            id="newTopicSelect"
-            style="width:100%"
+            id="newProjectTopic"
         >
 
             <option value="">
-                Select available project
+                -- Select Available Project --
             </option>
 
             ${options}
@@ -2731,12 +4024,14 @@ function openProjectChange(
 
     document.getElementById(
         "modalMessage"
-    ).textContent = "";
+    ).className =
+        "message";
 
 
     document.getElementById(
         "changeModal"
-    ).style.display = "flex";
+    ).style.display =
+        "flex";
 
 }
 
@@ -2754,22 +4049,10 @@ async function confirmChange() {
     }
 
 
-    const newTopic =
-        document.getElementById(
-            "newTopicSelect"
-        ).value;
-
-
-    if (!newTopic) {
-
+    const message =
         document.getElementById(
             "modalMessage"
-        ).textContent =
-            "Select an available option.";
-
-        return;
-
-    }
+        );
 
 
     let payload;
@@ -2780,9 +4063,29 @@ async function confirmChange() {
         "single"
     ) {
 
+        const newTopic =
+            document.getElementById(
+                "newSingleTopic"
+            ).value;
+
+
+        if (!newTopic) {
+
+            showMessage(
+                message,
+                "Select an available topic.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
         payload = {
 
-            action: "changeSingle",
+            action:
+                "changeSingle",
 
             sheet:
                 changeState.sheet,
@@ -2795,36 +4098,60 @@ async function confirmChange() {
 
         };
 
-    } else {
+    }
+
+
+    else {
+
+        const newProject =
+            document.getElementById(
+                "newProjectTopic"
+            ).value;
+
+
+        if (!newProject) {
+
+            showMessage(
+                message,
+                "Select an available project.",
+                "error"
+            );
+
+            return;
+
+        }
+
 
         payload = {
 
-            action: "changeProject",
+            action:
+                "changeProject",
 
             rollNo1:
-                changeState.rollNo1,
+                changeState.members[0],
 
             rollNo2:
-                changeState.rollNo2,
+                changeState.members[1],
 
             rollNo3:
-                changeState.rollNo3,
+                changeState.members[2],
 
             newTopic:
-                newTopic
+                newProject
 
         };
 
     }
 
 
+    showMessage(
+        message,
+        "Changing...",
+        "loading"
+    );
+
+
     try {
-
-        document.getElementById(
-            "modalMessage"
-        ).textContent =
-            "Processing...";
-
 
         const response =
             await fetch(
@@ -2833,7 +4160,8 @@ async function confirmChange() {
 
                 {
 
-                    method: "POST",
+                    method:
+                        "POST",
 
                     headers: {
 
@@ -2860,27 +4188,46 @@ async function confirmChange() {
             result.success
         ) {
 
-            closeModal();
+            showMessage(
+                message,
+                result.message,
+                "success"
+            );
 
-            loadData();
+
+            setTimeout(
+                function() {
+
+                    closeModal();
+
+                    loadData();
+
+                },
+                700
+            );
+
 
         } else {
 
-            document.getElementById(
-                "modalMessage"
-            ).textContent =
-                result.message;
+            showMessage(
+                message,
+                result.message,
+                "error"
+            );
 
         }
+
 
     } catch (error) {
 
         console.error(error);
 
-        document.getElementById(
-            "modalMessage"
-        ).textContent =
-            "Server connection failed.";
+
+        showMessage(
+            message,
+            "Unable to change allocation.",
+            "error"
+        );
 
     }
 
@@ -2898,6 +4245,7 @@ function closeModal() {
     ).style.display =
         "none";
 
+
     changeState = null;
 
 }
@@ -2913,24 +4261,18 @@ function showMessage(
     type
 ) {
 
-    if (!element) {
+    element.className =
+        "message " + type;
 
-        return;
-
-    }
 
     element.textContent =
         text;
-
-    element.className =
-        "message " +
-        type;
 
 }
 
 
 /* ============================================================
-   CLOSE MODAL OUTSIDE CLICK
+   CLOSE MODAL WHEN CLICKING OUTSIDE
    ============================================================ */
 
 window.addEventListener(
@@ -2941,6 +4283,7 @@ window.addEventListener(
             document.getElementById(
                 "changeModal"
             );
+
 
         if (
             event.target === modal
@@ -2966,15 +4309,13 @@ loadData();
    ============================================================ */
 
 setInterval(
-    function() {
-
-        loadData();
-
-    },
+    loadData,
     10000
 );
+
 
 </script>
 
 </body>
+
 </html>
