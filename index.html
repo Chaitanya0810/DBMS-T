@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DBMS Topic Allocation</title>
+<title>DBMS Topic Allocation Dashboard</title>
 
 <style>
 * {
@@ -21,11 +20,11 @@ body {
 }
 
 header {
-    padding: 35px 20px;
-    text-align: center;
     background: linear-gradient(135deg, #172554, #1e3a8a, #2563eb);
     color: white;
-    box-shadow: 0 8px 25px rgba(30,64,175,0.25);
+    text-align: center;
+    padding: 35px 20px;
+    box-shadow: 0 8px 25px rgba(30,64,175,.25);
 }
 
 header h1 {
@@ -35,173 +34,306 @@ header h1 {
 
 header p {
     margin-top: 8px;
-    font-size: 16px;
-    opacity: 0.9;
+    opacity: .9;
 }
 
 .container {
-    max-width: 1250px;
-    margin: 40px auto;
-    padding: 0 20px;
+    max-width: 1450px;
+    margin: auto;
+    padding: 30px 20px;
 }
 
-.intro {
-    text-align: center;
-    margin-bottom: 30px;
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
 }
 
-.intro h2 {
-    font-size: 28px;
-    margin-bottom: 8px;
+.summary {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-.intro p {
-    color: #64748b;
+.badge {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 9px 14px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+.refresh {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 700;
 }
 
-.card {
-    background: rgba(255,255,255,0.97);
+.section {
+    background: white;
     border-radius: 18px;
-    padding: 28px;
-    box-shadow: 0 12px 35px rgba(15,23,42,0.10);
+    margin-bottom: 30px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(15,23,42,.08);
     border: 1px solid #e2e8f0;
 }
 
-.card-icon {
-    width: 55px;
-    height: 55px;
-    border-radius: 14px;
+.section-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    font-size: 27px;
-    margin-bottom: 18px;
-    background: #dbeafe;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.card h3 {
-    font-size: 22px;
-    margin-bottom: 8px;
+.section-header h2 {
+    font-size: 25px;
 }
 
-.description {
-    color: #64748b;
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 22px;
-}
-
-.team-info {
-    background: #f3e8ff;
-    color: #6b21a8;
-    padding: 11px 13px;
-    border-radius: 10px;
+.count {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 7px 12px;
+    border-radius: 20px;
     font-size: 13px;
     font-weight: 700;
-    margin-bottom: 18px;
 }
 
-.form-group {
-    margin-bottom: 17px;
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+th {
+    background: #f1f5f9;
+    color: #334155;
+    text-align: left;
+    padding: 13px;
+    font-size: 13px;
+}
+
+td {
+    padding: 12px 13px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.collision {
+    background: #fff1f2 !important;
+}
+
+.collision td {
+    color: #9f1239;
+    border-bottom-color: #fecdd3;
+}
+
+.collision-label {
+    display: inline-block;
+    background: #dc2626;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 800;
+    margin-left: 7px;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.status-ok {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-empty {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.status-warning {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.change-btn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 7px 11px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.forms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.form-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 8px 25px rgba(15,23,42,.06);
+}
+
+.form-card h3 {
+    margin-bottom: 18px;
+    font-size: 19px;
+}
+
+.group {
+    margin-bottom: 14px;
 }
 
 label {
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-    margin-bottom: 7px;
-    color: #334155;
+    margin-bottom: 6px;
 }
 
 input,
 select {
     width: 100%;
-    padding: 12px 13px;
+    padding: 11px;
     border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    background: white;
-    font-size: 14px;
+    border-radius: 9px;
     outline: none;
+    background: white;
 }
 
 input:focus,
 select:focus {
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    box-shadow: 0 0 0 3px rgba(37,99,235,.12);
 }
 
-select {
-    cursor: pointer;
-}
-
-button {
+button.submit {
     width: 100%;
+    padding: 12px;
     border: none;
-    padding: 13px;
-    border-radius: 10px;
+    border-radius: 9px;
     color: white;
-    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    transform: translateY(-1px);
+    margin-top: 5px;
 }
 
 button:disabled {
-    opacity: 0.65;
+    opacity: .65;
     cursor: not-allowed;
-    transform: none;
 }
 
-.theory-btn {
+.theory {
     background: #2563eb;
 }
 
-.lab-btn {
+.lab {
     background: #059669;
 }
 
-.project-btn {
+.project {
     background: #7c3aed;
 }
 
 .message {
-    display: none;
-    margin-top: 15px;
-    padding: 11px 13px;
-    border-radius: 9px;
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 8px;
     font-size: 13px;
-    line-height: 1.4;
+    display: none;
 }
 
 .message.success {
     display: block;
     background: #dcfce7;
     color: #166534;
-    border: 1px solid #86efac;
 }
 
 .message.error {
     display: block;
     background: #fee2e2;
     color: #991b1b;
-    border: 1px solid #fca5a5;
 }
 
 .message.loading {
     display: block;
     background: #eff6ff;
     color: #1d4ed8;
-    border: 1px solid #bfdbfe;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-box {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.modal-box h3 {
+    margin-bottom: 18px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.cancel {
+    background: #e2e8f0;
+}
+
+.confirm {
+    background: #dc2626;
+    color: white;
 }
 
 footer {
@@ -211,13 +343,19 @@ footer {
     font-size: 13px;
 }
 
-@media (max-width: 950px) {
-    .cards {
+@media(max-width:1000px) {
+    .forms {
         grid-template-columns: 1fr;
     }
+}
 
+@media(max-width:700px) {
     header h1 {
-        font-size: 29px;
+        font-size: 27px;
+    }
+
+    .section {
+        padding: 16px;
     }
 }
 </style>
@@ -226,59 +364,189 @@ footer {
 <body>
 
 <header>
-    <h1>DBMS Topic Allocation</h1>
-    <p>Database Management Systems — Theory, Lab & Project</p>
+    <h1>DBMS Topic Allocation Dashboard</h1>
+    <p>Theory • Lab • Project</p>
 </header>
 
-<main class="container">
+<div class="container">
 
-    <div class="intro">
-        <h2>Select Your Category</h2>
-        <p>Enter your Roll Number and select an available topic.</p>
+    <div class="topbar">
+
+        <div class="summary">
+
+            <div class="badge">
+                Theory: <span id="theoryCount">0</span>
+            </div>
+
+            <div class="badge">
+                Lab: <span id="labCount">0</span>
+            </div>
+
+            <div class="badge">
+                Projects: <span id="projectCount">0</span>
+            </div>
+
+            <div class="badge">
+                ⚠ Collisions:
+                <span id="collisionCount">0</span>
+            </div>
+
+        </div>
+
+        <button class="refresh" onclick="loadData()">
+            ↻ Refresh
+        </button>
+
     </div>
 
-    <div class="cards">
 
-        <!-- ==================================================
-             THEORY
-        =================================================== -->
+    <!-- THEORY -->
 
-        <section class="card">
+    <section class="section">
 
-            <div class="card-icon">📘</div>
+        <div class="section-header">
 
-            <h3>DBMS Theory</h3>
+            <h2>📘 DBMS Theory Allocations</h2>
 
-            <p class="description">
-                Each student can select one Theory topic.
-            </p>
+            <div class="count">
+                Live Data
+            </div>
 
-            <div class="form-group">
+        </div>
 
-                <label for="theoryRoll">
-                    Full Roll Number
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Roll Number</th>
+                        <th>Topic</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="theoryTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- LAB -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h2>💻 DBMS Lab Allocations</h2>
+
+            <div class="count">
+                Live Data
+            </div>
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Roll Number</th>
+                        <th>Topic</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="labTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECT -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h2>🚀 DBMS Project Allocations</h2>
+
+            <div class="count">
+                Live Data
+            </div>
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Team Roll Numbers</th>
+                        <th>Project</th>
+                        <th>Batch</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="projectTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- FORMS -->
+
+    <div class="forms">
+
+
+        <!-- THEORY -->
+
+        <div class="form-card">
+
+            <h3>Allocate Theory</h3>
+
+            <div class="group">
+
+                <label>
+                    Roll Number
                 </label>
 
                 <input
-                    type="text"
                     id="theoryRoll"
-                    placeholder="Example: 257R1A66C9"
+                    placeholder="257R1A66C9"
                     autocomplete="off"
-                    spellcheck="false"
                 >
 
             </div>
 
-            <div class="form-group">
+            <div class="group">
 
-                <label for="theoryTopic">
-                    Theory Topic
+                <label>
+                    Topic
                 </label>
 
                 <select id="theoryTopic">
 
                     <option value="">
-                        -- Select Theory Topic --
+                        -- Select Topic --
                     </option>
 
                 </select>
@@ -286,66 +554,50 @@ footer {
             </div>
 
             <button
-                class="theory-btn"
-                onclick="submitSingle(
-                    'DBMS_THEORY',
-                    'theoryRoll',
-                    'theoryTopic',
-                    'theoryMessage',
-                    this
-                )"
+                class="submit theory"
+                onclick="allocateTheory()"
             >
-                Allocate Theory Topic
+                Allocate Theory
             </button>
 
             <div
                 id="theoryMessage"
-                class="message">
-            </div>
+                class="message"
+            ></div>
 
-        </section>
+        </div>
 
 
-        <!-- ==================================================
-             LAB
-        =================================================== -->
+        <!-- LAB -->
 
-        <section class="card">
+        <div class="form-card">
 
-            <div class="card-icon">💻</div>
+            <h3>Allocate Lab</h3>
 
-            <h3>DBMS Lab</h3>
+            <div class="group">
 
-            <p class="description">
-                Each student can select one Lab topic.
-            </p>
-
-            <div class="form-group">
-
-                <label for="labRoll">
-                    Full Roll Number
+                <label>
+                    Roll Number
                 </label>
 
                 <input
-                    type="text"
                     id="labRoll"
-                    placeholder="Example: 257R1A66C9"
+                    placeholder="257R1A66C9"
                     autocomplete="off"
-                    spellcheck="false"
                 >
 
             </div>
 
-            <div class="form-group">
+            <div class="group">
 
-                <label for="labTopic">
-                    Lab Topic
+                <label>
+                    Topic
                 </label>
 
                 <select id="labTopic">
 
                     <option value="">
-                        -- Select Lab Topic --
+                        -- Select Topic --
                     </option>
 
                 </select>
@@ -353,108 +605,72 @@ footer {
             </div>
 
             <button
-                class="lab-btn"
-                onclick="submitSingle(
-                    'DBMS_LAB',
-                    'labRoll',
-                    'labTopic',
-                    'labMessage',
-                    this
-                )"
+                class="submit lab"
+                onclick="allocateLab()"
             >
-                Allocate Lab Topic
+                Allocate Lab
             </button>
 
             <div
                 id="labMessage"
-                class="message">
-            </div>
+                class="message"
+            ></div>
 
-        </section>
-
-
-        <!-- ==================================================
-             PROJECT
-        =================================================== -->
-
-        <section class="card">
-
-            <div class="card-icon">🚀</div>
-
-            <h3>DBMS Project</h3>
-
-            <p class="description">
-                One project team must contain exactly 3 students.
-            </p>
-
-            <div class="team-info">
-                👥 Enter all 3 team members for one project
-            </div>
+        </div>
 
 
-            <!-- MEMBER 1 -->
+        <!-- PROJECT -->
 
-            <div class="form-group">
+        <div class="form-card">
 
-                <label for="projectRoll1">
-                    Team Member 1 Roll Number
+            <h3>Allocate Project</h3>
+
+            <div class="group">
+
+                <label>
+                    Team Member 1
                 </label>
 
                 <input
-                    type="text"
                     id="projectRoll1"
-                    placeholder="Example: 257R1A66C9"
+                    placeholder="Roll Number"
                     autocomplete="off"
-                    spellcheck="false"
                 >
 
             </div>
 
+            <div class="group">
 
-            <!-- MEMBER 2 -->
-
-            <div class="form-group">
-
-                <label for="projectRoll2">
-                    Team Member 2 Roll Number
+                <label>
+                    Team Member 2
                 </label>
 
                 <input
-                    type="text"
                     id="projectRoll2"
-                    placeholder="Example: 257R1A66D1"
+                    placeholder="Roll Number"
                     autocomplete="off"
-                    spellcheck="false"
                 >
 
             </div>
 
+            <div class="group">
 
-            <!-- MEMBER 3 -->
-
-            <div class="form-group">
-
-                <label for="projectRoll3">
-                    Team Member 3 Roll Number
+                <label>
+                    Team Member 3
                 </label>
 
                 <input
-                    type="text"
                     id="projectRoll3"
-                    placeholder="Example: 257R1A66D2"
+                    placeholder="Roll Number"
                     autocomplete="off"
-                    spellcheck="false"
                 >
 
             </div>
 
+            <div class="group">
 
-            <!-- PROJECT -->
-
-            <div class="form-group">
-
-                <label for="projectTopic">
-                    Project Title
+                <label>
+                    Project
                 </label>
 
                 <select id="projectTopic">
@@ -467,252 +683,762 @@ footer {
 
             </div>
 
-
             <button
-                class="project-btn"
-                onclick="submitProject(this)"
+                class="submit project"
+                onclick="allocateProject()"
             >
-                Allocate Project Team
+                Allocate Project
             </button>
-
 
             <div
                 id="projectMessage"
-                class="message">
-            </div>
+                class="message"
+            ></div>
 
-        </section>
+        </div>
 
     </div>
 
-</main>
+</div>
 
 
-<footer>
-    DBMS Topic Allocation System
-</footer>
+<!-- CHANGE MODAL -->
+
+<div class="modal" id="changeModal">
+
+    <div class="modal-box">
+
+        <h3 id="modalTitle">
+            Change Topic
+        </h3>
+
+        <div id="modalContent"></div>
+
+        <div class="modal-actions">
+
+            <button
+                class="cancel"
+                onclick="closeModal()"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="confirm"
+                onclick="confirmChange()"
+            >
+                Change
+            </button>
+
+        </div>
+
+        <div
+            id="modalMessage"
+            class="message"
+        ></div>
+
+    </div>
+
+</div>
 
 
 <script>
 
+
 /* ============================================================
-   APPS SCRIPT URL
-   ============================================================ */
+   LATEST APPS SCRIPT URL
+============================================================ */
 
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbza8AEsNbUFmzSXOaVWEY6H_hauj5Gymp_rFn93QHQdKh-aTpj2whAljWDQjnOHAgwYjQ/exec";
+"https://script.google.com/macros/s/AKfycbyKLRMVavrQoZbJbMdRclA23R76WbvM9I0s46l-Dvnv9j86reWXaYoxz1kbToOIp-fwcg/exec";
 
 
 /* ============================================================
-   THEORY TOPICS — 70
-   ============================================================ */
+   TOPICS
+============================================================ */
 
 const THEORY_TOPICS = [
-    "Functional Dependencies",
-    "ER Diagram for a Hospital Management System",
-    "Basic Form of SQL Queries",
-    "B+ Trees: A Dynamic Index Structure",
-    "Advantages and Applications of DBMS",
-    "Selection and Projection Operations",
-    "Transaction Concept and Transaction States",
-    "Weak Entity Sets and Strong Entity Sets",
-    "UNION, INTERSECT, and EXCEPT Operations in SQL",
-    "Problems Caused by Data Redundancy",
-    "Data Independence in Database Systems",
-    "Natural Join and Its Applications",
-    "Lock-Based Concurrency Control Protocols",
-    "Entity-Relationship (ER) Model",
-    "Fourth Normal Form (4NF)",
-    "Database System Architecture",
-    "NULL Values in SQL",
-    "Relational Algebra: Fundamental Operators",
-    "ER Diagram for an Online Shopping System",
-    "Atomicity and Durability in Transactions",
-    "Types of Attributes in ER Model",
-    "Database Decomposition",
-    "Tuple Relational Calculus",
-    "File Organization and Indexing Techniques",
-    "Second Normal Form (2NF)",
-    "Relationships and Relationship Sets",
-    "Triggers and Active Databases",
-    "Introduction to the Relational Model",
-    "Lossless Join Decomposition",
-    "SQL SELECT, FROM, and WHERE Clauses",
-    "Multiple Granularity Protocol",
-    "Additional Features of the ER Model",
-    "Division Operator in Relational Algebra",
-    "File Systems versus Database Management Systems",
-    "Fifth Normal Form (5NF)",
-    "Aggregation Operators in SQL",
-    "Logical Database Design",
-    "Concurrent Executions and Their Problems",
-    "Types of Relationships in ER Model",
-    "Domain Relational Calculus",
-    "Structure and Components of a DBMS",
-    "Third Normal Form (3NF)",
-    "Join Operations in Relational Algebra",
-    "Complex Integrity Constraints in SQL",
-    "Evolution and Historical Perspective of Database Systems",
-    "Serializability and Recoverability",
-    "Creating, Altering, and Destroying Tables and Views",
-    "Multivalued Dependencies",
-    "ER Diagram for a College Management System",
-    "Timestamp-Based and Validation-Based Protocols",
-    "Integrity Constraints over Relations",
-    "Boyce-Codd Normal Form (BCNF)",
-    "Relational Algebra versus Relational Calculus",
-    "Views in Relational Databases",
-    "Log-Based Recovery and Atomicity",
-    "Entities, Attributes, and Entity Sets",
-    "Cartesian Product, Union, and Set Difference",
-    "Querying Relational Data",
-    "Types and Applications of SQL Triggers",
-    "Database Design Process",
-    "Rename Operator in Relational Algebra",
-    "Enforcement of Integrity Constraints",
-    "Nested Queries in SQL",
-    "Conceptual Database Design Using ER Diagrams",
-    "Problems Related to Decomposition",
-    "Different Types of Data Models",
-    "Domain Relational Calculus",
-    "Reasoning about Functional Dependencies",
-    "Relational Model Integrity Constraints",
-    "Hash-Based and Tree-Based Indexing"
+"Functional Dependencies",
+"ER Diagram for a Hospital Management System",
+"Basic Form of SQL Queries",
+"B+ Trees: A Dynamic Index Structure",
+"Advantages and Applications of DBMS",
+"Selection and Projection Operations",
+"Transaction Concept and Transaction States",
+"Weak Entity Sets and Strong Entity Sets",
+"UNION, INTERSECT, and EXCEPT Operations in SQL",
+"Problems Caused by Data Redundancy",
+"Data Independence in Database Systems",
+"Natural Join and Its Applications",
+"Lock-Based Concurrency Control Protocols",
+"Entity-Relationship (ER) Model",
+"Fourth Normal Form (4NF)",
+"Database System Architecture",
+"NULL Values in SQL",
+"Relational Algebra: Fundamental Operators",
+"ER Diagram for an Online Shopping System",
+"Atomicity and Durability in Transactions",
+"Types of Attributes in ER Model",
+"Database Decomposition",
+"Tuple Relational Calculus",
+"File Organization and Indexing Techniques",
+"Second Normal Form (2NF)",
+"Relationships and Relationship Sets",
+"Triggers and Active Databases",
+"Introduction to the Relational Model",
+"Lossless Join Decomposition",
+"SQL SELECT, FROM, and WHERE Clauses",
+"Multiple Granularity Protocol",
+"Additional Features of the ER Model",
+"Division Operator in Relational Algebra",
+"File Systems versus Database Management Systems",
+"Fifth Normal Form (5NF)",
+"Aggregation Operators in SQL",
+"Logical Database Design",
+"Concurrent Executions and Their Problems",
+"Types of Relationships in ER Model",
+"Domain Relational Calculus",
+"Structure and Components of a DBMS",
+"Third Normal Form (3NF)",
+"Join Operations in Relational Algebra",
+"Complex Integrity Constraints in SQL",
+"Evolution and Historical Perspective of Database Systems",
+"Serializability and Recoverability",
+"Creating, Altering, and Destroying Tables and Views",
+"Multivalued Dependencies",
+"ER Diagram for a College Management System",
+"Timestamp-Based and Validation-Based Protocols",
+"Integrity Constraints over Relations",
+"Boyce-Codd Normal Form (BCNF)",
+"Relational Algebra versus Relational Calculus",
+"Views in Relational Databases",
+"Log-Based Recovery and Atomicity",
+"Entities, Attributes, and Entity Sets",
+"Cartesian Product, Union, and Set Difference",
+"Querying Relational Data",
+"Types and Applications of SQL Triggers",
+"Database Design Process",
+"Rename Operator in Relational Algebra",
+"Enforcement of Integrity Constraints",
+"Nested Queries in SQL",
+"Conceptual Database Design Using ER Diagrams",
+"Problems Related to Decomposition",
+"Different Types of Data Models",
+"Domain Relational Calculus",
+"Reasoning about Functional Dependencies",
+"Relational Model Integrity Constraints",
+"Hash-Based and Tree-Based Indexing"
 ];
 
-
-/* ============================================================
-   LAB TOPICS — 70
-   ============================================================ */
 
 const LAB_TOPICS = [
-    "Introduction to MySQL and Database Environment",
-    "Designing an ER Diagram for a College Management System",
-    "SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
-    "Database Normalization and Its Practical Importance",
-    "SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
-    "Database Views and Their Practical Applications",
-    "DML Commands: INSERT, UPDATE and DELETE",
-    "Functional Dependencies in Database Design",
-    "Nested Queries and Subqueries in SQL",
-    "SQL Aggregate Functions with GROUP BY and HAVING",
-    "Database Design for an Online Shopping System",
-    "Primary Key and Foreign Key Constraints",
-    "Correlated Subqueries in SQL",
-    "SQL Set Operations: UNION, INTERSECT and EXCEPT",
-    "Database Triggers and Their Applications",
-    "Stored Procedures in MySQL",
-    "Cursor Handling in Database Programming",
-    "One-to-One, One-to-Many and Many-to-Many Relationships",
-    "Converting ER Diagrams into Relational Schemas",
-    "SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
-    "First Normal Form, Second Normal Form and Third Normal Form",
-    "Boyce-Codd Normal Form (BCNF)",
-    "Designing a Hospital Management Database",
-    "SQL Queries for Employee Management System",
-    "SQL Queries for Student Management System",
-    "SQL Queries for Banking Database",
-    "SQL Queries for Library Management System",
-    "SQL Queries for Railway Reservation System",
-    "SQL Queries for Hotel Management System",
-    "SQL Queries for E-Commerce Database",
-    "Self Join and Its Applications",
-    "Cross Join and Cartesian Product",
-    "Natural Join and Equi Join",
-    "Subqueries Using IN, ANY and ALL",
-    "EXISTS and NOT EXISTS in SQL",
-    "SQL Date and Time Functions",
-    "SQL String Functions and Their Applications",
-    "SQL Numeric and Mathematical Functions",
-    "NULL Values and Three-Valued Logic in SQL",
-    "Creating and Managing SQL Views",
-    "BEFORE and AFTER Triggers in MySQL",
-    "INSERT, UPDATE and DELETE Triggers",
-    "Audit Trail Using Database Triggers",
-    "Stored Functions versus Stored Procedures",
-    "Input and Output Parameters in Stored Procedures",
-    "Cursors and Their Applications in MySQL",
-    "Error Handling in Stored Procedures",
-    "Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
-    "ACID Properties of Database Transactions",
-    "Database Concurrency and Transaction Problems",
-    "Indexing in MySQL for Faster Query Processing",
-    "Clustered and Non-Clustered Indexing",
-    "Primary Index, Secondary Index and Composite Index",
-    "Query Optimization Techniques in MySQL",
-    "Understanding EXPLAIN in MySQL",
-    "SQL Injection and Database Security",
-    "DCL Commands: GRANT and REVOKE",
-    "User Management and Privileges in MySQL",
-    "Database Backup and Restoration",
-    "Database Import and Export Using MySQL",
-    "Connecting Java Applications with MySQL",
-    "Connecting Python Applications with MySQL",
-    "CRUD Operations Using a Database Application",
-    "Database Connectivity Using JDBC",
-    "Database Connectivity Using Python and MySQL Connector",
-    "Introduction to NoSQL Databases",
-    "Relational Databases versus NoSQL Databases",
-    "MySQL JSON Data Types and JSON Queries",
-    "Database Replication and High Availability",
-    "Database Performance Monitoring and Optimization"
+"Introduction to MySQL and Database Environment",
+"Designing an ER Diagram for a College Management System",
+"SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
+"Database Normalization and Its Practical Importance",
+"SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
+"Database Views and Their Practical Applications",
+"DML Commands: INSERT, UPDATE and DELETE",
+"Functional Dependencies in Database Design",
+"Nested Queries and Subqueries in SQL",
+"SQL Aggregate Functions with GROUP BY and HAVING",
+"Database Design for an Online Shopping System",
+"Primary Key and Foreign Key Constraints",
+"Correlated Subqueries in SQL",
+"SQL Set Operations: UNION, INTERSECT and EXCEPT",
+"Database Triggers and Their Applications",
+"Stored Procedures in MySQL",
+"Cursor Handling in Database Programming",
+"One-to-One, One-to-Many and Many-to-Many Relationships",
+"Converting ER Diagrams into Relational Schemas",
+"SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
+"First Normal Form, Second Normal Form and Third Normal Form",
+"Boyce-Codd Normal Form (BCNF)",
+"Designing a Hospital Management Database",
+"SQL Queries for Employee Management System",
+"SQL Queries for Student Management System",
+"SQL Queries for Banking Database",
+"SQL Queries for Library Management System",
+"SQL Queries for Railway Reservation System",
+"SQL Queries for Hotel Management System",
+"SQL Queries for E-Commerce Database",
+"Self Join and Its Applications",
+"Cross Join and Cartesian Product",
+"Natural Join and Equi Join",
+"Subqueries Using IN, ANY and ALL",
+"EXISTS and NOT EXISTS in SQL",
+"SQL Date and Time Functions",
+"SQL String Functions and Their Applications",
+"SQL Numeric and Mathematical Functions",
+"NULL Values and Three-Valued Logic in SQL",
+"Creating and Managing SQL Views",
+"BEFORE and AFTER Triggers in MySQL",
+"INSERT, UPDATE and DELETE Triggers",
+"Audit Trail Using Database Triggers",
+"Stored Functions versus Stored Procedures",
+"Input and Output Parameters in Stored Procedures",
+"Cursors and Their Applications in MySQL",
+"Error Handling in Stored Procedures",
+"Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
+"ACID Properties of Database Transactions",
+"Database Concurrency and Transaction Problems",
+"Indexing in MySQL for Faster Query Processing",
+"Clustered and Non-Clustered Indexing",
+"Primary Index, Secondary Index and Composite Index",
+"Query Optimization Techniques in MySQL",
+"Understanding EXPLAIN in MySQL",
+"SQL Injection and Database Security",
+"DCL Commands: GRANT and REVOKE",
+"User Management and Privileges in MySQL",
+"Database Backup and Restoration",
+"Database Import and Export Using MySQL",
+"Connecting Java Applications with MySQL",
+"Connecting Python Applications with MySQL",
+"CRUD Operations Using a Database Application",
+"Database Connectivity Using JDBC",
+"Database Connectivity Using Python and MySQL Connector",
+"Introduction to NoSQL Databases",
+"Relational Databases versus NoSQL Databases",
+"MySQL JSON Data Types and JSON Queries",
+"Database Replication and High Availability",
+"Database Performance Monitoring and Optimization"
 ];
 
-
-/* ============================================================
-   PROJECT TOPICS — 23
-   ============================================================ */
 
 const PROJECT_TOPICS = [
-    "Supermarket Billing Management System",
-    "Blood Donation Camp Management System",
-    "Doctor Appointment Booking System",
-    "Online Examination Management System",
-    "College Hostel Allocation System",
-    "Vehicle Service Center Management System",
-    "Online Event Management System",
-    "College Placement Management System",
-    "Sports Tournament Management System",
-    "Parking Management System",
-    "Electricity Billing Management System",
-    "Water Supply Billing Management System",
-    "Real Estate Property Management System",
-    "Mobile Shop Management System",
-    "Computer Sales and Service Management System",
-    "Online Complaint Management System",
-    "Travel Agency Management System",
-    "Flight Booking Management System",
-    "Pet Clinic Management System",
-    "Donation Management System",
-    "Digital Document Management System",
-    "Freelancer Project Management System",
-    "Online Auction Management System"
+"Supermarket Billing Management System",
+"Blood Donation Camp Management System",
+"Doctor Appointment Booking System",
+"Online Examination Management System",
+"College Hostel Allocation System",
+"Vehicle Service Center Management System",
+"Online Event Management System",
+"College Placement Management System",
+"Sports Tournament Management System",
+"Parking Management System",
+"Electricity Billing Management System",
+"Water Supply Billing Management System",
+"Real Estate Property Management System",
+"Mobile Shop Management System",
+"Computer Sales and Service Management System",
+"Online Complaint Management System",
+"Travel Agency Management System",
+"Flight Booking Management System",
+"Pet Clinic Management System",
+"Donation Management System",
+"Digital Document Management System",
+"Freelancer Project Management System",
+"Online Auction Management System"
 ];
 
 
 /* ============================================================
-   LOAD TOPICS
-   ============================================================ */
+   DATA
+============================================================ */
 
-function loadTopics(selectId, topics, defaultText) {
+let database = {
+    theory: [],
+    lab: [],
+    project: []
+};
+
+let changeState = null;
+
+
+/* ============================================================
+   LOAD DATA
+============================================================ */
+
+async function loadData() {
+
+    try {
+
+        const response =
+            await fetch(
+                SCRIPT_URL + "?t=" + Date.now()
+            );
+
+        const data =
+            await response.json();
+
+        if (!data.success) {
+            throw new Error("Data loading failed");
+        }
+
+        database = data;
+
+        renderAll();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            document.getElementById("theoryMessage"),
+            "Unable to load Google Sheet data.",
+            "error"
+        );
+    }
+}
+
+
+/* ============================================================
+   RENDER
+============================================================ */
+
+function renderAll() {
+
+    renderTheory();
+
+    renderLab();
+
+    renderProjects();
+
+    updateSummary();
+}
+
+
+/* ============================================================
+   COLLISION DETECTION
+============================================================ */
+
+function getTopicCollisions(data) {
+
+    const map = {};
+
+    const collisions = new Set();
+
+    for (let i = 0; i < data.length; i++) {
+
+        const topic =
+            normalizeText(data[i].topic);
+
+        if (!topic) {
+            continue;
+        }
+
+        if (!map[topic]) {
+            map[topic] = [];
+        }
+
+        map[topic].push(i);
+    }
+
+    for (const topic in map) {
+
+        if (map[topic].length > 1) {
+
+            for (
+                let i = 0;
+                i < map[topic].length;
+                i++
+            ) {
+
+                collisions.add(
+                    map[topic][i]
+                );
+            }
+        }
+    }
+
+    return collisions;
+}
+
+
+/* ============================================================
+   THEORY TABLE
+============================================================ */
+
+function renderTheory() {
+
+    const body =
+        document.getElementById(
+            "theoryTable"
+        );
+
+    body.innerHTML = "";
+
+    const collisions =
+        getTopicCollisions(
+            database.theory
+        );
+
+    for (
+        let i = 0;
+        i < database.theory.length;
+        i++
+    ) {
+
+        const row =
+            database.theory[i];
+
+        const collision =
+            collisions.has(i);
+
+        const tr =
+            document.createElement("tr");
+
+        if (collision) {
+            tr.classList.add("collision");
+        }
+
+        tr.innerHTML = `
+
+            <td>
+                ${escapeHtml(row.sno)}
+            </td>
+
+            <td>
+                ${escapeHtml(row.rollNo)}
+            </td>
+
+            <td>
+                ${
+                    row.topic
+                    ? escapeHtml(row.topic)
+                    : "<em>Not selected</em>"
+                }
+
+                ${
+                    collision
+                    ?
+                    '<span class="collision-label">COLLISION</span>'
+                    :
+                    ''
+                }
+            </td>
+
+            <td>
+
+                ${
+                    collision
+                    ?
+                    '<span class="status status-warning">Collision</span>'
+                    :
+                    row.topic
+                    ?
+                    '<span class="status status-ok">Allocated</span>'
+                    :
+                    '<span class="status status-empty">Available</span>'
+                }
+
+            </td>
+
+            <td>
+
+                ${
+                    collision
+                    ?
+                    `<button
+                        class="change-btn"
+                        onclick="openSingleChange(
+                            'DBMS_THEORY',
+                            '${escapeAttr(row.rollNo)}',
+                            '${escapeAttr(row.topic)}',
+                            'Theory'
+                        )"
+                    >
+                        Change Topic
+                    </button>`
+                    :
+                    ''
+                }
+
+            </td>
+        `;
+
+        body.appendChild(tr);
+    }
+}
+
+
+/* ============================================================
+   LAB TABLE
+============================================================ */
+
+function renderLab() {
+
+    const body =
+        document.getElementById(
+            "labTable"
+        );
+
+    body.innerHTML = "";
+
+    const collisions =
+        getTopicCollisions(
+            database.lab
+        );
+
+    for (
+        let i = 0;
+        i < database.lab.length;
+        i++
+    ) {
+
+        const row =
+            database.lab[i];
+
+        const collision =
+            collisions.has(i);
+
+        const tr =
+            document.createElement("tr");
+
+        if (collision) {
+            tr.classList.add("collision");
+        }
+
+        tr.innerHTML = `
+
+            <td>
+                ${escapeHtml(row.sno)}
+            </td>
+
+            <td>
+                ${escapeHtml(row.rollNo)}
+            </td>
+
+            <td>
+                ${
+                    row.topic
+                    ? escapeHtml(row.topic)
+                    : "<em>Not selected</em>"
+                }
+
+                ${
+                    collision
+                    ?
+                    '<span class="collision-label">COLLISION</span>'
+                    :
+                    ''
+                }
+            </td>
+
+            <td>
+
+                ${
+                    collision
+                    ?
+                    '<span class="status status-warning">Collision</span>'
+                    :
+                    row.topic
+                    ?
+                    '<span class="status status-ok">Allocated</span>'
+                    :
+                    '<span class="status status-empty">Available</span>'
+                }
+
+            </td>
+
+            <td>
+
+                ${
+                    collision
+                    ?
+                    `<button
+                        class="change-btn"
+                        onclick="openSingleChange(
+                            'DBMS_LAB',
+                            '${escapeAttr(row.rollNo)}',
+                            '${escapeAttr(row.topic)}',
+                            'Lab'
+                        )"
+                    >
+                        Change Topic
+                    </button>`
+                    :
+                    ''
+                }
+
+            </td>
+        `;
+
+        body.appendChild(tr);
+    }
+}
+
+
+/* ============================================================
+   PROJECT TABLE
+============================================================ */
+
+function renderProjects() {
+
+    const body =
+        document.getElementById(
+            "projectTable"
+        );
+
+    body.innerHTML = "";
+
+    for (
+        let i = 0;
+        i < database.project.length;
+        i++
+    ) {
+
+        const row =
+            database.project[i];
+
+        const allocated =
+            row.rollNo.trim() !== "";
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>
+                ${escapeHtml(row.sno)}
+            </td>
+
+            <td>
+                ${
+                    allocated
+                    ?
+                    escapeHtml(row.rollNo)
+                    :
+                    "<em>Not allocated</em>"
+                }
+            </td>
+
+            <td>
+                ${escapeHtml(row.project)}
+            </td>
+
+            <td>
+                ${escapeHtml(row.batch)}
+            </td>
+
+            <td>
+
+                ${
+                    allocated
+                    ?
+                    '<span class="status status-ok">Allocated</span>'
+                    :
+                    '<span class="status status-empty">Available</span>'
+                }
+
+            </td>
+
+            <td>
+
+                ${
+                    allocated
+                    ?
+                    `<button
+                        class="change-btn"
+                        onclick="openProjectChange(
+                            '${escapeAttr(row.rollNo)}',
+                            '${escapeAttr(row.project)}'
+                        )"
+                    >
+                        Change Project
+                    </button>`
+                    :
+                    ''
+                }
+
+            </td>
+        `;
+
+        body.appendChild(tr);
+    }
+}
+
+
+/* ============================================================
+   SUMMARY
+============================================================ */
+
+function updateSummary() {
+
+    let theoryCount = 0;
+    let labCount = 0;
+    let projectCount = 0;
+
+    for (
+        let i = 0;
+        i < database.theory.length;
+        i++
+    ) {
+
+        if (database.theory[i].topic) {
+            theoryCount++;
+        }
+    }
+
+    for (
+        let i = 0;
+        i < database.lab.length;
+        i++
+    ) {
+
+        if (database.lab[i].topic) {
+            labCount++;
+        }
+    }
+
+    for (
+        let i = 0;
+        i < database.project.length;
+        i++
+    ) {
+
+        if (database.project[i].rollNo) {
+            projectCount++;
+        }
+    }
+
+    const theoryCollisions =
+        getTopicCollisions(
+            database.theory
+        ).size;
+
+    const labCollisions =
+        getTopicCollisions(
+            database.lab
+        ).size;
+
+    document.getElementById(
+        "theoryCount"
+    ).textContent = theoryCount;
+
+    document.getElementById(
+        "labCount"
+    ).textContent = labCount;
+
+    document.getElementById(
+        "projectCount"
+    ).textContent = projectCount;
+
+    document.getElementById(
+        "collisionCount"
+    ).textContent =
+        theoryCollisions +
+        labCollisions;
+}
+
+
+/* ============================================================
+   LOAD DROPDOWNS
+============================================================ */
+
+function loadDropdown(
+    id,
+    topics
+) {
 
     const select =
-        document.getElementById(selectId);
+        document.getElementById(id);
 
-    select.innerHTML = "";
-
-    const defaultOption =
-        document.createElement("option");
-
-    defaultOption.value = "";
-
-    defaultOption.textContent =
-        defaultText;
-
-    select.appendChild(defaultOption);
-
-
-    for (let i = 0; i < topics.length; i++) {
+    for (
+        let i = 0;
+        i < topics.length;
+        i++
+    ) {
 
         const option =
             document.createElement("option");
@@ -721,107 +1447,176 @@ function loadTopics(selectId, topics, defaultText) {
             topics[i];
 
         option.textContent =
-            (i + 1) + ". " + topics[i];
+            (i + 1) +
+            ". " +
+            topics[i];
 
         select.appendChild(option);
     }
 }
 
 
-loadTopics(
+loadDropdown(
     "theoryTopic",
-    THEORY_TOPICS,
-    "-- Select Theory Topic --"
+    THEORY_TOPICS
 );
 
-loadTopics(
+loadDropdown(
     "labTopic",
-    LAB_TOPICS,
-    "-- Select Lab Topic --"
+    LAB_TOPICS
 );
 
-loadTopics(
+loadDropdown(
     "projectTopic",
-    PROJECT_TOPICS,
-    "-- Select Project --"
+    PROJECT_TOPICS
 );
 
 
 /* ============================================================
-   THEORY / LAB SUBMISSION
-   ============================================================ */
+   THEORY ALLOCATION
+============================================================ */
 
-async function submitSingle(
-    sheetName,
-    rollId,
-    topicId,
-    messageId,
-    button
-) {
-
-    const rollInput =
-        document.getElementById(rollId);
-
-    const topicInput =
-        document.getElementById(topicId);
-
-    const message =
-        document.getElementById(messageId);
-
+async function allocateTheory() {
 
     const rollNo =
-        rollInput.value.trim();
+        document.getElementById(
+            "theoryRoll"
+        ).value.trim();
 
     const topic =
-        topicInput.value.trim();
+        document.getElementById(
+            "theoryTopic"
+        ).value;
+
+    await sendRequest(
+
+        {
+            action:
+                "allocateSingle",
+
+            sheet:
+                "DBMS_THEORY",
+
+            rollNo:
+                rollNo,
+
+            topic:
+                topic
+        },
+
+        "theoryMessage"
+    );
+}
 
 
-    message.className =
-        "message";
+/* ============================================================
+   LAB ALLOCATION
+============================================================ */
 
-    message.textContent = "";
+async function allocateLab() {
+
+    const rollNo =
+        document.getElementById(
+            "labRoll"
+        ).value.trim();
+
+    const topic =
+        document.getElementById(
+            "labTopic"
+        ).value;
+
+    await sendRequest(
+
+        {
+            action:
+                "allocateSingle",
+
+            sheet:
+                "DBMS_LAB",
+
+            rollNo:
+                rollNo,
+
+            topic:
+                topic
+        },
+
+        "labMessage"
+    );
+}
 
 
-    if (!rollNo) {
+/* ============================================================
+   PROJECT ALLOCATION
+============================================================ */
 
-        showMessage(
-            message,
-            "Please enter your full Roll Number.",
-            "error"
+async function allocateProject() {
+
+    const roll1 =
+        document.getElementById(
+            "projectRoll1"
+        ).value.trim();
+
+    const roll2 =
+        document.getElementById(
+            "projectRoll2"
+        ).value.trim();
+
+    const roll3 =
+        document.getElementById(
+            "projectRoll3"
+        ).value.trim();
+
+    const topic =
+        document.getElementById(
+            "projectTopic"
+        ).value;
+
+    await sendRequest(
+
+        {
+
+            action:
+                "allocateProject",
+
+            rollNo1:
+                roll1,
+
+            rollNo2:
+                roll2,
+
+            rollNo3:
+                roll3,
+
+            topic:
+                topic
+
+        },
+
+        "projectMessage"
+    );
+}
+
+
+/* ============================================================
+   SEND REQUEST
+============================================================ */
+
+async function sendRequest(
+    payload,
+    messageId
+) {
+
+    const message =
+        document.getElementById(
+            messageId
         );
-
-        rollInput.focus();
-
-        return;
-    }
-
-
-    if (!topic) {
-
-        showMessage(
-            message,
-            "Please select a topic.",
-            "error"
-        );
-
-        topicInput.focus();
-
-        return;
-    }
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "Checking...";
-
 
     showMessage(
         message,
-        "Checking Roll Number and topic availability...",
+        "Processing...",
         "loading"
     );
-
 
     try {
 
@@ -829,35 +1624,25 @@ async function submitSingle(
             await fetch(
                 SCRIPT_URL,
                 {
-                    method: "POST",
+
+                    method:
+                        "POST",
 
                     headers: {
+
                         "Content-Type":
                             "text/plain;charset=utf-8"
+
                     },
 
-                    body: JSON.stringify({
+                    body:
+                        JSON.stringify(payload)
 
-                        sheet:
-                            sheetName,
-
-                        rollNo:
-                            rollNo,
-
-                        topic:
-                            topic
-
-                    })
                 }
             );
 
-
-        const text =
-            await response.text();
-
         const result =
-            JSON.parse(text);
-
+            await response.json();
 
         if (result.success) {
 
@@ -867,192 +1652,299 @@ async function submitSingle(
                 "success"
             );
 
-            rollInput.value = "";
+            setTimeout(
+                loadData,
+                500
+            );
 
-            topicInput.value = "";
-
-        }
-
-        else {
+        } else {
 
             showMessage(
                 message,
                 result.message,
                 "error"
             );
-
         }
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(error);
 
         showMessage(
             message,
-            "Unable to connect to the allocation server. Please try again.",
+            "Server connection failed.",
             "error"
         );
-
-    }
-
-    finally {
-
-        button.disabled = false;
-
-        if (
-            sheetName ===
-            "DBMS_THEORY"
-        ) {
-
-            button.textContent =
-                "Allocate Theory Topic";
-
-        }
-
-        else {
-
-            button.textContent =
-                "Allocate Lab Topic";
-
-        }
-
     }
 }
 
 
 /* ============================================================
-   PROJECT TEAM SUBMISSION
-   ============================================================ */
+   SINGLE CHANGE MODAL
+============================================================ */
 
-async function submitProject(button) {
+function openSingleChange(
+    sheet,
+    rollNo,
+    currentTopic,
+    category
+) {
 
-    const roll1 =
-        document.getElementById(
-            "projectRoll1"
+    changeState = {
+
+        type:
+            "single",
+
+        sheet:
+            sheet,
+
+        rollNo:
+            rollNo,
+
+        currentTopic:
+            currentTopic
+    };
+
+    const topics =
+        sheet === "DBMS_THEORY"
+        ?
+        THEORY_TOPICS
+        :
+        LAB_TOPICS;
+
+    let options = "";
+
+    for (
+        let i = 0;
+        i < topics.length;
+        i++
+    ) {
+
+        if (
+            normalizeText(topics[i]) ===
+            normalizeText(currentTopic)
+        ) {
+            continue;
+        }
+
+        options +=
+            `<option value="${escapeAttr(topics[i])}">
+                ${i + 1}. ${escapeHtml(topics[i])}
+            </option>`;
+    }
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Change " +
+        category +
+        " Topic";
+
+    document.getElementById(
+        "modalContent"
+    ).innerHTML = `
+
+        <p style="margin-bottom:12px;">
+            <strong>Roll Number:</strong>
+            ${escapeHtml(rollNo)}
+        </p>
+
+        <p style="margin-bottom:15px;">
+            <strong>Current Topic:</strong>
+            ${escapeHtml(currentTopic)}
+        </p>
+
+        <label>
+            Select New Topic
+        </label>
+
+        <select id="newSingleTopic">
+            ${options}
+        </select>
+    `;
+
+    document.getElementById(
+        "modalMessage"
+    ).className = "message";
+
+    document.getElementById(
+        "changeModal"
+    ).style.display = "flex";
+}
+
+
+/* ============================================================
+   PROJECT CHANGE MODAL
+============================================================ */
+
+function openProjectChange(
+    rollCell,
+    currentProject
+) {
+
+    const members =
+        rollCell
+            .split(",")
+            .map(function(value) {
+                return value.trim();
+            });
+
+    if (members.length !== 3) {
+
+        alert(
+            "This project does not contain exactly 3 Roll Numbers."
         );
 
-    const roll2 =
-        document.getElementById(
-            "projectRoll2"
-        );
+        return;
+    }
 
-    const roll3 =
-        document.getElementById(
-            "projectRoll3"
-        );
+    changeState = {
 
-    const topicInput =
-        document.getElementById(
-            "projectTopic"
-        );
+        type:
+            "project",
+
+        members:
+            members,
+
+        currentProject:
+            currentProject
+    };
+
+    let options = "";
+
+    for (
+        let i = 0;
+        i < PROJECT_TOPICS.length;
+        i++
+    ) {
+
+        if (
+            normalizeText(
+                PROJECT_TOPICS[i]
+            ) ===
+            normalizeText(
+                currentProject
+            )
+        ) {
+            continue;
+        }
+
+        options +=
+            `<option value="${escapeAttr(PROJECT_TOPICS[i])}">
+                ${i + 1}. ${escapeHtml(PROJECT_TOPICS[i])}
+            </option>`;
+    }
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Change Project";
+
+    document.getElementById(
+        "modalContent"
+    ).innerHTML = `
+
+        <p style="margin-bottom:10px;">
+            <strong>Team Members:</strong>
+        </p>
+
+        <p style="margin-bottom:15px;">
+            ${escapeHtml(members.join(" • "))}
+        </p>
+
+        <p style="margin-bottom:15px;">
+            <strong>Current Project:</strong>
+            ${escapeHtml(currentProject)}
+        </p>
+
+        <label>
+            Select New Project
+        </label>
+
+        <select id="newProjectTopic">
+            ${options}
+        </select>
+    `;
+
+    document.getElementById(
+        "modalMessage"
+    ).className = "message";
+
+    document.getElementById(
+        "changeModal"
+    ).style.display = "flex";
+}
+
+
+/* ============================================================
+   CONFIRM CHANGE
+============================================================ */
+
+async function confirmChange() {
 
     const message =
         document.getElementById(
-            "projectMessage"
+            "modalMessage"
         );
 
-
-    const rollNo1 =
-        roll1.value.trim();
-
-    const rollNo2 =
-        roll2.value.trim();
-
-    const rollNo3 =
-        roll3.value.trim();
-
-    const topic =
-        topicInput.value.trim();
-
-
-    message.className =
-        "message";
-
-    message.textContent = "";
-
-
-    /* --------------------------------------------------------
-       THREE ROLL NUMBERS REQUIRED
-    -------------------------------------------------------- */
+    let payload;
 
     if (
-        !rollNo1 ||
-        !rollNo2 ||
-        !rollNo3
+        changeState.type ===
+        "single"
     ) {
 
-        showMessage(
-            message,
-            "Please enter all 3 team member Roll Numbers.",
-            "error"
-        );
+        const newTopic =
+            document.getElementById(
+                "newSingleTopic"
+            ).value;
 
-        return;
+        payload = {
+
+            action:
+                "changeSingle",
+
+            sheet:
+                changeState.sheet,
+
+            rollNo:
+                changeState.rollNo,
+
+            newTopic:
+                newTopic
+        };
+
+    } else {
+
+        const newTopic =
+            document.getElementById(
+                "newProjectTopic"
+            ).value;
+
+        payload = {
+
+            action:
+                "changeProject",
+
+            rollNo1:
+                changeState.members[0],
+
+            rollNo2:
+                changeState.members[1],
+
+            rollNo3:
+                changeState.members[2],
+
+            newTopic:
+                newTopic
+        };
     }
-
-
-    /* --------------------------------------------------------
-       THREE MEMBERS MUST BE DIFFERENT
-    -------------------------------------------------------- */
-
-    const r1 =
-        rollNo1.toUpperCase();
-
-    const r2 =
-        rollNo2.toUpperCase();
-
-    const r3 =
-        rollNo3.toUpperCase();
-
-
-    if (
-        r1 === r2 ||
-        r1 === r3 ||
-        r2 === r3
-    ) {
-
-        showMessage(
-            message,
-            "All 3 team members must have different Roll Numbers.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    /* --------------------------------------------------------
-       PROJECT REQUIRED
-    -------------------------------------------------------- */
-
-    if (!topic) {
-
-        showMessage(
-            message,
-            "Please select a Project.",
-            "error"
-        );
-
-        topicInput.focus();
-
-        return;
-    }
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "Checking Team...";
-
 
     showMessage(
         message,
-        "Checking all 3 members and project availability...",
+        "Changing...",
         "loading"
     );
-
 
     try {
 
@@ -1060,41 +1952,25 @@ async function submitProject(button) {
             await fetch(
                 SCRIPT_URL,
                 {
-                    method: "POST",
+
+                    method:
+                        "POST",
 
                     headers: {
+
                         "Content-Type":
                             "text/plain;charset=utf-8"
+
                     },
 
-                    body: JSON.stringify({
+                    body:
+                        JSON.stringify(payload)
 
-                        sheet:
-                            "DBMS_PROJECT",
-
-                        rollNo1:
-                            rollNo1,
-
-                        rollNo2:
-                            rollNo2,
-
-                        rollNo3:
-                            rollNo3,
-
-                        topic:
-                            topic
-
-                    })
                 }
             );
 
-
-        const text =
-            await response.text();
-
         const result =
-            JSON.parse(text);
-
+            await response.json();
 
         if (result.success) {
 
@@ -1104,54 +1980,55 @@ async function submitProject(button) {
                 "success"
             );
 
-            roll1.value = "";
+            setTimeout(
+                function() {
 
-            roll2.value = "";
+                    closeModal();
 
-            roll3.value = "";
+                    loadData();
 
-            topicInput.value = "";
+                },
+                700
+            );
 
-        }
-
-        else {
+        } else {
 
             showMessage(
                 message,
                 result.message,
                 "error"
             );
-
         }
 
-    }
-
-    catch (error) {
-
-        console.error(error);
+    } catch (error) {
 
         showMessage(
             message,
-            "Unable to connect to the allocation server. Please try again.",
+            "Unable to change allocation.",
             "error"
         );
-
     }
+}
 
-    finally {
 
-        button.disabled = false;
+/* ============================================================
+   CLOSE MODAL
+============================================================ */
 
-        button.textContent =
-            "Allocate Project Team";
+function closeModal() {
 
-    }
+    document.getElementById(
+        "changeModal"
+    ).style.display =
+        "none";
+
+    changeState = null;
 }
 
 
 /* ============================================================
    MESSAGE
-   ============================================================ */
+============================================================ */
 
 function showMessage(
     element,
@@ -1165,6 +2042,55 @@ function showMessage(
     element.textContent =
         text;
 }
+
+
+/* ============================================================
+   NORMALIZE
+============================================================ */
+
+function normalizeText(value) {
+
+    return String(value || "")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+}
+
+
+/* ============================================================
+   ESCAPE
+============================================================ */
+
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function escapeAttr(value) {
+
+    return escapeHtml(value);
+}
+
+
+/* ============================================================
+   INITIAL LOAD
+============================================================ */
+
+loadData();
+
+
+/* Refresh every 30 seconds */
+
+setInterval(
+    loadData,
+    30000
+);
 
 </script>
 
