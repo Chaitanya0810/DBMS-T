@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>DBMS Topic Allocation</title>
 
 <style>
@@ -96,6 +97,16 @@ header p {
     margin-bottom: 22px;
 }
 
+.team-info {
+    background: #f3e8ff;
+    color: #6b21a8;
+    padding: 11px 13px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
 .form-group {
     margin-bottom: 17px;
 }
@@ -138,11 +149,17 @@ button {
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
 }
 
 button:disabled {
     opacity: 0.65;
     cursor: not-allowed;
+    transform: none;
 }
 
 .theory-btn {
@@ -217,12 +234,14 @@ footer {
 
     <div class="intro">
         <h2>Select Your Category</h2>
-        <p>Enter your complete Roll Number and select one available topic.</p>
+        <p>Enter your Roll Number and select an available topic.</p>
     </div>
 
     <div class="cards">
 
-        <!-- ================= THEORY ================= -->
+        <!-- ==================================================
+             THEORY
+        =================================================== -->
 
         <section class="card">
 
@@ -231,12 +250,14 @@ footer {
             <h3>DBMS Theory</h3>
 
             <p class="description">
-                Select one Theory topic. Theory allocation is checked
-                only against the Theory sheet.
+                Each student can select one Theory topic.
             </p>
 
             <div class="form-group">
-                <label for="theoryRoll">Full Roll Number</label>
+
+                <label for="theoryRoll">
+                    Full Roll Number
+                </label>
 
                 <input
                     type="text"
@@ -245,17 +266,28 @@ footer {
                     autocomplete="off"
                     spellcheck="false"
                 >
+
             </div>
 
             <div class="form-group">
-                <label for="theoryTopic">Theory Topic</label>
 
-                <select id="theoryTopic"></select>
+                <label for="theoryTopic">
+                    Theory Topic
+                </label>
+
+                <select id="theoryTopic">
+
+                    <option value="">
+                        -- Select Theory Topic --
+                    </option>
+
+                </select>
+
             </div>
 
             <button
                 class="theory-btn"
-                onclick="submitAllocation(
+                onclick="submitSingle(
                     'DBMS_THEORY',
                     'theoryRoll',
                     'theoryTopic',
@@ -266,12 +298,17 @@ footer {
                 Allocate Theory Topic
             </button>
 
-            <div id="theoryMessage" class="message"></div>
+            <div
+                id="theoryMessage"
+                class="message">
+            </div>
 
         </section>
 
 
-        <!-- ================= LAB ================= -->
+        <!-- ==================================================
+             LAB
+        =================================================== -->
 
         <section class="card">
 
@@ -280,12 +317,14 @@ footer {
             <h3>DBMS Lab</h3>
 
             <p class="description">
-                Select one Lab topic. Lab allocation is checked
-                only against the Lab sheet.
+                Each student can select one Lab topic.
             </p>
 
             <div class="form-group">
-                <label for="labRoll">Full Roll Number</label>
+
+                <label for="labRoll">
+                    Full Roll Number
+                </label>
 
                 <input
                     type="text"
@@ -294,17 +333,28 @@ footer {
                     autocomplete="off"
                     spellcheck="false"
                 >
+
             </div>
 
             <div class="form-group">
-                <label for="labTopic">Lab Topic</label>
 
-                <select id="labTopic"></select>
+                <label for="labTopic">
+                    Lab Topic
+                </label>
+
+                <select id="labTopic">
+
+                    <option value="">
+                        -- Select Lab Topic --
+                    </option>
+
+                </select>
+
             </div>
 
             <button
                 class="lab-btn"
-                onclick="submitAllocation(
+                onclick="submitSingle(
                     'DBMS_LAB',
                     'labRoll',
                     'labTopic',
@@ -315,12 +365,17 @@ footer {
                 Allocate Lab Topic
             </button>
 
-            <div id="labMessage" class="message"></div>
+            <div
+                id="labMessage"
+                class="message">
+            </div>
 
         </section>
 
 
-        <!-- ================= PROJECT ================= -->
+        <!-- ==================================================
+             PROJECT
+        =================================================== -->
 
         <section class="card">
 
@@ -329,48 +384,109 @@ footer {
             <h3>DBMS Project</h3>
 
             <p class="description">
-                Select one Project. Project allocation is checked
-                only against the Project sheet.
+                One project team must contain exactly 3 students.
             </p>
 
+            <div class="team-info">
+                👥 Enter all 3 team members for one project
+            </div>
+
+
+            <!-- MEMBER 1 -->
+
             <div class="form-group">
-                <label for="projectRoll">Full Roll Number</label>
+
+                <label for="projectRoll1">
+                    Team Member 1 Roll Number
+                </label>
 
                 <input
                     type="text"
-                    id="projectRoll"
+                    id="projectRoll1"
                     placeholder="Example: 257R1A66C9"
                     autocomplete="off"
                     spellcheck="false"
                 >
+
             </div>
+
+
+            <!-- MEMBER 2 -->
 
             <div class="form-group">
-                <label for="projectTopic">Project Title</label>
 
-                <select id="projectTopic"></select>
+                <label for="projectRoll2">
+                    Team Member 2 Roll Number
+                </label>
+
+                <input
+                    type="text"
+                    id="projectRoll2"
+                    placeholder="Example: 257R1A66D1"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+
             </div>
+
+
+            <!-- MEMBER 3 -->
+
+            <div class="form-group">
+
+                <label for="projectRoll3">
+                    Team Member 3 Roll Number
+                </label>
+
+                <input
+                    type="text"
+                    id="projectRoll3"
+                    placeholder="Example: 257R1A66D2"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+
+            </div>
+
+
+            <!-- PROJECT -->
+
+            <div class="form-group">
+
+                <label for="projectTopic">
+                    Project Title
+                </label>
+
+                <select id="projectTopic">
+
+                    <option value="">
+                        -- Select Project --
+                    </option>
+
+                </select>
+
+            </div>
+
 
             <button
                 class="project-btn"
-                onclick="submitAllocation(
-                    'DBMS_PROJECT',
-                    'projectRoll',
-                    'projectTopic',
-                    'projectMessage',
-                    this
-                )"
+                onclick="submitProject(this)"
             >
-                Allocate Project
+                Allocate Project Team
             </button>
 
-            <div id="projectMessage" class="message"></div>
+
+            <div
+                id="projectMessage"
+                class="message">
+            </div>
 
         </section>
 
     </div>
 
 </main>
+
 
 <footer>
     DBMS Topic Allocation System
@@ -380,11 +496,11 @@ footer {
 <script>
 
 /* ============================================================
-   APPS SCRIPT WEB APP URL
+   APPS SCRIPT URL
    ============================================================ */
 
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbwrv_b7OxINKGtxkktHLG7Ajp0bWKN9ubk3jGByDM0iUbfmzvE-YYV-_VLB7hVtIjKUBw/exec";
+"https://script.google.com/macros/s/AKfycbza8AEsNbUFmzSXOaVWEY6H_hauj5Gymp_rFn93QHQdKh-aTpj2whAljWDQjnOHAgwYjQ/exec";
 
 
 /* ============================================================
@@ -392,147 +508,76 @@ const SCRIPT_URL =
    ============================================================ */
 
 const THEORY_TOPICS = [
-
-"Functional Dependencies",
-
-"ER Diagram for a Hospital Management System",
-
-"Basic Form of SQL Queries",
-
-"B+ Trees: A Dynamic Index Structure",
-
-"Advantages and Applications of DBMS",
-
-"Selection and Projection Operations",
-
-"Transaction Concept and Transaction States",
-
-"Weak Entity Sets and Strong Entity Sets",
-
-"UNION, INTERSECT, and EXCEPT Operations in SQL",
-
-"Problems Caused by Data Redundancy",
-
-"Data Independence in Database Systems",
-
-"Natural Join and Its Applications",
-
-"Lock-Based Concurrency Control Protocols",
-
-"Entity-Relationship (ER) Model",
-
-"Fourth Normal Form (4NF)",
-
-"Database System Architecture",
-
-"NULL Values in SQL",
-
-"Relational Algebra: Fundamental Operators",
-
-"ER Diagram for an Online Shopping System",
-
-"Atomicity and Durability in Transactions",
-
-"Types of Attributes in ER Model",
-
-"Database Decomposition",
-
-"Tuple Relational Calculus",
-
-"File Organization and Indexing Techniques",
-
-"Second Normal Form (2NF)",
-
-"Relationships and Relationship Sets",
-
-"Triggers and Active Databases",
-
-"Introduction to the Relational Model",
-
-"Lossless Join Decomposition",
-
-"SQL SELECT, FROM, and WHERE Clauses",
-
-"Multiple Granularity Protocol",
-
-"Additional Features of the ER Model",
-
-"Division Operator in Relational Algebra",
-
-"File Systems versus Database Management Systems",
-
-"Fifth Normal Form (5NF)",
-
-"Aggregation Operators in SQL",
-
-"Logical Database Design",
-
-"Concurrent Executions and Their Problems",
-
-"Types of Relationships in ER Model",
-
-"Domain Relational Calculus",
-
-"Structure and Components of a DBMS",
-
-"Third Normal Form (3NF)",
-
-"Join Operations in Relational Algebra",
-
-"Complex Integrity Constraints in SQL",
-
-"Evolution and Historical Perspective of Database Systems",
-
-"Serializability and Recoverability",
-
-"Creating, Altering, and Destroying Tables and Views",
-
-"Multivalued Dependencies",
-
-"ER Diagram for a College Management System",
-
-"Timestamp-Based and Validation-Based Protocols",
-
-"Integrity Constraints over Relations",
-
-"Boyce-Codd Normal Form (BCNF)",
-
-"Relational Algebra versus Relational Calculus",
-
-"Views in Relational Databases",
-
-"Log-Based Recovery and Atomicity",
-
-"Entities, Attributes, and Entity Sets",
-
-"Cartesian Product, Union, and Set Difference",
-
-"Querying Relational Data",
-
-"Types and Applications of SQL Triggers",
-
-"Database Design Process",
-
-"Rename Operator in Relational Algebra",
-
-"Enforcement of Integrity Constraints",
-
-"Nested Queries in SQL",
-
-"Conceptual Database Design Using ER Diagrams",
-
-"Problems Related to Decomposition",
-
-"Different Types of Data Models",
-
-"Domain Relational Calculus",
-
-"Reasoning about Functional Dependencies",
-
-"Relational Model Integrity Constraints",
-
-"Hash-Based and Tree-Based Indexing"
-
+    "Functional Dependencies",
+    "ER Diagram for a Hospital Management System",
+    "Basic Form of SQL Queries",
+    "B+ Trees: A Dynamic Index Structure",
+    "Advantages and Applications of DBMS",
+    "Selection and Projection Operations",
+    "Transaction Concept and Transaction States",
+    "Weak Entity Sets and Strong Entity Sets",
+    "UNION, INTERSECT, and EXCEPT Operations in SQL",
+    "Problems Caused by Data Redundancy",
+    "Data Independence in Database Systems",
+    "Natural Join and Its Applications",
+    "Lock-Based Concurrency Control Protocols",
+    "Entity-Relationship (ER) Model",
+    "Fourth Normal Form (4NF)",
+    "Database System Architecture",
+    "NULL Values in SQL",
+    "Relational Algebra: Fundamental Operators",
+    "ER Diagram for an Online Shopping System",
+    "Atomicity and Durability in Transactions",
+    "Types of Attributes in ER Model",
+    "Database Decomposition",
+    "Tuple Relational Calculus",
+    "File Organization and Indexing Techniques",
+    "Second Normal Form (2NF)",
+    "Relationships and Relationship Sets",
+    "Triggers and Active Databases",
+    "Introduction to the Relational Model",
+    "Lossless Join Decomposition",
+    "SQL SELECT, FROM, and WHERE Clauses",
+    "Multiple Granularity Protocol",
+    "Additional Features of the ER Model",
+    "Division Operator in Relational Algebra",
+    "File Systems versus Database Management Systems",
+    "Fifth Normal Form (5NF)",
+    "Aggregation Operators in SQL",
+    "Logical Database Design",
+    "Concurrent Executions and Their Problems",
+    "Types of Relationships in ER Model",
+    "Domain Relational Calculus",
+    "Structure and Components of a DBMS",
+    "Third Normal Form (3NF)",
+    "Join Operations in Relational Algebra",
+    "Complex Integrity Constraints in SQL",
+    "Evolution and Historical Perspective of Database Systems",
+    "Serializability and Recoverability",
+    "Creating, Altering, and Destroying Tables and Views",
+    "Multivalued Dependencies",
+    "ER Diagram for a College Management System",
+    "Timestamp-Based and Validation-Based Protocols",
+    "Integrity Constraints over Relations",
+    "Boyce-Codd Normal Form (BCNF)",
+    "Relational Algebra versus Relational Calculus",
+    "Views in Relational Databases",
+    "Log-Based Recovery and Atomicity",
+    "Entities, Attributes, and Entity Sets",
+    "Cartesian Product, Union, and Set Difference",
+    "Querying Relational Data",
+    "Types and Applications of SQL Triggers",
+    "Database Design Process",
+    "Rename Operator in Relational Algebra",
+    "Enforcement of Integrity Constraints",
+    "Nested Queries in SQL",
+    "Conceptual Database Design Using ER Diagrams",
+    "Problems Related to Decomposition",
+    "Different Types of Data Models",
+    "Domain Relational Calculus",
+    "Reasoning about Functional Dependencies",
+    "Relational Model Integrity Constraints",
+    "Hash-Based and Tree-Based Indexing"
 ];
 
 
@@ -541,147 +586,76 @@ const THEORY_TOPICS = [
    ============================================================ */
 
 const LAB_TOPICS = [
-
-"Introduction to MySQL and Database Environment",
-
-"Designing an ER Diagram for a College Management System",
-
-"SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
-
-"Database Normalization and Its Practical Importance",
-
-"SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
-
-"Database Views and Their Practical Applications",
-
-"DML Commands: INSERT, UPDATE and DELETE",
-
-"Functional Dependencies in Database Design",
-
-"Nested Queries and Subqueries in SQL",
-
-"SQL Aggregate Functions with GROUP BY and HAVING",
-
-"Database Design for an Online Shopping System",
-
-"Primary Key and Foreign Key Constraints",
-
-"Correlated Subqueries in SQL",
-
-"SQL Set Operations: UNION, INTERSECT and EXCEPT",
-
-"Database Triggers and Their Applications",
-
-"Stored Procedures in MySQL",
-
-"Cursor Handling in Database Programming",
-
-"One-to-One, One-to-Many and Many-to-Many Relationships",
-
-"Converting ER Diagrams into Relational Schemas",
-
-"SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
-
-"First Normal Form, Second Normal Form and Third Normal Form",
-
-"Boyce-Codd Normal Form (BCNF)",
-
-"Designing a Hospital Management Database",
-
-"SQL Queries for Employee Management System",
-
-"SQL Queries for Student Management System",
-
-"SQL Queries for Banking Database",
-
-"SQL Queries for Library Management System",
-
-"SQL Queries for Railway Reservation System",
-
-"SQL Queries for Hotel Management System",
-
-"SQL Queries for E-Commerce Database",
-
-"Self Join and Its Applications",
-
-"Cross Join and Cartesian Product",
-
-"Natural Join and Equi Join",
-
-"Subqueries Using IN, ANY and ALL",
-
-"EXISTS and NOT EXISTS in SQL",
-
-"SQL Date and Time Functions",
-
-"SQL String Functions and Their Applications",
-
-"SQL Numeric and Mathematical Functions",
-
-"NULL Values and Three-Valued Logic in SQL",
-
-"Creating and Managing SQL Views",
-
-"BEFORE and AFTER Triggers in MySQL",
-
-"INSERT, UPDATE and DELETE Triggers",
-
-"Audit Trail Using Database Triggers",
-
-"Stored Functions versus Stored Procedures",
-
-"Input and Output Parameters in Stored Procedures",
-
-"Cursors and Their Applications in MySQL",
-
-"Error Handling in Stored Procedures",
-
-"Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
-
-"ACID Properties of Database Transactions",
-
-"Database Concurrency and Transaction Problems",
-
-"Indexing in MySQL for Faster Query Processing",
-
-"Clustered and Non-Clustered Indexing",
-
-"Primary Index, Secondary Index and Composite Index",
-
-"Query Optimization Techniques in MySQL",
-
-"Understanding EXPLAIN in MySQL",
-
-"SQL Injection and Database Security",
-
-"DCL Commands: GRANT and REVOKE",
-
-"User Management and Privileges in MySQL",
-
-"Database Backup and Restoration",
-
-"Database Import and Export Using MySQL",
-
-"Connecting Java Applications with MySQL",
-
-"Connecting Python Applications with MySQL",
-
-"CRUD Operations Using a Database Application",
-
-"Database Connectivity Using JDBC",
-
-"Database Connectivity Using Python and MySQL Connector",
-
-"Introduction to NoSQL Databases",
-
-"Relational Databases versus NoSQL Databases",
-
-"MySQL JSON Data Types and JSON Queries",
-
-"Database Replication and High Availability",
-
-"Database Performance Monitoring and Optimization"
-
+    "Introduction to MySQL and Database Environment",
+    "Designing an ER Diagram for a College Management System",
+    "SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
+    "Database Normalization and Its Practical Importance",
+    "SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
+    "Database Views and Their Practical Applications",
+    "DML Commands: INSERT, UPDATE and DELETE",
+    "Functional Dependencies in Database Design",
+    "Nested Queries and Subqueries in SQL",
+    "SQL Aggregate Functions with GROUP BY and HAVING",
+    "Database Design for an Online Shopping System",
+    "Primary Key and Foreign Key Constraints",
+    "Correlated Subqueries in SQL",
+    "SQL Set Operations: UNION, INTERSECT and EXCEPT",
+    "Database Triggers and Their Applications",
+    "Stored Procedures in MySQL",
+    "Cursor Handling in Database Programming",
+    "One-to-One, One-to-Many and Many-to-Many Relationships",
+    "Converting ER Diagrams into Relational Schemas",
+    "SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
+    "First Normal Form, Second Normal Form and Third Normal Form",
+    "Boyce-Codd Normal Form (BCNF)",
+    "Designing a Hospital Management Database",
+    "SQL Queries for Employee Management System",
+    "SQL Queries for Student Management System",
+    "SQL Queries for Banking Database",
+    "SQL Queries for Library Management System",
+    "SQL Queries for Railway Reservation System",
+    "SQL Queries for Hotel Management System",
+    "SQL Queries for E-Commerce Database",
+    "Self Join and Its Applications",
+    "Cross Join and Cartesian Product",
+    "Natural Join and Equi Join",
+    "Subqueries Using IN, ANY and ALL",
+    "EXISTS and NOT EXISTS in SQL",
+    "SQL Date and Time Functions",
+    "SQL String Functions and Their Applications",
+    "SQL Numeric and Mathematical Functions",
+    "NULL Values and Three-Valued Logic in SQL",
+    "Creating and Managing SQL Views",
+    "BEFORE and AFTER Triggers in MySQL",
+    "INSERT, UPDATE and DELETE Triggers",
+    "Audit Trail Using Database Triggers",
+    "Stored Functions versus Stored Procedures",
+    "Input and Output Parameters in Stored Procedures",
+    "Cursors and Their Applications in MySQL",
+    "Error Handling in Stored Procedures",
+    "Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
+    "ACID Properties of Database Transactions",
+    "Database Concurrency and Transaction Problems",
+    "Indexing in MySQL for Faster Query Processing",
+    "Clustered and Non-Clustered Indexing",
+    "Primary Index, Secondary Index and Composite Index",
+    "Query Optimization Techniques in MySQL",
+    "Understanding EXPLAIN in MySQL",
+    "SQL Injection and Database Security",
+    "DCL Commands: GRANT and REVOKE",
+    "User Management and Privileges in MySQL",
+    "Database Backup and Restoration",
+    "Database Import and Export Using MySQL",
+    "Connecting Java Applications with MySQL",
+    "Connecting Python Applications with MySQL",
+    "CRUD Operations Using a Database Application",
+    "Database Connectivity Using JDBC",
+    "Database Connectivity Using Python and MySQL Connector",
+    "Introduction to NoSQL Databases",
+    "Relational Databases versus NoSQL Databases",
+    "MySQL JSON Data Types and JSON Queries",
+    "Database Replication and High Availability",
+    "Database Performance Monitoring and Optimization"
 ];
 
 
@@ -690,78 +664,61 @@ const LAB_TOPICS = [
    ============================================================ */
 
 const PROJECT_TOPICS = [
-
-"Supermarket Billing Management System",
-
-"Blood Donation Camp Management System",
-
-"Doctor Appointment Booking System",
-
-"Online Examination Management System",
-
-"College Hostel Allocation System",
-
-"Vehicle Service Center Management System",
-
-"Online Event Management System",
-
-"College Placement Management System",
-
-"Sports Tournament Management System",
-
-"Parking Management System",
-
-"Electricity Billing Management System",
-
-"Water Supply Billing Management System",
-
-"Real Estate Property Management System",
-
-"Mobile Shop Management System",
-
-"Computer Sales and Service Management System",
-
-"Online Complaint Management System",
-
-"Travel Agency Management System",
-
-"Flight Booking Management System",
-
-"Pet Clinic Management System",
-
-"Donation Management System",
-
-"Digital Document Management System",
-
-"Freelancer Project Management System",
-
-"Online Auction Management System"
-
+    "Supermarket Billing Management System",
+    "Blood Donation Camp Management System",
+    "Doctor Appointment Booking System",
+    "Online Examination Management System",
+    "College Hostel Allocation System",
+    "Vehicle Service Center Management System",
+    "Online Event Management System",
+    "College Placement Management System",
+    "Sports Tournament Management System",
+    "Parking Management System",
+    "Electricity Billing Management System",
+    "Water Supply Billing Management System",
+    "Real Estate Property Management System",
+    "Mobile Shop Management System",
+    "Computer Sales and Service Management System",
+    "Online Complaint Management System",
+    "Travel Agency Management System",
+    "Flight Booking Management System",
+    "Pet Clinic Management System",
+    "Donation Management System",
+    "Digital Document Management System",
+    "Freelancer Project Management System",
+    "Online Auction Management System"
 ];
 
 
 /* ============================================================
-   LOAD TOPICS INTO DROPDOWNS
+   LOAD TOPICS
    ============================================================ */
 
 function loadTopics(selectId, topics, defaultText) {
 
-    const select = document.getElementById(selectId);
+    const select =
+        document.getElementById(selectId);
 
     select.innerHTML = "";
 
-    const defaultOption = document.createElement("option");
+    const defaultOption =
+        document.createElement("option");
 
     defaultOption.value = "";
-    defaultOption.textContent = defaultText;
+
+    defaultOption.textContent =
+        defaultText;
 
     select.appendChild(defaultOption);
 
+
     for (let i = 0; i < topics.length; i++) {
 
-        const option = document.createElement("option");
+        const option =
+            document.createElement("option");
 
-        option.value = topics[i];
+        option.value =
+            topics[i];
 
         option.textContent =
             (i + 1) + ". " + topics[i];
@@ -770,10 +727,6 @@ function loadTopics(selectId, topics, defaultText) {
     }
 }
 
-
-/* ============================================================
-   INITIALIZE DROPDOWNS
-   ============================================================ */
 
 loadTopics(
     "theoryTopic",
@@ -795,25 +748,26 @@ loadTopics(
 
 
 /* ============================================================
-   ALLOCATION FUNCTION
+   THEORY / LAB SUBMISSION
    ============================================================ */
 
-async function submitAllocation(
+async function submitSingle(
     sheetName,
-    rollInputId,
-    topicInputId,
+    rollId,
+    topicId,
     messageId,
     button
 ) {
 
     const rollInput =
-        document.getElementById(rollInputId);
+        document.getElementById(rollId);
 
     const topicInput =
-        document.getElementById(topicInputId);
+        document.getElementById(topicId);
 
     const message =
         document.getElementById(messageId);
+
 
     const rollNo =
         rollInput.value.trim();
@@ -822,9 +776,9 @@ async function submitAllocation(
         topicInput.value.trim();
 
 
-    /* ---------------- VALIDATION ---------------- */
+    message.className =
+        "message";
 
-    message.className = "message";
     message.textContent = "";
 
 
@@ -856,11 +810,11 @@ async function submitAllocation(
     }
 
 
-    /* ---------------- LOADING ---------------- */
-
     button.disabled = true;
 
-    button.textContent = "Checking...";
+    button.textContent =
+        "Checking...";
+
 
     showMessage(
         message,
@@ -871,62 +825,45 @@ async function submitAllocation(
 
     try {
 
-        /* ---------------- SEND TO APPS SCRIPT ---------------- */
+        const response =
+            await fetch(
+                SCRIPT_URL,
+                {
+                    method: "POST",
 
-        const response = await fetch(
-            SCRIPT_URL,
-            {
-                method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+                    },
 
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
+                    body: JSON.stringify({
 
-                body: JSON.stringify({
+                        sheet:
+                            sheetName,
 
-                    sheet: sheetName,
+                        rollNo:
+                            rollNo,
 
-                    rollNo: rollNo,
+                        topic:
+                            topic
 
-                    topic: topic
-
-                })
-            }
-        );
+                    })
+                }
+            );
 
 
         const text =
             await response.text();
 
+        const result =
+            JSON.parse(text);
 
-        let result;
-
-
-        try {
-
-            result =
-                JSON.parse(text);
-
-        }
-
-        catch (parseError) {
-
-            throw new Error(
-                "Invalid response received from server."
-            );
-
-        }
-
-
-        /* ---------------- SUCCESS ---------------- */
 
         if (result.success) {
 
             showMessage(
                 message,
-                result.message ||
-                "Allocation successful!",
+                result.message,
                 "success"
             );
 
@@ -936,22 +873,17 @@ async function submitAllocation(
 
         }
 
-
-        /* ---------------- FAILURE ---------------- */
-
         else {
 
             showMessage(
                 message,
-                result.message ||
-                "Allocation failed.",
+                result.message,
                 "error"
             );
 
         }
 
     }
-
 
     catch (error) {
 
@@ -965,40 +897,260 @@ async function submitAllocation(
 
     }
 
-
     finally {
 
         button.disabled = false;
 
-
-        if (sheetName === "DBMS_THEORY") {
+        if (
+            sheetName ===
+            "DBMS_THEORY"
+        ) {
 
             button.textContent =
                 "Allocate Theory Topic";
 
         }
 
-        else if (sheetName === "DBMS_LAB") {
+        else {
 
             button.textContent =
                 "Allocate Lab Topic";
 
         }
 
+    }
+}
+
+
+/* ============================================================
+   PROJECT TEAM SUBMISSION
+   ============================================================ */
+
+async function submitProject(button) {
+
+    const roll1 =
+        document.getElementById(
+            "projectRoll1"
+        );
+
+    const roll2 =
+        document.getElementById(
+            "projectRoll2"
+        );
+
+    const roll3 =
+        document.getElementById(
+            "projectRoll3"
+        );
+
+    const topicInput =
+        document.getElementById(
+            "projectTopic"
+        );
+
+    const message =
+        document.getElementById(
+            "projectMessage"
+        );
+
+
+    const rollNo1 =
+        roll1.value.trim();
+
+    const rollNo2 =
+        roll2.value.trim();
+
+    const rollNo3 =
+        roll3.value.trim();
+
+    const topic =
+        topicInput.value.trim();
+
+
+    message.className =
+        "message";
+
+    message.textContent = "";
+
+
+    /* --------------------------------------------------------
+       THREE ROLL NUMBERS REQUIRED
+    -------------------------------------------------------- */
+
+    if (
+        !rollNo1 ||
+        !rollNo2 ||
+        !rollNo3
+    ) {
+
+        showMessage(
+            message,
+            "Please enter all 3 team member Roll Numbers.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       THREE MEMBERS MUST BE DIFFERENT
+    -------------------------------------------------------- */
+
+    const r1 =
+        rollNo1.toUpperCase();
+
+    const r2 =
+        rollNo2.toUpperCase();
+
+    const r3 =
+        rollNo3.toUpperCase();
+
+
+    if (
+        r1 === r2 ||
+        r1 === r3 ||
+        r2 === r3
+    ) {
+
+        showMessage(
+            message,
+            "All 3 team members must have different Roll Numbers.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /* --------------------------------------------------------
+       PROJECT REQUIRED
+    -------------------------------------------------------- */
+
+    if (!topic) {
+
+        showMessage(
+            message,
+            "Please select a Project.",
+            "error"
+        );
+
+        topicInput.focus();
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Checking Team...";
+
+
+    showMessage(
+        message,
+        "Checking all 3 members and project availability...",
+        "loading"
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                SCRIPT_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+                    },
+
+                    body: JSON.stringify({
+
+                        sheet:
+                            "DBMS_PROJECT",
+
+                        rollNo1:
+                            rollNo1,
+
+                        rollNo2:
+                            rollNo2,
+
+                        rollNo3:
+                            rollNo3,
+
+                        topic:
+                            topic
+
+                    })
+                }
+            );
+
+
+        const text =
+            await response.text();
+
+        const result =
+            JSON.parse(text);
+
+
+        if (result.success) {
+
+            showMessage(
+                message,
+                result.message,
+                "success"
+            );
+
+            roll1.value = "";
+
+            roll2.value = "";
+
+            roll3.value = "";
+
+            topicInput.value = "";
+
+        }
+
         else {
 
-            button.textContent =
-                "Allocate Project";
+            showMessage(
+                message,
+                result.message,
+                "error"
+            );
 
         }
 
     }
 
+    catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            message,
+            "Unable to connect to the allocation server. Please try again.",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "Allocate Project Team";
+
+    }
 }
 
 
 /* ============================================================
-   MESSAGE DISPLAY
+   MESSAGE
    ============================================================ */
 
 function showMessage(
@@ -1012,7 +1164,6 @@ function showMessage(
 
     element.textContent =
         text;
-
 }
 
 </script>
