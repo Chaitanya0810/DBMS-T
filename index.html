@@ -1,1235 +1,1025 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>DBMS Topic Allocation Dashboard</title>
-
+<title>DBMS Topic Allocation</title>
 
 <style>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+:root {
+    --bg: #eef4ff;
+    --card: #ffffff;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary: #7c3aed;
+    --text: #172033;
+    --muted: #64748b;
+    --border: #dbe3f0;
+    --success: #15803d;
+    --success-bg: #dcfce7;
+    --danger: #dc2626;
+    --danger-bg: #fee2e2;
+    --warning: #d97706;
+    --warning-bg: #fef3c7;
+    --shadow: 0 12px 35px rgba(30, 64, 175, 0.10);
 }
 
 body {
-
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, #dbeafe 0, transparent 32%),
+        radial-gradient(circle at bottom right, #ede9fe 0, transparent 30%),
+        var(--bg);
+    color: var(--text);
     min-height: 100vh;
-
-    background:
-        linear-gradient(
-            135deg,
-            #eef2ff,
-            #f8fafc,
-            #e0f2fe
-        );
-
-    color: #172033;
 }
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header {
-
-    background:
-        linear-gradient(
-            135deg,
-            #172554,
-            #1e3a8a,
-            #2563eb
-        );
-
-    color: white;
-
-    text-align: center;
-
-    padding: 35px 20px;
-
-    box-shadow:
-        0 8px 25px rgba(30,64,175,.25);
-}
-
-header h1 {
-
-    font-size: 36px;
-
-    font-weight: 800;
-}
-
-header p {
-
-    margin-top: 8px;
-
-    opacity: .9;
-}
-
-
-/* =========================================================
-   CONTAINER
-========================================================= */
 
 .container {
-
-    max-width: 1450px;
-
+    width: min(1450px, 94%);
     margin: auto;
-
-    padding: 30px 20px;
 }
 
+/* ================= HEADER ================= */
 
-/* =========================================================
-   TOP BAR
-========================================================= */
-
-.topbar {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-bottom: 25px;
-
-    flex-wrap: wrap;
+header {
+    padding: 28px 0 18px;
 }
+
+.header-box {
+    background: linear-gradient(135deg, #172554, #3730a3);
+    color: white;
+    border-radius: 24px;
+    padding: 30px 34px;
+    box-shadow: 0 18px 45px rgba(30, 41, 59, 0.18);
+}
+
+.header-box h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 8px;
+}
+
+.header-box p {
+    color: #dbeafe;
+    font-size: 16px;
+}
+
+/* ================= SUMMARY ================= */
 
 .summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 18px 0;
+}
 
+.summary-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.summary-card .number {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.summary-card .label {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+/* ================= TABS ================= */
+
+.tabs {
     display: flex;
-
-    gap: 12px;
-
+    gap: 10px;
+    margin: 24px 0;
     flex-wrap: wrap;
 }
 
-.badge {
-
-    background: white;
-
-    border: 1px solid #e2e8f0;
-
-    padding: 9px 14px;
-
-    border-radius: 9px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    box-shadow:
-        0 3px 10px rgba(15,23,42,.04);
-}
-
-.refresh {
-
-    background: #2563eb;
-
-    color: white;
-
+.tab {
     border: none;
-
-    padding: 10px 18px;
-
-    border-radius: 9px;
-
+    background: white;
+    color: var(--muted);
+    padding: 13px 22px;
+    border-radius: 12px;
     cursor: pointer;
-
+    font-size: 15px;
     font-weight: 700;
+    border: 1px solid var(--border);
+    transition: 0.2s;
 }
 
-.refresh:hover {
-
-    background: #1d4ed8;
+.tab:hover {
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
+.tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
 
-/* =========================================================
-   SECTION
-========================================================= */
+/* ================= SECTIONS ================= */
 
 .section {
+    display: none;
+}
 
-    background: white;
-
-    border-radius: 18px;
-
-    margin-bottom: 30px;
-
-    padding: 25px;
-
-    box-shadow:
-        0 10px 30px rgba(15,23,42,.08);
-
-    border: 1px solid #e2e8f0;
+.section.active {
+    display: block;
 }
 
 .section-header {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    margin-bottom: 20px;
-
+    gap: 15px;
     flex-wrap: wrap;
-
-    gap: 10px;
+    margin-bottom: 18px;
 }
 
 .section-header h2 {
-
-    font-size: 25px;
+    font-size: 26px;
 }
 
-.count {
-
-    background: #eff6ff;
-
-    color: #1d4ed8;
-
-    padding: 7px 12px;
-
-    border-radius: 20px;
-
-    font-size: 13px;
-
-    font-weight: 700;
+.section-header p {
+    color: var(--muted);
+    margin-top: 4px;
 }
 
-
-/* =========================================================
-   TABLE
-========================================================= */
-
-.table-wrap {
-
-    overflow-x: auto;
-}
-
-table {
-
-    width: 100%;
-
-    border-collapse: collapse;
-
-    min-width: 800px;
-}
-
-th {
-
-    background: #f1f5f9;
-
-    color: #334155;
-
-    text-align: left;
-
-    padding: 13px;
-
-    font-size: 13px;
-
-    white-space: nowrap;
-}
-
-td {
-
-    padding: 12px 13px;
-
-    border-bottom:
-        1px solid #e2e8f0;
-
-    font-size: 13px;
-
-    vertical-align: middle;
-}
-
-tbody tr:hover {
-
-    background: #f8fafc;
-}
-
-
-/* =========================================================
-   COLLISION
-========================================================= */
-
-.collision {
-
-    background: #fff1f2 !important;
-}
-
-.collision td {
-
-    color: #9f1239;
-
-    border-bottom-color:
-        #fecdd3;
-}
-
-.collision-label {
-
-    display: inline-block;
-
-    background: #dc2626;
-
-    color: white;
-
-    padding: 4px 8px;
-
-    border-radius: 5px;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    margin-left: 7px;
-}
-
-.collision-info {
-
-    margin-top: 8px;
-
-    padding: 9px 11px;
-
-    background: #ffe4e6;
-
-    border-left:
-        4px solid #dc2626;
-
-    border-radius: 7px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    color: #9f1239;
-}
-
-.collision-roll {
-
-    display: inline-block;
-
-    background: white;
-
-    border: 1px solid #fda4af;
-
-    padding: 4px 7px;
-
-    border-radius: 5px;
-
-    margin: 3px 3px 0 0;
-
-    font-family: monospace;
-
-    color: #881337;
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-.status {
-
-    display: inline-block;
-
-    padding: 5px 9px;
-
-    border-radius: 6px;
-
-    font-size: 11px;
-
-    font-weight: 800;
-}
-
-.status-ok {
-
-    background: #dcfce7;
-
-    color: #166534;
-}
-
-.status-empty {
-
-    background: #f1f5f9;
-
-    color: #64748b;
-}
-
-.status-warning {
-
-    background: #fee2e2;
-
-    color: #991b1b;
-}
-
-
-/* =========================================================
-   CHANGE BUTTON
-========================================================= */
-
-.change-btn {
-
-    background: #dc2626;
-
-    color: white;
-
-    border: none;
-
-    padding: 7px 11px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-size: 11px;
-
-    font-weight: 700;
-}
-
-.change-btn:hover {
-
-    background: #b91c1c;
-}
-
-
-/* =========================================================
-   FORMS
-========================================================= */
-
-.forms {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 25px;
-
-    margin-top: 30px;
-}
+/* ================= ALLOCATION CARD ================= */
 
 .form-card {
-
-    background: white;
-
-    border:
-        1px solid #e2e8f0;
-
-    border-radius: 16px;
-
-    padding: 22px;
-
-    box-shadow:
-        0 8px 25px rgba(15,23,42,.06);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 22px;
 }
 
-.form-card h3 {
-
-    margin-bottom: 18px;
-
-    font-size: 19px;
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr auto;
+    gap: 14px;
+    align-items: end;
 }
 
-.group {
+.project-form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
 
-    margin-bottom: 14px;
+.project-form-grid .full {
+    grid-column: 1 / -1;
 }
 
 label {
-
     display: block;
-
-    font-size: 13px;
-
     font-weight: 700;
-
-    margin-bottom: 6px;
+    font-size: 14px;
+    margin-bottom: 7px;
 }
 
 input,
 select {
-
     width: 100%;
-
-    padding: 11px;
-
-    border:
-        1px solid #cbd5e1;
-
-    border-radius: 9px;
-
-    outline: none;
-
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 11px;
     background: white;
-
-    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    font-size: 14px;
 }
 
 input:focus,
 select:focus {
-
-    border-color: #2563eb;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,.12);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
 }
 
+button {
+    font-family: inherit;
+}
 
-/* =========================================================
-   SUBMIT BUTTONS
-========================================================= */
-
-button.submit {
-
-    width: 100%;
-
-    padding: 12px;
-
+.primary-btn {
     border: none;
-
-    border-radius: 9px;
-
+    background: var(--primary);
     color: white;
-
+    padding: 12px 20px;
+    border-radius: 11px;
     font-weight: 700;
-
     cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+}
 
+.primary-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: var(--text);
+    padding: 9px 14px;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.secondary-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.danger-btn {
+    border: none;
+    background: var(--danger);
+    color: white;
+    padding: 9px 14px;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* ================= TABLE ================= */
+
+.table-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.table-top {
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.table-top h3 {
+    font-size: 18px;
+}
+
+.search {
+    width: min(320px, 100%);
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+th {
+    background: #f1f5ff;
+    color: #334155;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 13px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 14px 15px;
+    border-bottom: 1px solid #edf1f7;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: #f8faff;
+}
+
+.collision-row {
+    background: #fff1f2 !important;
+}
+
+.collision-row:hover {
+    background: #ffe4e6 !important;
+}
+
+.project-collision-row {
+    background: #fff7ed !important;
+}
+
+.topic-name {
+    font-weight: 700;
+}
+
+.roll {
+    font-family: Consolas, monospace;
+    font-weight: 700;
+    color: #334155;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.status.available {
+    color: var(--success);
+    background: var(--success-bg);
+}
+
+.status.allocated {
+    color: #1e40af;
+    background: #dbeafe;
+}
+
+.status.collision {
+    color: var(--danger);
+    background: var(--danger-bg);
+}
+
+.status.warning {
+    color: var(--warning);
+    background: var(--warning-bg);
+}
+
+.conflict {
+    color: var(--danger);
+    font-size: 12px;
+    font-weight: 700;
     margin-top: 5px;
 }
 
-button:disabled {
-
-    opacity: .65;
-
-    cursor: not-allowed;
+.muted {
+    color: var(--muted);
 }
 
-.theory {
+/* ================= TOAST ================= */
 
+#toastContainer {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    min-width: 280px;
+    max-width: 420px;
+    padding: 14px 17px;
+    border-radius: 13px;
+    color: white;
+    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    animation: slideIn .25s ease;
+    font-size: 14px;
+}
+
+.toast.success {
+    background: #15803d;
+}
+
+.toast.error {
+    background: #dc2626;
+}
+
+.toast.info {
     background: #2563eb;
 }
 
-.theory:hover {
-
-    background: #1d4ed8;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-.lab {
-
-    background: #059669;
-}
-
-.lab:hover {
-
-    background: #047857;
-}
-
-.project {
-
-    background: #7c3aed;
-}
-
-.project:hover {
-
-    background: #6d28d9;
-}
-
-
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-.message {
-
-    margin-top: 12px;
-
-    padding: 10px;
-
-    border-radius: 8px;
-
-    font-size: 13px;
-
-    display: none;
-}
-
-.message.success {
-
-    display: block;
-
-    background: #dcfce7;
-
-    color: #166534;
-}
-
-.message.error {
-
-    display: block;
-
-    background: #fee2e2;
-
-    color: #991b1b;
-}
-
-.message.loading {
-
-    display: block;
-
-    background: #eff6ff;
-
-    color: #1d4ed8;
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
+/* ================= MODAL ================= */
 
 .modal {
-
     display: none;
-
     position: fixed;
-
     inset: 0;
-
-    background:
-        rgba(15,23,42,.55);
-
-    z-index: 1000;
-
+    background: rgba(15, 23, 42, 0.65);
+    z-index: 5000;
     align-items: center;
-
     justify-content: center;
-
     padding: 20px;
 }
 
-.modal-box {
-
-    background: white;
-
-    width: 100%;
-
-    max-width: 500px;
-
-    padding: 25px;
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.25);
+.modal.show {
+    display: flex;
 }
 
-.modal-box h3 {
+.modal-box {
+    width: min(560px, 100%);
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 25px 70px rgba(0,0,0,.25);
+}
 
-    margin-bottom: 18px;
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close {
+    border: none;
+    background: #f1f5f9;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .modal-actions {
-
     display: flex;
-
     gap: 10px;
-
-    margin-top: 15px;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
-.modal-actions button {
+/* ================= EMPTY / LOADING ================= */
 
-    flex: 1;
-
-    padding: 11px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-weight: 700;
+.empty {
+    padding: 45px;
+    text-align: center;
+    color: var(--muted);
 }
 
-.cancel {
-
-    background: #e2e8f0;
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
 }
 
-.confirm {
-
-    background: #dc2626;
-
-    color: white;
+.refresh-info {
+    color: var(--muted);
+    font-size: 12px;
 }
 
-
-/* =========================================================
-   FOOTER
-========================================================= */
+/* ================= FOOTER ================= */
 
 footer {
-
     text-align: center;
-
-    padding: 30px;
-
-    color: #64748b;
-
+    padding: 35px 0;
+    color: var(--muted);
     font-size: 13px;
 }
 
+/* ================= RESPONSIVE ================= */
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+@media (max-width: 1000px) {
 
-@media(max-width:1000px) {
+    .summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-    .forms {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
 
+    .project-form-grid {
         grid-template-columns: 1fr;
     }
 }
 
-@media(max-width:700px) {
+@media (max-width: 600px) {
 
-    header h1 {
-
-        font-size: 27px;
+    .summary {
+        grid-template-columns: 1fr;
     }
 
-    .section {
-
-        padding: 16px;
+    .header-box {
+        padding: 23px;
     }
 
-    .container {
+    .form-card {
+        padding: 18px;
+    }
 
-        padding: 20px 12px;
+    .tab {
+        width: 100%;
+    }
+
+    #toastContainer {
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .toast {
+        min-width: auto;
+        max-width: none;
     }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
+<div class="container">
 
 <header>
-
-    <h1>
-        DBMS Topic Allocation Dashboard
-    </h1>
-
-    <p>
-        Theory • Lab • Project
-    </p>
-
+    <div class="header-box">
+        <h1>DBMS Topic Allocation</h1>
+        <p>
+            Theory • Lab • Project — centralized topic allocation system
+        </p>
+    </div>
 </header>
 
 
-<div class="container">
+<!-- ================= SUMMARY ================= -->
 
+<div class="summary">
 
-<!-- =======================================================
-     SUMMARY
-======================================================= -->
-
-<div class="topbar">
-
-    <div class="summary">
-
-        <div class="badge">
-            Theory:
-            <span id="theoryCount">0</span>
-        </div>
-
-        <div class="badge">
-            Lab:
-            <span id="labCount">0</span>
-        </div>
-
-        <div class="badge">
-            Projects:
-            <span id="projectCount">0</span>
-        </div>
-
-        <div class="badge">
-            ⚠ Collisions:
-            <span id="collisionCount">0</span>
-        </div>
-
+    <div class="summary-card">
+        <div class="number" id="theoryCount">0</div>
+        <div class="label">Theory Allocations</div>
     </div>
 
+    <div class="summary-card">
+        <div class="number" id="labCount">0</div>
+        <div class="label">Lab Allocations</div>
+    </div>
 
-    <button
-        class="refresh"
-        onclick="loadData()"
-    >
-        ↻ Refresh
+    <div class="summary-card">
+        <div class="number" id="projectCount">0</div>
+        <div class="label">Project Teams</div>
+    </div>
+
+    <div class="summary-card">
+        <div class="number" id="collisionCount">0</div>
+        <div class="label">Detected Collisions</div>
+    </div>
+
+</div>
+
+
+<!-- ================= TABS ================= -->
+
+<div class="tabs">
+
+    <button class="tab active" onclick="showSection('theory', this)">
+        DBMS Theory
+    </button>
+
+    <button class="tab" onclick="showSection('lab', this)">
+        DBMS Lab
+    </button>
+
+    <button class="tab" onclick="showSection('project', this)">
+        DBMS Project
     </button>
 
 </div>
 
 
-<!-- =======================================================
-     THEORY DASHBOARD
-======================================================= -->
+<!-- =========================================================
+     THEORY
+     ========================================================= -->
 
-<section class="section">
+<section id="theory" class="section active">
 
     <div class="section-header">
 
-        <h2>
-            📘 DBMS Theory Allocations
-        </h2>
+        <div>
+            <h2>DBMS Theory</h2>
+            <p>
+                Select a topic using your existing Roll Number.
+            </p>
+        </div>
 
-        <div class="count">
-            Live Data
+        <span class="refresh-info">
+            Automatically refreshes every 30 seconds
+        </span>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <div class="form-grid">
+
+            <div>
+                <label>Roll Number</label>
+                <input
+                    id="theoryRoll"
+                    type="text"
+                    placeholder="Example: 257R1A66C9"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div>
+                <label>Topic</label>
+
+                <select id="theoryTopic">
+
+                    <option value="">
+                        Select Theory Topic
+                    </option>
+
+                </select>
+            </div>
+
+            <button
+                class="primary-btn"
+                onclick="allocateSingle('theory')"
+            >
+                Allocate Topic
+            </button>
+
         </div>
 
     </div>
 
 
-    <div class="table-wrap">
+    <div class="table-card">
 
-        <table>
+        <div class="table-top">
 
-            <thead>
+            <h3>Theory Allocation Status</h3>
 
-                <tr>
+            <input
+                class="search"
+                id="theorySearch"
+                type="text"
+                placeholder="Search Roll Number or Topic..."
+                oninput="renderTheory()"
+            >
 
-                    <th>
-                        S.No
-                    </th>
+        </div>
 
-                    <th>
-                        Roll Number
-                    </th>
+        <div class="table-wrapper">
 
-                    <th>
-                        Topic
-                    </th>
+            <table>
 
-                    <th>
-                        Status
-                    </th>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Roll Number</th>
+                        <th>Topic</th>
+                        <th>Presentation Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-                    <th>
-                        Action
-                    </th>
+                <tbody id="theoryTable">
+                </tbody>
 
-                </tr>
+            </table>
 
-            </thead>
-
-
-            <tbody id="theoryTable">
-
-            </tbody>
-
-        </table>
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- =======================================================
-     LAB DASHBOARD
-======================================================= -->
+<!-- =========================================================
+     LAB
+     ========================================================= -->
 
-<section class="section">
+<section id="lab" class="section">
 
     <div class="section-header">
 
-        <h2>
-            💻 DBMS Lab Allocations
-        </h2>
+        <div>
+            <h2>DBMS Lab</h2>
+            <p>
+                Select a lab topic using your existing Roll Number.
+            </p>
+        </div>
 
-        <div class="count">
-            Live Data
+        <span class="refresh-info">
+            Automatically refreshes every 30 seconds
+        </span>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <div class="form-grid">
+
+            <div>
+                <label>Roll Number</label>
+
+                <input
+                    id="labRoll"
+                    type="text"
+                    placeholder="Example: 257R1A66C9"
+                    autocomplete="off"
+                >
+            </div>
+
+            <div>
+
+                <label>Topic</label>
+
+                <select id="labTopic">
+
+                    <option value="">
+                        Select Lab Topic
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                class="primary-btn"
+                onclick="allocateSingle('lab')"
+            >
+                Allocate Topic
+            </button>
+
         </div>
 
     </div>
 
 
-    <div class="table-wrap">
+    <div class="table-card">
 
-        <table>
+        <div class="table-top">
 
-            <thead>
+            <h3>Lab Allocation Status</h3>
 
-                <tr>
+            <input
+                class="search"
+                id="labSearch"
+                type="text"
+                placeholder="Search Roll Number or Topic..."
+                oninput="renderLab()"
+            >
 
-                    <th>
-                        S.No
-                    </th>
+        </div>
 
-                    <th>
-                        Roll Number
-                    </th>
+        <div class="table-wrapper">
 
-                    <th>
-                        Topic
-                    </th>
+            <table>
 
-                    <th>
-                        Status
-                    </th>
+                <thead>
 
-                    <th>
-                        Action
-                    </th>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Roll Number</th>
+                        <th>Topic</th>
+                        <th>Presentation Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
 
-                </tr>
+                </thead>
 
-            </thead>
+                <tbody id="labTable">
+                </tbody>
 
+            </table>
 
-            <tbody id="labTable">
-
-            </tbody>
-
-        </table>
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- =======================================================
-     PROJECT DASHBOARD
-======================================================= -->
+<!-- =========================================================
+     PROJECT
+     ========================================================= -->
 
-<section class="section">
+<section id="project" class="section">
 
     <div class="section-header">
 
-        <h2>
-            🚀 DBMS Project Allocations
-        </h2>
+        <div>
+            <h2>DBMS Project</h2>
+            <p>
+                Each project is allocated to exactly one team of 3 students.
+            </p>
+        </div>
 
-        <div class="count">
-            Live Data
+        <span class="refresh-info">
+            Automatically refreshes every 30 seconds
+        </span>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <div class="project-form-grid">
+
+            <div>
+                <label>Team Member 1</label>
+
+                <input
+                    id="projectRoll1"
+                    type="text"
+                    placeholder="Roll Number"
+                    autocomplete="off"
+                >
+            </div>
+
+
+            <div>
+                <label>Team Member 2</label>
+
+                <input
+                    id="projectRoll2"
+                    type="text"
+                    placeholder="Roll Number"
+                    autocomplete="off"
+                >
+            </div>
+
+
+            <div>
+                <label>Team Member 3</label>
+
+                <input
+                    id="projectRoll3"
+                    type="text"
+                    placeholder="Roll Number"
+                    autocomplete="off"
+                >
+            </div>
+
+
+            <div class="full">
+
+                <label>Project Title</label>
+
+                <select id="projectTopic">
+
+                    <option value="">
+                        Select Project
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="full">
+
+                <button
+                    class="primary-btn"
+                    onclick="allocateProject()"
+                >
+                    Allocate Project
+                </button>
+
+            </div>
+
         </div>
 
     </div>
 
 
-    <div class="table-wrap">
+    <div class="table-card">
 
-        <table>
+        <div class="table-top">
 
-            <thead>
+            <h3>Project Allocation Status</h3>
 
-                <tr>
+            <input
+                class="search"
+                id="projectSearch"
+                type="text"
+                placeholder="Search Roll Number or Project..."
+                oninput="renderProjects()"
+            >
 
-                    <th>
-                        S.No
-                    </th>
-
-                    <th>
-                        Team Roll Numbers
-                    </th>
-
-                    <th>
-                        Project
-                    </th>
-
-                    <th>
-                        Batch
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                    <th>
-                        Action
-                    </th>
-
-                </tr>
-
-            </thead>
+        </div>
 
 
-            <tbody id="projectTable">
+        <div class="table-wrapper">
 
-            </tbody>
+            <table>
 
-        </table>
+                <thead>
+
+                    <tr>
+                        <th>S.No</th>
+                        <th>Team Roll Numbers</th>
+                        <th>Batch</th>
+                        <th>Project</th>
+                        <th>Presentation Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="projectTable">
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- =======================================================
-     ALLOCATION FORMS
-======================================================= -->
-
-<div class="forms">
-
-
-<!-- =======================================================
-     THEORY FORM
-======================================================= -->
-
-<div class="form-card">
-
-    <h3>
-        Allocate Theory
-    </h3>
-
-
-    <div class="group">
-
-        <label>
-            Roll Number
-        </label>
-
-        <input
-            id="theoryRoll"
-            placeholder="257R1A66C9"
-            autocomplete="off"
-        >
-
-    </div>
-
-
-    <div class="group">
-
-        <label>
-            Topic
-        </label>
-
-        <select id="theoryTopic">
-
-            <option value="">
-                -- Select Topic --
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <button
-        class="submit theory"
-        onclick="allocateTheory()"
-    >
-        Allocate Theory
-    </button>
-
-
-    <div
-        id="theoryMessage"
-        class="message"
-    ></div>
+<footer>
+    DBMS Topic Allocation System
+</footer>
 
 </div>
 
 
-<!-- =======================================================
-     LAB FORM
-======================================================= -->
+<!-- ================= CHANGE MODAL ================= -->
 
-<div class="form-card">
-
-    <h3>
-        Allocate Lab
-    </h3>
-
-
-    <div class="group">
-
-        <label>
-            Roll Number
-        </label>
-
-        <input
-            id="labRoll"
-            placeholder="257R1A66C9"
-            autocomplete="off"
-        >
-
-    </div>
-
-
-    <div class="group">
-
-        <label>
-            Topic
-        </label>
-
-        <select id="labTopic">
-
-            <option value="">
-                -- Select Topic --
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <button
-        class="submit lab"
-        onclick="allocateLab()"
-    >
-        Allocate Lab
-    </button>
-
-
-    <div
-        id="labMessage"
-        class="message"
-    ></div>
-
-</div>
-
-
-<!-- =======================================================
-     PROJECT FORM
-======================================================= -->
-
-<div class="form-card">
-
-    <h3>
-        Allocate Project
-    </h3>
-
-
-    <div class="group">
-
-        <label>
-            Team Member 1
-        </label>
-
-        <input
-            id="projectRoll1"
-            placeholder="Roll Number"
-            autocomplete="off"
-        >
-
-    </div>
-
-
-    <div class="group">
-
-        <label>
-            Team Member 2
-        </label>
-
-        <input
-            id="projectRoll2"
-            placeholder="Roll Number"
-            autocomplete="off"
-        >
-
-    </div>
-
-
-    <div class="group">
-
-        <label>
-            Team Member 3
-        </label>
-
-        <input
-            id="projectRoll3"
-            placeholder="Roll Number"
-            autocomplete="off"
-        >
-
-    </div>
-
-
-    <div class="group">
-
-        <label>
-            Project
-        </label>
-
-        <select id="projectTopic">
-
-            <option value="">
-                -- Select Project --
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <button
-        class="submit project"
-        onclick="allocateProject()"
-    >
-        Allocate Project
-    </button>
-
-
-    <div
-        id="projectMessage"
-        class="message"
-    ></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =======================================================
-     CHANGE MODAL
-======================================================= -->
-
-<div
-    class="modal"
-    id="changeModal"
->
+<div class="modal" id="changeModal">
 
     <div class="modal-box">
 
-        <h3 id="modalTitle">
-            Change Topic
-        </h3>
+        <div class="modal-header">
+
+            <div>
+                <h3 id="modalTitle">
+                    Change Topic
+                </h3>
+
+                <p
+                    class="muted"
+                    id="modalDescription"
+                    style="margin-top:5px;"
+                >
+                </p>
+            </div>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
 
 
-        <div id="modalContent">
+        <div id="singleChangeBox">
+
+            <label>New Topic</label>
+
+            <select id="newTopicSelect"></select>
+
+        </div>
+
+
+        <div id="projectChangeBox" style="display:none;">
+
+            <label>New Project</label>
+
+            <select id="newProjectSelect"></select>
 
         </div>
 
@@ -1237,488 +1027,1759 @@ footer {
         <div class="modal-actions">
 
             <button
-                class="cancel"
+                class="secondary-btn"
                 onclick="closeModal()"
             >
                 Cancel
             </button>
 
-
             <button
-                class="confirm"
-                onclick="confirmChange()"
+                class="primary-btn"
+                onclick="submitChange()"
             >
-                Change
+                Confirm Change
             </button>
 
         </div>
-
-
-        <div
-            id="modalMessage"
-            class="message"
-        ></div>
 
     </div>
 
 </div>
 
 
-<!-- =======================================================
-     FOOTER
-======================================================= -->
+<!-- ================= TOAST ================= -->
 
-<footer>
-
-    DBMS Topic Allocation System
-
-    <br>
-
-    Live data synchronized with Google Sheets
-
-</footer>
+<div id="toastContainer"></div>
 
 
 <script>
 
-
 /* =========================================================
    APPS SCRIPT URL
-========================================================= */
+   ========================================================= */
 
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbyKLRMVavrQoZbJbMdRclA23R76WbvM9I0s46l-Dvnv9j86reWXaYoxz1kbToOIp-fwcg/exec";
+"https://script.google.com/macros/s/AKfycbx7rNFBrasnyHwGi--xERDMLwyowuxBR8Pzhe3Cz4abDy7hF2Cy9Oe0kBG2a0bc-oAvTA/exec";
 
 
 /* =========================================================
-   THEORY TOPICS
-========================================================= */
+   TOPIC LISTS
+   ========================================================= */
 
 const THEORY_TOPICS = [
-
 "Functional Dependencies",
-
 "ER Diagram for a Hospital Management System",
-
 "Basic Form of SQL Queries",
-
 "B+ Trees: A Dynamic Index Structure",
-
 "Advantages and Applications of DBMS",
-
 "Selection and Projection Operations",
-
 "Transaction Concept and Transaction States",
-
 "Weak Entity Sets and Strong Entity Sets",
-
 "UNION, INTERSECT, and EXCEPT Operations in SQL",
-
 "Problems Caused by Data Redundancy",
-
 "Data Independence in Database Systems",
-
 "Natural Join and Its Applications",
-
 "Lock-Based Concurrency Control Protocols",
-
 "Entity-Relationship (ER) Model",
-
 "Fourth Normal Form (4NF)",
-
 "Database System Architecture",
-
 "NULL Values in SQL",
-
 "Relational Algebra: Fundamental Operators",
-
 "ER Diagram for an Online Shopping System",
-
 "Atomicity and Durability in Transactions",
-
 "Types of Attributes in ER Model",
-
 "Database Decomposition",
-
 "Tuple Relational Calculus",
-
 "File Organization and Indexing Techniques",
-
 "Second Normal Form (2NF)",
-
 "Relationships and Relationship Sets",
-
 "Triggers and Active Databases",
-
 "Introduction to the Relational Model",
-
 "Lossless Join Decomposition",
-
 "SQL SELECT, FROM, and WHERE Clauses",
-
 "Multiple Granularity Protocol",
-
 "Additional Features of the ER Model",
-
 "Division Operator in Relational Algebra",
-
 "File Systems versus Database Management Systems",
-
 "Fifth Normal Form (5NF)",
-
 "Aggregation Operators in SQL",
-
 "Logical Database Design",
-
 "Concurrent Executions and Their Problems",
-
 "Types of Relationships in ER Model",
-
 "Domain Relational Calculus",
-
 "Structure and Components of a DBMS",
-
 "Third Normal Form (3NF)",
-
 "Join Operations in Relational Algebra",
-
 "Complex Integrity Constraints in SQL",
-
 "Evolution and Historical Perspective of Database Systems",
-
 "Serializability and Recoverability",
-
 "Creating, Altering, and Destroying Tables and Views",
-
 "Multivalued Dependencies",
-
 "ER Diagram for a College Management System",
-
 "Timestamp-Based and Validation-Based Protocols",
-
 "Integrity Constraints over Relations",
-
 "Boyce-Codd Normal Form (BCNF)",
-
 "Relational Algebra versus Relational Calculus",
-
 "Views in Relational Databases",
-
 "Log-Based Recovery and Atomicity",
-
 "Entities, Attributes, and Entity Sets",
-
 "Cartesian Product, Union, and Set Difference",
-
 "Querying Relational Data",
-
 "Types and Applications of SQL Triggers",
-
 "Database Design Process",
-
 "Rename Operator in Relational Algebra",
-
 "Enforcement of Integrity Constraints",
-
 "Nested Queries in SQL",
-
 "Conceptual Database Design Using ER Diagrams",
-
 "Problems Related to Decomposition",
-
 "Different Types of Data Models",
-
 "Domain Relational Calculus",
-
 "Reasoning about Functional Dependencies",
-
 "Relational Model Integrity Constraints",
-
 "Hash-Based and Tree-Based Indexing"
-
 ];
 
-
-/* =========================================================
-   LAB TOPICS
-========================================================= */
 
 const LAB_TOPICS = [
-
 "Introduction to MySQL and Database Environment",
-
 "Designing an ER Diagram for a College Management System",
-
 "SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
-
 "Database Normalization and Its Practical Importance",
-
 "SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
-
 "Database Views and Their Practical Applications",
-
 "DML Commands: INSERT, UPDATE and DELETE",
-
 "Functional Dependencies in Database Design",
-
 "Nested Queries and Subqueries in SQL",
-
 "SQL Aggregate Functions with GROUP BY and HAVING",
-
 "Database Design for an Online Shopping System",
-
 "Primary Key and Foreign Key Constraints",
-
 "Correlated Subqueries in SQL",
-
 "SQL Set Operations: UNION, INTERSECT and EXCEPT",
-
 "Database Triggers and Their Applications",
-
 "Stored Procedures in MySQL",
-
 "Cursor Handling in Database Programming",
-
 "One-to-One, One-to-Many and Many-to-Many Relationships",
-
 "Converting ER Diagrams into Relational Schemas",
-
 "SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
-
 "First Normal Form, Second Normal Form and Third Normal Form",
-
 "Boyce-Codd Normal Form (BCNF)",
-
 "Designing a Hospital Management Database",
-
 "SQL Queries for Employee Management System",
-
 "SQL Queries for Student Management System",
-
 "SQL Queries for Banking Database",
-
 "SQL Queries for Library Management System",
-
 "SQL Queries for Railway Reservation System",
-
 "SQL Queries for Hotel Management System",
-
 "SQL Queries for E-Commerce Database",
-
 "Self Join and Its Applications",
-
 "Cross Join and Cartesian Product",
-
 "Natural Join and Equi Join",
-
 "Subqueries Using IN, ANY and ALL",
-
 "EXISTS and NOT EXISTS in SQL",
-
 "SQL Date and Time Functions",
-
 "SQL String Functions and Their Applications",
-
 "SQL Numeric and Mathematical Functions",
-
 "NULL Values and Three-Valued Logic in SQL",
-
 "Creating and Managing SQL Views",
-
 "BEFORE and AFTER Triggers in MySQL",
-
 "INSERT, UPDATE and DELETE Triggers",
-
 "Audit Trail Using Database Triggers",
-
 "Stored Functions versus Stored Procedures",
-
 "Input and Output Parameters in Stored Procedures",
-
 "Cursors and Their Applications in MySQL",
-
 "Error Handling in Stored Procedures",
-
 "Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
-
 "ACID Properties of Database Transactions",
-
 "Database Concurrency and Transaction Problems",
-
 "Indexing in MySQL for Faster Query Processing",
-
 "Clustered and Non-Clustered Indexing",
-
 "Primary Index, Secondary Index and Composite Index",
-
 "Query Optimization Techniques in MySQL",
-
 "Understanding EXPLAIN in MySQL",
-
 "SQL Injection and Database Security",
-
 "DCL Commands: GRANT and REVOKE",
-
 "User Management and Privileges in MySQL",
-
 "Database Backup and Restoration",
-
 "Database Import and Export Using MySQL",
-
 "Connecting Java Applications with MySQL",
-
 "Connecting Python Applications with MySQL",
-
 "CRUD Operations Using a Database Application",
-
 "Database Connectivity Using JDBC",
-
 "Database Connectivity Using Python and MySQL Connector",
-
 "Introduction to NoSQL Databases",
-
 "Relational Databases versus NoSQL Databases",
-
 "MySQL JSON Data Types and JSON Queries",
-
 "Database Replication and High Availability",
-
 "Database Performance Monitoring and Optimization"
-
 ];
 
-
-/* =========================================================
-   PROJECT TOPICS
-========================================================= */
 
 const PROJECT_TOPICS = [
-
 "Supermarket Billing Management System",
-
 "Blood Donation Camp Management System",
-
 "Doctor Appointment Booking System",
-
 "Online Examination Management System",
-
 "College Hostel Allocation System",
-
 "Vehicle Service Center Management System",
-
 "Online Event Management System",
-
 "College Placement Management System",
-
 "Sports Tournament Management System",
-
 "Parking Management System",
-
 "Electricity Billing Management System",
-
 "Water Supply Billing Management System",
-
 "Real Estate Property Management System",
-
 "Mobile Shop Management System",
-
 "Computer Sales and Service Management System",
-
 "Online Complaint Management System",
-
 "Travel Agency Management System",
-
 "Flight Booking Management System",
-
 "Pet Clinic Management System",
-
 "Donation Management System",
-
 "Digital Document Management System",
-
 "Freelancer Project Management System",
-
 "Online Auction Management System"
-
 ];
 
 
 /* =========================================================
-   DATABASE
-========================================================= */
+   GLOBAL DATA
+   ========================================================= */
 
-let database = {
-
+let appData = {
     theory: [],
-
     lab: [],
+    projects: []
+};
 
-    project: []
-
+let currentChange = {
+    type: null,
+    roll: null,
+    rolls: null
 };
 
 
 /* =========================================================
-   CHANGE STATE
-========================================================= */
+   NORMALIZATION
+   ========================================================= */
 
-let changeState = null;
+function normalizeText(value) {
+
+    return String(value || "")
+        .replace(/\u00A0/g, " ")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+}
+
+
+function normalizeRoll(value) {
+
+    return String(value || "")
+        .trim()
+        .replace(/\s+/g, "")
+        .toUpperCase();
+}
+
+
+function normalizeProject(value) {
+
+    return String(value || "")
+        .replace(/\u00A0/g, " ")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+}
+
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
 
 /* =========================================================
    LOAD DATA
-========================================================= */
+   ========================================================= */
 
 async function loadData() {
 
     try {
 
-        const response = await fetch(
-            SCRIPT_URL + "?t=" + Date.now()
-        );
-
-        if (!response.ok) {
-
-            throw new Error(
-                "HTTP error: " + response.status
+        const response =
+            await fetch(
+                SCRIPT_URL + "?t=" + Date.now()
             );
 
-        }
+        const data =
+            await response.json();
 
-        const data = await response.json();
 
         if (!data.success) {
 
             throw new Error(
-                data.message ||
-                "Data loading failed"
+                data.message || "Unable to load data."
+            );
+        }
+
+
+        appData = data;
+
+
+        renderAll();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Unable to connect to the allocation server.",
+            "error"
+        );
+    }
+}
+
+
+/* =========================================================
+   POST REQUEST
+   ========================================================= */
+
+async function postData(payload) {
+
+    const response =
+        await fetch(
+            SCRIPT_URL,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify(payload)
+            }
+        );
+
+    return await response.json();
+}
+
+
+/* =========================================================
+   ALLOCATE THEORY / LAB
+   ========================================================= */
+
+async function allocateSingle(type) {
+
+    const roll =
+        normalizeRoll(
+            document.getElementById(
+                type + "Roll"
+            ).value
+        );
+
+
+    const topic =
+        document.getElementById(
+            type + "Topic"
+        ).value;
+
+
+    if (!roll) {
+
+        showToast(
+            "Enter your Roll Number.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (!topic) {
+
+        showToast(
+            "Select a topic.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    try {
+
+        showToast(
+            "Processing allocation...",
+            "info"
+        );
+
+
+        const result =
+            await postData({
+                action: "allocateSingle",
+                category: type,
+                roll: roll,
+                topic: topic
+            });
+
+
+        if (result.success) {
+
+            showToast(
+                result.message,
+                "success"
+            );
+
+
+            document.getElementById(
+                type + "Roll"
+            ).value = "";
+
+            document.getElementById(
+                type + "Topic"
+            ).value = "";
+
+
+            await loadData();
+
+        } else {
+
+            showToast(
+                result.message,
+                "error"
+            );
+
+            await loadData();
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Allocation request failed.",
+            "error"
+        );
+    }
+}
+
+
+/* =========================================================
+   ALLOCATE PROJECT
+   ========================================================= */
+
+async function allocateProject() {
+
+    const rolls = [
+        normalizeRoll(
+            document.getElementById("projectRoll1").value
+        ),
+
+        normalizeRoll(
+            document.getElementById("projectRoll2").value
+        ),
+
+        normalizeRoll(
+            document.getElementById("projectRoll3").value
+        )
+    ];
+
+
+    const project =
+        document.getElementById(
+            "projectTopic"
+        ).value;
+
+
+    if (
+        !rolls[0] ||
+        !rolls[1] ||
+        !rolls[2]
+    ) {
+
+        showToast(
+            "Enter all 3 team Roll Numbers.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (
+        new Set(rolls).size !== 3
+    ) {
+
+        showToast(
+            "All 3 team Roll Numbers must be different.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (!project) {
+
+        showToast(
+            "Select a project.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    try {
+
+        showToast(
+            "Processing project allocation...",
+            "info"
+        );
+
+
+        const result =
+            await postData({
+                action: "allocateProject",
+                rolls: rolls,
+                topic: project
+            });
+
+
+        if (result.success) {
+
+            showToast(
+                result.message,
+                "success"
+            );
+
+
+            document.getElementById(
+                "projectRoll1"
+            ).value = "";
+
+            document.getElementById(
+                "projectRoll2"
+            ).value = "";
+
+            document.getElementById(
+                "projectRoll3"
+            ).value = "";
+
+            document.getElementById(
+                "projectTopic"
+            ).value = "";
+
+
+            await loadData();
+
+        } else {
+
+            showToast(
+                result.message,
+                "error"
+            );
+
+            await loadData();
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Project allocation request failed.",
+            "error"
+        );
+    }
+}
+
+
+/* =========================================================
+   FIND THEORY/LAB COLLISIONS
+   ========================================================= */
+
+function getTopicCollisions(rows) {
+
+    const map = {};
+
+
+    rows.forEach(function(row) {
+
+        const topic =
+            normalizeText(row.topic);
+
+
+        if (!topic) {
+            return;
+        }
+
+
+        if (!map[topic]) {
+            map[topic] = [];
+        }
+
+
+        map[topic].push(row);
+
+    });
+
+
+    const collisions = {};
+
+
+    Object.keys(map).forEach(function(topic) {
+
+        if (map[topic].length > 1) {
+
+            map[topic].forEach(function(row) {
+
+                collisions[
+                    normalizeRoll(row.roll)
+                ] = map[topic]
+                    .filter(function(other) {
+                        return (
+                            normalizeRoll(other.roll) !==
+                            normalizeRoll(row.roll)
+                        );
+                    });
+
+            });
+
+        }
+
+    });
+
+
+    return collisions;
+}
+
+
+/* =========================================================
+   THEORY RENDER
+   ========================================================= */
+
+function renderTheory() {
+
+    const tbody =
+        document.getElementById(
+            "theoryTable"
+        );
+
+
+    const search =
+        normalizeText(
+            document.getElementById(
+                "theorySearch"
+            ).value
+        );
+
+
+    const collisions =
+        getTopicCollisions(
+            appData.theory
+        );
+
+
+    const rows =
+        appData.theory.filter(function(row) {
+
+            return (
+                normalizeText(row.roll).includes(search) ||
+                normalizeText(row.topic).includes(search)
+            );
+
+        });
+
+
+    if (!rows.length) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    <div class="empty">
+                        No matching records found.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    tbody.innerHTML =
+        rows.map(function(row) {
+
+            const roll =
+                normalizeRoll(row.roll);
+
+            const topic =
+                String(row.topic || "").trim();
+
+            const conflict =
+                collisions[roll];
+
+
+            const isCollision =
+                !!conflict;
+
+
+            let conflictText = "";
+
+
+            if (isCollision) {
+
+                conflictText =
+                    `
+                    <div class="conflict">
+                        Same topic with:
+                        ${conflict.map(function(other) {
+                            return escapeHtml(
+                                normalizeRoll(other.roll)
+                            );
+                        }).join(", ")}
+                    </div>
+                    `;
+            }
+
+
+            return `
+                <tr class="${isCollision ? "collision-row" : ""}">
+
+                    <td>
+                        ${escapeHtml(row.sno)}
+                    </td>
+
+                    <td class="roll">
+                        ${escapeHtml(
+                            normalizeRoll(row.roll)
+                        )}
+                    </td>
+
+                    <td>
+                        ${
+                            topic
+                            ? `
+                                <div class="topic-name">
+                                    ${escapeHtml(topic)}
+                                </div>
+                                ${conflictText}
+                              `
+                            : `<span class="muted">Not allocated</span>`
+                        }
+                    </td>
+
+                    <td>
+                        ${escapeHtml(row.date || "-")}
+                    </td>
+
+                    <td>
+
+                        ${
+                            isCollision
+                            ?
+                            `<span class="status collision">
+                                Collision
+                             </span>`
+                            :
+                            topic
+                            ?
+                            `<span class="status allocated">
+                                Allocated
+                             </span>`
+                            :
+                            `<span class="status available">
+                                Available
+                             </span>`
+                        }
+
+                    </td>
+
+                    <td>
+
+                        ${
+                            isCollision
+                            ?
+                            `
+                            <button
+                                class="danger-btn"
+                                onclick="openSingleChange(
+                                    'theory',
+                                    '${escapeAttr(roll)}'
+                                )"
+                            >
+                                Change Topic
+                            </button>
+                            `
+                            :
+                            `<span class="muted">—</span>`
+                        }
+
+                    </td>
+
+                </tr>
+            `;
+
+        }).join("");
+}
+
+
+/* =========================================================
+   LAB RENDER
+   ========================================================= */
+
+function renderLab() {
+
+    const tbody =
+        document.getElementById(
+            "labTable"
+        );
+
+
+    const search =
+        normalizeText(
+            document.getElementById(
+                "labSearch"
+            ).value
+        );
+
+
+    const collisions =
+        getTopicCollisions(
+            appData.lab
+        );
+
+
+    const rows =
+        appData.lab.filter(function(row) {
+
+            return (
+                normalizeText(row.roll).includes(search) ||
+                normalizeText(row.topic).includes(search)
+            );
+
+        });
+
+
+    if (!rows.length) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    <div class="empty">
+                        No matching records found.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    tbody.innerHTML =
+        rows.map(function(row) {
+
+            const roll =
+                normalizeRoll(row.roll);
+
+            const topic =
+                String(row.topic || "").trim();
+
+            const conflict =
+                collisions[roll];
+
+            const isCollision =
+                !!conflict;
+
+
+            let conflictText = "";
+
+
+            if (isCollision) {
+
+                conflictText =
+                    `
+                    <div class="conflict">
+                        Same topic with:
+                        ${conflict.map(function(other) {
+                            return escapeHtml(
+                                normalizeRoll(other.roll)
+                            );
+                        }).join(", ")}
+                    </div>
+                    `;
+            }
+
+
+            return `
+                <tr class="${isCollision ? "collision-row" : ""}">
+
+                    <td>
+                        ${escapeHtml(row.sno)}
+                    </td>
+
+                    <td class="roll">
+                        ${escapeHtml(roll)}
+                    </td>
+
+                    <td>
+
+                        ${
+                            topic
+                            ?
+                            `
+                            <div class="topic-name">
+                                ${escapeHtml(topic)}
+                            </div>
+
+                            ${conflictText}
+                            `
+                            :
+                            `<span class="muted">
+                                Not allocated
+                             </span>`
+                        }
+
+                    </td>
+
+                    <td>
+                        ${escapeHtml(row.date || "-")}
+                    </td>
+
+                    <td>
+
+                        ${
+                            isCollision
+                            ?
+                            `<span class="status collision">
+                                Collision
+                             </span>`
+                            :
+                            topic
+                            ?
+                            `<span class="status allocated">
+                                Allocated
+                             </span>`
+                            :
+                            `<span class="status available">
+                                Available
+                             </span>`
+                        }
+
+                    </td>
+
+                    <td>
+
+                        ${
+                            isCollision
+                            ?
+                            `
+                            <button
+                                class="danger-btn"
+                                onclick="openSingleChange(
+                                    'lab',
+                                    '${escapeAttr(roll)}'
+                                )"
+                            >
+                                Change Topic
+                            </button>
+                            `
+                            :
+                            `<span class="muted">—</span>`
+                        }
+
+                    </td>
+
+                </tr>
+            `;
+
+        }).join("");
+}
+
+
+/* =========================================================
+   PROJECT COLLISIONS
+   ========================================================= */
+
+function getProjectCollisions() {
+
+    const memberMap = {};
+
+
+    appData.projects.forEach(function(project) {
+
+        const rolls =
+            parseProjectRolls(
+                project.teamRolls
+            );
+
+
+        rolls.forEach(function(roll) {
+
+            if (!memberMap[roll]) {
+                memberMap[roll] = [];
+            }
+
+
+            memberMap[roll].push(project);
+
+        });
+
+    });
+
+
+    const collisions = {};
+
+
+    Object.keys(memberMap).forEach(function(roll) {
+
+        if (memberMap[roll].length > 1) {
+
+            memberMap[roll].forEach(function(project) {
+
+                const key =
+                    String(project.row);
+
+                if (!collisions[key]) {
+                    collisions[key] = [];
+                }
+
+                if (
+                    collisions[key].indexOf(roll) === -1
+                ) {
+                    collisions[key].push(roll);
+                }
+
+            });
+
+        }
+
+    });
+
+
+    return collisions;
+}
+
+
+/* =========================================================
+   PROJECT RENDER
+   ========================================================= */
+
+function renderProjects() {
+
+    const tbody =
+        document.getElementById(
+            "projectTable"
+        );
+
+
+    const search =
+        normalizeText(
+            document.getElementById(
+                "projectSearch"
+            ).value
+        );
+
+
+    const collisions =
+        getProjectCollisions();
+
+
+    const rows =
+        appData.projects.filter(function(row) {
+
+            return (
+                normalizeText(row.project).includes(search) ||
+                normalizeText(row.teamRolls).includes(search) ||
+                normalizeText(row.batch).includes(search)
+            );
+
+        });
+
+
+    if (!rows.length) {
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="7">
+                    <div class="empty">
+                        No matching project records found.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    tbody.innerHTML =
+        rows.map(function(row) {
+
+            const key =
+                String(row.row);
+
+            const collisionRolls =
+                collisions[key] || [];
+
+            const isCollision =
+                collisionRolls.length > 0;
+
+
+            let conflictText = "";
+
+
+            if (isCollision) {
+
+                conflictText =
+                    `
+                    <div class="conflict">
+                        Conflicting Roll Number(s):
+                        ${collisionRolls.map(function(roll) {
+                            return escapeHtml(roll);
+                        }).join(", ")}
+                    </div>
+                    `;
+            }
+
+
+            const teamRolls =
+                parseProjectRolls(
+                    row.teamRolls
+                );
+
+
+            return `
+                <tr
+                    class="${
+                        isCollision
+                        ? "project-collision-row"
+                        : ""
+                    }"
+                >
+
+                    <td>
+                        ${escapeHtml(row.sno)}
+                    </td>
+
+                    <td>
+
+                        ${
+                            teamRolls.length
+                            ?
+                            teamRolls.map(function(roll) {
+
+                                return `
+                                    <div
+                                        class="roll"
+                                        style="margin-bottom:4px;"
+                                    >
+                                        ${escapeHtml(roll)}
+                                    </div>
+                                `;
+
+                            }).join("")
+                            :
+                            `<span class="muted">
+                                No team allocated
+                             </span>`
+                        }
+
+                        ${conflictText}
+
+                    </td>
+
+                    <td>
+                        ${escapeHtml(row.batch || "-")}
+                    </td>
+
+                    <td>
+                        <div class="topic-name">
+                            ${escapeHtml(
+                                row.project || "-"
+                            )}
+                        </div>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            row.date || "-"
+                        )}
+                    </td>
+
+                    <td>
+
+                        ${
+                            isCollision
+                            ?
+                            `<span class="status collision">
+                                Team Collision
+                             </span>`
+                            :
+                            teamRolls.length
+                            ?
+                            `<span class="status allocated">
+                                Allocated
+                             </span>`
+                            :
+                            `<span class="status available">
+                                Available
+                             </span>`
+                        }
+
+                    </td>
+
+                    <td>
+
+                        ${
+                            isCollision
+                            ?
+                            `
+                            <button
+                                class="danger-btn"
+                                onclick='openProjectChange(
+                                    ${JSON.stringify(teamRolls)}
+                                )'
+                            >
+                                Change Project
+                            </button>
+                            `
+                            :
+                            `<span class="muted">—</span>`
+                        }
+
+                    </td>
+
+                </tr>
+            `;
+
+        }).join("");
+}
+
+
+/* =========================================================
+   PARSE PROJECT ROLL NUMBERS
+   ========================================================= */
+
+function parseProjectRolls(value) {
+
+    if (!value) {
+        return [];
+    }
+
+
+    return String(value)
+        .split(",")
+        .map(function(item) {
+
+            return normalizeRoll(item);
+
+        })
+        .filter(function(item) {
+
+            return item !== "";
+
+        });
+}
+
+
+/* =========================================================
+   POPULATE SELECTS
+   ========================================================= */
+
+function populateSelects() {
+
+    const theory =
+        document.getElementById(
+            "theoryTopic"
+        );
+
+    const lab =
+        document.getElementById(
+            "labTopic"
+        );
+
+    const project =
+        document.getElementById(
+            "projectTopic"
+        );
+
+
+    theory.innerHTML =
+        `<option value="">
+            Select Theory Topic
+         </option>`;
+
+
+    THEORY_TOPICS.forEach(function(topic) {
+
+        theory.innerHTML += `
+            <option value="${escapeAttr(topic)}">
+                ${escapeHtml(topic)}
+            </option>
+        `;
+
+    });
+
+
+    lab.innerHTML =
+        `<option value="">
+            Select Lab Topic
+         </option>`;
+
+
+    LAB_TOPICS.forEach(function(topic) {
+
+        lab.innerHTML += `
+            <option value="${escapeAttr(topic)}">
+                ${escapeHtml(topic)}
+            </option>
+        `;
+
+    });
+
+
+    project.innerHTML =
+        `<option value="">
+            Select Project
+         </option>`;
+
+
+    PROJECT_TOPICS.forEach(function(topic) {
+
+        project.innerHTML += `
+            <option value="${escapeAttr(topic)}">
+                ${escapeHtml(topic)}
+            </option>
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   OPEN SINGLE CHANGE MODAL
+   ========================================================= */
+
+function openSingleChange(type, roll) {
+
+    currentChange = {
+        type: type,
+        roll: roll,
+        rolls: null
+    };
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Change " +
+        (type === "theory" ? "Theory" : "Lab") +
+        " Topic";
+
+
+    document.getElementById(
+        "modalDescription"
+    ).textContent =
+        "Roll Number: " + roll;
+
+
+    document.getElementById(
+        "singleChangeBox"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "projectChangeBox"
+    ).style.display = "none";
+
+
+    const select =
+        document.getElementById(
+            "newTopicSelect"
+        );
+
+
+    const topics =
+        type === "theory"
+        ? THEORY_TOPICS
+        : LAB_TOPICS;
+
+
+    const rows =
+        type === "theory"
+        ? appData.theory
+        : appData.lab;
+
+
+    const used =
+        new Set();
+
+
+    rows.forEach(function(row) {
+
+        if (
+            normalizeRoll(row.roll) !==
+            roll &&
+            row.topic
+        ) {
+
+            used.add(
+                normalizeText(row.topic)
             );
 
         }
 
-        database = data;
+    });
 
-        renderAll();
+
+    select.innerHTML =
+        `<option value="">
+            Select New Topic
+         </option>`;
+
+
+    topics.forEach(function(topic) {
+
+        /*
+         * A topic already allocated to another
+         * student is not offered.
+         */
+
+        if (
+            !used.has(
+                normalizeText(topic)
+            )
+        ) {
+
+            select.innerHTML += `
+                <option value="${escapeAttr(topic)}">
+                    ${escapeHtml(topic)}
+                </option>
+            `;
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "changeModal"
+    ).classList.add("show");
+}
+
+
+/* =========================================================
+   OPEN PROJECT CHANGE
+   ========================================================= */
+
+function openProjectChange(rolls) {
+
+    currentChange = {
+        type: "project",
+        roll: null,
+        rolls: rolls
+    };
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Change Project";
+
+
+    document.getElementById(
+        "modalDescription"
+    ).textContent =
+        "Team: " + rolls.join(", ");
+
+
+    document.getElementById(
+        "singleChangeBox"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "projectChangeBox"
+    ).style.display = "block";
+
+
+    const select =
+        document.getElementById(
+            "newProjectSelect"
+        );
+
+
+    const allocatedProjects =
+        new Set();
+
+
+    appData.projects.forEach(function(row) {
+
+        if (row.teamRolls) {
+
+            allocatedProjects.add(
+                normalizeProject(row.project)
+            );
+
+        }
+
+    });
+
+
+    const currentProject =
+        appData.projects.find(function(row) {
+
+            const team =
+                parseProjectRolls(
+                    row.teamRolls
+                );
+
+            return sameTeam(
+                team,
+                rolls
+            );
+
+        });
+
+
+    select.innerHTML =
+        `<option value="">
+            Select New Project
+         </option>`;
+
+
+    PROJECT_TOPICS.forEach(function(project) {
+
+        /*
+         * The current project is excluded.
+         * Other allocated projects are also excluded.
+         */
+
+        const normalized =
+            normalizeProject(project);
+
+
+        if (
+            currentProject &&
+            normalized ===
+            normalizeProject(
+                currentProject.project
+            )
+        ) {
+            return;
+        }
+
+
+        if (
+            allocatedProjects.has(normalized)
+        ) {
+            return;
+        }
+
+
+        select.innerHTML += `
+            <option value="${escapeAttr(project)}">
+                ${escapeHtml(project)}
+            </option>
+        `;
+
+    });
+
+
+    document.getElementById(
+        "changeModal"
+    ).classList.add("show");
+}
+
+
+/* =========================================================
+   SAME TEAM
+   ========================================================= */
+
+function sameTeam(a, b) {
+
+    if (
+        a.length !== b.length
+    ) {
+        return false;
+    }
+
+
+    const first =
+        a.slice().sort();
+
+    const second =
+        b.slice().sort();
+
+
+    for (
+        let i = 0;
+        i < first.length;
+        i++
+    ) {
+
+        if (
+            first[i] !==
+            second[i]
+        ) {
+            return false;
+        }
 
     }
-    catch (error) {
 
-        console.error(
-            "LOAD ERROR:",
-            error
-        );
 
-        showMessage(
+    return true;
+}
 
+
+/* =========================================================
+   SUBMIT CHANGE
+   ========================================================= */
+
+async function submitChange() {
+
+    if (
+        currentChange.type ===
+        "theory" ||
+        currentChange.type ===
+        "lab"
+    ) {
+
+        const newTopic =
             document.getElementById(
-                "theoryMessage"
-            ),
+                "newTopicSelect"
+            ).value;
 
-            "Unable to load Google Sheet data.",
 
-            "error"
+        if (!newTopic) {
 
-        );
+            showToast(
+                "Select a new topic.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        try {
+
+            const result =
+                await postData({
+                    action: "changeSingle",
+                    category: currentChange.type,
+                    roll: currentChange.roll,
+                    newTopic: newTopic
+                });
+
+
+            if (result.success) {
+
+                showToast(
+                    result.message,
+                    "success"
+                );
+
+                closeModal();
+
+                await loadData();
+
+            } else {
+
+                showToast(
+                    result.message,
+                    "error"
+                );
+
+                await loadData();
+            }
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showToast(
+                "Unable to change topic.",
+                "error"
+            );
+        }
+
+        return;
+    }
+
+
+    if (
+        currentChange.type ===
+        "project"
+    ) {
+
+        const newProject =
+            document.getElementById(
+                "newProjectSelect"
+            ).value;
+
+
+        if (!newProject) {
+
+            showToast(
+                "Select a new project.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        try {
+
+            const result =
+                await postData({
+                    action: "changeProject",
+                    rolls: currentChange.rolls,
+                    newTopic: newProject
+                });
+
+
+            if (result.success) {
+
+                showToast(
+                    result.message,
+                    "success"
+                );
+
+                closeModal();
+
+                await loadData();
+
+            } else {
+
+                showToast(
+                    result.message,
+                    "error"
+                );
+
+                await loadData();
+            }
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showToast(
+                "Unable to change project.",
+                "error"
+            );
+        }
 
     }
 
@@ -1726,8 +2787,145 @@ async function loadData() {
 
 
 /* =========================================================
-   RENDER EVERYTHING
-========================================================= */
+   CLOSE MODAL
+   ========================================================= */
+
+function closeModal() {
+
+    document.getElementById(
+        "changeModal"
+    ).classList.remove("show");
+
+
+    currentChange = {
+        type: null,
+        roll: null,
+        rolls: null
+    };
+}
+
+
+/* =========================================================
+   SHOW SECTION
+   ========================================================= */
+
+function showSection(section, button) {
+
+    document
+        .querySelectorAll(".section")
+        .forEach(function(item) {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(function(item) {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(section)
+        .classList.add("active");
+
+
+    button.classList.add("active");
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+function updateSummary() {
+
+    const theoryAllocated =
+        appData.theory.filter(function(row) {
+
+            return String(
+                row.topic || ""
+            ).trim() !== "";
+
+        }).length;
+
+
+    const labAllocated =
+        appData.lab.filter(function(row) {
+
+            return String(
+                row.topic || ""
+            ).trim() !== "";
+
+        }).length;
+
+
+    const projectsAllocated =
+        appData.projects.filter(function(row) {
+
+            return parseProjectRolls(
+                row.teamRolls
+            ).length > 0;
+
+        }).length;
+
+
+    const theoryCollisions =
+        Object.keys(
+            getTopicCollisions(
+                appData.theory
+            )
+        ).length;
+
+
+    const labCollisions =
+        Object.keys(
+            getTopicCollisions(
+                appData.lab
+            )
+        ).length;
+
+
+    const projectCollisions =
+        Object.keys(
+            getProjectCollisions()
+        ).length;
+
+
+    document.getElementById(
+        "theoryCount"
+    ).textContent =
+        theoryAllocated;
+
+
+    document.getElementById(
+        "labCount"
+    ).textContent =
+        labAllocated;
+
+
+    document.getElementById(
+        "projectCount"
+    ).textContent =
+        projectsAllocated;
+
+
+    document.getElementById(
+        "collisionCount"
+    ).textContent =
+        theoryCollisions +
+        labCollisions +
+        projectCollisions;
+}
+
+
+/* =========================================================
+   RENDER ALL
+   ========================================================= */
 
 function renderAll() {
 
@@ -1738,1945 +2936,101 @@ function renderAll() {
     renderProjects();
 
     updateSummary();
-
 }
 
 
 /* =========================================================
-   BUILD TOPIC COLLISION MAP
-========================================================= */
+   TOAST
+   ========================================================= */
 
-function getTopicCollisionMap(data) {
+function showToast(message, type) {
 
-    const topicMap = {};
-
-
-    for (
-        let i = 0;
-        i < data.length;
-        i++
-    ) {
-
-        const topic =
-            normalizeText(
-                data[i].topic
-            );
-
-
-        if (!topic) {
-
-            continue;
-
-        }
-
-
-        if (!topicMap[topic]) {
-
-            topicMap[topic] = [];
-
-        }
-
-
-        topicMap[topic].push({
-
-            index: i,
-
-            rollNo:
-                data[i].rollNo
-
-        });
-
-    }
-
-
-    return topicMap;
-
-}
-
-
-/* =========================================================
-   GET OTHER ROLL NUMBERS USING SAME TOPIC
-========================================================= */
-
-function getCollisionRollNumbers(
-    data,
-    currentIndex
-) {
-
-    const currentTopic =
-        normalizeText(
-            data[currentIndex].topic
-        );
-
-
-    if (!currentTopic) {
-
-        return [];
-
-    }
-
-
-    const rolls = [];
-
-
-    for (
-        let i = 0;
-        i < data.length;
-        i++
-    ) {
-
-        if (
-            i !== currentIndex &&
-            normalizeText(
-                data[i].topic
-            ) === currentTopic
-        ) {
-
-            rolls.push(
-                data[i].rollNo
-            );
-
-        }
-
-    }
-
-
-    return rolls;
-
-}
-
-
-/* =========================================================
-   RENDER THEORY
-========================================================= */
-
-function renderTheory() {
-
-    const body =
+    const container =
         document.getElementById(
-            "theoryTable"
-        );
-
-    body.innerHTML = "";
-
-
-    const collisionMap =
-        getTopicCollisionMap(
-            database.theory
+            "toastContainer"
         );
 
 
-    for (
-        let i = 0;
-        i < database.theory.length;
-        i++
-    ) {
+    const toast =
+        document.createElement("div");
 
-        const row =
-            database.theory[i];
 
+    toast.className =
+        "toast " +
+        (type || "info");
 
-        const topicKey =
-            normalizeText(
-                row.topic
-            );
 
+    toast.textContent =
+        message;
 
-        const collision =
-            topicKey &&
-            collisionMap[topicKey] &&
-            collisionMap[topicKey].length > 1;
 
+    container.appendChild(toast);
 
-        const otherRolls =
-            collision
-            ?
-            getCollisionRollNumbers(
-                database.theory,
-                i
-            )
-            :
-            [];
 
+    setTimeout(function() {
 
-        const tr =
-            document.createElement("tr");
+        toast.style.opacity = "0";
 
+        toast.style.transform =
+            "translateX(30px)";
 
-        if (collision) {
+        setTimeout(function() {
 
-            tr.classList.add(
-                "collision"
-            );
+            toast.remove();
 
-        }
+        }, 250);
 
-
-        let collisionInfo = "";
-
-
-        if (collision) {
-
-            collisionInfo = `
-
-                <div class="collision-info">
-
-                    ⚠ This topic is also allocated to:
-
-                    <br>
-
-                    ${otherRolls.map(
-                        function(roll) {
-
-                            return `
-                                <span
-                                    class="collision-roll"
-                                >
-                                    ${escapeHtml(roll)}
-                                </span>
-                            `;
-
-                        }
-                    ).join("")}
-
-                </div>
-
-            `;
-
-        }
-
-
-        tr.innerHTML = `
-
-            <td>
-                ${escapeHtml(row.sno)}
-            </td>
-
-
-            <td>
-                <strong>
-                    ${escapeHtml(row.rollNo)}
-                </strong>
-            </td>
-
-
-            <td>
-
-                ${
-                    row.topic
-                    ?
-                    escapeHtml(row.topic)
-                    :
-                    "<em>Not selected</em>"
-                }
-
-
-                ${
-                    collision
-                    ?
-                    `
-                    <span
-                        class="collision-label"
-                    >
-                        COLLISION
-                    </span>
-                    `
-                    :
-                    ""
-                }
-
-
-                ${collisionInfo}
-
-            </td>
-
-
-            <td>
-
-                ${
-                    collision
-                    ?
-                    `
-                    <span
-                        class="status status-warning"
-                    >
-                        Collision
-                    </span>
-                    `
-                    :
-                    row.topic
-                    ?
-                    `
-                    <span
-                        class="status status-ok"
-                    >
-                        Allocated
-                    </span>
-                    `
-                    :
-                    `
-                    <span
-                        class="status status-empty"
-                    >
-                        Available
-                    </span>
-                    `
-                }
-
-            </td>
-
-
-            <td>
-
-                ${
-                    collision
-                    ?
-                    `
-                    <button
-                        class="change-btn"
-
-                        onclick="openSingleChange(
-                            'DBMS_THEORY',
-                            '${escapeAttr(row.rollNo)}',
-                            '${escapeAttr(row.topic)}',
-                            'Theory'
-                        )"
-                    >
-                        Change Topic
-                    </button>
-                    `
-                    :
-                    ""
-                }
-
-            </td>
-
-        `;
-
-
-        body.appendChild(tr);
-
-    }
-
-}
-
-
-/* =========================================================
-   RENDER LAB
-========================================================= */
-
-function renderLab() {
-
-    const body =
-        document.getElementById(
-            "labTable"
-        );
-
-    body.innerHTML = "";
-
-
-    const collisionMap =
-        getTopicCollisionMap(
-            database.lab
-        );
-
-
-    for (
-        let i = 0;
-        i < database.lab.length;
-        i++
-    ) {
-
-        const row =
-            database.lab[i];
-
-
-        const topicKey =
-            normalizeText(
-                row.topic
-            );
-
-
-        const collision =
-            topicKey &&
-            collisionMap[topicKey] &&
-            collisionMap[topicKey].length > 1;
-
-
-        const otherRolls =
-            collision
-            ?
-            getCollisionRollNumbers(
-                database.lab,
-                i
-            )
-            :
-            [];
-
-
-        const tr =
-            document.createElement("tr");
-
-
-        if (collision) {
-
-            tr.classList.add(
-                "collision"
-            );
-
-        }
-
-
-        let collisionInfo = "";
-
-
-        if (collision) {
-
-            collisionInfo = `
-
-                <div class="collision-info">
-
-                    ⚠ This topic is also allocated to:
-
-                    <br>
-
-                    ${otherRolls.map(
-                        function(roll) {
-
-                            return `
-                                <span
-                                    class="collision-roll"
-                                >
-                                    ${escapeHtml(roll)}
-                                </span>
-                            `;
-
-                        }
-                    ).join("")}
-
-                </div>
-
-            `;
-
-        }
-
-
-        tr.innerHTML = `
-
-            <td>
-                ${escapeHtml(row.sno)}
-            </td>
-
-
-            <td>
-                <strong>
-                    ${escapeHtml(row.rollNo)}
-                </strong>
-            </td>
-
-
-            <td>
-
-                ${
-                    row.topic
-                    ?
-                    escapeHtml(row.topic)
-                    :
-                    "<em>Not selected</em>"
-                }
-
-
-                ${
-                    collision
-                    ?
-                    `
-                    <span
-                        class="collision-label"
-                    >
-                        COLLISION
-                    </span>
-                    `
-                    :
-                    ""
-                }
-
-
-                ${collisionInfo}
-
-            </td>
-
-
-            <td>
-
-                ${
-                    collision
-                    ?
-                    `
-                    <span
-                        class="status status-warning"
-                    >
-                        Collision
-                    </span>
-                    `
-                    :
-                    row.topic
-                    ?
-                    `
-                    <span
-                        class="status status-ok"
-                    >
-                        Allocated
-                    </span>
-                    `
-                    :
-                    `
-                    <span
-                        class="status status-empty"
-                    >
-                        Available
-                    </span>
-                    `
-                }
-
-            </td>
-
-
-            <td>
-
-                ${
-                    collision
-                    ?
-                    `
-                    <button
-                        class="change-btn"
-
-                        onclick="openSingleChange(
-                            'DBMS_LAB',
-                            '${escapeAttr(row.rollNo)}',
-                            '${escapeAttr(row.topic)}',
-                            'Lab'
-                        )"
-                    >
-                        Change Topic
-                    </button>
-                    `
-                    :
-                    ""
-                }
-
-            </td>
-
-        `;
-
-
-        body.appendChild(tr);
-
-    }
-
-}
-
-
-/* =========================================================
-   PROJECT MEMBER COLLISION MAP
-========================================================= */
-
-function getProjectMemberMap() {
-
-    const map = {};
-
-
-    for (
-        let i = 0;
-        i < database.project.length;
-        i++
-    ) {
-
-        const row =
-            database.project[i];
-
-
-        if (!row.rollNo) {
-
-            continue;
-
-        }
-
-
-        const members =
-            String(row.rollNo)
-                .split(",");
-
-
-        for (
-            let j = 0;
-            j < members.length;
-            j++
-        ) {
-
-            const roll =
-                normalizeRoll(
-                    members[j]
-                );
-
-
-            if (!roll) {
-
-                continue;
-
-            }
-
-
-            if (!map[roll]) {
-
-                map[roll] = [];
-
-            }
-
-
-            map[roll].push({
-
-                index: i,
-
-                project:
-                    row.project
-
-            });
-
-        }
-
-    }
-
-
-    return map;
-
-}
-
-
-/* =========================================================
-   RENDER PROJECTS
-========================================================= */
-
-function renderProjects() {
-
-    const body =
-        document.getElementById(
-            "projectTable"
-        );
-
-    body.innerHTML = "";
-
-
-    const memberMap =
-        getProjectMemberMap();
-
-
-    for (
-        let i = 0;
-        i < database.project.length;
-        i++
-    ) {
-
-        const row =
-            database.project[i];
-
-
-        const allocated =
-            String(
-                row.rollNo || ""
-            ).trim() !== "";
-
-
-        const members =
-            allocated
-            ?
-            String(row.rollNo)
-                .split(",")
-                .map(function(value) {
-
-                    return normalizeRoll(
-                        value
-                    );
-
-                })
-                .filter(Boolean)
-            :
-            [];
-
-
-        let projectCollision =
-            false;
-
-
-        const collisionMembers = [];
-
-
-        for (
-            let j = 0;
-            j < members.length;
-            j++
-        ) {
-
-            const roll =
-                members[j];
-
-
-            const entries =
-                memberMap[roll] || [];
-
-
-            if (
-                entries.length > 1
-            ) {
-
-                projectCollision =
-                    true;
-
-
-                collisionMembers.push(
-                    roll
-                );
-
-            }
-
-        }
-
-
-        const tr =
-            document.createElement("tr");
-
-
-        if (projectCollision) {
-
-            tr.classList.add(
-                "collision"
-            );
-
-        }
-
-
-        let collisionInfo = "";
-
-
-        if (
-            projectCollision
-        ) {
-
-            collisionInfo = `
-
-                <div class="collision-info">
-
-                    ⚠ Team member collision:
-
-                    <br>
-
-                    ${collisionMembers.map(
-                        function(roll) {
-
-                            return `
-                                <span
-                                    class="collision-roll"
-                                >
-                                    ${escapeHtml(roll)}
-                                </span>
-                            `;
-
-                        }
-                    ).join("")}
-
-                    <br>
-
-                    These Roll Numbers appear
-                    in more than one project.
-
-                </div>
-
-            `;
-
-        }
-
-
-        tr.innerHTML = `
-
-            <td>
-                ${escapeHtml(row.sno)}
-            </td>
-
-
-            <td>
-
-                ${
-                    allocated
-                    ?
-                    escapeHtml(row.rollNo)
-                    :
-                    "<em>Not allocated</em>"
-                }
-
-                ${collisionInfo}
-
-            </td>
-
-
-            <td>
-
-                ${escapeHtml(row.project)}
-
-                ${
-                    projectCollision
-                    ?
-                    `
-                    <span
-                        class="collision-label"
-                    >
-                        COLLISION
-                    </span>
-                    `
-                    :
-                    ""
-                }
-
-            </td>
-
-
-            <td>
-                ${escapeHtml(row.batch)}
-            </td>
-
-
-            <td>
-
-                ${
-                    projectCollision
-                    ?
-                    `
-                    <span
-                        class="status status-warning"
-                    >
-                        Collision
-                    </span>
-                    `
-                    :
-                    allocated
-                    ?
-                    `
-                    <span
-                        class="status status-ok"
-                    >
-                        Allocated
-                    </span>
-                    `
-                    :
-                    `
-                    <span
-                        class="status status-empty"
-                    >
-                        Available
-                    </span>
-                    `
-                }
-
-            </td>
-
-
-            <td>
-
-                ${
-                    projectCollision
-                    ?
-                    `
-                    <button
-                        class="change-btn"
-
-                        onclick="openProjectChange(
-                            '${escapeAttr(row.rollNo)}',
-                            '${escapeAttr(row.project)}'
-                        )"
-                    >
-                        Change Project
-                    </button>
-                    `
-                    :
-                    ""
-                }
-
-            </td>
-
-        `;
-
-
-        body.appendChild(tr);
-
-    }
-
-}
-
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-function updateSummary() {
-
-    let theoryCount = 0;
-
-    let labCount = 0;
-
-    let projectCount = 0;
-
-
-    for (
-        let i = 0;
-        i < database.theory.length;
-        i++
-    ) {
-
-        if (
-            database.theory[i].topic
-        ) {
-
-            theoryCount++;
-
-        }
-
-    }
-
-
-    for (
-        let i = 0;
-        i < database.lab.length;
-        i++
-    ) {
-
-        if (
-            database.lab[i].topic
-        ) {
-
-            labCount++;
-
-        }
-
-    }
-
-
-    for (
-        let i = 0;
-        i < database.project.length;
-        i++
-    ) {
-
-        if (
-            database.project[i].rollNo
-        ) {
-
-            projectCount++;
-
-        }
-
-    }
-
-
-    const theoryCollisions =
-        getTopicCollisionMap(
-            database.theory
-        );
-
-
-    const labCollisions =
-        getTopicCollisionMap(
-            database.lab
-        );
-
-
-    let theoryCollisionRows = 0;
-
-    let labCollisionRows = 0;
-
-
-    for (
-        const topic in theoryCollisions
-    ) {
-
-        if (
-            theoryCollisions[topic].length > 1
-        ) {
-
-            theoryCollisionRows +=
-                theoryCollisions[topic].length;
-
-        }
-
-    }
-
-
-    for (
-        const topic in labCollisions
-    ) {
-
-        if (
-            labCollisions[topic].length > 1
-        ) {
-
-            labCollisionRows +=
-                labCollisions[topic].length;
-
-        }
-
-    }
-
-
-    document.getElementById(
-        "theoryCount"
-    ).textContent =
-        theoryCount;
-
-
-    document.getElementById(
-        "labCount"
-    ).textContent =
-        labCount;
-
-
-    document.getElementById(
-        "projectCount"
-    ).textContent =
-        projectCount;
-
-
-    document.getElementById(
-        "collisionCount"
-    ).textContent =
-        theoryCollisionRows +
-        labCollisionRows;
-
-}
-
-
-/* =========================================================
-   LOAD DROPDOWNS
-========================================================= */
-
-function loadDropdown(
-    id,
-    topics
-) {
-
-    const select =
-        document.getElementById(id);
-
-
-    for (
-        let i = 0;
-        i < topics.length;
-        i++
-    ) {
-
-        const option =
-            document.createElement(
-                "option"
-            );
-
-
-        option.value =
-            topics[i];
-
-
-        option.textContent =
-            (i + 1) +
-            ". " +
-            topics[i];
-
-
-        select.appendChild(
-            option
-        );
-
-    }
-
-}
-
-
-loadDropdown(
-    "theoryTopic",
-    THEORY_TOPICS
-);
-
-
-loadDropdown(
-    "labTopic",
-    LAB_TOPICS
-);
-
-
-loadDropdown(
-    "projectTopic",
-    PROJECT_TOPICS
-);
-
-
-/* =========================================================
-   THEORY ALLOCATION
-========================================================= */
-
-async function allocateTheory() {
-
-    const rollNo =
-        document.getElementById(
-            "theoryRoll"
-        ).value.trim();
-
-
-    const topic =
-        document.getElementById(
-            "theoryTopic"
-        ).value;
-
-
-    await sendRequest(
-
-        {
-
-            action:
-                "allocateSingle",
-
-            sheet:
-                "DBMS_THEORY",
-
-            rollNo:
-                rollNo,
-
-            topic:
-                topic
-
-        },
-
-        "theoryMessage"
-
-    );
-
-}
-
-
-/* =========================================================
-   LAB ALLOCATION
-========================================================= */
-
-async function allocateLab() {
-
-    const rollNo =
-        document.getElementById(
-            "labRoll"
-        ).value.trim();
-
-
-    const topic =
-        document.getElementById(
-            "labTopic"
-        ).value;
-
-
-    await sendRequest(
-
-        {
-
-            action:
-                "allocateSingle",
-
-            sheet:
-                "DBMS_LAB",
-
-            rollNo:
-                rollNo,
-
-            topic:
-                topic
-
-        },
-
-        "labMessage"
-
-    );
-
-}
-
-
-/* =========================================================
-   PROJECT ALLOCATION
-========================================================= */
-
-async function allocateProject() {
-
-    const roll1 =
-        document.getElementById(
-            "projectRoll1"
-        ).value.trim();
-
-
-    const roll2 =
-        document.getElementById(
-            "projectRoll2"
-        ).value.trim();
-
-
-    const roll3 =
-        document.getElementById(
-            "projectRoll3"
-        ).value.trim();
-
-
-    const topic =
-        document.getElementById(
-            "projectTopic"
-        ).value;
-
-
-    await sendRequest(
-
-        {
-
-            action:
-                "allocateProject",
-
-            rollNo1:
-                roll1,
-
-            rollNo2:
-                roll2,
-
-            rollNo3:
-                roll3,
-
-            topic:
-                topic
-
-        },
-
-        "projectMessage"
-
-    );
-
-}
-
-
-/* =========================================================
-   SEND REQUEST
-========================================================= */
-
-async function sendRequest(
-    payload,
-    messageId
-) {
-
-    const message =
-        document.getElementById(
-            messageId
-        );
-
-
-    showMessage(
-        message,
-        "Processing...",
-        "loading"
-    );
-
-
-    try {
-
-        const response =
-            await fetch(
-
-                SCRIPT_URL,
-
-                {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "text/plain;charset=utf-8"
-
-                    },
-
-                    body:
-                        JSON.stringify(
-                            payload
-                        )
-
-                }
-
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if (
-            result.success
-        ) {
-
-            showMessage(
-                message,
-                result.message,
-                "success"
-            );
-
-
-            setTimeout(
-                loadData,
-                500
-            );
-
-
-        }
-        else {
-
-            showMessage(
-                message,
-                result.message,
-                "error"
-            );
-
-        }
-
-    }
-    catch (error) {
-
-        console.error(
-            "REQUEST ERROR:",
-            error
-        );
-
-
-        showMessage(
-            message,
-            "Server connection failed.",
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   OPEN SINGLE CHANGE
-========================================================= */
-
-function openSingleChange(
-    sheet,
-    rollNo,
-    currentTopic,
-    category
-) {
-
-    changeState = {
-
-        type:
-            "single",
-
-        sheet:
-            sheet,
-
-        rollNo:
-            rollNo,
-
-        currentTopic:
-            currentTopic
-
-    };
-
-
-    const topics =
-        sheet === "DBMS_THEORY"
-        ?
-        THEORY_TOPICS
-        :
-        LAB_TOPICS;
-
-
-    let options = "";
-
-
-    for (
-        let i = 0;
-        i < topics.length;
-        i++
-    ) {
-
-        if (
-            normalizeText(
-                topics[i]
-            ) ===
-            normalizeText(
-                currentTopic
-            )
-        ) {
-
-            continue;
-
-        }
-
-
-        options += `
-
-            <option
-                value="${escapeAttr(topics[i])}"
-            >
-                ${i + 1}.
-                ${escapeHtml(topics[i])}
-            </option>
-
-        `;
-
-    }
-
-
-    document.getElementById(
-        "modalTitle"
-    ).textContent =
-        "Change " +
-        category +
-        " Topic";
-
-
-    document.getElementById(
-        "modalContent"
-    ).innerHTML = `
-
-        <p style="margin-bottom:12px;">
-
-            <strong>
-                Roll Number:
-            </strong>
-
-            ${escapeHtml(rollNo)}
-
-        </p>
-
-
-        <p style="margin-bottom:15px;">
-
-            <strong>
-                Current Topic:
-            </strong>
-
-            ${escapeHtml(currentTopic)}
-
-        </p>
-
-
-        <label>
-            Select New Topic
-        </label>
-
-
-        <select id="newSingleTopic">
-
-            ${options}
-
-        </select>
-
-    `;
-
-
-    document.getElementById(
-        "modalMessage"
-    ).className =
-        "message";
-
-
-    document.getElementById(
-        "changeModal"
-    ).style.display =
-        "flex";
-
-}
-
-
-/* =========================================================
-   OPEN PROJECT CHANGE
-========================================================= */
-
-function openProjectChange(
-    rollCell,
-    currentProject
-) {
-
-    const members =
-        rollCell
-            .split(",")
-            .map(function(value) {
-
-                return value.trim();
-
-            })
-            .filter(Boolean);
-
-
-    if (
-        members.length !== 3
-    ) {
-
-        alert(
-            "This project does not contain exactly 3 Roll Numbers."
-        );
-
-        return;
-
-    }
-
-
-    changeState = {
-
-        type:
-            "project",
-
-        members:
-            members,
-
-        currentProject:
-            currentProject
-
-    };
-
-
-    let options = "";
-
-
-    for (
-        let i = 0;
-        i < PROJECT_TOPICS.length;
-        i++
-    ) {
-
-        if (
-            normalizeText(
-                PROJECT_TOPICS[i]
-            ) ===
-            normalizeText(
-                currentProject
-            )
-        ) {
-
-            continue;
-
-        }
-
-
-        options += `
-
-            <option
-                value="${escapeAttr(
-                    PROJECT_TOPICS[i]
-                )}"
-            >
-                ${i + 1}.
-                ${escapeHtml(
-                    PROJECT_TOPICS[i]
-                )}
-            </option>
-
-        `;
-
-    }
-
-
-    document.getElementById(
-        "modalTitle"
-    ).textContent =
-        "Change Project";
-
-
-    document.getElementById(
-        "modalContent"
-    ).innerHTML = `
-
-        <p style="margin-bottom:10px;">
-
-            <strong>
-                Team Members:
-            </strong>
-
-        </p>
-
-
-        <p style="margin-bottom:15px;">
-
-            ${escapeHtml(
-                members.join(" • ")
-            )}
-
-        </p>
-
-
-        <p style="margin-bottom:15px;">
-
-            <strong>
-                Current Project:
-            </strong>
-
-            ${escapeHtml(
-                currentProject
-            )}
-
-        </p>
-
-
-        <label>
-            Select New Project
-        </label>
-
-
-        <select id="newProjectTopic">
-
-            ${options}
-
-        </select>
-
-    `;
-
-
-    document.getElementById(
-        "modalMessage"
-    ).className =
-        "message";
-
-
-    document.getElementById(
-        "changeModal"
-    ).style.display =
-        "flex";
-
-}
-
-
-/* =========================================================
-   CONFIRM CHANGE
-========================================================= */
-
-async function confirmChange() {
-
-    const message =
-        document.getElementById(
-            "modalMessage"
-        );
-
-
-    let payload;
-
-
-    if (
-        changeState.type ===
-        "single"
-    ) {
-
-        const newTopic =
-            document.getElementById(
-                "newSingleTopic"
-            ).value;
-
-
-        payload = {
-
-            action:
-                "changeSingle",
-
-            sheet:
-                changeState.sheet,
-
-            rollNo:
-                changeState.rollNo,
-
-            newTopic:
-                newTopic
-
-        };
-
-    }
-    else {
-
-        const newTopic =
-            document.getElementById(
-                "newProjectTopic"
-            ).value;
-
-
-        payload = {
-
-            action:
-                "changeProject",
-
-            rollNo1:
-                changeState.members[0],
-
-            rollNo2:
-                changeState.members[1],
-
-            rollNo3:
-                changeState.members[2],
-
-            newTopic:
-                newTopic
-
-        };
-
-    }
-
-
-    showMessage(
-        message,
-        "Changing...",
-        "loading"
-    );
-
-
-    try {
-
-        const response =
-            await fetch(
-
-                SCRIPT_URL,
-
-                {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "text/plain;charset=utf-8"
-
-                    },
-
-                    body:
-                        JSON.stringify(
-                            payload
-                        )
-
-                }
-
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if (
-            result.success
-        ) {
-
-            showMessage(
-                message,
-                result.message,
-                "success"
-            );
-
-
-            setTimeout(
-                function() {
-
-                    closeModal();
-
-                    loadData();
-
-                },
-                700
-            );
-
-        }
-        else {
-
-            showMessage(
-                message,
-                result.message,
-                "error"
-            );
-
-        }
-
-    }
-    catch (error) {
-
-        console.error(error);
-
-
-        showMessage(
-            message,
-            "Unable to change allocation.",
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-function closeModal() {
-
-    document.getElementById(
-        "changeModal"
-    ).style.display =
-        "none";
-
-
-    changeState = null;
-
-}
-
-
-/* =========================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
-========================================================= */
-
-document.getElementById(
-    "changeModal"
-).addEventListener(
-    "click",
-    function(event) {
-
-        if (
-            event.target ===
-            this
-        ) {
-
-            closeModal();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-function showMessage(
-    element,
-    text,
-    type
-) {
-
-    element.className =
-        "message " + type;
-
-
-    element.textContent =
-        text;
-
-}
-
-
-/* =========================================================
-   NORMALIZE TEXT
-========================================================= */
-
-function normalizeText(
-    value
-) {
-
-    return String(
-        value || ""
-    )
-    .trim()
-    .replace(
-        /\s+/g,
-        " "
-    )
-    .toLowerCase();
-
-}
-
-
-/* =========================================================
-   NORMALIZE ROLL NUMBER
-========================================================= */
-
-function normalizeRoll(
-    value
-) {
-
-    return String(
-        value || ""
-    )
-    .trim()
-    .replace(
-        /\s+/g,
-        ""
-    )
-    .toUpperCase();
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHtml(
-    value
-) {
-
-    return String(
-        value || ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
+    }, 3500);
 }
 
 
 /* =========================================================
    ESCAPE ATTRIBUTE
-========================================================= */
+   ========================================================= */
 
-function escapeAttr(
-    value
-) {
+function escapeAttr(value) {
 
-    return escapeHtml(
-        value
-    );
-
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
 }
 
 
 /* =========================================================
-   INITIAL LOAD
-========================================================= */
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+   ========================================================= */
+
+document
+    .getElementById("changeModal")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+                closeModal();
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+populateSelects();
 
 loadData();
 
 
-/* =========================================================
-   AUTO REFRESH
-========================================================= */
+/*
+ * Refresh data every 30 seconds.
+ */
 
 setInterval(
     loadData,
