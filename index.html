@@ -1266,70 +1266,83 @@ function escapeAttr(value) {
    LOAD DATA
    ===================================================== */
 
-async function loadData() {
+function jsonpRequest(payload) {
+    return new Promise(function(resolve, reject) {
+        const callbackName =
+            "dbmsCallback_" + Date.now() + "_" +
+            Math.random().toString(36).slice(2);
 
-    try {
+        const script = document.createElement("script");
+        const params = new URLSearchParams();
 
-        const response =
-            await fetch(
-                SCRIPT_URL +
-                "?t=" +
-                Date.now()
+        Object.keys(payload || {}).forEach(function(key) {
+            const value = payload[key];
+            params.set(
+                key,
+                Array.isArray(value) ? JSON.stringify(value) : String(value ?? "")
             );
+        });
 
+        params.set("callback", callbackName);
+        params.set("_", Date.now());
 
-        const data =
-            await response.json();
+        let finished = false;
 
-
-        if (!data.success) {
-
-            throw new Error(
-                data.message
-            );
+        function cleanup() {
+            if (script.parentNode) script.parentNode.removeChild(script);
+            try { delete window[callbackName]; }
+            catch (e) { window[callbackName] = undefined; }
         }
 
+        window[callbackName] = function(data) {
+            if (finished) return;
+            finished = true;
+            cleanup();
+            resolve(data);
+        };
 
-        appData = data;
+        script.onerror = function() {
+            if (finished) return;
+            finished = true;
+            cleanup();
+            reject(new Error("Could not reach the Apps Script web app."));
+        };
+
+        script.src = SCRIPT_URL + "?" + params.toString();
+        document.body.appendChild(script);
+
+        setTimeout(function() {
+            if (finished) return;
+            finished = true;
+            cleanup();
+            reject(new Error("Request timed out."));
+        }, 20000);
+    });
+}
+
+async function loadData() {
+    try {
+        const data = await jsonpRequest({ action: "loadData" });
+
+        if (!data || data.success !== true) {
+            throw new Error(data && data.message ? data.message : "Invalid Apps Script response.");
+        }
+
+        appData = {
+            theory: Array.isArray(data.theory) ? data.theory : [],
+            lab: Array.isArray(data.lab) ? data.lab : [],
+            projects: Array.isArray(data.projects) ? data.projects : []
+        };
 
         renderAll();
-
     } catch(error) {
-
         console.error(error);
-
-        showToast(
-            "Unable to connect to Google Sheets.",
-            "error"
-        );
+        showToast("Connection error: " + (error.message || "Unknown error"), "error");
     }
 }
 
-
-/* =====================================================
-   POST DATA
-   ===================================================== */
-
 async function postData(payload) {
-
-    const response =
-        await fetch(
-            SCRIPT_URL,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
-
-                body:
-                    JSON.stringify(payload)
-            }
-        );
-
-
-    return await response.json();
+    return await jsonpRequest(payload);
 }
 
 
@@ -1339,91 +1352,38 @@ async function postData(payload) {
 
 async function allocateSingle(type) {
 
-    const roll =
-        normalizeRoll(
-            document.getElementById(
-                type + "Roll"
-            ).value
-        );
-
-
-    const topic =
-        document.getElementById(
-            type + "Topic"
-        ).value;
-
+    const roll = normalizeRoll(document.getElementById(type + "Roll").value);
+    const topic = document.getElementById(type + "Topic").value;
 
     if (!roll) {
-
-        showToast(
-            "Enter your Roll Number.",
-            "error"
-        );
-
+        showToast("Enter your Roll Number.", "error");
         return;
     }
-
 
     if (!topic) {
-
-        showToast(
-            "Select a topic.",
-            "error"
-        );
-
+        showToast("Select a topic.", "error");
         return;
     }
 
-
     try {
+        const result = await postData({
+            action: "allocateSingle",
+            category: type,
+            roll: roll,
+            topic: topic
+        });
 
-        const result =
-            await postData({
-
-                action:
-                    "allocateSingle",
-
-                category:
-                    type,
-
-                roll:
-                    roll,
-
-                topic:
-                    topic
-            });
-
-
-        showToast(
-            result.message,
-            result.success
-                ? "success"
-                : "error"
-        );
-
+        showToast(result.message, result.success ? "success" : "error");
 
         if (result.success) {
-
-            document.getElementById(
-                type + "Roll"
-            ).value = "";
-
-            document.getElementById(
-                type + "Topic"
-            ).value = "";
+            document.getElementById(type + "Roll").value = "";
+            document.getElementById(type + "Topic").value = "";
         }
 
-
         await loadData();
-
     } catch(error) {
-
         console.error(error);
-
-        showToast(
-            "Request failed.",
-            "error"
-        );
+        showToast("Request failed: " + (error.message || "Unknown error"), "error");
     }
 }
 
@@ -1435,128 +1395,48 @@ async function allocateSingle(type) {
 async function allocateProject() {
 
     const rolls = [
-
-        normalizeRoll(
-            document.getElementById(
-                "projectRoll1"
-            ).value
-        ),
-
-        normalizeRoll(
-            document.getElementById(
-                "projectRoll2"
-            ).value
-        ),
-
-        normalizeRoll(
-            document.getElementById(
-                "projectRoll3"
-            ).value
-        )
-
+        normalizeRoll(document.getElementById("projectRoll1").value),
+        normalizeRoll(document.getElementById("projectRoll2").value),
+        normalizeRoll(document.getElementById("projectRoll3").value)
     ];
 
+    const project = document.getElementById("projectTopic").value;
 
-    const project =
-        document.getElementById(
-            "projectTopic"
-        ).value;
-
-
-    if (
-        !rolls[0] ||
-        !rolls[1] ||
-        !rolls[2]
-    ) {
-
-        showToast(
-            "Enter all 3 Roll Numbers.",
-            "error"
-        );
-
+    if (!rolls[0] || !rolls[1] || !rolls[2]) {
+        showToast("Enter all 3 Roll Numbers.", "error");
         return;
     }
 
-
-    if (
-        new Set(rolls).size !== 3
-    ) {
-
-        showToast(
-            "All 3 Roll Numbers must be different.",
-            "error"
-        );
-
+    if (new Set(rolls).size !== 3) {
+        showToast("All 3 Roll Numbers must be different.", "error");
         return;
     }
-
 
     if (!project) {
-
-        showToast(
-            "Select a project.",
-            "error"
-        );
-
+        showToast("Select a project.", "error");
         return;
     }
 
-
     try {
+        const result = await postData({
+            action: "allocateProject",
+            rolls: rolls,
+            topic: project
+        });
 
-        const result =
-            await postData({
-
-                action:
-                    "allocateProject",
-
-                rolls:
-                    rolls,
-
-                topic:
-                    project
-
-            });
-
-
-        showToast(
-            result.message,
-            result.success
-                ? "success"
-                : "error"
-        );
-
+        showToast(result.message, result.success ? "success" : "error");
 
         if (result.success) {
-
-            document.getElementById(
-                "projectRoll1"
-            ).value = "";
-
-            document.getElementById(
-                "projectRoll2"
-            ).value = "";
-
-            document.getElementById(
-                "projectRoll3"
-            ).value = "";
-
-            document.getElementById(
-                "projectTopic"
-            ).value = "";
+            document.getElementById("projectRoll1").value = "";
+            document.getElementById("projectRoll2").value = "";
+            document.getElementById("projectRoll3").value = "";
+            document.getElementById("projectTopic").value = "";
         }
 
-
         await loadData();
-
     } catch(error) {
-
         console.error(error);
-
-        showToast(
-            "Project request failed.",
-            "error"
-        );
+        showToast("Project request failed: " + (error.message || "Unknown error"), "error");
     }
 }
 
