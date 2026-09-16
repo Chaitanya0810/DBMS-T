@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DBMS Topic Allocation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc, #e0f2fe);
+            color: #172033;
+        }
+
+        .header {
+            padding: 35px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #172554, #1e3a8a, #2563eb);
+            color: white;
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.25);
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            margin-top: 8px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .intro h2 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.10);
+            border: 1px solid #e2e8f0;
+            transition: 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
+        }
+
+        .card-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            margin-bottom: 18px;
+            background: #dbeafe;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 7px;
+            color: #334155;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: white;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .theory-btn {
+            background: #2563eb;
+        }
+
+        .lab-btn {
+            background: #059669;
+        }
+
+        .project-btn {
+            background: #7c3aed;
+        }
+
+        .message {
+            margin-top: 15px;
+            padding: 11px 13px;
+            border-radius: 9px;
+            font-size: 13px;
+            display: none;
+            line-height: 1.4;
+        }
+
+        .success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .loading {
+            display: block;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 950px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 29px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 0 13px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .header {
+                padding: 28px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>DBMS Topic Allocation</h1>
+    <p>Database Management Systems — Theory, Lab & Project</p>
+</header>
+
+<main class="container">
+
+    <div class="intro">
+        <h2>Select Your Category</h2>
+        <p>Enter your Roll Number and select an available topic.</p>
+    </div>
+
+    <div class="cards">
+
+        <!-- ================= THEORY ================= -->
+
+        <section class="card">
+
+            <div class="card-icon">📘</div>
+
+            <h3>DBMS Theory</h3>
+
+            <p class="card-description">
+                Select one DBMS theory topic for your presentation.
+            </p>
+
+            <div class="form-group">
+                <label for="theoryRoll">
+                    Roll Number
+                </label>
+
+                <input
+                    type="text"
+                    id="theoryRoll"
+                    maxlength="30"
+                    placeholder="Enter Roll Number"
+                >
+            </div>
+
+            <div class="form-group">
+
+                <label for="theoryTopic">
+                    Theory Topic
+                </label>
+
+                <select id="theoryTopic">
+
+                    <option value="">
+                        -- Select Theory Topic --
+                    </option>
+
+                    <option value="Functional Dependencies">
+                        1. Functional Dependencies
+                    </option>
+
+                    <option value="ER Diagram for a Hospital Management System">
+                        2. ER Diagram for a Hospital Management System
+                    </option>
+
+                    <option value="Basic Form of SQL Queries">
+                        3. Basic Form of SQL Queries
+                    </option>
+
+                    <option value="B+ Trees: A Dynamic Index Structure">
+                        4. B+ Trees: A Dynamic Index Structure
+                    </option>
+
+                    <option value="Advantages and Applications of DBMS">
+                        5. Advantages and Applications of DBMS
+                    </option>
+
+                    <option value="Selection and Projection Operations">
+                        6. Selection and Projection Operations
+                    </option>
+
+                    <option value="Transaction Concept and Transaction States">
+                        7. Transaction Concept and Transaction States
+                    </option>
+
+                    <option value="Weak Entity Sets and Strong Entity Sets">
+                        8. Weak Entity Sets and Strong Entity Sets
+                    </option>
+
+                    <option value="UNION, INTERSECT, and EXCEPT Operations in SQL">
+                        9. UNION, INTERSECT, and EXCEPT Operations in SQL
+                    </option>
+
+                    <option value="Problems Caused by Data Redundancy">
+                        10. Problems Caused by Data Redundancy
+                    </option>
+
+                    <option value="Data Independence in Database Systems">
+                        11. Data Independence in Database Systems
+                    </option>
+
+                    <option value="Natural Join and Its Applications">
+                        12. Natural Join and Its Applications
+                    </option>
+
+                    <option value="Lock-Based Concurrency Control Protocols">
+                        13. Lock-Based Concurrency Control Protocols
+                    </option>
+
+                    <option value="Entity-Relationship (ER) Model">
+                        14. Entity-Relationship (ER) Model
+                    </option>
+
+                    <option value="Fourth Normal Form (4NF)">
+                        15. Fourth Normal Form (4NF)
+                    </option>
+
+                    <option value="Database System Architecture">
+                        16. Database System Architecture
+                    </option>
+
+                    <option value="NULL Values in SQL">
+                        17. NULL Values in SQL
+                    </option>
+
+                    <option value="Relational Algebra: Fundamental Operators">
+                        18. Relational Algebra: Fundamental Operators
+                    </option>
+
+                    <option value="ER Diagram for an Online Shopping System">
+                        19. ER Diagram for an Online Shopping System
+                    </option>
+
+                    <option value="Atomicity and Durability in Transactions">
+                        20. Atomicity and Durability in Transactions
+                    </option>
+
+                    <option value="Types of Attributes in ER Model">
+                        21. Types of Attributes in ER Model
+                    </option>
+
+                    <option value="Database Decomposition">
+                        22. Database Decomposition
+                    </option>
+
+                    <option value="Tuple Relational Calculus">
+                        23. Tuple Relational Calculus
+                    </option>
+
+                    <option value="File Organization and Indexing Techniques">
+                        24. File Organization and Indexing Techniques
+                    </option>
+
+                    <option value="Second Normal Form (2NF)">
+                        25. Second Normal Form (2NF)
+                    </option>
+
+                    <option value="Relationships and Relationship Sets">
+                        26. Relationships and Relationship Sets
+                    </option>
+
+                    <option value="Triggers and Active Databases">
+                        27. Triggers and Active Databases
+                    </option>
+
+                    <option value="Introduction to the Relational Model">
+                        28. Introduction to the Relational Model
+                    </option>
+
+                    <option value="Lossless Join Decomposition">
+                        29. Lossless Join Decomposition
+                    </option>
+
+                    <option value="SQL SELECT, FROM, and WHERE Clauses">
+                        30. SQL SELECT, FROM, and WHERE Clauses
+                    </option>
+
+                    <option value="Multiple Granularity Protocol">
+                        31. Multiple Granularity Protocol
+                    </option>
+
+                    <option value="Additional Features of the ER Model">
+                        32. Additional Features of the ER Model
+                    </option>
+
+                    <option value="Division Operator in Relational Algebra">
+                        33. Division Operator in Relational Algebra
+                    </option>
+
+                    <option value="File Systems versus Database Management Systems">
+                        34. File Systems versus Database Management Systems
+                    </option>
+
+                    <option value="Fifth Normal Form (5NF)">
+                        35. Fifth Normal Form (5NF)
+                    </option>
+
+                    <option value="Aggregation Operators in SQL">
+                        36. Aggregation Operators in SQL
+                    </option>
+
+                    <option value="Logical Database Design">
+                        37. Logical Database Design
+                    </option>
+
+                    <option value="Concurrent Executions and Their Problems">
+                        38. Concurrent Executions and Their Problems
+                    </option>
+
+                    <option value="Types of Relationships in ER Model">
+                        39. Types of Relationships in ER Model
+                    </option>
+
+                    <option value="Domain Relational Calculus">
+                        40. Domain Relational Calculus
+                    </option>
+
+                    <option value="Structure and Components of a DBMS">
+                        41. Structure and Components of a DBMS
+                    </option>
+
+                    <option value="Third Normal Form (3NF)">
+                        42. Third Normal Form (3NF)
+                    </option>
+
+                    <option value="Join Operations in Relational Algebra">
+                        43. Join Operations in Relational Algebra
+                    </option>
+
+                    <option value="Complex Integrity Constraints in SQL">
+                        44. Complex Integrity Constraints in SQL
+                    </option>
+
+                    <option value="Evolution and Historical Perspective of Database Systems">
+                        45. Evolution and Historical Perspective of Database Systems
+                    </option>
+
+                    <option value="Serializability and Recoverability">
+                        46. Serializability and Recoverability
+                    </option>
+
+                    <option value="Creating, Altering, and Destroying Tables and Views">
+                        47. Creating, Altering, and Destroying Tables and Views
+                    </option>
+
+                    <option value="Multivalued Dependencies">
+                        48. Multivalued Dependencies
+                    </option>
+
+                    <option value="ER Diagram for a College Management System">
+                        49. ER Diagram for a College Management System
+                    </option>
+
+                    <option value="Timestamp-Based and Validation-Based Protocols">
+                        50. Timestamp-Based and Validation-Based Protocols
+                    </option>
+
+                    <option value="Integrity Constraints over Relations">
+                        51. Integrity Constraints over Relations
+                    </option>
+
+                    <option value="Boyce-Codd Normal Form (BCNF)">
+                        52. Boyce-Codd Normal Form (BCNF)
+                    </option>
+
+                    <option value="Relational Algebra versus Relational Calculus">
+                        53. Relational Algebra versus Relational Calculus
+                    </option>
+
+                    <option value="Views in Relational Databases">
+                        54. Views in Relational Databases
+                    </option>
+
+                    <option value="Log-Based Recovery and Atomicity">
+                        55. Log-Based Recovery and Atomicity
+                    </option>
+
+                    <option value="Entities, Attributes, and Entity Sets">
+                        56. Entities, Attributes, and Entity Sets
+                    </option>
+
+                    <option value="Cartesian Product, Union, and Set Difference">
+                        57. Cartesian Product, Union, and Set Difference
+                    </option>
+
+                    <option value="Querying Relational Data">
+                        58. Querying Relational Data
+                    </option>
+
+                    <option value="Types and Applications of SQL Triggers">
+                        59. Types and Applications of SQL Triggers
+                    </option>
+
+                    <option value="Database Design Process">
+                        60. Database Design Process
+                    </option>
+
+                    <option value="Rename Operator in Relational Algebra">
+                        61. Rename Operator in Relational Algebra
+                    </option>
+
+                    <option value="Enforcement of Integrity Constraints">
+                        62. Enforcement of Integrity Constraints
+                    </option>
+
+                    <option value="Nested Queries in SQL">
+                        63. Nested Queries in SQL
+                    </option>
+
+                    <option value="Conceptual Database Design Using ER Diagrams">
+                        64. Conceptual Database Design Using ER Diagrams
+                    </option>
+
+                    <option value="Problems Related to Decomposition">
+                        65. Problems Related to Decomposition
+                    </option>
+
+                    <option value="Different Types of Data Models">
+                        66. Different Types of Data Models
+                    </option>
+
+                    <option value="Domain Relational Calculus">
+                        67. Domain Relational Calculus
+                    </option>
+
+                    <option value="Reasoning about Functional Dependencies">
+                        68. Reasoning about Functional Dependencies
+                    </option>
+
+                    <option value="Relational Model Integrity Constraints">
+                        69. Relational Model Integrity Constraints
+                    </option>
+
+                    <option value="Hash-Based and Tree-Based Indexing">
+                        70. Hash-Based and Tree-Based Indexing
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                class="btn theory-btn"
+                onclick="submitAllocation('DBMS_THEORY', 'theoryRoll', 'theoryTopic', 'theoryMessage', this)"
+            >
+                Allocate Theory Topic
+            </button>
+
+            <div id="theoryMessage" class="message"></div>
+
+        </section>
+
+
+        <!-- ================= LAB ================= -->
+
+        <section class="card">
+
+            <div class="card-icon">💻</div>
+
+            <h3>DBMS Lab</h3>
+
+            <p class="card-description">
+                Select one DBMS laboratory topic for your practical presentation.
+            </p>
+
+            <div class="form-group">
+
+                <label for="labRoll">
+                    Roll Number
+                </label>
+
+                <input
+                    type="text"
+                    id="labRoll"
+                    maxlength="30"
+                    placeholder="Enter Roll Number"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="labTopic">
+                    Lab Topic
+                </label>
+
+                <select id="labTopic">
+
+                    <option value="">
+                        -- Select Lab Topic --
+                    </option>
+
+                    <option value="Introduction to MySQL and Database Environment">
+                        1. Introduction to MySQL and Database Environment
+                    </option>
+
+                    <option value="Designing an ER Diagram for a College Management System">
+                        2. Designing an ER Diagram for a College Management System
+                    </option>
+
+                    <option value="SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE">
+                        3. SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE
+                    </option>
+
+                    <option value="Database Normalization and Its Practical Importance">
+                        4. Database Normalization and Its Practical Importance
+                    </option>
+
+                    <option value="SQL Joins: INNER, LEFT, RIGHT and FULL JOIN">
+                        5. SQL Joins: INNER, LEFT, RIGHT and FULL JOIN
+                    </option>
+
+                    <option value="Database Views and Their Practical Applications">
+                        6. Database Views and Their Practical Applications
+                    </option>
+
+                    <option value="DML Commands: INSERT, UPDATE and DELETE">
+                        7. DML Commands: INSERT, UPDATE and DELETE
+                    </option>
+
+                    <option value="Functional Dependencies in Database Design">
+                        8. Functional Dependencies in Database Design
+                    </option>
+
+                    <option value="Nested Queries and Subqueries in SQL">
+                        9. Nested Queries and Subqueries in SQL
+                    </option>
+
+                    <option value="SQL Aggregate Functions with GROUP BY and HAVING">
+                        10. SQL Aggregate Functions with GROUP BY and HAVING
+                    </option>
+
+                    <option value="Database Design for an Online Shopping System">
+                        11. Database Design for an Online Shopping System
+                    </option>
+
+                    <option value="Primary Key and Foreign Key Constraints">
+                        12. Primary Key and Foreign Key Constraints
+                    </option>
+
+                    <option value="Correlated Subqueries in SQL">
+                        13. Correlated Subqueries in SQL
+                    </option>
+
+                    <option value="SQL Set Operations: UNION, INTERSECT and EXCEPT">
+                        14. SQL Set Operations: UNION, INTERSECT and EXCEPT
+                    </option>
+
+                    <option value="Database Triggers and Their Applications">
+                        15. Database Triggers and Their Applications
+                    </option>
+
+                    <option value="Stored Procedures in MySQL">
+                        16. Stored Procedures in MySQL
+                    </option>
+
+                    <option value="Cursor Handling in Database Programming">
+                        17. Cursor Handling in Database Programming
+                    </option>
+
+                    <option value="One-to-One, One-to-Many and Many-to-Many Relationships">
+                        18. One-to-One, One-to-Many and Many-to-Many Relationships
+                    </option>
+
+                    <option value="Converting ER Diagrams into Relational Schemas">
+                        19. Converting ER Diagrams into Relational Schemas
+                    </option>
+
+                    <option value="SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT">
+                        20. SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT
+                    </option>
+
+                    <option value="First Normal Form, Second Normal Form and Third Normal Form">
+                        21. First Normal Form, Second Normal Form and Third Normal Form
+                    </option>
+
+                    <option value="Boyce-Codd Normal Form (BCNF)">
+                        22. Boyce-Codd Normal Form (BCNF)
+                    </option>
+
+                    <option value="Designing a Hospital Management Database">
+                        23. Designing a Hospital Management Database
+                    </option>
+
+                    <option value="SQL Queries for Employee Management System">
+                        24. SQL Queries for Employee Management System
+                    </option>
+
+                    <option value="SQL Queries for Student Management System">
+                        25. SQL Queries for Student Management System
+                    </option>
+
+                    <option value="SQL Queries for Banking Database">
+                        26. SQL Queries for Banking Database
+                    </option>
+
+                    <option value="SQL Queries for Library Management System">
+                        27. SQL Queries for Library Management System
+                    </option>
+
+                    <option value="SQL Queries for Railway Reservation System">
+                        28. SQL Queries for Railway Reservation System
+                    </option>
+
+                    <option value="SQL Queries for Hotel Management System">
+                        29. SQL Queries for Hotel Management System
+                    </option>
+
+                    <option value="SQL Queries for E-Commerce Database">
+                        30. SQL Queries for E-Commerce Database
+                    </option>
+
+                    <option value="Self Join and Its Applications">
+                        31. Self Join and Its Applications
+                    </option>
+
+                    <option value="Cross Join and Cartesian Product">
+                        32. Cross Join and Cartesian Product
+                    </option>
+
+                    <option value="Natural Join and Equi Join">
+                        33. Natural Join and Equi Join
+                    </option>
+
+                    <option value="Subqueries Using IN, ANY and ALL">
+                        34. Subqueries Using IN, ANY and ALL
+                    </option>
+
+                    <option value="EXISTS and NOT EXISTS in SQL">
+                        35. EXISTS and NOT EXISTS in SQL
+                    </option>
+
+                    <option value="SQL Date and Time Functions">
+                        36. SQL Date and Time Functions
+                    </option>
+
+                    <option value="SQL String Functions and Their Applications">
+                        37. SQL String Functions and Their Applications
+                    </option>
+
+                    <option value="SQL Numeric and Mathematical Functions">
+                        38. SQL Numeric and Mathematical Functions
+                    </option>
+
+                    <option value="NULL Values and Three-Valued Logic in SQL">
+                        39. NULL Values and Three-Valued Logic in SQL
+                    </option>
+
+                    <option value="Creating and Managing SQL Views">
+                        40. Creating and Managing SQL Views
+                    </option>
+
+                    <option value="BEFORE and AFTER Triggers in MySQL">
+                        41. BEFORE and AFTER Triggers in MySQL
+                    </option>
+
+                    <option value="INSERT, UPDATE and DELETE Triggers">
+                        42. INSERT, UPDATE and DELETE Triggers
+                    </option>
+
+                    <option value="Audit Trail Using Database Triggers">
+                        43. Audit Trail Using Database Triggers
+                    </option>
+
+                    <option value="Stored Functions versus Stored Procedures">
+                        44. Stored Functions versus Stored Procedures
+                    </option>
+
+                    <option value="Input and Output Parameters in Stored Procedures">
+                        45. Input and Output Parameters in Stored Procedures
+                    </option>
+
+                    <option value="Cursors and Their Applications in MySQL">
+                        46. Cursors and Their Applications in MySQL
+                    </option>
+
+                    <option value="Error Handling in Stored Procedures">
+                        47. Error Handling in Stored Procedures
+                    </option>
+
+                    <option value="Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT">
+                        48. Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT
+                    </option>
+
+                    <option value="ACID Properties of Database Transactions">
+                        49. ACID Properties of Database Transactions
+                    </option>
+
+                    <option value="Database Concurrency and Transaction Problems">
+                        50. Database Concurrency and Transaction Problems
+                    </option>
+
+                    <option value="Indexing in MySQL for Faster Query Processing">
+                        51. Indexing in MySQL for Faster Query Processing
+                    </option>
+
+                    <option value="Clustered and Non-Clustered Indexing">
+                        52. Clustered and Non-Clustered Indexing
+                    </option>
+
+                    <option value="Primary Index, Secondary Index and Composite Index">
+                        53. Primary Index, Secondary Index and Composite Index
+                    </option>
+
+                    <option value="Query Optimization Techniques in MySQL">
+                        54. Query Optimization Techniques in MySQL
+                    </option>
+
+                    <option value="Understanding EXPLAIN in MySQL">
+                        55. Understanding EXPLAIN in MySQL
+                    </option>
+
+                    <option value="SQL Injection and Database Security">
+                        56. SQL Injection and Database Security
+                    </option>
+
+                    <option value="DCL Commands: GRANT and REVOKE">
+                        57. DCL Commands: GRANT and REVOKE
+                    </option>
+
+                    <option value="User Management and Privileges in MySQL">
+                        58. User Management and Privileges in MySQL
+                    </option>
+
+                    <option value="Database Backup and Restoration">
+                        59. Database Backup and Restoration
+                    </option>
+
+                    <option value="Database Import and Export Using MySQL">
+                        60. Database Import and Export Using MySQL
+                    </option>
+
+                    <option value="Connecting Java Applications with MySQL">
+                        61. Connecting Java Applications with MySQL
+                    </option>
+
+                    <option value="Connecting Python Applications with MySQL">
+                        62. Connecting Python Applications with MySQL
+                    </option>
+
+                    <option value="CRUD Operations Using a Database Application">
+                        63. CRUD Operations Using a Database Application
+                    </option>
+
+                    <option value="Database Connectivity Using JDBC">
+                        64. Database Connectivity Using JDBC
+                    </option>
+
+                    <option value="Database Connectivity Using Python and MySQL Connector">
+                        65. Database Connectivity Using Python and MySQL Connector
+                    </option>
+
+                    <option value="Introduction to NoSQL Databases">
+                        66. Introduction to NoSQL Databases
+                    </option>
+
+                    <option value="Relational Databases versus NoSQL Databases">
+                        67. Relational Databases versus NoSQL Databases
+                    </option>
+
+                    <option value="MySQL JSON Data Types and JSON Queries">
+                        68. MySQL JSON Data Types and JSON Queries
+                    </option>
+
+                    <option value="Database Replication and High Availability">
+                        69. Database Replication and High Availability
+                    </option>
+
+                    <option value="Database Performance Monitoring and Optimization">
+                        70. Database Performance Monitoring and Optimization
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                class="btn lab-btn"
+                onclick="submitAllocation('DBMS_LAB', 'labRoll', 'labTopic', 'labMessage', this)"
+            >
+                Allocate Lab Topic
+            </button>
+
+            <div id="labMessage" class="message"></div>
+
+        </section>
+
+
+        <!-- ================= PROJECT ================= -->
+
+        <section class="card">
+
+            <div class="card-icon">🚀</div>
+
+            <h3>DBMS Project</h3>
+
+            <p class="card-description">
+                Select one DBMS project title for your project work.
+            </p>
+
+            <div class="form-group">
+
+                <label for="projectRoll">
+                    Roll Number
+                </label>
+
+                <input
+                    type="text"
+                    id="projectRoll"
+                    maxlength="30"
+                    placeholder="Enter Roll Number"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="projectTopic">
+                    Project Title
+                </label>
+
+                <select id="projectTopic">
+
+                    <option value="">
+                        -- Select Project --
+                    </option>
+
+                    <option value="Supermarket Billing Management System">
+                        1. Supermarket Billing Management System
+                    </option>
+
+                    <option value="Blood Donation Camp Management System">
+                        2. Blood Donation Camp Management System
+                    </option>
+
+                    <option value="Doctor Appointment Booking System">
+                        3. Doctor Appointment Booking System
+                    </option>
+
+                    <option value="Online Examination Management System">
+                        4. Online Examination Management System
+                    </option>
+
+                    <option value="College Hostel Allocation System">
+                        5. College Hostel Allocation System
+                    </option>
+
+                    <option value="Vehicle Service Center Management System">
+                        6. Vehicle Service Center Management System
+                    </option>
+
+                    <option value="Online Event Management System">
+                        7. Online Event Management System
+                    </option>
+
+                    <option value="College Placement Management System">
+                        8. College Placement Management System
+                    </option>
+
+                    <option value="Sports Tournament Management System">
+                        9. Sports Tournament Management System
+                    </option>
+
+                    <option value="Parking Management System">
+                        10. Parking Management System
+                    </option>
+
+                    <option value="Electricity Billing Management System">
+                        11. Electricity Billing Management System
+                    </option>
+
+                    <option value="Water Supply Billing Management System">
+                        12. Water Supply Billing Management System
+                    </option>
+
+                    <option value="Real Estate Property Management System">
+                        13. Real Estate Property Management System
+                    </option>
+
+                    <option value="Mobile Shop Management System">
+                        14. Mobile Shop Management System
+                    </option>
+
+                    <option value="Computer Sales and Service Management System">
+                        15. Computer Sales and Service Management System
+                    </option>
+
+                    <option value="Online Complaint Management System">
+                        16. Online Complaint Management System
+                    </option>
+
+                    <option value="Travel Agency Management System">
+                        17. Travel Agency Management System
+                    </option>
+
+                    <option value="Flight Booking Management System">
+                        18. Flight Booking Management System
+                    </option>
+
+                    <option value="Pet Clinic Management System">
+                        19. Pet Clinic Management System
+                    </option>
+
+                    <option value="Donation Management System">
+                        20. Donation Management System
+                    </option>
+
+                    <option value="Digital Document Management System">
+                        21. Digital Document Management System
+                    </option>
+
+                    <option value="Freelancer Project Management System">
+                        22. Freelancer Project Management System
+                    </option>
+
+                    <option value="Online Auction Management System">
+                        23. Online Auction Management System
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button
+                class="btn project-btn"
+                onclick="submitAllocation('DBMS_PROJECT', 'projectRoll', 'projectTopic', 'projectMessage', this)"
+            >
+                Allocate Project
+            </button>
+
+            <div id="projectMessage" class="message"></div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+    DBMS Topic Allocation System
+</footer>
+
+
+<script>
+
+    /* =====================================================
+       GOOGLE APPS SCRIPT WEB APP URL
+       ===================================================== */
+
+    const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbwjy1fjKRUBbIU90uRWF4wzE5h9MQkEnTCTByUF8uJHvqtMLYdUSl3gmk-lOE7ngTuWRg/exec";
+
+
+    /* =====================================================
+       SUBMIT ALLOCATION
+       ===================================================== */
+
+    async function submitAllocation(
+        sheetName,
+        rollInputId,
+        topicInputId,
+        messageId,
+        button
+    ) {
+
+        const rollInput = document.getElementById(rollInputId);
+        const topicInput = document.getElementById(topicInputId);
+        const message = document.getElementById(messageId);
+
+        const rollNo = rollInput.value.trim();
+        const topic = topicInput.value.trim();
+
+
+        /* Clear previous message */
+
+        message.className = "message";
+        message.textContent = "";
+
+
+        /* Validate Roll Number */
+
+        if (!rollNo) {
+
+            showMessage(
+                message,
+                "Please enter your Roll Number.",
+                "error"
+            );
+
+            rollInput.focus();
+            return;
+        }
+
+
+        /* Validate Topic */
+
+        if (!topic) {
+
+            showMessage(
+                message,
+                "Please select a topic.",
+                "error"
+            );
+
+            topicInput.focus();
+            return;
+        }
+
+
+        /* Disable button */
+
+        button.disabled = true;
+        button.textContent = "Submitting...";
+
+
+        showMessage(
+            message,
+            "Checking availability...",
+            "loading"
+        );
+
+
+        try {
+
+            const response = await fetch(
+                SCRIPT_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "text/plain;charset=utf-8"
+                    },
+
+                    body: JSON.stringify({
+                        sheet: sheetName,
+                        rollNo: rollNo,
+                        topic: topic
+                    })
+                }
+            );
+
+
+            const text = await response.text();
+
+            let result;
+
+            try {
+                result = JSON.parse(text);
+            }
+            catch (parseError) {
+
+                throw new Error(
+                    "Invalid response received from the server."
+                );
+            }
+
+
+            if (result.success) {
+
+                showMessage(
+                    message,
+                    result.message || "Allocation successful!",
+                    "success"
+                );
+
+
+                /* Clear fields after successful allocation */
+
+                rollInput.value = "";
+                topicInput.value = "";
+
+            }
+            else {
+
+                showMessage(
+                    message,
+                    result.message || "Allocation failed.",
+                    "error"
+                );
+
+            }
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                message,
+                "Unable to connect to the allocation server. Please try again.",
+                "error"
+            );
+
+        }
+        finally {
+
+            button.disabled = false;
+
+            if (sheetName === "DBMS_THEORY") {
+                button.textContent = "Allocate Theory Topic";
+            }
+            else if (sheetName === "DBMS_LAB") {
+                button.textContent = "Allocate Lab Topic";
+            }
+            else {
+                button.textContent = "Allocate Project";
+            }
+
+        }
+
+    }
+
+
+    /* =====================================================
+       MESSAGE DISPLAY
+       ===================================================== */
+
+    function showMessage(element, text, type) {
+
+        element.className = "message " + type;
+        element.textContent = text;
+
+    }
+
+</script>
+
+</body>
+</html>
