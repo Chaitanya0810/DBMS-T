@@ -1,388 +1,1021 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DBMS Topic Allocation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBMS Topic Allocation</title>
 
-```
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
 
-    body {
-        min-height: 100vh;
-        background: linear-gradient(135deg, #eef2ff, #f8fafc, #e0f2fe);
-        color: #172033;
-    }
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #eef2ff, #f8fafc, #e0f2fe);
+    color: #172033;
+}
 
-    .header {
-        padding: 35px 20px;
-        text-align: center;
-        background: linear-gradient(135deg, #172554, #1e3a8a, #2563eb);
-        color: white;
-        box-shadow: 0 8px 25px rgba(30, 64, 175, 0.25);
-    }
+header {
+    padding: 35px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #172554, #1e3a8a, #2563eb);
+    color: white;
+    box-shadow: 0 8px 25px rgba(30,64,175,0.25);
+}
 
-    .header h1 {
-        font-size: 36px;
-        font-weight: 800;
-    }
+header h1 {
+    font-size: 36px;
+    font-weight: 800;
+}
 
-    .header p {
-        margin-top: 8px;
-        font-size: 16px;
-        opacity: 0.9;
-    }
+header p {
+    margin-top: 8px;
+    font-size: 16px;
+    opacity: 0.9;
+}
 
-    .container {
-        max-width: 1200px;
-        margin: 40px auto;
-        padding: 0 20px;
-    }
+.container {
+    max-width: 1250px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
 
-    .intro {
-        text-align: center;
-        margin-bottom: 30px;
-    }
+.intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-    .intro h2 {
-        font-size: 27px;
-        margin-bottom: 8px;
-    }
+.intro h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
 
-    .intro p {
-        color: #64748b;
-        font-size: 15px;
-    }
+.intro p {
+    color: #64748b;
+}
 
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 12px 35px rgba(15,23,42,0.10);
+    border: 1px solid #e2e8f0;
+}
+
+.card-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    margin-bottom: 18px;
+    background: #dbeafe;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.description {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 7px;
+    color: #334155;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: white;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+}
+
+select {
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.theory-btn {
+    background: #2563eb;
+}
+
+.lab-btn {
+    background: #059669;
+}
+
+.project-btn {
+    background: #7c3aed;
+}
+
+.message {
+    display: none;
+    margin-top: 15px;
+    padding: 11px 13px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.message.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.message.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.message.loading {
+    display: block;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+@media (max-width: 950px) {
     .cards {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
+        grid-template-columns: 1fr;
     }
 
-    .card {
-        background: rgba(255, 255, 255, 0.96);
-        border-radius: 18px;
-        padding: 28px;
-        box-shadow: 0 12px 35px rgba(15, 23, 42, 0.10);
-        border: 1px solid #e2e8f0;
-        transition: 0.25s ease;
+    header h1 {
+        font-size: 29px;
     }
-
-    .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.15);
-    }
-
-    .card-icon {
-        width: 55px;
-        height: 55px;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 27px;
-        margin-bottom: 18px;
-        background: #dbeafe;
-    }
-
-    .card h3 {
-        font-size: 22px;
-        margin-bottom: 8px;
-    }
-
-    .card-description {
-        color: #64748b;
-        font-size: 14px;
-        margin-bottom: 22px;
-        line-height: 1.5;
-    }
-
-    .form-group {
-        margin-bottom: 17px;
-    }
-
-    label {
-        display: block;
-        font-size: 14px;
-        font-weight: 700;
-        margin-bottom: 7px;
-        color: #334155;
-    }
-
-    input,
-    select {
-        width: 100%;
-        padding: 12px 13px;
-        border: 1px solid #cbd5e1;
-        border-radius: 10px;
-        background: white;
-        font-size: 14px;
-        outline: none;
-        transition: 0.2s;
-    }
-
-    input:focus,
-    select:focus {
-        border-color: #2563eb;
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-    }
-
-    select {
-        cursor: pointer;
-    }
-
-    .btn {
-        width: 100%;
-        border: none;
-        padding: 13px;
-        border-radius: 10px;
-        color: white;
-        font-size: 15px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .btn:hover {
-        transform: translateY(-1px);
-    }
-
-    .btn:disabled {
-        opacity: 0.65;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    .theory-btn {
-        background: #2563eb;
-    }
-
-    .lab-btn {
-        background: #059669;
-    }
-
-    .project-btn {
-        background: #7c3aed;
-    }
-
-    .message {
-        margin-top: 15px;
-        padding: 11px 13px;
-        border-radius: 9px;
-        font-size: 13px;
-        display: none;
-        line-height: 1.4;
-    }
-
-    .success {
-        display: block;
-        background: #dcfce7;
-        color: #166534;
-        border: 1px solid #86efac;
-    }
-
-    .error {
-        display: block;
-        background: #fee2e2;
-        color: #991b1b;
-        border: 1px solid #fca5a5;
-    }
-
-    .loading {
-        display: block;
-        background: #eff6ff;
-        color: #1d4ed8;
-        border: 1px solid #bfdbfe;
-    }
-
-    .footer {
-        text-align: center;
-        padding: 30px 20px;
-        color: #64748b;
-        font-size: 13px;
-    }
-
-    @media (max-width: 950px) {
-        .cards {
-            grid-template-columns: 1fr;
-        }
-
-        .header h1 {
-            font-size: 29px;
-        }
-    }
-
-    @media (max-width: 500px) {
-        .container {
-            padding: 0 13px;
-        }
-
-        .card {
-            padding: 22px;
-        }
-
-        .header {
-            padding: 28px 15px;
-        }
-    }
+}
 </style>
-```
-
 </head>
 
 <body>
 
-<header class="header">
+<header>
     <h1>DBMS Topic Allocation</h1>
     <p>Database Management Systems — Theory, Lab & Project</p>
 </header>
 
 <main class="container">
 
-```
-<div class="intro">
-    <h2>Select Your Category</h2>
-    <p>Enter your complete Roll Number and select one available topic.</p>
-</div>
+    <div class="intro">
+        <h2>Select Your Category</h2>
+        <p>Enter your complete Roll Number and select one available topic.</p>
+    </div>
 
-<div class="cards">
+    <div class="cards">
 
-    <!-- =====================================================
-         THEORY
-    ====================================================== -->
+        <!-- ================= THEORY ================= -->
 
-    <section class="card">
+        <section class="card">
 
-        <div class="card-icon">📘</div>
+            <div class="card-icon">📘</div>
 
-        <h3>DBMS Theory</h3>
+            <h3>DBMS Theory</h3>
 
-        <p class="card-description">
-            Select one Theory topic. Theory allocation is checked
-            only against the Theory sheet.
-        </p>
+            <p class="description">
+                Select one Theory topic. Theory allocation is checked
+                only against the Theory sheet.
+            </p>
 
-        <div class="form-group">
+            <div class="form-group">
+                <label for="theoryRoll">Full Roll Number</label>
 
-            <label for="theoryRoll">
-                Full Roll Number
-            </label>
+                <input
+                    type="text"
+                    id="theoryRoll"
+                    placeholder="Example: 257R1A66C9"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+            </div>
 
-            <input
-                type="text"
-                id="theoryRoll"
-                placeholder="Example: 257R1A66C9"
-                autocomplete="off"
-                spellcheck="false"
+            <div class="form-group">
+                <label for="theoryTopic">Theory Topic</label>
+
+                <select id="theoryTopic"></select>
+            </div>
+
+            <button
+                class="theory-btn"
+                onclick="submitAllocation(
+                    'DBMS_THEORY',
+                    'theoryRoll',
+                    'theoryTopic',
+                    'theoryMessage',
+                    this
+                )"
             >
+                Allocate Theory Topic
+            </button>
 
-        </div>
+            <div id="theoryMessage" class="message"></div>
 
-        <div class="form-group">
+        </section>
 
-            <label for="theoryTopic">
-                Theory Topic
-            </label>
 
-            <select id="theoryTopic">
+        <!-- ================= LAB ================= -->
 
-                <option value="">
-                    -- Select Theory Topic --
-                </option>
+        <section class="card">
 
-                <option value="Functional Dependencies">
-                    1. Functional Dependencies
-                </option>
+            <div class="card-icon">💻</div>
 
-                <option value="ER Diagram for a Hospital Management System">
-                    2. ER Diagram for a Hospital Management System
-                </option>
+            <h3>DBMS Lab</h3>
 
-                <option value="Basic Form of SQL Queries">
-                    3. Basic Form of SQL Queries
-                </option>
+            <p class="description">
+                Select one Lab topic. Lab allocation is checked
+                only against the Lab sheet.
+            </p>
 
-                <option value="B+ Trees: A Dynamic Index Structure">
-                    4. B+ Trees: A Dynamic Index Structure
-                </option>
+            <div class="form-group">
+                <label for="labRoll">Full Roll Number</label>
 
-                <option value="Advantages and Applications of DBMS">
-                    5. Advantages and Applications of DBMS
-                </option>
+                <input
+                    type="text"
+                    id="labRoll"
+                    placeholder="Example: 257R1A66C9"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+            </div>
 
-                <option value="Selection and Projection Operations">
-                    6. Selection and Projection Operations
-                </option>
+            <div class="form-group">
+                <label for="labTopic">Lab Topic</label>
 
-                <option value="Transaction Concept and Transaction States">
-                    7. Transaction Concept and Transaction States
-                </option>
+                <select id="labTopic"></select>
+            </div>
 
-                <option value="Weak Entity Sets and Strong Entity Sets">
-                    8. Weak Entity Sets and Strong Entity Sets
-                </option>
+            <button
+                class="lab-btn"
+                onclick="submitAllocation(
+                    'DBMS_LAB',
+                    'labRoll',
+                    'labTopic',
+                    'labMessage',
+                    this
+                )"
+            >
+                Allocate Lab Topic
+            </button>
 
-                <option value="UNION, INTERSECT, and EXCEPT Operations in SQL">
-                    9. UNION, INTERSECT, and EXCEPT Operations in SQL
-                </option>
+            <div id="labMessage" class="message"></div>
 
-                <option value="Problems Caused by Data Redundancy">
-                    10. Problems Caused by Data Redundancy
-                </option>
+        </section>
 
-                <option value="Data Independence in Database Systems">
-                    11. Data Independence in Database Systems
-                </option>
 
-                <option value="Natural Join and Its Applications">
-                    12. Natural Join and Its Applications
-                </option>
+        <!-- ================= PROJECT ================= -->
 
-                <option value="Lock-Based Concurrency Control Protocols">
-                    13. Lock-Based Concurrency Control Protocols
-                </option>
+        <section class="card">
 
-                <option value="Entity-Relationship (ER) Model">
-                    14. Entity-Relationship (ER) Model
-                </option>
+            <div class="card-icon">🚀</div>
 
-                <option value="Fourth Normal Form (4NF)">
-                    15. Fourth Normal Form (4NF)
-                </option>
+            <h3>DBMS Project</h3>
 
-                <option value="Database System Architecture">
-                    16. Database System Architecture
-                </option>
+            <p class="description">
+                Select one Project. Project allocation is checked
+                only against the Project sheet.
+            </p>
 
-                <option value="NULL Values in SQL">
-                    17. NULL Values in SQL
-                </option>
+            <div class="form-group">
+                <label for="projectRoll">Full Roll Number</label>
 
-                <option value="Relational Algebra: Fundamental Operators">
-                    18. Relational Algebra: Fundamental Operators
-                </option>
+                <input
+                    type="text"
+                    id="projectRoll"
+                    placeholder="Example: 257R1A66C9"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+            </div>
 
-                <option value="ER Diagram for an Online Shopping System">
-                    19. ER Diagram for an Online Shopping System
-                </option>
+            <div class="form-group">
+                <label for="projectTopic">Project Title</label>
 
-                <option value="Atomicity and Durability in Transactions">
-                    20. Atomicity and Durability in Transactions
-                </option>
+                <select id="projectTopic"></select>
+            </div>
 
-                <option value="Types of Attributes in ER Model">
-                    21. Types of Attributes in ER Model
-                </option>
+            <button
+                class="project-btn"
+                onclick="submitAllocation(
+                    'DBMS_PROJECT',
+                    'projectRoll',
+                    'projectTopic',
+                    'projectMessage',
+                    this
+                )"
+            >
+                Allocate Project
+            </button>
 
-                <option value="Database Decomposition">
-                    22. Database Decomposition
-```
+            <div id="projectMessage" class="message"></div>
+
+        </section>
+
+    </div>
+
+</main>
+
+<footer>
+    DBMS Topic Allocation System
+</footer>
+
+
+<script>
+
+/* ============================================================
+   APPS SCRIPT WEB APP URL
+   ============================================================ */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwrv_b7OxINKGtxkktHLG7Ajp0bWKN9ubk3jGByDM0iUbfmzvE-YYV-_VLB7hVtIjKUBw/exec";
+
+
+/* ============================================================
+   THEORY TOPICS — 70
+   ============================================================ */
+
+const THEORY_TOPICS = [
+
+"Functional Dependencies",
+
+"ER Diagram for a Hospital Management System",
+
+"Basic Form of SQL Queries",
+
+"B+ Trees: A Dynamic Index Structure",
+
+"Advantages and Applications of DBMS",
+
+"Selection and Projection Operations",
+
+"Transaction Concept and Transaction States",
+
+"Weak Entity Sets and Strong Entity Sets",
+
+"UNION, INTERSECT, and EXCEPT Operations in SQL",
+
+"Problems Caused by Data Redundancy",
+
+"Data Independence in Database Systems",
+
+"Natural Join and Its Applications",
+
+"Lock-Based Concurrency Control Protocols",
+
+"Entity-Relationship (ER) Model",
+
+"Fourth Normal Form (4NF)",
+
+"Database System Architecture",
+
+"NULL Values in SQL",
+
+"Relational Algebra: Fundamental Operators",
+
+"ER Diagram for an Online Shopping System",
+
+"Atomicity and Durability in Transactions",
+
+"Types of Attributes in ER Model",
+
+"Database Decomposition",
+
+"Tuple Relational Calculus",
+
+"File Organization and Indexing Techniques",
+
+"Second Normal Form (2NF)",
+
+"Relationships and Relationship Sets",
+
+"Triggers and Active Databases",
+
+"Introduction to the Relational Model",
+
+"Lossless Join Decomposition",
+
+"SQL SELECT, FROM, and WHERE Clauses",
+
+"Multiple Granularity Protocol",
+
+"Additional Features of the ER Model",
+
+"Division Operator in Relational Algebra",
+
+"File Systems versus Database Management Systems",
+
+"Fifth Normal Form (5NF)",
+
+"Aggregation Operators in SQL",
+
+"Logical Database Design",
+
+"Concurrent Executions and Their Problems",
+
+"Types of Relationships in ER Model",
+
+"Domain Relational Calculus",
+
+"Structure and Components of a DBMS",
+
+"Third Normal Form (3NF)",
+
+"Join Operations in Relational Algebra",
+
+"Complex Integrity Constraints in SQL",
+
+"Evolution and Historical Perspective of Database Systems",
+
+"Serializability and Recoverability",
+
+"Creating, Altering, and Destroying Tables and Views",
+
+"Multivalued Dependencies",
+
+"ER Diagram for a College Management System",
+
+"Timestamp-Based and Validation-Based Protocols",
+
+"Integrity Constraints over Relations",
+
+"Boyce-Codd Normal Form (BCNF)",
+
+"Relational Algebra versus Relational Calculus",
+
+"Views in Relational Databases",
+
+"Log-Based Recovery and Atomicity",
+
+"Entities, Attributes, and Entity Sets",
+
+"Cartesian Product, Union, and Set Difference",
+
+"Querying Relational Data",
+
+"Types and Applications of SQL Triggers",
+
+"Database Design Process",
+
+"Rename Operator in Relational Algebra",
+
+"Enforcement of Integrity Constraints",
+
+"Nested Queries in SQL",
+
+"Conceptual Database Design Using ER Diagrams",
+
+"Problems Related to Decomposition",
+
+"Different Types of Data Models",
+
+"Domain Relational Calculus",
+
+"Reasoning about Functional Dependencies",
+
+"Relational Model Integrity Constraints",
+
+"Hash-Based and Tree-Based Indexing"
+
+];
+
+
+/* ============================================================
+   LAB TOPICS — 70
+   ============================================================ */
+
+const LAB_TOPICS = [
+
+"Introduction to MySQL and Database Environment",
+
+"Designing an ER Diagram for a College Management System",
+
+"SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
+
+"Database Normalization and Its Practical Importance",
+
+"SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
+
+"Database Views and Their Practical Applications",
+
+"DML Commands: INSERT, UPDATE and DELETE",
+
+"Functional Dependencies in Database Design",
+
+"Nested Queries and Subqueries in SQL",
+
+"SQL Aggregate Functions with GROUP BY and HAVING",
+
+"Database Design for an Online Shopping System",
+
+"Primary Key and Foreign Key Constraints",
+
+"Correlated Subqueries in SQL",
+
+"SQL Set Operations: UNION, INTERSECT and EXCEPT",
+
+"Database Triggers and Their Applications",
+
+"Stored Procedures in MySQL",
+
+"Cursor Handling in Database Programming",
+
+"One-to-One, One-to-Many and Many-to-Many Relationships",
+
+"Converting ER Diagrams into Relational Schemas",
+
+"SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
+
+"First Normal Form, Second Normal Form and Third Normal Form",
+
+"Boyce-Codd Normal Form (BCNF)",
+
+"Designing a Hospital Management Database",
+
+"SQL Queries for Employee Management System",
+
+"SQL Queries for Student Management System",
+
+"SQL Queries for Banking Database",
+
+"SQL Queries for Library Management System",
+
+"SQL Queries for Railway Reservation System",
+
+"SQL Queries for Hotel Management System",
+
+"SQL Queries for E-Commerce Database",
+
+"Self Join and Its Applications",
+
+"Cross Join and Cartesian Product",
+
+"Natural Join and Equi Join",
+
+"Subqueries Using IN, ANY and ALL",
+
+"EXISTS and NOT EXISTS in SQL",
+
+"SQL Date and Time Functions",
+
+"SQL String Functions and Their Applications",
+
+"SQL Numeric and Mathematical Functions",
+
+"NULL Values and Three-Valued Logic in SQL",
+
+"Creating and Managing SQL Views",
+
+"BEFORE and AFTER Triggers in MySQL",
+
+"INSERT, UPDATE and DELETE Triggers",
+
+"Audit Trail Using Database Triggers",
+
+"Stored Functions versus Stored Procedures",
+
+"Input and Output Parameters in Stored Procedures",
+
+"Cursors and Their Applications in MySQL",
+
+"Error Handling in Stored Procedures",
+
+"Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
+
+"ACID Properties of Database Transactions",
+
+"Database Concurrency and Transaction Problems",
+
+"Indexing in MySQL for Faster Query Processing",
+
+"Clustered and Non-Clustered Indexing",
+
+"Primary Index, Secondary Index and Composite Index",
+
+"Query Optimization Techniques in MySQL",
+
+"Understanding EXPLAIN in MySQL",
+
+"SQL Injection and Database Security",
+
+"DCL Commands: GRANT and REVOKE",
+
+"User Management and Privileges in MySQL",
+
+"Database Backup and Restoration",
+
+"Database Import and Export Using MySQL",
+
+"Connecting Java Applications with MySQL",
+
+"Connecting Python Applications with MySQL",
+
+"CRUD Operations Using a Database Application",
+
+"Database Connectivity Using JDBC",
+
+"Database Connectivity Using Python and MySQL Connector",
+
+"Introduction to NoSQL Databases",
+
+"Relational Databases versus NoSQL Databases",
+
+"MySQL JSON Data Types and JSON Queries",
+
+"Database Replication and High Availability",
+
+"Database Performance Monitoring and Optimization"
+
+];
+
+
+/* ============================================================
+   PROJECT TOPICS — 23
+   ============================================================ */
+
+const PROJECT_TOPICS = [
+
+"Supermarket Billing Management System",
+
+"Blood Donation Camp Management System",
+
+"Doctor Appointment Booking System",
+
+"Online Examination Management System",
+
+"College Hostel Allocation System",
+
+"Vehicle Service Center Management System",
+
+"Online Event Management System",
+
+"College Placement Management System",
+
+"Sports Tournament Management System",
+
+"Parking Management System",
+
+"Electricity Billing Management System",
+
+"Water Supply Billing Management System",
+
+"Real Estate Property Management System",
+
+"Mobile Shop Management System",
+
+"Computer Sales and Service Management System",
+
+"Online Complaint Management System",
+
+"Travel Agency Management System",
+
+"Flight Booking Management System",
+
+"Pet Clinic Management System",
+
+"Donation Management System",
+
+"Digital Document Management System",
+
+"Freelancer Project Management System",
+
+"Online Auction Management System"
+
+];
+
+
+/* ============================================================
+   LOAD TOPICS INTO DROPDOWNS
+   ============================================================ */
+
+function loadTopics(selectId, topics, defaultText) {
+
+    const select = document.getElementById(selectId);
+
+    select.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+
+    defaultOption.value = "";
+    defaultOption.textContent = defaultText;
+
+    select.appendChild(defaultOption);
+
+    for (let i = 0; i < topics.length; i++) {
+
+        const option = document.createElement("option");
+
+        option.value = topics[i];
+
+        option.textContent =
+            (i + 1) + ". " + topics[i];
+
+        select.appendChild(option);
+    }
+}
+
+
+/* ============================================================
+   INITIALIZE DROPDOWNS
+   ============================================================ */
+
+loadTopics(
+    "theoryTopic",
+    THEORY_TOPICS,
+    "-- Select Theory Topic --"
+);
+
+loadTopics(
+    "labTopic",
+    LAB_TOPICS,
+    "-- Select Lab Topic --"
+);
+
+loadTopics(
+    "projectTopic",
+    PROJECT_TOPICS,
+    "-- Select Project --"
+);
+
+
+/* ============================================================
+   ALLOCATION FUNCTION
+   ============================================================ */
+
+async function submitAllocation(
+    sheetName,
+    rollInputId,
+    topicInputId,
+    messageId,
+    button
+) {
+
+    const rollInput =
+        document.getElementById(rollInputId);
+
+    const topicInput =
+        document.getElementById(topicInputId);
+
+    const message =
+        document.getElementById(messageId);
+
+    const rollNo =
+        rollInput.value.trim();
+
+    const topic =
+        topicInput.value.trim();
+
+
+    /* ---------------- VALIDATION ---------------- */
+
+    message.className = "message";
+    message.textContent = "";
+
+
+    if (!rollNo) {
+
+        showMessage(
+            message,
+            "Please enter your full Roll Number.",
+            "error"
+        );
+
+        rollInput.focus();
+
+        return;
+    }
+
+
+    if (!topic) {
+
+        showMessage(
+            message,
+            "Please select a topic.",
+            "error"
+        );
+
+        topicInput.focus();
+
+        return;
+    }
+
+
+    /* ---------------- LOADING ---------------- */
+
+    button.disabled = true;
+
+    button.textContent = "Checking...";
+
+    showMessage(
+        message,
+        "Checking Roll Number and topic availability...",
+        "loading"
+    );
+
+
+    try {
+
+        /* ---------------- SEND TO APPS SCRIPT ---------------- */
+
+        const response = await fetch(
+            SCRIPT_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+
+                    sheet: sheetName,
+
+                    rollNo: rollNo,
+
+                    topic: topic
+
+                })
+            }
+        );
+
+
+        const text =
+            await response.text();
+
+
+        let result;
+
+
+        try {
+
+            result =
+                JSON.parse(text);
+
+        }
+
+        catch (parseError) {
+
+            throw new Error(
+                "Invalid response received from server."
+            );
+
+        }
+
+
+        /* ---------------- SUCCESS ---------------- */
+
+        if (result.success) {
+
+            showMessage(
+                message,
+                result.message ||
+                "Allocation successful!",
+                "success"
+            );
+
+            rollInput.value = "";
+
+            topicInput.value = "";
+
+        }
+
+
+        /* ---------------- FAILURE ---------------- */
+
+        else {
+
+            showMessage(
+                message,
+                result.message ||
+                "Allocation failed.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            message,
+            "Unable to connect to the allocation server. Please try again.",
+            "error"
+        );
+
+    }
+
+
+    finally {
+
+        button.disabled = false;
+
+
+        if (sheetName === "DBMS_THEORY") {
+
+            button.textContent =
+                "Allocate Theory Topic";
+
+        }
+
+        else if (sheetName === "DBMS_LAB") {
+
+            button.textContent =
+                "Allocate Lab Topic";
+
+        }
+
+        else {
+
+            button.textContent =
+                "Allocate Project";
+
+        }
+
+    }
+
+}
+
+
+/* ============================================================
+   MESSAGE DISPLAY
+   ============================================================ */
+
+function showMessage(
+    element,
+    text,
+    type
+) {
+
+    element.className =
+        "message " + type;
+
+    element.textContent =
+        text;
+
+}
+
+</script>
+
+</body>
+</html>
