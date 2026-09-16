@@ -3,438 +3,443 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>DBMS Topic Allocation</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #eef4ff, #f5f3ff);
-    color: #172033;
-    min-height: 100vh;
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:linear-gradient(135deg,#eef4ff,#f5f3ff);
+    color:#172033;
+    min-height:100vh;
 }
 
-.container {
-    width: 94%;
-    max-width: 1450px;
-    margin: auto;
+.container{
+    width:94%;
+    max-width:1450px;
+    margin:auto;
 }
 
-/* HEADER */
-
-header {
-    padding: 28px 0 18px;
+header{
+    padding:28px 0 18px;
 }
 
-.header-box {
-    background: linear-gradient(135deg, #172554, #3730a3);
-    color: white;
-    padding: 32px;
-    border-radius: 24px;
-    box-shadow: 0 18px 45px rgba(30, 41, 59, .18);
+.header-box{
+    background:linear-gradient(135deg,#172554,#3730a3);
+    color:white;
+    padding:32px;
+    border-radius:24px;
+    box-shadow:0 18px 45px rgba(30,41,59,.18);
 }
 
-.header-box h1 {
-    font-size: 40px;
-    margin-bottom: 8px;
+.header-box h1{
+    font-size:40px;
+    margin-bottom:8px;
 }
 
-.header-box p {
-    color: #dbeafe;
+.header-box p{
+    color:#dbeafe;
+}
+
+#liveStatus{
+    font-weight:700;
+    margin-bottom:8px;
+    color:#bbf7d0;
 }
 
 /* SUMMARY */
 
-.summary {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 18px 0;
+.summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin:18px 0;
 }
 
-.summary-card {
-    background: white;
-    border: 1px solid #dbe3f0;
-    border-radius: 18px;
-    padding: 20px;
-    box-shadow: 0 12px 35px rgba(30, 64, 175, .10);
+.summary-card{
+    background:white;
+    border:1px solid #dbe3f0;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 12px 35px rgba(30,64,175,.10);
 }
 
-.number {
-    font-size: 30px;
-    font-weight: 800;
-    color: #2563eb;
+.number{
+    font-size:30px;
+    font-weight:800;
+    color:#2563eb;
 }
 
-.label {
-    color: #64748b;
-    margin-top: 5px;
+.label{
+    color:#64748b;
+    margin-top:5px;
 }
 
 /* TABS */
 
-.tabs {
-    display: flex;
-    gap: 10px;
-    margin: 24px 0;
-    flex-wrap: wrap;
+.tabs{
+    display:flex;
+    gap:10px;
+    margin:24px 0;
+    flex-wrap:wrap;
 }
 
-.tab {
-    border: 1px solid #dbe3f0;
-    background: white;
-    color: #64748b;
-    padding: 13px 22px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 700;
+.tab{
+    border:1px solid #dbe3f0;
+    background:white;
+    color:#64748b;
+    padding:13px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
 }
 
-.tab.active {
-    background: #2563eb;
-    color: white;
-    border-color: #2563eb;
+.tab.active{
+    background:#2563eb;
+    color:white;
+    border-color:#2563eb;
 }
 
 /* SECTIONS */
 
-.section {
-    display: none;
+.section{
+    display:none;
 }
 
-.section.active {
-    display: block;
+.section.active{
+    display:block;
 }
 
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 18px;
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
 }
 
-.section-header h2 {
-    font-size: 26px;
+.section-header h2{
+    font-size:26px;
 }
 
-.section-header p {
-    color: #64748b;
-    margin-top: 4px;
+.section-header p{
+    color:#64748b;
+    margin-top:4px;
 }
 
-/* FORM */
+/* FORMS */
 
-.form-card {
-    background: white;
-    border: 1px solid #dbe3f0;
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 12px 35px rgba(30, 64, 175, .10);
-    margin-bottom: 22px;
+.form-card{
+    background:white;
+    border:1px solid #dbe3f0;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 12px 35px rgba(30,64,175,.10);
+    margin-bottom:22px;
 }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr auto;
-    gap: 14px;
-    align-items: end;
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1.5fr auto;
+    gap:14px;
+    align-items:end;
 }
 
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+.project-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
 }
 
-.full {
-    grid-column: 1 / -1;
+.full{
+    grid-column:1/-1;
 }
 
-label {
-    display: block;
-    font-weight: 700;
-    font-size: 14px;
-    margin-bottom: 7px;
+label{
+    display:block;
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:7px;
 }
 
 input,
-select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 11px;
-    background: white;
-    font-size: 14px;
-    outline: none;
+select{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #cbd5e1;
+    border-radius:11px;
+    background:white;
+    font-size:14px;
+    outline:none;
 }
 
 input:focus,
-select:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
+select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.10);
 }
 
-button {
-    font-family: inherit;
+button{
+    font-family:inherit;
 }
 
-.primary {
-    border: none;
-    background: #2563eb;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 11px;
-    font-weight: 700;
-    cursor: pointer;
+.primary{
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:12px 20px;
+    border-radius:11px;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.primary:hover {
-    background: #1d4ed8;
+.primary:hover{
+    background:#1d4ed8;
 }
 
 /* TABLE */
 
-.table-card {
-    background: white;
-    border: 1px solid #dbe3f0;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 12px 35px rgba(30, 64, 175, .10);
+.table-card{
+    background:white;
+    border:1px solid #dbe3f0;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 12px 35px rgba(30,64,175,.10);
 }
 
-.table-top {
-    padding: 18px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
+.table-top{
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
-.search {
-    width: 320px;
+.search{
+    width:320px;
 }
 
-.table-wrapper {
-    overflow-x: auto;
+.table-wrapper{
+    overflow-x:auto;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 900px;
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
 }
 
-th {
-    background: #f1f5ff;
-    color: #334155;
-    padding: 13px 15px;
-    text-align: left;
-    font-size: 13px;
+th{
+    background:#f1f5ff;
+    color:#334155;
+    padding:13px 15px;
+    text-align:left;
+    font-size:13px;
 }
 
-td {
-    padding: 14px 15px;
-    border-bottom: 1px solid #edf1f7;
-    font-size: 14px;
+td{
+    padding:14px 15px;
+    border-bottom:1px solid #edf1f7;
+    font-size:14px;
 }
 
-tr:hover {
-    background: #f8faff;
+tr:hover{
+    background:#f8faff;
 }
 
-.collision-row {
-    background: #fff1f2 !important;
+.collision-row{
+    background:#fff1f2 !important;
 }
 
-.project-collision-row {
-    background: #fff7ed !important;
+.project-collision-row{
+    background:#fff7ed !important;
 }
 
-.roll {
-    font-family: Consolas, monospace;
-    font-weight: 700;
+.roll{
+    font-family:Consolas,monospace;
+    font-weight:700;
 }
 
-.topic-name {
-    font-weight: 700;
+.topic-name{
+    font-weight:700;
 }
 
-.muted {
-    color: #64748b;
+.muted{
+    color:#64748b;
 }
 
 /* STATUS */
 
-.status {
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 800;
+.status{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
 }
 
-.available {
-    background: #dcfce7;
-    color: #15803d;
+.available{
+    background:#dcfce7;
+    color:#15803d;
 }
 
-.allocated {
-    background: #dbeafe;
-    color: #1e40af;
+.allocated{
+    background:#dbeafe;
+    color:#1e40af;
 }
 
-.collision {
-    background: #fee2e2;
-    color: #dc2626;
+.collision{
+    background:#fee2e2;
+    color:#dc2626;
 }
 
-.conflict {
-    color: #dc2626;
-    font-size: 12px;
-    font-weight: 700;
-    margin-top: 5px;
+.conflict{
+    color:#dc2626;
+    font-size:12px;
+    font-weight:700;
+    margin-top:5px;
 }
 
-.change-btn {
-    border: none;
-    background: #dc2626;
-    color: white;
-    padding: 9px 13px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-weight: 700;
+.change-btn{
+    border:none;
+    background:#dc2626;
+    color:white;
+    padding:9px 13px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.change-btn:hover{
+    background:#b91c1c;
 }
 
 /* MODAL */
 
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, .65);
-    align-items: center;
-    justify-content: center;
-    z-index: 5000;
-    padding: 20px;
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.65);
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+    padding:20px;
 }
 
-.modal.show {
-    display: flex;
+.modal.show{
+    display:flex;
 }
 
-.modal-box {
-    width: min(550px, 100%);
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
+.modal-box{
+    width:min(550px,100%);
+    background:white;
+    border-radius:20px;
+    padding:25px;
 }
 
-.modal-head {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
 }
 
-.close {
-    border: none;
-    background: #f1f5f9;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 20px;
+.close{
+    border:none;
+    background:#f1f5f9;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:20px;
 }
 
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:20px;
 }
 
-.cancel {
-    border: 1px solid #cbd5e1;
-    background: white;
-    padding: 10px 16px;
-    border-radius: 10px;
-    cursor: pointer;
+.cancel{
+    border:1px solid #cbd5e1;
+    background:white;
+    padding:10px 16px;
+    border-radius:10px;
+    cursor:pointer;
 }
 
 /* TOAST */
 
-#toast {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 9999;
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:9999;
 }
 
-.toast-item {
-    color: white;
-    padding: 14px 18px;
-    border-radius: 12px;
-    margin-top: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+.toast-item{
+    color:white;
+    padding:14px 18px;
+    border-radius:12px;
+    margin-top:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
 }
 
-.toast-success {
-    background: #15803d;
+.toast-success{
+    background:#15803d;
 }
 
-.toast-error {
-    background: #dc2626;
+.toast-error{
+    background:#dc2626;
 }
 
-.toast-info {
-    background: #2563eb;
+.toast-info{
+    background:#2563eb;
 }
 
 /* RESPONSIVE */
 
-@media(max-width:1000px) {
+@media(max-width:1000px){
 
-    .summary {
-        grid-template-columns: repeat(2, 1fr);
+    .summary{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .form-grid {
-        grid-template-columns: 1fr;
+    .form-grid{
+        grid-template-columns:1fr;
     }
 
-    .project-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media(max-width:600px) {
-
-    .summary {
-        grid-template-columns: 1fr;
-    }
-
-    .header-box h1 {
-        font-size: 28px;
-    }
-
-    .tab {
-        width: 100%;
-    }
-
-    .search {
-        width: 100%;
+    .project-grid{
+        grid-template-columns:1fr;
     }
 }
 
+@media(max-width:600px){
+
+    .summary{
+        grid-template-columns:1fr;
+    }
+
+    .header-box h1{
+        font-size:28px;
+    }
+
+    .tab{
+        width:100%;
+    }
+
+    .search{
+        width:100%;
+    }
+}
 </style>
 </head>
 
@@ -443,15 +448,16 @@ tr:hover {
 <div class="container">
 
 <header>
+    <div class="header-box">
 
-<div class="header-box">
+        <div id="liveStatus">
+            ● Connecting to live Google Sheets...
+        </div>
 
-<h1>DBMS Topic Allocation</h1>
+        <h1>DBMS Topic Allocation</h1>
+        <p>Theory • Lab • Project</p>
 
-<p>Theory • Lab • Project</p>
-
-</div>
-
+    </div>
 </header>
 
 
@@ -459,48 +465,25 @@ tr:hover {
 
 <div class="summary">
 
-<div class="summary-card">
+    <div class="summary-card">
+        <div class="number" id="theoryCount">0</div>
+        <div class="label">Theory Allocations</div>
+    </div>
 
-<div class="number" id="theoryCount">0</div>
+    <div class="summary-card">
+        <div class="number" id="labCount">0</div>
+        <div class="label">Lab Allocations</div>
+    </div>
 
-<div class="label">
-Theory Allocations
-</div>
+    <div class="summary-card">
+        <div class="number" id="projectCount">0</div>
+        <div class="label">Project Teams</div>
+    </div>
 
-</div>
-
-
-<div class="summary-card">
-
-<div class="number" id="labCount">0</div>
-
-<div class="label">
-Lab Allocations
-</div>
-
-</div>
-
-
-<div class="summary-card">
-
-<div class="number" id="projectCount">0</div>
-
-<div class="label">
-Project Teams
-</div>
-
-</div>
-
-
-<div class="summary-card">
-
-<div class="number" id="collisionCount">0</div>
-
-<div class="label">
-Collisions
-</div>
-
-</div>
+    <div class="summary-card">
+        <div class="number" id="collisionCount">0</div>
+        <div class="label">Collisions</div>
+    </div>
 
 </div>
 
@@ -509,26 +492,20 @@ Collisions
 
 <div class="tabs">
 
-<button
-    class="tab active"
-    onclick="showSection('theory', this)"
->
-DBMS Theory
-</button>
+    <button class="tab active"
+            onclick="showSection('theory',this)">
+        DBMS Theory
+    </button>
 
-<button
-    class="tab"
-    onclick="showSection('lab', this)"
->
-DBMS Lab
-</button>
+    <button class="tab"
+            onclick="showSection('lab',this)">
+        DBMS Lab
+    </button>
 
-<button
-    class="tab"
-    onclick="showSection('project', this)"
->
-DBMS Project
-</button>
+    <button class="tab"
+            onclick="showSection('project',this)">
+        DBMS Project
+    </button>
 
 </div>
 
@@ -542,13 +519,8 @@ DBMS Project
 <div class="section-header">
 
 <div>
-
-<h2>DBMS Theory</h2>
-
-<p>
-Choose a theory topic using your Roll Number.
-</p>
-
+    <h2>DBMS Theory</h2>
+    <p>Choose a theory topic using your Roll Number.</p>
 </div>
 
 </div>
@@ -562,10 +534,8 @@ Choose a theory topic using your Roll Number.
 
 <label>Roll Number</label>
 
-<input
-    id="theoryRoll"
-    placeholder="257R1A66C9"
->
+<input id="theoryRoll"
+       placeholder="257R1A66C9">
 
 </div>
 
@@ -577,7 +547,7 @@ Choose a theory topic using your Roll Number.
 <select id="theoryTopic">
 
 <option value="">
-Select Theory Topic
+    Select Theory Topic
 </option>
 
 </select>
@@ -585,11 +555,11 @@ Select Theory Topic
 </div>
 
 
-<button
-    class="primary"
-    onclick="allocateSingle('theory')"
->
+<button class="primary"
+        onclick="allocateSingle('theory')">
+
 Allocate Topic
+
 </button>
 
 </div>
@@ -603,12 +573,10 @@ Allocate Topic
 
 <h3>Theory Allocation Status</h3>
 
-<input
-    id="theorySearch"
-    class="search"
-    placeholder="Search Roll Number or Topic..."
-    oninput="renderTheory()"
->
+<input id="theorySearch"
+       class="search"
+       placeholder="Search Roll Number or Topic..."
+       oninput="renderTheory()">
 
 </div>
 
@@ -620,14 +588,12 @@ Allocate Topic
 <thead>
 
 <tr>
-
 <th>S.No</th>
 <th>Roll Number</th>
 <th>Topic</th>
 <th>Presentation Date</th>
 <th>Status</th>
 <th>Action</th>
-
 </tr>
 
 </thead>
@@ -672,10 +638,8 @@ Choose a lab topic using your Roll Number.
 
 <label>Roll Number</label>
 
-<input
-    id="labRoll"
-    placeholder="257R1A66C9"
->
+<input id="labRoll"
+       placeholder="257R1A66C9">
 
 </div>
 
@@ -695,11 +659,11 @@ Select Lab Topic
 </div>
 
 
-<button
-    class="primary"
-    onclick="allocateSingle('lab')"
->
+<button class="primary"
+        onclick="allocateSingle('lab')">
+
 Allocate Topic
+
 </button>
 
 </div>
@@ -713,12 +677,10 @@ Allocate Topic
 
 <h3>Lab Allocation Status</h3>
 
-<input
-    id="labSearch"
-    class="search"
-    placeholder="Search Roll Number or Topic..."
-    oninput="renderLab()"
->
+<input id="labSearch"
+       class="search"
+       placeholder="Search Roll Number or Topic..."
+       oninput="renderLab()">
 
 </div>
 
@@ -730,14 +692,12 @@ Allocate Topic
 <thead>
 
 <tr>
-
 <th>S.No</th>
 <th>Roll Number</th>
 <th>Topic</th>
 <th>Presentation Date</th>
 <th>Status</th>
 <th>Action</th>
-
 </tr>
 
 </thead>
@@ -778,15 +738,12 @@ Each project is allocated to one team of exactly 3 students.
 
 <div class="project-grid">
 
-
 <div>
 
 <label>Team Member 1</label>
 
-<input
-    id="projectRoll1"
-    placeholder="Roll Number"
->
+<input id="projectRoll1"
+       placeholder="Roll Number">
 
 </div>
 
@@ -795,10 +752,8 @@ Each project is allocated to one team of exactly 3 students.
 
 <label>Team Member 2</label>
 
-<input
-    id="projectRoll2"
-    placeholder="Roll Number"
->
+<input id="projectRoll2"
+       placeholder="Roll Number">
 
 </div>
 
@@ -807,10 +762,8 @@ Each project is allocated to one team of exactly 3 students.
 
 <label>Team Member 3</label>
 
-<input
-    id="projectRoll3"
-    placeholder="Roll Number"
->
+<input id="projectRoll3"
+       placeholder="Roll Number">
 
 </div>
 
@@ -832,15 +785,14 @@ Select Project
 
 <div class="full">
 
-<button
-    class="primary"
-    onclick="allocateProject()"
->
+<button class="primary"
+        onclick="allocateProject()">
+
 Allocate Project
+
 </button>
 
 </div>
-
 
 </div>
 
@@ -853,12 +805,10 @@ Allocate Project
 
 <h3>Project Allocation Status</h3>
 
-<input
-    id="projectSearch"
-    class="search"
-    placeholder="Search project or Roll Number..."
-    oninput="renderProjects()"
->
+<input id="projectSearch"
+       class="search"
+       placeholder="Search project or Roll Number..."
+       oninput="renderProjects()">
 
 </div>
 
@@ -870,7 +820,6 @@ Allocate Project
 <thead>
 
 <tr>
-
 <th>S.No</th>
 <th>Team Roll Numbers</th>
 <th>Batch</th>
@@ -878,7 +827,6 @@ Allocate Project
 <th>Presentation Date</th>
 <th>Status</th>
 <th>Action</th>
-
 </tr>
 
 </thead>
@@ -912,18 +860,14 @@ Allocate Project
 Change Topic
 </h3>
 
-<p
-    id="modalDescription"
-    style="color:#64748b;margin-top:5px;"
->
+<p id="modalDescription"
+   style="color:#64748b;margin-top:5px;">
 </p>
 
 </div>
 
-<button
-    class="close"
-    onclick="closeModal()"
->
+<button class="close"
+        onclick="closeModal()">
 ×
 </button>
 
@@ -945,10 +889,8 @@ Select New Topic
 </div>
 
 
-<div
-    id="projectChange"
-    style="display:none;"
->
+<div id="projectChange"
+     style="display:none;">
 
 <label>New Project</label>
 
@@ -965,17 +907,13 @@ Select New Project
 
 <div class="modal-actions">
 
-<button
-    class="cancel"
-    onclick="closeModal()"
->
+<button class="cancel"
+        onclick="closeModal()">
 Cancel
 </button>
 
-<button
-    class="primary"
-    onclick="submitChange()"
->
+<button class="primary"
+        onclick="submitChange()">
 Confirm Change
 </button>
 
@@ -992,172 +930,164 @@ Confirm Change
 <script>
 
 /* =====================================================
-   YOUR CURRENT APPS SCRIPT URL
+   GOOGLE APPS SCRIPT URL
    ===================================================== */
 
 const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbzvtKNRlxnsdRNwqzjxysGiEkyyFJMUFWNmBWrTaGnpWOv6XM9EsTzOylEjYkU09tgjxw/exec";
+"https://script.google.com/macros/s/AKfycbyZ7ARqW43Faq8-lzm8Mlx2u0W5fRDmTpiFczIB3KdNGHQhyGOVzmuDTmyC2wWUSYbhQg/exec";
 
 
 /* =====================================================
-   THEORY TOPICS
+   TOPIC LISTS
    ===================================================== */
 
-const THEORY_TOPICS = [
-"Functional Dependencies",
-"ER Diagram for a Hospital Management System",
-"Basic Form of SQL Queries",
-"B+ Trees: A Dynamic Index Structure",
-"Advantages and Applications of DBMS",
-"Selection and Projection Operations",
-"Transaction Concept and Transaction States",
-"Weak Entity Sets and Strong Entity Sets",
-"UNION, INTERSECT, and EXCEPT Operations in SQL",
-"Problems Caused by Data Redundancy",
-"Data Independence in Database Systems",
-"Natural Join and Its Applications",
-"Lock-Based Concurrency Control Protocols",
-"Entity-Relationship (ER) Model",
-"Fourth Normal Form (4NF)",
-"Database System Architecture",
-"NULL Values in SQL",
-"Relational Algebra: Fundamental Operators",
-"ER Diagram for an Online Shopping System",
-"Atomicity and Durability in Transactions",
-"Types of Attributes in ER Model",
-"Database Decomposition",
-"Tuple Relational Calculus",
-"File Organization and Indexing Techniques",
-"Second Normal Form (2NF)",
-"Relationships and Relationship Sets",
-"Triggers and Active Databases",
-"Introduction to the Relational Model",
-"Lossless Join Decomposition",
-"SQL SELECT, FROM, and WHERE Clauses",
-"Multiple Granularity Protocol",
-"Additional Features of the ER Model",
-"Division Operator in Relational Algebra",
-"File Systems versus Database Management Systems",
-"Fifth Normal Form (5NF)",
-"Aggregation Operators in SQL",
-"Logical Database Design",
-"Concurrent Executions and Their Problems",
-"Types of Relationships in ER Model",
-"Domain Relational Calculus",
-"Structure and Components of a DBMS",
-"Third Normal Form (3NF)",
-"Join Operations in Relational Algebra",
-"Complex Integrity Constraints in SQL",
-"Evolution and Historical Perspective of Database Systems",
-"Serializability and Recoverability",
-"Creating, Altering, and Destroying Tables and Views",
-"Multivalued Dependencies",
-"ER Diagram for a College Management System",
-"Timestamp-Based and Validation-Based Protocols",
-"Integrity Constraints over Relations",
-"Boyce-Codd Normal Form (BCNF)",
-"Relational Algebra versus Relational Calculus",
-"Views in Relational Databases",
-"Log-Based Recovery and Atomicity",
-"Entities, Attributes, and Entity Sets",
-"Cartesian Product, Union, and Set Difference",
-"Querying Relational Data",
-"Types and Applications of SQL Triggers",
-"Database Design Process",
-"Rename Operator in Relational Algebra",
-"Enforcement of Integrity Constraints",
-"Nested Queries in SQL",
-"Conceptual Database Design Using ER Diagrams",
-"Problems Related to Decomposition",
-"Different Types of Data Models",
-"Domain Relational Calculus",
-"Reasoning about Functional Dependencies",
-"Relational Model Integrity Constraints",
-"Hash-Based and Tree-Based Indexing"
-];
+const THEORY_TOPICS = `
+Functional Dependencies
+ER Diagram for a Hospital Management System
+Basic Form of SQL Queries
+B+ Trees: A Dynamic Index Structure
+Advantages and Applications of DBMS
+Selection and Projection Operations
+Transaction Concept and Transaction States
+Weak Entity Sets and Strong Entity Sets
+UNION, INTERSECT, and EXCEPT Operations in SQL
+Problems Caused by Data Redundancy
+Data Independence in Database Systems
+Natural Join and Its Applications
+Lock-Based Concurrency Control Protocols
+Entity-Relationship (ER) Model
+Fourth Normal Form (4NF)
+Database System Architecture
+NULL Values in SQL
+Relational Algebra: Fundamental Operators
+ER Diagram for an Online Shopping System
+Atomicity and Durability in Transactions
+Types of Attributes in ER Model
+Database Decomposition
+Tuple Relational Calculus
+File Organization and Indexing Techniques
+Second Normal Form (2NF)
+Relationships and Relationship Sets
+Triggers and Active Databases
+Introduction to the Relational Model
+Lossless Join Decomposition
+SQL SELECT, FROM, and WHERE Clauses
+Multiple Granularity Protocol
+Additional Features of the ER Model
+Division Operator in Relational Algebra
+File Systems versus Database Management Systems
+Fifth Normal Form (5NF)
+Aggregation Operators in SQL
+Logical Database Design
+Concurrent Executions and Their Problems
+Types of Relationships in ER Model
+Domain Relational Calculus
+Structure and Components of a DBMS
+Third Normal Form (3NF)
+Join Operations in Relational Algebra
+Complex Integrity Constraints in SQL
+Evolution and Historical Perspective of Database Systems
+Serializability and Recoverability
+Creating, Altering, and Destroying Tables and Views
+Multivalued Dependencies
+ER Diagram for a College Management System
+Timestamp-Based and Validation-Based Protocols
+Integrity Constraints over Relations
+Boyce-Codd Normal Form (BCNF)
+Relational Algebra versus Relational Calculus
+Views in Relational Databases
+Log-Based Recovery and Atomicity
+Entities, Attributes, and Entity Sets
+Cartesian Product, Union, and Set Difference
+Querying Relational Data
+Types and Applications of SQL Triggers
+Database Design Process
+Rename Operator in Relational Algebra
+Enforcement of Integrity Constraints
+Nested Queries in SQL
+Conceptual Database Design Using ER Diagrams
+Problems Related to Decomposition
+Different Types of Data Models
+Domain Relational Calculus
+Reasoning about Functional Dependencies
+Relational Model Integrity Constraints
+Hash-Based and Tree-Based Indexing
+`.trim().split("\n");
 
 
-/* =====================================================
-   LAB TOPICS
-   ===================================================== */
+const LAB_TOPICS = `
+Introduction to MySQL and Database Environment
+Designing an ER Diagram for a College Management System
+SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE
+Database Normalization and Its Practical Importance
+SQL Joins: INNER, LEFT, RIGHT and FULL JOIN
+Database Views and Their Practical Applications
+DML Commands: INSERT, UPDATE and DELETE
+Functional Dependencies in Database Design
+Nested Queries and Subqueries in SQL
+SQL Aggregate Functions with GROUP BY and HAVING
+Database Design for an Online Shopping System
+Primary Key and Foreign Key Constraints
+Correlated Subqueries in SQL
+SQL Set Operations: UNION, INTERSECT and EXCEPT
+Database Triggers and Their Applications
+Stored Procedures in MySQL
+Cursor Handling in Database Programming
+One-to-One, One-to-Many and Many-to-Many Relationships
+Converting ER Diagrams into Relational Schemas
+SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT
+First Normal Form, Second Normal Form and Third Normal Form
+Boyce-Codd Normal Form (BCNF)
+Designing a Hospital Management Database
+SQL Queries for Employee Management System
+SQL Queries for Student Management System
+SQL Queries for Banking Database
+SQL Queries for Library Management System
+SQL Queries for Railway Reservation System
+SQL Queries for Hotel Management System
+SQL Queries for E-Commerce Database
+Self Join and Its Applications
+Cross Join and Cartesian Product
+Natural Join and Equi Join
+Subqueries Using IN, ANY and ALL
+EXISTS and NOT EXISTS in SQL
+SQL Date and Time Functions
+SQL String Functions and Their Applications
+SQL Numeric and Mathematical Functions
+NULL Values and Three-Valued Logic in SQL
+Creating and Managing SQL Views
+BEFORE and AFTER Triggers in MySQL
+INSERT, UPDATE and DELETE Triggers
+Audit Trail Using Database Triggers
+Stored Functions versus Stored Procedures
+Input and Output Parameters in Stored Procedures
+Cursors and Their Applications in MySQL
+Error Handling in Stored Procedures
+Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT
+ACID Properties of Database Transactions
+Database Concurrency and Transaction Problems
+Indexing in MySQL for Faster Query Processing
+Clustered and Non-Clustered Indexing
+Primary Index, Secondary Index and Composite Index
+Query Optimization Techniques in MySQL
+Understanding EXPLAIN in MySQL
+SQL Injection and Database Security
+DCL Commands: GRANT and REVOKE
+User Management and Privileges in MySQL
+Database Backup and Restoration
+Database Import and Export Using MySQL
+Connecting Java Applications with MySQL
+Connecting Python Applications with MySQL
+CRUD Operations Using a Database Application
+Database Connectivity Using JDBC
+Database Connectivity Using Python and MySQL Connector
+Introduction to NoSQL Databases
+Relational Databases versus NoSQL Databases
+MySQL JSON Data Types and JSON Queries
+Database Replication and High Availability
+Database Performance Monitoring and Optimization
+`.trim().split("\n");
 
-const LAB_TOPICS = [
-"Introduction to MySQL and Database Environment",
-"Designing an ER Diagram for a College Management System",
-"SQL DDL Commands: CREATE, ALTER, DROP and TRUNCATE",
-"Database Normalization and Its Practical Importance",
-"SQL Joins: INNER, LEFT, RIGHT and FULL JOIN",
-"Database Views and Their Practical Applications",
-"DML Commands: INSERT, UPDATE and DELETE",
-"Functional Dependencies in Database Design",
-"Nested Queries and Subqueries in SQL",
-"SQL Aggregate Functions with GROUP BY and HAVING",
-"Database Design for an Online Shopping System",
-"Primary Key and Foreign Key Constraints",
-"Correlated Subqueries in SQL",
-"SQL Set Operations: UNION, INTERSECT and EXCEPT",
-"Database Triggers and Their Applications",
-"Stored Procedures in MySQL",
-"Cursor Handling in Database Programming",
-"One-to-One, One-to-Many and Many-to-Many Relationships",
-"Converting ER Diagrams into Relational Schemas",
-"SQL Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT",
-"First Normal Form, Second Normal Form and Third Normal Form",
-"Boyce-Codd Normal Form (BCNF)",
-"Designing a Hospital Management Database",
-"SQL Queries for Employee Management System",
-"SQL Queries for Student Management System",
-"SQL Queries for Banking Database",
-"SQL Queries for Library Management System",
-"SQL Queries for Railway Reservation System",
-"SQL Queries for Hotel Management System",
-"SQL Queries for E-Commerce Database",
-"Self Join and Its Applications",
-"Cross Join and Cartesian Product",
-"Natural Join and Equi Join",
-"Subqueries Using IN, ANY and ALL",
-"EXISTS and NOT EXISTS in SQL",
-"SQL Date and Time Functions",
-"SQL String Functions and Their Applications",
-"SQL Numeric and Mathematical Functions",
-"NULL Values and Three-Valued Logic in SQL",
-"Creating and Managing SQL Views",
-"BEFORE and AFTER Triggers in MySQL",
-"INSERT, UPDATE and DELETE Triggers",
-"Audit Trail Using Database Triggers",
-"Stored Functions versus Stored Procedures",
-"Input and Output Parameters in Stored Procedures",
-"Cursors and Their Applications in MySQL",
-"Error Handling in Stored Procedures",
-"Transactions in SQL: COMMIT, ROLLBACK and SAVEPOINT",
-"ACID Properties of Database Transactions",
-"Database Concurrency and Transaction Problems",
-"Indexing in MySQL for Faster Query Processing",
-"Clustered and Non-Clustered Indexing",
-"Primary Index, Secondary Index and Composite Index",
-"Query Optimization Techniques in MySQL",
-"Understanding EXPLAIN in MySQL",
-"SQL Injection and Database Security",
-"DCL Commands: GRANT and REVOKE",
-"User Management and Privileges in MySQL",
-"Database Backup and Restoration",
-"Database Import and Export Using MySQL",
-"Connecting Java Applications with MySQL",
-"Connecting Python Applications with MySQL",
-"CRUD Operations Using a Database Application",
-"Database Connectivity Using JDBC",
-"Database Connectivity Using Python and MySQL Connector",
-"Introduction to NoSQL Databases",
-"Relational Databases versus NoSQL Databases",
-"MySQL JSON Data Types and JSON Queries",
-"Database Replication and High Availability",
-"Database Performance Monitoring and Optimization"
-];
-
-
-/* =====================================================
-   PROJECT TOPICS
-   ===================================================== */
 
 const PROJECT_TOPICS = [
 "Supermarket Billing Management System",
@@ -1191,16 +1121,15 @@ const PROJECT_TOPICS = [
    ===================================================== */
 
 let appData = {
-    theory: [],
-    lab: [],
-    projects: []
+    theory:[],
+    lab:[],
+    projects:[]
 };
 
-
 let currentChange = {
-    type: null,
-    roll: null,
-    rolls: null
+    type:null,
+    roll:null,
+    rolls:null
 };
 
 
@@ -1208,263 +1137,513 @@ let currentChange = {
    NORMALIZATION
    ===================================================== */
 
-function normalizeText(value) {
+function cleanValue(value){
 
     return String(value || "")
-        .replace(/\u00A0/g, " ")
+        .replace(/\u00A0/g," ")
         .trim()
-        .replace(/\s+/g, " ")
-        .toLowerCase();
+        .replace(/\s+/g," ");
+
 }
 
+function normalizeText(value){
 
-function normalizeRoll(value) {
+    return cleanValue(value)
+        .toLowerCase();
+
+}
+
+function normalizeRoll(value){
 
     return String(value || "")
         .trim()
-        .replace(/\s+/g, "")
+        .replace(/\s+/g,"")
         .toUpperCase();
+
 }
 
+function normalizeProject(value){
 
-function normalizeProject(value) {
-
-    return String(value || "")
-        .replace(/\u00A0/g, " ")
-        .trim()
-        .replace(/\s+/g, " ")
+    return cleanValue(value)
         .toLowerCase();
+
+}
+
+function parseProjectRolls(value){
+
+    if(!value) return [];
+
+    return String(value)
+        .split(",")
+        .map(function(x){
+            return normalizeRoll(x);
+        })
+        .filter(function(x){
+            return x !== "";
+        });
+
 }
 
 
-function cleanValue(value) {
+/* =====================================================
+   HTML ESCAPING
+   ===================================================== */
 
-    return String(value || "")
-        .replace(/\u00A0/g, " ")
-        .trim();
-}
-
-
-function escapeHtml(value) {
+function escapeHtml(value){
 
     return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
 }
 
-
-function escapeAttr(value) {
+function escapeAttr(value){
 
     return escapeHtml(value);
+
 }
 
 
 /* =====================================================
-   LOAD DATA
+   JSONP REQUEST
    ===================================================== */
 
-function jsonpRequest(payload) {
-    return new Promise(function(resolve, reject) {
+function jsonpRequest(params){
+
+    return new Promise(function(resolve,reject){
+
         const callbackName =
-            "dbmsCallback_" + Date.now() + "_" +
-            Math.random().toString(36).slice(2);
+            "jsonp_" +
+            Date.now() +
+            "_" +
+            Math.floor(Math.random()*100000);
 
-        const script = document.createElement("script");
-        const params = new URLSearchParams();
 
-        Object.keys(payload || {}).forEach(function(key) {
-            const value = payload[key];
-            params.set(
-                key,
-                Array.isArray(value) ? JSON.stringify(value) : String(value ?? "")
-            );
-        });
+        params.callback =
+            callbackName;
 
-        params.set("callback", callbackName);
-        params.set("_", Date.now());
 
-        let finished = false;
+        const query =
+            Object.keys(params)
+                .map(function(key){
 
-        function cleanup() {
-            if (script.parentNode) script.parentNode.removeChild(script);
-            try { delete window[callbackName]; }
-            catch (e) { window[callbackName] = undefined; }
+                    return encodeURIComponent(key) +
+                        "=" +
+                        encodeURIComponent(params[key]);
+
+                })
+                .join("&");
+
+
+        const script =
+            document.createElement("script");
+
+
+        const timeout =
+            setTimeout(function(){
+
+                cleanup();
+
+                reject(
+                    new Error(
+                        "Google Sheets connection timed out."
+                    )
+                );
+
+            },15000);
+
+
+        window[callbackName] =
+            function(data){
+
+                clearTimeout(timeout);
+
+                cleanup();
+
+                resolve(data);
+
+            };
+
+
+        function cleanup(){
+
+            delete window[callbackName];
+
+            if(script.parentNode){
+                script.parentNode.removeChild(script);
+            }
+
         }
 
-        window[callbackName] = function(data) {
-            if (finished) return;
-            finished = true;
-            cleanup();
-            resolve(data);
-        };
 
-        script.onerror = function() {
-            if (finished) return;
-            finished = true;
-            cleanup();
-            reject(new Error("Could not reach the Apps Script web app."));
-        };
+        script.onerror =
+            function(){
 
-        script.src = SCRIPT_URL + "?" + params.toString();
+                clearTimeout(timeout);
+
+                cleanup();
+
+                reject(
+                    new Error(
+                        "Unable to connect to Google Sheets."
+                    )
+                );
+
+            };
+
+
+        script.src =
+            SCRIPT_URL +
+            "?" +
+            query;
+
+
         document.body.appendChild(script);
 
-        setTimeout(function() {
-            if (finished) return;
-            finished = true;
-            cleanup();
-            reject(new Error("Request timed out."));
-        }, 20000);
     });
+
 }
 
-async function loadData() {
-    try {
-        const data = await jsonpRequest({ action: "loadData" });
 
-        if (!data || data.success !== true) {
-            throw new Error(data && data.message ? data.message : "Invalid Apps Script response.");
+/* =====================================================
+   LOAD LIVE DATA
+   ===================================================== */
+
+async function loadData(){
+
+    try{
+
+        const data =
+            await jsonpRequest({
+                action:"loadData"
+            });
+
+
+        if(!data.success){
+
+            throw new Error(
+                data.message ||
+                "Unable to load Sheet data."
+            );
+
         }
 
-        appData = {
-            theory: Array.isArray(data.theory) ? data.theory : [],
-            lab: Array.isArray(data.lab) ? data.lab : [],
-            projects: Array.isArray(data.projects) ? data.projects : []
-        };
+
+        appData = data;
 
         renderAll();
-    } catch(error) {
-        console.error(error);
-        showToast("Connection error: " + (error.message || "Unknown error"), "error");
-    }
-}
-
-async function postData(payload) {
-    return await jsonpRequest(payload);
-}
 
 
-/* =====================================================
-   SINGLE ALLOCATION
-   ===================================================== */
+        const status =
+            document.getElementById(
+                "liveStatus"
+            );
 
-async function allocateSingle(type) {
 
-    const roll = normalizeRoll(document.getElementById(type + "Roll").value);
-    const topic = document.getElementById(type + "Topic").value;
+        if(status){
 
-    if (!roll) {
-        showToast("Enter your Roll Number.", "error");
-        return;
-    }
+            status.textContent =
+                "● Live • Google Sheets connected • Updated " +
+                new Date().toLocaleTimeString();
 
-    if (!topic) {
-        showToast("Select a topic.", "error");
-        return;
-    }
-
-    try {
-        const result = await postData({
-            action: "allocateSingle",
-            category: type,
-            roll: roll,
-            topic: topic
-        });
-
-        showToast(result.message, result.success ? "success" : "error");
-
-        if (result.success) {
-            document.getElementById(type + "Roll").value = "";
-            document.getElementById(type + "Topic").value = "";
         }
 
-        await loadData();
-    } catch(error) {
-        console.error(error);
-        showToast("Request failed: " + (error.message || "Unknown error"), "error");
     }
+
+    catch(error){
+
+        console.error(error);
+
+        const status =
+            document.getElementById(
+                "liveStatus"
+            );
+
+
+        if(status){
+
+            status.textContent =
+                "● Connection error • Retrying...";
+
+        }
+
+
+        showToast(
+            error.message ||
+            "Unable to connect to Google Sheets.",
+            "error"
+        );
+
+    }
+
 }
 
 
 /* =====================================================
-   PROJECT ALLOCATION
+   POST / WRITE REQUEST
    ===================================================== */
 
-async function allocateProject() {
+async function postData(payload){
+
+    return await jsonpRequest(payload);
+
+}
+
+
+/* =====================================================
+   ALLOCATE THEORY / LAB
+   ===================================================== */
+
+async function allocateSingle(type){
+
+    const roll =
+        document.getElementById(
+            type + "Roll"
+        ).value.trim();
+
+
+    const topic =
+        document.getElementById(
+            type + "Topic"
+        ).value;
+
+
+    if(!roll){
+
+        showToast(
+            "Enter your Roll Number.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!topic){
+
+        showToast(
+            "Select a topic.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await postData({
+
+                action:"allocateSingle",
+
+                category:type,
+
+                roll:roll,
+
+                topic:topic
+
+            });
+
+
+        showToast(
+            result.message,
+            result.success
+                ? "success"
+                : "error"
+        );
+
+
+        if(result.success){
+
+            document.getElementById(
+                type + "Roll"
+            ).value = "";
+
+            document.getElementById(
+                type + "Topic"
+            ).value = "";
+
+        }
+
+
+        await loadData();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to process allocation.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ALLOCATE PROJECT
+   ===================================================== */
+
+async function allocateProject(){
 
     const rolls = [
-        normalizeRoll(document.getElementById("projectRoll1").value),
-        normalizeRoll(document.getElementById("projectRoll2").value),
-        normalizeRoll(document.getElementById("projectRoll3").value)
+
+        document.getElementById(
+            "projectRoll1"
+        ).value,
+
+        document.getElementById(
+            "projectRoll2"
+        ).value,
+
+        document.getElementById(
+            "projectRoll3"
+        ).value
+
     ];
 
-    const project = document.getElementById("projectTopic").value;
 
-    if (!rolls[0] || !rolls[1] || !rolls[2]) {
-        showToast("Enter all 3 Roll Numbers.", "error");
+    const project =
+        document.getElementById(
+            "projectTopic"
+        ).value;
+
+
+    if(
+        !rolls[0] ||
+        !rolls[1] ||
+        !rolls[2]
+    ){
+
+        showToast(
+            "Enter all 3 team Roll Numbers.",
+            "error"
+        );
+
         return;
+
     }
 
-    if (new Set(rolls).size !== 3) {
-        showToast("All 3 Roll Numbers must be different.", "error");
+
+    if(!project){
+
+        showToast(
+            "Select a project.",
+            "error"
+        );
+
         return;
+
     }
 
-    if (!project) {
-        showToast("Select a project.", "error");
+
+    const normalized =
+        rolls.map(normalizeRoll);
+
+
+    if(
+        new Set(normalized).size !== 3
+    ){
+
+        showToast(
+            "All 3 Roll Numbers must be different.",
+            "error"
+        );
+
         return;
+
     }
 
-    try {
-        const result = await postData({
-            action: "allocateProject",
-            rolls: rolls,
-            topic: project
-        });
 
-        showToast(result.message, result.success ? "success" : "error");
+    try{
 
-        if (result.success) {
-            document.getElementById("projectRoll1").value = "";
-            document.getElementById("projectRoll2").value = "";
-            document.getElementById("projectRoll3").value = "";
-            document.getElementById("projectTopic").value = "";
+        const result =
+            await postData({
+
+                action:"allocateProject",
+
+                rolls:rolls,
+
+                topic:project
+
+            });
+
+
+        showToast(
+            result.message,
+            result.success
+                ? "success"
+                : "error"
+        );
+
+
+        if(result.success){
+
+            document.getElementById(
+                "projectRoll1"
+            ).value = "";
+
+            document.getElementById(
+                "projectRoll2"
+            ).value = "";
+
+            document.getElementById(
+                "projectRoll3"
+            ).value = "";
+
+            document.getElementById(
+                "projectTopic"
+            ).value = "";
+
         }
 
+
         await loadData();
-    } catch(error) {
-        console.error(error);
-        showToast("Project request failed: " + (error.message || "Unknown error"), "error");
+
     }
+
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Unable to process project allocation.",
+            "error"
+        );
+
+    }
+
 }
 
 
 /* =====================================================
-   TOPIC COLLISION DETECTION
+   TOPIC COLLISIONS
    ===================================================== */
 
-function getTopicCollisions(rows) {
+function getTopicCollisions(rows){
 
     const map = {};
 
-
-    rows.forEach(function(row) {
+    rows.forEach(function(row){
 
         const topic =
             normalizeText(row.topic);
 
+        if(!topic) return;
 
-        if (!topic) return;
-
-
-        if (!map[topic]) {
-
+        if(!map[topic]){
             map[topic] = [];
-
         }
-
 
         map[topic].push(row);
 
@@ -1473,31 +1652,20 @@ function getTopicCollisions(rows) {
 
     const collisions = {};
 
+    Object.keys(map).forEach(function(topic){
 
-    Object.keys(map).forEach(function(topic) {
+        if(map[topic].length > 1){
 
-        if (
-            map[topic].length > 1
-        ) {
+            map[topic].forEach(function(row){
 
-            map[topic].forEach(function(row) {
-
-                const roll =
-                    normalizeRoll(row.roll);
-
-
-                collisions[roll] =
-                    map[topic].filter(
-                        function(other) {
-
-                            return (
-                                normalizeRoll(
-                                    other.roll
-                                ) !== roll
-                            );
-
-                        }
-                    );
+                collisions[row.row] =
+                    map[topic]
+                        .filter(function(other){
+                            return other.row !== row.row;
+                        })
+                        .map(function(other){
+                            return normalizeRoll(other.roll);
+                        });
 
             });
 
@@ -1507,6 +1675,67 @@ function getTopicCollisions(rows) {
 
 
     return collisions;
+
+}
+
+
+/* =====================================================
+   PROJECT COLLISIONS
+   ===================================================== */
+
+function getProjectCollisions(){
+
+    const memberMap = {};
+
+    appData.projects.forEach(function(project){
+
+        parseProjectRolls(
+            project.teamRolls
+        ).forEach(function(roll){
+
+            if(!memberMap[roll]){
+                memberMap[roll] = [];
+            }
+
+            memberMap[roll].push(project);
+
+        });
+
+    });
+
+
+    const collisions = {};
+
+    Object.keys(memberMap).forEach(function(roll){
+
+        if(memberMap[roll].length > 1){
+
+            memberMap[roll].forEach(function(project){
+
+                const key =
+                    String(project.row);
+
+                if(!collisions[key]){
+                    collisions[key] = [];
+                }
+
+                if(
+                    collisions[key].indexOf(roll) === -1
+                ){
+
+                    collisions[key].push(roll);
+
+                }
+
+            });
+
+        }
+
+    });
+
+
+    return collisions;
+
 }
 
 
@@ -1514,7 +1743,7 @@ function getTopicCollisions(rows) {
    THEORY RENDER
    ===================================================== */
 
-function renderTheory() {
+function renderTheory(){
 
     const tbody =
         document.getElementById(
@@ -1537,7 +1766,7 @@ function renderTheory() {
 
 
     const rows =
-        appData.theory.filter(function(row) {
+        appData.theory.filter(function(row){
 
             return (
                 normalizeText(row.roll)
@@ -1547,78 +1776,68 @@ function renderTheory() {
 
                 normalizeText(row.topic)
                     .includes(search)
+
+                ||
+
+                normalizeText(row.sno)
+                    .includes(search)
             );
 
         });
 
 
     tbody.innerHTML =
-        rows.map(function(row) {
+        rows.map(function(row){
+
+            const conflict =
+                collisions[row.row] || [];
+
 
             const roll =
                 normalizeRoll(row.roll);
 
+
             const topic =
                 cleanValue(row.topic);
-
-            const conflict =
-                collisions[roll];
 
 
             return `
 
-<tr class="${conflict ? "collision-row" : ""}">
+<tr class="${conflict.length ? "collision-row" : ""}">
 
 <td>
 ${escapeHtml(row.sno)}
 </td>
 
 <td class="roll">
-${escapeHtml(roll)}
+${escapeHtml(roll || "-")}
 </td>
 
 <td>
 
 ${
-    topic
+topic
+?
+`<span class="topic-name">
+${escapeHtml(topic)}
+</span>`
+:
+`<span class="muted">
+No topic allocated
+</span>`
+}
 
-    ?
-
-    `
-    <div class="topic-name">
-        ${escapeHtml(topic)}
-    </div>
-
-    ${
-        conflict
-        ?
-        `
-        <div class="conflict">
-            Same topic with:
-            ${conflict.map(
-                function(other) {
-                    return escapeHtml(
-                        normalizeRoll(
-                            other.roll
-                        )
-                    );
-                }
-            ).join(", ")}
-        </div>
-        `
-        :
-        ""
-    }
-
-    `
-
-    :
-
-    `
-    <span class="muted">
-        Not allocated
-    </span>
-    `
+${
+conflict.length
+?
+`
+<div class="conflict">
+Conflicting Roll Number(s):
+${conflict.map(escapeHtml).join(", ")}
+</div>
+`
+:
+""
 }
 
 </td>
@@ -1630,29 +1849,24 @@ ${escapeHtml(row.date || "-")}
 <td>
 
 ${
-    conflict
+conflict.length
+?
+`<span class="status collision">
+Collision
+</span>`
 
-    ?
+:
 
-    `<span class="status collision">
-        Collision
-    </span>`
+topic
+?
+`<span class="status allocated">
+Allocated
+</span>`
 
-    :
-
-    topic
-
-    ?
-
-    `<span class="status allocated">
-        Allocated
-    </span>`
-
-    :
-
-    `<span class="status available">
-        Available
-    </span>`
+:
+`<span class="status available">
+Available
+</span>`
 }
 
 </td>
@@ -1660,25 +1874,20 @@ ${
 <td>
 
 ${
-    conflict
-
-    ?
-
-    `
-    <button
-        class="change-btn"
-        onclick="openSingleChange(
-            'theory',
-            '${escapeAttr(roll)}'
-        )"
-    >
-        Change Topic
-    </button>
-    `
-
-    :
-
-    "—"
+conflict.length
+?
+`
+<button
+class="change-btn"
+onclick="openSingleChange(
+'theory',
+'${escapeAttr(roll)}'
+)">
+Change Topic
+</button>
+`
+:
+"—"
 }
 
 </td>
@@ -1690,7 +1899,7 @@ ${
         }).join("");
 
 
-    if (!rows.length) {
+    if(!rows.length){
 
         tbody.innerHTML = `
 
@@ -1698,14 +1907,14 @@ ${
 
 <td colspan="6">
 
-<div
-    style="
-    padding:40px;
-    text-align:center;
-    color:#64748b;
-    "
->
+<div style="
+padding:40px;
+text-align:center;
+color:#64748b;
+">
+
 No matching records found.
+
 </div>
 
 </td>
@@ -1715,6 +1924,7 @@ No matching records found.
 `;
 
     }
+
 }
 
 
@@ -1722,7 +1932,7 @@ No matching records found.
    LAB RENDER
    ===================================================== */
 
-function renderLab() {
+function renderLab(){
 
     const tbody =
         document.getElementById(
@@ -1745,7 +1955,7 @@ function renderLab() {
 
 
     const rows =
-        appData.lab.filter(function(row) {
+        appData.lab.filter(function(row){
 
             return (
                 normalizeText(row.roll)
@@ -1755,78 +1965,68 @@ function renderLab() {
 
                 normalizeText(row.topic)
                     .includes(search)
+
+                ||
+
+                normalizeText(row.sno)
+                    .includes(search)
             );
 
         });
 
 
     tbody.innerHTML =
-        rows.map(function(row) {
+        rows.map(function(row){
+
+            const conflict =
+                collisions[row.row] || [];
+
 
             const roll =
                 normalizeRoll(row.roll);
 
+
             const topic =
                 cleanValue(row.topic);
-
-            const conflict =
-                collisions[roll];
 
 
             return `
 
-<tr class="${conflict ? "collision-row" : ""}">
+<tr class="${conflict.length ? "collision-row" : ""}">
 
 <td>
 ${escapeHtml(row.sno)}
 </td>
 
 <td class="roll">
-${escapeHtml(roll)}
+${escapeHtml(roll || "-")}
 </td>
 
 <td>
 
 ${
-    topic
+topic
+?
+`<span class="topic-name">
+${escapeHtml(topic)}
+</span>`
+:
+`<span class="muted">
+No topic allocated
+</span>`
+}
 
-    ?
-
-    `
-    <div class="topic-name">
-        ${escapeHtml(topic)}
-    </div>
-
-    ${
-        conflict
-        ?
-        `
-        <div class="conflict">
-            Same topic with:
-            ${conflict.map(
-                function(other) {
-                    return escapeHtml(
-                        normalizeRoll(
-                            other.roll
-                        )
-                    );
-                }
-            ).join(", ")}
-        </div>
-        `
-        :
-        ""
-    }
-
-    `
-
-    :
-
-    `
-    <span class="muted">
-        Not allocated
-    </span>
-    `
+${
+conflict.length
+?
+`
+<div class="conflict">
+Conflicting Roll Number(s):
+${conflict.map(escapeHtml).join(", ")}
+</div>
+`
+:
+""
 }
 
 </td>
@@ -1838,29 +2038,24 @@ ${escapeHtml(row.date || "-")}
 <td>
 
 ${
-    conflict
+conflict.length
+?
+`<span class="status collision">
+Collision
+</span>`
 
-    ?
+:
 
-    `<span class="status collision">
-        Collision
-    </span>`
+topic
+?
+`<span class="status allocated">
+Allocated
+</span>`
 
-    :
-
-    topic
-
-    ?
-
-    `<span class="status allocated">
-        Allocated
-    </span>`
-
-    :
-
-    `<span class="status available">
-        Available
-    </span>`
+:
+`<span class="status available">
+Available
+</span>`
 }
 
 </td>
@@ -1868,25 +2063,20 @@ ${
 <td>
 
 ${
-    conflict
-
-    ?
-
-    `
-    <button
-        class="change-btn"
-        onclick="openSingleChange(
-            'lab',
-            '${escapeAttr(roll)}'
-        )"
-    >
-        Change Topic
-    </button>
-    `
-
-    :
-
-    "—"
+conflict.length
+?
+`
+<button
+class="change-btn"
+onclick="openSingleChange(
+'lab',
+'${escapeAttr(roll)}'
+)">
+Change Topic
+</button>
+`
+:
+"—"
 }
 
 </td>
@@ -1898,7 +2088,7 @@ ${
         }).join("");
 
 
-    if (!rows.length) {
+    if(!rows.length){
 
         tbody.innerHTML = `
 
@@ -1906,14 +2096,14 @@ ${
 
 <td colspan="6">
 
-<div
-    style="
-    padding:40px;
-    text-align:center;
-    color:#64748b;
-    "
->
+<div style="
+padding:40px;
+text-align:center;
+color:#64748b;
+">
+
 No matching records found.
+
 </div>
 
 </td>
@@ -1923,77 +2113,7 @@ No matching records found.
 `;
 
     }
-}
 
-
-/* =====================================================
-   PROJECT COLLISION DETECTION
-   ===================================================== */
-
-function getProjectCollisions() {
-
-    const memberMap = {};
-
-
-    appData.projects.forEach(function(project) {
-
-        parseProjectRolls(
-            project.teamRolls
-        ).forEach(function(roll) {
-
-            if (!memberMap[roll]) {
-
-                memberMap[roll] = [];
-
-            }
-
-            memberMap[roll].push(project);
-
-        });
-
-    });
-
-
-    const collisions = {};
-
-
-    Object.keys(memberMap).forEach(function(roll) {
-
-        if (
-            memberMap[roll].length > 1
-        ) {
-
-            memberMap[roll].forEach(function(project) {
-
-                const key =
-                    String(project.row);
-
-
-                if (!collisions[key]) {
-
-                    collisions[key] = [];
-
-                }
-
-
-                if (
-                    collisions[key].indexOf(
-                        roll
-                    ) === -1
-                ) {
-
-                    collisions[key].push(roll);
-
-                }
-
-            });
-
-        }
-
-    });
-
-
-    return collisions;
 }
 
 
@@ -2001,7 +2121,7 @@ function getProjectCollisions() {
    PROJECT RENDER
    ===================================================== */
 
-function renderProjects() {
+function renderProjects(){
 
     const tbody =
         document.getElementById(
@@ -2022,7 +2142,7 @@ function renderProjects() {
 
 
     const rows =
-        appData.projects.filter(function(row) {
+        appData.projects.filter(function(row){
 
             return (
                 normalizeText(row.project)
@@ -2037,24 +2157,32 @@ function renderProjects() {
 
                 normalizeText(row.batch)
                     .includes(search)
+
+                ||
+
+                normalizeText(row.sno)
+                    .includes(search)
             );
 
         });
 
 
     tbody.innerHTML =
-        rows.map(function(row) {
+        rows.map(function(row){
 
             const key =
                 String(row.row);
 
+
             const conflict =
                 collisions[key] || [];
+
 
             const team =
                 parseProjectRolls(
                     row.teamRolls
                 );
+
 
             const hasTeam =
                 team.length > 0;
@@ -2076,52 +2204,45 @@ ${escapeHtml(row.sno)}
 <td>
 
 ${
-    team.length
+team.length
 
-    ?
+?
 
-    team.map(function(roll) {
+team.map(function(roll){
 
-        return `
-        <div
-            class="roll"
-            style="margin-bottom:4px;"
-        >
-            ${escapeHtml(roll)}
-        </div>
-        `;
+return `
+<div class="roll"
+     style="margin-bottom:4px;">
+${escapeHtml(roll)}
+</div>
+`;
 
-    }).join("")
+}).join("")
 
-    :
+:
 
-    `
-    <span class="muted">
-        No team allocated
-    </span>
-    `
+`
+<span class="muted">
+No team allocated
+</span>
+`
 }
 
 
 ${
-    conflict.length
+conflict.length
 
-    ?
+?
 
-    `
-    <div class="conflict">
-        Conflicting Roll Number(s):
-        ${conflict.map(
-            function(roll) {
-                return escapeHtml(roll);
-            }
-        ).join(", ")}
-    </div>
-    `
+`
+<div class="conflict">
+Conflicting Roll Number(s):
+${conflict.map(escapeHtml).join(", ")}
+</div>
+`
 
-    :
-
-    ""
+:
+""
 }
 
 </td>
@@ -2147,29 +2268,36 @@ ${escapeHtml(row.date || "-")}
 <td>
 
 ${
-    conflict.length
+conflict.length
 
-    ?
+?
 
-    `<span class="status collision">
-        Team Collision
-    </span>`
+`
+<span class="status collision">
+Team Collision
+</span>
+`
 
-    :
+:
 
-    hasTeam
+hasTeam
 
-    ?
+?
 
-    `<span class="status allocated">
-        Allocated
-    </span>`
+`
+<span class="status allocated">
+Allocated
+</span>
+`
 
-    :
+:
 
-    `<span class="status available">
-        Available
-    </span>`
+`
+<span class="status available">
+Available
+</span>
+`
+
 }
 
 </td>
@@ -2178,24 +2306,22 @@ ${
 <td>
 
 ${
-    conflict.length
+conflict.length
 
-    ?
+?
 
-    `
-    <button
-        class="change-btn"
-        onclick='openProjectChange(
-            ${JSON.stringify(team)}
-        )'
-    >
-        Change Project
-    </button>
-    `
+`
+<button
+class="change-btn"
+onclick='openProjectChange(
+${JSON.stringify(team)}
+)'>
+Change Project
+</button>
+`
 
-    :
-
-    "—"
+:
+"—"
 }
 
 </td>
@@ -2207,7 +2333,7 @@ ${
         }).join("");
 
 
-    if (!rows.length) {
+    if(!rows.length){
 
         tbody.innerHTML = `
 
@@ -2215,14 +2341,14 @@ ${
 
 <td colspan="7">
 
-<div
-    style="
-    padding:40px;
-    text-align:center;
-    color:#64748b;
-    "
->
+<div style="
+padding:40px;
+text-align:center;
+color:#64748b;
+">
+
 No matching project records found.
+
 </div>
 
 </td>
@@ -2232,14 +2358,15 @@ No matching project records found.
 `;
 
     }
+
 }
 
 
 /* =====================================================
-   POPULATE DROPDOWNS
+   POPULATE SELECTS
    ===================================================== */
 
-function populateSelects() {
+function populateSelects(){
 
     const theory =
         document.getElementById(
@@ -2259,55 +2386,35 @@ function populateSelects() {
         );
 
 
-    theory.innerHTML =
-        `<option value="">
-            Select Theory Topic
-        </option>`;
+    THEORY_TOPICS.forEach(function(topic){
 
-
-    THEORY_TOPICS.forEach(function(topic) {
-
-        theory.innerHTML += `
-            <option value="${escapeAttr(topic)}">
+        theory.innerHTML +=
+            `<option value="${escapeAttr(topic)}">
                 ${escapeHtml(topic)}
-            </option>
-        `;
+            </option>`;
 
     });
 
 
-    lab.innerHTML =
-        `<option value="">
-            Select Lab Topic
-        </option>`;
+    LAB_TOPICS.forEach(function(topic){
 
-
-    LAB_TOPICS.forEach(function(topic) {
-
-        lab.innerHTML += `
-            <option value="${escapeAttr(topic)}">
+        lab.innerHTML +=
+            `<option value="${escapeAttr(topic)}">
                 ${escapeHtml(topic)}
-            </option>
-        `;
+            </option>`;
 
     });
 
 
-    project.innerHTML =
-        `<option value="">
-            Select Project
-        </option>`;
+    PROJECT_TOPICS.forEach(function(topic){
 
-
-    PROJECT_TOPICS.forEach(function(topic) {
-
-        project.innerHTML += `
-            <option value="${escapeAttr(topic)}">
+        project.innerHTML +=
+            `<option value="${escapeAttr(topic)}">
                 ${escapeHtml(topic)}
-            </option>
-        `;
+            </option>`;
 
     });
+
 }
 
 
@@ -2315,12 +2422,12 @@ function populateSelects() {
    OPEN SINGLE CHANGE
    ===================================================== */
 
-function openSingleChange(type, roll) {
+function openSingleChange(type,roll){
 
     currentChange = {
-        type: type,
-        roll: roll,
-        rolls: null
+        type:type,
+        roll:roll,
+        rolls:null
     };
 
 
@@ -2377,12 +2484,12 @@ function openSingleChange(type, roll) {
         new Set();
 
 
-    rows.forEach(function(row) {
+    rows.forEach(function(row){
 
-        if (
+        if(
             normalizeRoll(row.roll) !== roll &&
-            row.topic
-        ) {
+            cleanValue(row.topic)
+        ){
 
             used.add(
                 normalizeText(
@@ -2401,19 +2508,18 @@ function openSingleChange(type, roll) {
         </option>`;
 
 
-    topics.forEach(function(topic) {
+    topics.forEach(function(topic){
 
-        if (
+        if(
             !used.has(
                 normalizeText(topic)
             )
-        ) {
+        ){
 
-            select.innerHTML += `
-                <option value="${escapeAttr(topic)}">
+            select.innerHTML +=
+                `<option value="${escapeAttr(topic)}">
                     ${escapeHtml(topic)}
-                </option>
-            `;
+                </option>`;
 
         }
 
@@ -2423,6 +2529,7 @@ function openSingleChange(type, roll) {
     document.getElementById(
         "changeModal"
     ).classList.add("show");
+
 }
 
 
@@ -2430,12 +2537,12 @@ function openSingleChange(type, roll) {
    OPEN PROJECT CHANGE
    ===================================================== */
 
-function openProjectChange(rolls) {
+function openProjectChange(rolls){
 
     currentChange = {
-        type: "project",
-        roll: null,
-        rolls: rolls
+        type:"project",
+        roll:null,
+        rolls:rolls
     };
 
 
@@ -2474,9 +2581,12 @@ function openProjectChange(rolls) {
         new Set();
 
 
-    appData.projects.forEach(function(row) {
+    appData.projects.forEach(function(row){
 
-        if (row.teamRolls) {
+        if(
+            cleanValue(row.teamRolls) &&
+            cleanValue(row.project)
+        ){
 
             allocated.add(
                 normalizeProject(
@@ -2495,25 +2605,20 @@ function openProjectChange(rolls) {
         </option>`;
 
 
-    PROJECT_TOPICS.forEach(function(project) {
+    PROJECT_TOPICS.forEach(function(project){
 
-        const key =
-            normalizeProject(project);
+        if(
+            !allocated.has(
+                normalizeProject(project)
+            )
+        ){
 
+            select.innerHTML +=
+                `<option value="${escapeAttr(project)}">
+                    ${escapeHtml(project)}
+                </option>`;
 
-        if (
-            allocated.has(key)
-        ) {
-
-            return;
         }
-
-
-        select.innerHTML += `
-            <option value="${escapeAttr(project)}">
-                ${escapeHtml(project)}
-            </option>
-        `;
 
     });
 
@@ -2521,6 +2626,7 @@ function openProjectChange(rolls) {
     document.getElementById(
         "changeModal"
     ).classList.add("show");
+
 }
 
 
@@ -2528,14 +2634,14 @@ function openProjectChange(rolls) {
    SUBMIT CHANGE
    ===================================================== */
 
-async function submitChange() {
+async function submitChange(){
 
-    try {
+    try{
 
-        if (
+        if(
             currentChange.type === "theory" ||
             currentChange.type === "lab"
-        ) {
+        ){
 
             const newTopic =
                 document.getElementById(
@@ -2543,7 +2649,7 @@ async function submitChange() {
                 ).value;
 
 
-            if (!newTopic) {
+            if(!newTopic){
 
                 showToast(
                     "Select a new topic.",
@@ -2551,14 +2657,14 @@ async function submitChange() {
                 );
 
                 return;
+
             }
 
 
             const result =
                 await postData({
 
-                    action:
-                        "changeSingle",
+                    action:"changeSingle",
 
                     category:
                         currentChange.type,
@@ -2566,8 +2672,7 @@ async function submitChange() {
                     roll:
                         currentChange.roll,
 
-                    newTopic:
-                        newTopic
+                    newTopic:newTopic
 
                 });
 
@@ -2580,22 +2685,22 @@ async function submitChange() {
             );
 
 
-            if (result.success) {
-
+            if(result.success){
                 closeModal();
-
             }
 
 
             await loadData();
 
             return;
+
         }
 
 
-        if (
-            currentChange.type === "project"
-        ) {
+        if(
+            currentChange.type ===
+            "project"
+        ){
 
             const newProject =
                 document.getElementById(
@@ -2603,7 +2708,7 @@ async function submitChange() {
                 ).value;
 
 
-            if (!newProject) {
+            if(!newProject){
 
                 showToast(
                     "Select a new project.",
@@ -2611,20 +2716,19 @@ async function submitChange() {
                 );
 
                 return;
+
             }
 
 
             const result =
                 await postData({
 
-                    action:
-                        "changeProject",
+                    action:"changeProject",
 
                     rolls:
                         currentChange.rolls,
 
-                    newTopic:
-                        newProject
+                    newTopic:newProject
 
                 });
 
@@ -2637,10 +2741,8 @@ async function submitChange() {
             );
 
 
-            if (result.success) {
-
+            if(result.success){
                 closeModal();
-
             }
 
 
@@ -2648,7 +2750,9 @@ async function submitChange() {
 
         }
 
-    } catch(error) {
+    }
+
+    catch(error){
 
         console.error(error);
 
@@ -2656,7 +2760,9 @@ async function submitChange() {
             "Unable to process change.",
             "error"
         );
+
     }
+
 }
 
 
@@ -2664,7 +2770,7 @@ async function submitChange() {
    CLOSE MODAL
    ===================================================== */
 
-function closeModal() {
+function closeModal(){
 
     document.getElementById(
         "changeModal"
@@ -2672,10 +2778,11 @@ function closeModal() {
 
 
     currentChange = {
-        type: null,
-        roll: null,
-        rolls: null
+        type:null,
+        roll:null,
+        rolls:null
     };
+
 }
 
 
@@ -2683,11 +2790,11 @@ function closeModal() {
    SECTION SWITCH
    ===================================================== */
 
-function showSection(section, button) {
+function showSection(section,button){
 
     document
         .querySelectorAll(".section")
-        .forEach(function(item) {
+        .forEach(function(item){
 
             item.classList.remove("active");
 
@@ -2696,7 +2803,7 @@ function showSection(section, button) {
 
     document
         .querySelectorAll(".tab")
-        .forEach(function(item) {
+        .forEach(function(item){
 
             item.classList.remove("active");
 
@@ -2709,6 +2816,7 @@ function showSection(section, button) {
 
 
     button.classList.add("active");
+
 }
 
 
@@ -2716,10 +2824,10 @@ function showSection(section, button) {
    SUMMARY
    ===================================================== */
 
-function updateSummary() {
+function updateSummary(){
 
     const theory =
-        appData.theory.filter(function(row) {
+        appData.theory.filter(function(row){
 
             return cleanValue(
                 row.topic
@@ -2729,7 +2837,7 @@ function updateSummary() {
 
 
     const lab =
-        appData.lab.filter(function(row) {
+        appData.lab.filter(function(row){
 
             return cleanValue(
                 row.topic
@@ -2739,7 +2847,7 @@ function updateSummary() {
 
 
     const projects =
-        appData.projects.filter(function(row) {
+        appData.projects.filter(function(row){
 
             return parseProjectRolls(
                 row.teamRolls
@@ -2794,14 +2902,15 @@ function updateSummary() {
         theoryCollision +
         labCollision +
         projectCollision;
+
 }
 
 
 /* =====================================================
-   RENDER EVERYTHING
+   RENDER ALL
    ===================================================== */
 
-function renderAll() {
+function renderAll(){
 
     renderTheory();
 
@@ -2810,6 +2919,7 @@ function renderAll() {
     renderProjects();
 
     updateSummary();
+
 }
 
 
@@ -2817,7 +2927,7 @@ function renderAll() {
    TOAST
    ===================================================== */
 
-function showToast(message, type) {
+function showToast(message,type){
 
     const container =
         document.getElementById(
@@ -2851,52 +2961,37 @@ function showToast(message, type) {
     container.appendChild(item);
 
 
-    setTimeout(function() {
+    setTimeout(function(){
 
         item.remove();
 
-    }, 4000);
+    },4000);
+
 }
 
 
 /* =====================================================
-   CLOSE MODAL ON OUTSIDE CLICK
+   INITIALIZATION
    ===================================================== */
 
-document
-    .getElementById(
-        "changeModal"
-    )
-    .addEventListener(
-        "click",
-        function(event) {
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-            if (
-                event.target === this
-            ) {
+        populateSelects();
 
-                closeModal();
+        loadData();
 
-            }
+        /*
+         Refresh live data every 30 seconds.
+        */
 
-        }
-    );
+        setInterval(
+            loadData,
+            30000
+        );
 
-
-/* =====================================================
-   INITIALIZE
-   ===================================================== */
-
-populateSelects();
-
-loadData();
-
-
-/* REFRESH EVERY 30 SECONDS */
-
-setInterval(
-    loadData,
-    30000
+    }
 );
 
 </script>
